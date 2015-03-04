@@ -2,8 +2,10 @@ Feature: Show event details on the webpage for a particular event.
   As a website vistor
   So that I can find details about the event
   I want to be able to visit the event page
+  And be able to return to the calendar page when I am done
 
 Background: Events have already been added to the database
+
   Given that the following events exist:
   | organization       | event_name       | details                                   | date            | location
   | Nature in the City | Nature Walk      | A walk through the city                   | 1630:19:03:2015 | The old Town Hall
