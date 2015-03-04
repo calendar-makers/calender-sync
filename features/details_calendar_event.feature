@@ -18,7 +18,7 @@ Scenario: user clicks on link to get to event details
   Then I should be on the "Grean Bean Mixer" description page
 
 Scenario: user is on an event page
-  Given I am on the "Nature Walk" page
+  Given I am on the "Nature Walk" description page
   Then I should see the organization "Nature in the City"
   And I should see the event name "Nature Walk"
   And I should see the time and date "4:30pm, March 19, 2015"
