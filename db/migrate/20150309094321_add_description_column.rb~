@@ -1,0 +1,4 @@
+class AddDescriptionColumn < ActiveRecord::Migration
+  def change
+  end
+end

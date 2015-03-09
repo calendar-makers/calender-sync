@@ -53,5 +53,5 @@ group :production do
   gem 'pg'
 end
 
-gem 'haml'
+gem 'haml-rails'
 gem 'rubocop', :require => false

@@ -1,0 +1,18 @@
+%h1 Events
+
+%table#movies
+  %thead
+    %tr
+      %th Name
+      %th Date
+      %th Time
+      %th Location
+      %th Organization
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= link_to event.name, calendar_event_path(event)
+        %td= event.get_date
+        %td= event.get_time
+        %td= event.location
+        %td= event.organization

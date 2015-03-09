@@ -1,0 +1,21 @@
+%h2 Details about #{@event.name}
+
+%ul#details
+  %li
+    Organization:
+    = @event.organization
+  %li
+    Date:
+    = @event.get_date
+  %li
+    Time:
+    = @event.get_time
+  %li
+    Location:
+    = @event.location
+
+%h3 Description:
+
+%p#description= @event.description
+
+= link_to 'Back to calendar', calendar_events_path
