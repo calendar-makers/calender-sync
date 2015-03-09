@@ -3,15 +3,14 @@ Feature: update information of an event
   As an admin
   So that I can change the details of events I've already created
   I want to be able to update events
-  
+
 Background: Event has already been added to the database
 
-  Given the following events exists:
-  | organization       | event_name       | details                                   | date              | location                   |
-  | Nature in the City | Nature Walk      | A walk through the city                   | 1630:19:03:2015   | The old Town Hall          |
-  | Green Carrots      | Grean Bean Mixer | If you like beans you'll like this event! | 0000:12:03:2015   | San Francisco City Library |
-  
-  
+  Given the following events exist:
+  | organization       | event_name       | details                                   | date       | time  | location
+  | Nature in the City | Nature Walk      | A walk through the city                   | 19:03:2015 | 16:30 | The old Town Hall
+  | Green Carrots      | Green Bean Mixer | If you like beans you'll like this event! | 12:03:2015 | 00:00 | San Francisco City Library
+
   And I am on the "details" page for "Nature in the City"'s "Nature Walk
 
 Scenario: navigate to edit page and see all of the information
