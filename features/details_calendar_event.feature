@@ -7,9 +7,9 @@ Feature: Show event details on the webpage for a particular event
 Background: Events have already been added to the database
 
   Given the following events exist:
-  | organization       | name             | description                               | time  |  date         |  location                  |
-  | Nature in the City | Nature Walk      | A walk through the city                   | 16:30 | march 19 2015 | The old Town Hall          |
-  | Green Carrots      | Green Bean Mixer | If you like beans you'll like this event! | 00:00 | march 12 2015 | San Francisco City Library |
+  | name             | organization       | description                               | date          | time  | location                   |
+  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 | 16:30 | The old Town Hall          |
+  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 | 00:00 | San Francisco City Library |
 
 Scenario: user clicks on link to get to event details
   Given I am on the "calendar" page

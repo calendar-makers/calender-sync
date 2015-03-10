@@ -7,9 +7,9 @@ Feature: update information of an event
 Background: Event has already been added to the database
 
   Given the following events exist:
-  | organization       | event_name       | details                                   | date       | time  | location
-  | Nature in the City | Nature Walk      | A walk through the city                   | 19:03:2015 | 16:30 | The old Town Hall
-  | Green Carrots      | Green Bean Mixer | If you like beans you'll like this event! | 12:03:2015 | 00:00 | San Francisco City Library
+  | name             | organization       | description                               | date          | time  | location                   |
+  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 | 16:30 | The old Town Hall          |
+  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 | 00:00 | San Francisco City Library |
 
   And I am on the "details" page for "Nature in the City"'s "Nature Walk
 
