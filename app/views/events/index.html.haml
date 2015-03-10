@@ -11,7 +11,7 @@
   %tbody
     - @events.each do |event|
       %tr
-        %td= link_to event.name, calendar_event_path(event)
+        %td= link_to event.name, event_path(event)
         %td= event.get_date
         %td= event.get_time
         %td= event.location

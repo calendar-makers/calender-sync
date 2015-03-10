@@ -39,10 +39,9 @@ Given(/^"(.*)" exists$/) do |arg|
 end
 
 def path_to(page_name)
-  #byebug
   case page_name
-    when /^calendar$/ then 'calendar/events'
-    when /^(.*)$/ then "/calendar/events/#{Event.find_by(name: $1).id}"
+    when /^calendar$/ then '/events'
+    when /^(.*)$/ then "/events/#{Event.find_by(name: $1).id}"
     else
       begin
         page_name =~ /^the (.*) page$/
