@@ -19,12 +19,12 @@ Scenario: user clicks on link to get to event details
 
 Scenario: user is on an event page
   Given I am on the details page for "Nature Walk"
-  Then I should see the "organization" "Nature in the City"
-  And I should see the "event name" "Nature Walk"
-  And I should see the "time" "4:30pm"
-  And I should see the "date" "March 19, 2015"
-  And I should see the "description" "A walk through the city"
-  And I should see the "location" "The old Town Hall"
+  Then I should see "Nature Walk" as the "event name"
+  And I should see "Nature in the City" as the "organization"
+  And I should see "4:30pm" as the "time"
+  And I should see "March 19, 2015" as the "date"
+  And I should see "A walk through the city" as the "description"
+  And I should see "The old Town Hall" as the "location"
 
 Scenario: user going from event page back to calendar page
   Given I am on the details page for "Nature Walk"

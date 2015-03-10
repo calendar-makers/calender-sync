@@ -15,30 +15,28 @@ Background: Event has already been added to the database
 
 Scenario: navigate to edit page and see all of the information
   When I click on the "Edit Event" button
-  Then I should be on the "details" page
-  When I click on the "Edit Event" button 
-  Then I should be on the "edit" page 
-  Then I should be on the "Create" page
+  Then I should be on the "Edit" page
   And the "Event Name" field should be populated with "Nature Walk"
   And the "Add Event Details" field should be populated with "A walk through the city"
   And the "Date" field should be populated with "3/19/2015"
   And the "Location" field should be populated with "The Old Town Hall"
   And the "Time" field should be poplulated with "4:30"
-  
+  And I should see ""Nature Walk" was successfully updated."
+
 Scenario: correctly change information results in change
-  Given I am on the "edit" page for "Nature in the City"'s "Nature Walk"
+  Given I am on the "Edit" page for "Nature in the City"'s "Nature Walk"
   And I replace the "Location" text with "The New Town Hall"
   And I click the "Update Event Information" button
   Then I should be on the "details" page
   And I should see "Location: The New Town Hall"
   And I should not see "Location: The Old Town Hall"
-  
+
 Scenario: make sure user correctly changes information in edit page
-  Given I am on the "edit" page for "Nature in the City"'s "Nature Walk"
+  Given I am on the "Edit" page for "Nature in the City"'s "Nature Walk"
   And I replace the "Location" text with " "
   And I click the "Update Event Information" button
-  Then I should be on the "edit" page
-  And I should see the flash message "Please complete the edit page form"
+  Then I should be on the "Edit" page
+  And I should see the flash message "Please complete the Edit page form"
   And the "Event Name" field should be populated with "Nature Walk"
   And the "Add Event Details" field should be populated with "A walk through the city"
   And the "Date" field should be populated with "3/19/2015"

@@ -17,4 +17,4 @@ Scenario: Delete event from the calendar
   When I click on the "Delete" button
   Then I should be on the calendar page
   And I should not see the "Nature Walk" event
-  And I should see ""Nature Walk" event deleted"
+  And I should see ""Nature Walk" was successfully removed."

@@ -24,6 +24,7 @@ Scenario: store information when all the fields are filled out
   And I click the "Submit" button
   Then I should be on the "Calendar" page
   And I should see "Nature Walk" link on "3/19/2015"
+  And I should see ""Nature Walk" was successfully added."
 
 Scenario: make sure that that all event fields are filled in
   Given I am on the "Create" page

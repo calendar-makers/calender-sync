@@ -20,7 +20,7 @@ When /^(?:|I )click on the "(.*)" button$/ do |link|
   click_link(link)
 end
 
-Then /^(?:|I )should see the "(.*)" "(.*)"$/ do |field, value|
+Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
      page.should have_content(value)
 end
 
