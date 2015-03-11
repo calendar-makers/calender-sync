@@ -1,6 +1,7 @@
 class EventsController < ActionController::Base
   def index
     @events = Event.all
+    @month  = Month.new
   end
 
   def show
@@ -9,6 +10,7 @@ class EventsController < ActionController::Base
 
   def new
     # default: render 'new' template
+    @days = [1..31]
   end
 
   def create

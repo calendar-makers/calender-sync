@@ -1,0 +1,24 @@
+%h1 Create New Event
+
+= form_tag new_event_path do
+  = label :event, :organization, 'Organization Name'
+%div
+  = text_field :event, 'Organization'
+%div
+  = label :event, :name, 'Title'
+%div
+  = text_field :event, 'title'
+%div
+  = label :event, :time, 'Date'
+%div
+  = date_select :event, :date
+%div
+  = label :event, :time, 'Time'
+%div
+  = time_select :event, :time
+%div
+  = label :event, :director, 'Event Description'
+%div
+  = text_area :event, 'Description', :cols =>'40', :rows => '10'
+%div
+  = submit_tag 'Save Changes'

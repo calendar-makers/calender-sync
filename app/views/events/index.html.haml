@@ -1,18 +1,21 @@
-%h1 Events
+-#  This file is app/views/movies/index.html.haml
+%h1 Calendar
 
-%table#movies
+%table
   %thead
     %tr
-      %th Name
-      %th Date
-      %th Time
-      %th Location
-      %th Organization
+      %th Sunday
+      %th Monday
+      %th Tuesday
+      %th Wednesday
+      %th Thursday
+      %th Friday
+      %th Saturday
   %tbody
-    - @events.each do |event|
+    - 5.times do 
       %tr
-        %td= link_to event.name, event_path(event)
-        %td= event.formatted_date
-        %td= event.formatted_time
-        %td= event.location
-        %td= event.organization
+        - 7.times do 
+          %td= @month.get_day
+%div  
+%div
+  = link_to "Add Event", new_event_path
