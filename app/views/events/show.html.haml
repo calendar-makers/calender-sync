@@ -6,10 +6,10 @@
     = @event.organization
   %li
     Date:
-    = @event.get_date
+    = @event.date.strftime('%B %d, %Y')
   %li
     Time:
-    = @event.get_time
+    = @event.time.strftime('%l:%M%P')
   %li
     Location:
     = @event.location

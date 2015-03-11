@@ -12,7 +12,7 @@
     - @events.each do |event|
       %tr
         %td= link_to event.name, event_path(event)
-        %td= event.get_date
-        %td= event.get_time
+        %td= event.date.strftime('%B %d, %Y')
+        %td= event.time.strftime('%l:%M%P')
         %td= event.location
         %td= event.organization
