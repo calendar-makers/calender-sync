@@ -20,8 +20,5 @@
 %div  
 %div
   = link_to "Add Event", new_event_path
-
-%table
-  %tbody
-    -@events.each do |event|
-      %tr= event.name
+%div
+  = link_to "See #{@event.name}", event_path(@event)

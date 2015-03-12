@@ -8,4 +8,8 @@ class Month
   def get_day
     @day = (@day%31)+1
   end
+
+  def today
+  	@day
+  end
 end

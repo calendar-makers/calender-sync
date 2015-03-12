@@ -7,7 +7,7 @@ end
 class EventsController < ActionController::Base
   def index
     @message = flash[:notice]
-    @events = Event.last(3)
+    @event = Event.last()
     @month  = Month.new
 
     @var = Event.get_events_for_month(4,2015)
