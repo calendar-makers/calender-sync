@@ -3,8 +3,19 @@
   %head
     %title Calendar
     = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
+    = javascript_include_tag 'jquery.min'
+    = javascript_include_tag 'moment.min'
+    = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
+
+    :javascript
+      $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+        })
+      });
 
   %body
     %h1.title Calendar
