@@ -1,10 +1,12 @@
+-# edit.html.haml using partial
 
-%h1 Create New Event
+%h1 Edit Existing Event
 
-= form_tag events_path do
+= form_tag edit_event_path(@event), :method => :put do
+
   = label :event, :organization, 'Organization Name'
   %div
-  = text_field :event, :organization
+  = text_field :event, 'organization'
   %div
   = label :event, :name, 'Event Name'
   %div
@@ -26,4 +28,4 @@
   %div
   = text_area :event, 'description', :cols =>'40', :rows => '10'
   %div
-  = submit_tag "Create Event"
+  = submit_tag 'Update Event Info'

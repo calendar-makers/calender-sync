@@ -1,7 +1,17 @@
+def printer(arg1)
+  puts "******** LOG *********"
+  puts arg1.inspect
+  puts "******** END *********"
+end
+
 class EventsController < ActionController::Base
   def index
-    @events = Event.all
+    @message = flash[:notice]
+    @events = Event.last(3)
     @month  = Month.new
+
+    @var = Event.get_events_for_month(4,2015)
+    printer(@var)
   end
 
   def show
@@ -10,11 +20,11 @@ class EventsController < ActionController::Base
 
   def new
     # default: render 'new' template
-    @days = [1..31]
+    printer("I'm in new")
   end
 
   def create
-    @event = Event.create!(param[:event])
+    @event = Event.create!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully added."
     redirect_to events_path
   end
@@ -39,6 +49,7 @@ class EventsController < ActionController::Base
 
   private
 
+  #Never trust anything from the internet
   def event_params
     params.require(:event).permit(:name, :organization,
                                   :date, :time,
