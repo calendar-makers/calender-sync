@@ -5,7 +5,11 @@ class Event < ActiveRecord::Base
   def Event.get_events_for_month(month = 03, year = 2015)
   	Event.where(date: (year.to_s+"-0"+month.to_s+"-01")..(year.to_s+"-0"+((month%12)+1).to_s+"-01") )
   end
-  #def Event.get_event_for_day(day)
+  def Event.get_event_for_day(day, month, year)
+  	day = '0'+day.to_s if day.to_s.lenght < 2
+  	month = '0'+month.to_s if month.to_s.lenght <2
+  	Event.where(date: "#{year}-#{month}-#{day}" )
+  end
   def formatted_date
     date.strftime('%B %d, %Y')
   end

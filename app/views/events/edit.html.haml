@@ -2,7 +2,7 @@
 
 %h1 Edit Existing Event
 
-= form_tag edit_event_path(@event), :method => :put do
+= form_tag event_path(@event), :method => :put do
 
   = label :event, :organization, 'Organization Name'
   %div

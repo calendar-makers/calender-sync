@@ -15,7 +15,12 @@ class EventsController < ActionController::Base
   end
 
   def show
-    @event = Event.find params[:id]
+    begin
+      @event = Event.find params[:id]
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "404: This is not the event you are looking for."
+      redirect_to events_path
+    end
   end
 
   def new
@@ -30,12 +35,17 @@ class EventsController < ActionController::Base
   end
 
   def edit
-    @event = Event.find params[:id]
+    begin
+      @event = Event.find params[:id]
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "404: This is not the event you are looking for."
+      redirect_to events_path
+    end
   end
 
   def update
     @event = Event.find params[:id]
-    @event.update_attributes!(params[:event])
+    @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
     redirect_to event_path(@event)
   end
