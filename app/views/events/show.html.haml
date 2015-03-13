@@ -1,16 +1,19 @@
-%h2 Details about #{@event.name}
+%h2 Event Details
 
 %ul#details
-  %li
+  %li#name
+    Name:
+    = @event.name
+  %li#organization
     Organization:
     = @event.organization
-  %li
+  %li#date
     Date:
     = @event.formatted_date
-  %li
+  %li#time
     Time:
     = @event.formatted_time
-  %li
+  %li#location
     Location:
     = @event.location
 
