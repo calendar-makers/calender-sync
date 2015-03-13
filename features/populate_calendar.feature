@@ -12,8 +12,9 @@ Background: Events have already been added to the database
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 | 00:00 | San Francisco City Library |
 
 Scenario: see calendar options
-  When I click on the calendar page
-  Then I should see events in the calendar
+  Given I am on the "calendar" page
+  Then I should see "Nature Walk" as the "event name"
+  Then I should see "Green Bean Mixer" as the "event name"
   And I should see filter/search options
   And I should see calendar navigation tools
 

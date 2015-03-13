@@ -13,19 +13,21 @@
       %th Friday
       %th Saturday
   %tbody
-    - 4.times do 
+    - 4.times do
       %tr
-        - 7.times do 
+        - 7.times do
           %td
             %div
               =@month.get_day
-            - @events.each do |event|
-              - if event.day == @month.today
-                - printer(event.name) 
-                %div
-                  = link_to "#{event.name}", event_path(event)
-%div  
+            - if @events
+              - @events.each do |event|
+                - if event.day == @month.today
+                  - printer(event.name)
+                  %div
+                    = link_to "#{event.name}", event_path(event)
+%div
 %div
   = link_to "Add Event", new_event_path
 %div
-  = link_to "See #{@event.name}", event_path(@event)
+  - if @event
+    = link_to "See #{@event.name}", event_path(@event)
