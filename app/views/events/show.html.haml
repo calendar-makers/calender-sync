@@ -1,9 +1,11 @@
 -# in app/views/movies/show.html.haml
 
 %h2 Details about #{@event.name}
-
 %ul#details
-  %li
+  %li#name
+    Name:
+    = @event.name
+  %li#organization
     Organization:
     = @event.organization
   %li

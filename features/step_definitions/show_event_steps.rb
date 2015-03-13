@@ -86,9 +86,22 @@ When /^(?:|I )click on the "(.*)" button$/ do |link|
   click_link(link)
 end
 
+#Then /^(?:|I )should see "(.*)"/ do |value|
+#    page.should have_content(value)
+#end
+
+#Then /^(?:|I )should see the field "(.*)"/ do |field|
+#    page.should have_content(value)
+#end
+
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
+<<<<<<< HEAD
   page.should have_content(value)
   # FIELD IS UNUSED. NEEDS WORK
+=======
+  field = find_by_id(field)
+  field.should have_content(value)
+>>>>>>> master
 end
 
 Then /^(?:|I )should be on the details page for "(.*)"$/ do |event|
@@ -108,9 +121,8 @@ end
 def path_to(page_name)
   #page_name = page_name.downcase
   case page_name
-    when /^calendar$/ then '/events'
-    when /^Create$/ then '/events/new'
-    #when /^edit$/ then '/events/'
+    when /^calendar$/ then '/calendar'
+    when /^events directory/ then '/events'
     when /^(.*)$/ then "/events/#{Event.find_by(name: $1).id}"
     else
       begin
