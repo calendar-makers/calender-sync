@@ -6,15 +6,7 @@ end
 
 class EventsController < ActionController::Base
   def index
-    @message = flash[:notice]
-    @event = Event.last
-    @events = Event.get_events_for_month(2)
-    @month  = Month.new
-    @events.each do |event|
-      printer event.day
-    end
-    @var = Event.get_events_for_month(4,2015)
-    printer(@events)
+    @events = Event.all
   end
 
   def show
