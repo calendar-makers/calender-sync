@@ -1,7 +1,7 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   resource :calendar, :only => [:show]
-  
   resources :events
+  get '/', to: redirect('/calendar')
 
 
   # The priority is based upon order of creation: first created -> highest priority.

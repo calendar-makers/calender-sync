@@ -23,6 +23,24 @@ And /^(?:|I )fill in the "(.*)" field with "(.*)"$/ do |field, value|
   fill_in(field, with: value)
 end
 
+And /^I select "([^"]*)" as the date$/ do |date|
+  date = Date.strptime(date, '%m/%d/%Y')
+  select date.year, :from => 'event_date_1i'
+  select date.strftime("%B"), :from => 'event_date_2i'
+  select date.day, :from => 'event_date_3i' 
+
+  #select(date.year.to_s, :from => "#event[date(1i)]")
+  #select(date.strftime("%B"), :from => "#event_date_2i")
+  #select(date.day.to_s, :from => "#event_date_3i")
+end
+
+And /^I select "([^"]*)" as the time$/ do |time|
+  time = Time.parse(time)
+  select time.hour, :from => 'event_time_4i'
+  select time.min, :from => 'event_time_5i'
+end
+
+
 Then /(?:|I )should see "(.*)" link on "(.*)"$/ do |event_link, date|
   page.should have_link(event_link)
   ## NEEDS MORE WORK TO CHECK THAT THE LINK IS ACTUALLY UNDER THE GIVEN DATE
@@ -82,13 +100,21 @@ When /^(?:|I )click on "(.*)"$/ do |link|
   click_link(link)
 end
 
-When /^(?:|I )click on the "(.*)" button$/ do |link|
-  click_link(link)
+When /^(?:|I )click on the "(.*)" button$/ do |button|
+  click_button(button)
 end
 
+#Then /^(?:|I )should see "(.*)"/ do |value|
+#    page.should have_content(value)
+#end
+
+#Then /^(?:|I )should see the field "(.*)"/ do |field|
+#    page.should have_content(value)
+#end
+
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
-  page.should have_content(value)
-  # FIELD IS UNUSED. NEEDS WORK
+  field = find_by_id(field)
+  field.should have_content(value)
 end
 
 Then /^(?:|I )should be on the details page for "(.*)"$/ do |event|
@@ -108,9 +134,9 @@ end
 def path_to(page_name)
   #page_name = page_name.downcase
   case page_name
-    when /^calendar$/ then '/events'
-    when /^Create$/ then '/events/new'
-    #when /^edit$/ then '/events/'
+    when /^Calendar$/ then '/calendar'
+    when /^Events Directory/ then '/events'
+    when /^Create/ then '/events/new'
     when /^(.*)$/ then "/events/#{Event.find_by(name: $1).id}"
     else
       begin

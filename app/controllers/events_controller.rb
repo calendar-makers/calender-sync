@@ -6,9 +6,8 @@ end
 
 class EventsController < ActionController::Base
   def index
-    @message = flash[:notice]
-    @event = Event.last
     @events = Event.all
+    @message = flash[:notice]
   end
 
   def show
