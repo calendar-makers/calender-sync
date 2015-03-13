@@ -1,14 +1,14 @@
-%div= label :event, :organization, 'Organization Name'
-%div= text_field :event, :organization
-
 %div= label :event, :name, 'Event Name'
 %div= text_field :event, 'name'
 
-%div= label :event, :location, 'Event Location'
+%div= label :event, :location, 'Location'
 %div= text_field :event, 'location'
+
+%div= label :event, :organization, 'Organization Name'
+%div= text_field :event, :organization
 
 %div= label :event, :start, 'Start Time'
 %div= datetime_select :event, :start
 
-%div= label :event, :description, 'Event Description'
+%div= label :event, :description, 'Description'
 %div= text_area :event, 'description', :cols =>'40', :rows => '10'

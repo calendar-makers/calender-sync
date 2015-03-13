@@ -1,33 +1,21 @@
--#  This file is app/views/movies/index.html.haml
-%h1 Calendar
-%div February
-%div #{@message}
-%table
+-#  This file is app/views/events/index.html.haml
+%h1 Events Listing
+
+%table#events
   %thead
     %tr
-      %th Sunday
-      %th Monday
-      %th Tuesday
-      %th Wednesday
-      %th Thursday
-      %th Friday
-      %th Saturday
+      %th Event Name
+      %th Location
+      %th Organization Name
+      %th Start Time
+      %th Description
   %tbody
-    - 4.times do
+    - @events.each do |event|
       %tr
-        - 7.times do
-          %td
-            %div
-              =@month.get_day
-            - if @events
-              - @events.each do |event|
-                - if event.day == @month.today
-                  - printer(event.name)
-                  %div
-                    = link_to "#{event.name}", event_path(event)
-%div
-%div
-  = link_to "Add Event", new_event_path
-%div
-  - if @event
-    = link_to "See #{@event.name}", event_path(@event)
+        %td= link_to "#{event.name}", event_path(event)
+        %td= event.location
+        %td= event.organization
+        %td= event.start
+        %td= event.description
+
+= link_to 'Add new event', new_event_path
