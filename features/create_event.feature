@@ -16,14 +16,14 @@ Scenario: redirect to create page when create new event button pushed
 Scenario: store information when all the fields are filled out
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
-  And I fill in the "Event Description" field with "Join us for a nature walk through old town San Franciso!"
+  And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
   And I select "3/19/2015" as the date
   And I select "4:30 PM" as the time
-  And I fill in the "Event Location" field with "The Old Town Hall"
+  And I fill in the "Location" field with "The Old Town Hall"
   And I click on the "Create Event" button
   Then I should be on the "Events Directory" page
   And I should see "Nature Walk"
-  
+
   #And I should see "Nature Walk" link on "3/19/2015"
   #And I should see ""Nature Walk" was successfully added."
 
@@ -31,9 +31,9 @@ Scenario: store information when all the fields are filled out
 Scenario: make sure that that all event fields are filled in
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
-  And I fill in the "Event Description" field with "Join us for a nature walk through old town San Francicso!"
+  And I fill in the "Description" field with "Join us for a nature walk through old town San Francicso!"
   And I select "3/19/2015"
-  And I fill in the "Event Location" field with "The Old Town Hall"
+  And I fill in the "Location" field with "The Old Town Hall"
   And I click on the "Create Event" button
   Then I should be on the "Create" page
   And I should see the flash message "Please complete the event page form"

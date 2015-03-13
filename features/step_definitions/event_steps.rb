@@ -25,9 +25,9 @@ end
 
 And /^I select "([^"]*)" as the date$/ do |date|
   date = Date.strptime(date, '%m/%d/%Y')
-  select date.year, :from => 'event_date_1i'
-  select date.strftime("%B"), :from => 'event_date_2i'
-  select date.day, :from => 'event_date_3i' 
+  select date.year, :from => 'event_start_1i'
+  select date.strftime("%B"), :from => 'event_start_2i'
+  select date.day, :from => 'event_start_3i' 
 
   #select(date.year.to_s, :from => "#event[date(1i)]")
   #select(date.strftime("%B"), :from => "#event_date_2i")
@@ -36,8 +36,8 @@ end
 
 And /^I select "([^"]*)" as the time$/ do |time|
   time = Time.parse(time)
-  select time.hour, :from => 'event_time_4i'
-  select time.min, :from => 'event_time_5i'
+  select time.hour, :from => 'event_start_4i'
+  select time.min, :from => 'event_start_5i'
 end
 
 
