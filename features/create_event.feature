@@ -8,26 +8,11 @@ Background: I have logged in as an admin and have permission to create
 
 Scenario: redirect to create page when create new event button pushed
   Given I am on the "calendar" page
-<<<<<<< HEAD
   And I click on the "Add Event" button
   Then I should be on the "Create" page
   And I should see the following fields: "Event Name, Event Description, Date, Event Location, Time"
   And I should see the "Create Event" button
   And I should see the "Organization Name" on the page
-=======
-  And I click on "Create New Event" button
-  Then I should be on the "Create" page
-  And I should see field "Event Name"
-  And I should see field "Add Event Details"
-  And I should see field "Date"
-  And I should see field "Location"
-  And I should see field "Time"
-  And I should see field "Submit"
-  And I should see field "Organization Name"
-  #And I should see the following fields: Event Name, Add Event Details, Date, Location, Time
-  #And I should see the "Submit" button
-  #And I should see the "Organization Name" on the page
->>>>>>> master
 
 Scenario: store information when all the fields are filled out
   Given I am on the "Create" page
