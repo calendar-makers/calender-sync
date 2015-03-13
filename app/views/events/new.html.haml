@@ -1,28 +1,5 @@
 
 %h1 Create New Event
 = form_tag events_path do
-  = label :event, :organization, 'Organization Name'
-  %div
-  = text_field :event, :organization
-  %div
-  = label :event, :name, 'Event Name'
-  %div
-  = text_field :event, 'name'
-  %div
-    = label :event, :location, 'Event Location'
-  %div
-  = text_field :event, 'location'
-  %div
-  = label :event, :date, 'Date'
-  %div
-  = date_select :event, :date
-  %div
-  = label :event, :time, 'Time'
-  %div
-  = time_select :event, :time
-  %div
-  = label :event, :description, 'Event Description'
-  %div
-  = text_area :event, 'description', :cols =>'40', :rows => '10'
-  %div
+  = render :partial => 'event_form'
   = submit_tag "Create Event"

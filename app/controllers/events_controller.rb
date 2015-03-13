@@ -13,13 +13,14 @@ class EventsController < ActionController::Base
     @events.each do |event|
       printer event.day
     end
-    @var = Event.get_events_for_month(4,2015)
     printer(@events)
+    printer(@event)
   end
 
   def show
     begin
       @event = Event.find params[:id]
+      printer(@event)
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "404: This is not the event you are looking for."
       redirect_to events_path
@@ -65,7 +66,7 @@ class EventsController < ActionController::Base
   #Never trust anything from the internet
   def event_params
     params.require(:event).permit(:name, :organization,
-                                  :date, :time,
-                                  :location, :description)
+                                  :start, :location,
+                                  :description)
   end
 end

@@ -3,29 +3,5 @@
 %h1 Edit Existing Event
 
 = form_tag event_path(@event), :method => :put do
-
-  = label :event, :organization, 'Organization Name'
-  %div
-  = text_field :event, 'organization'
-  %div
-  = label :event, :name, 'Event Name'
-  %div
-  = text_field :event, 'name'
-  %div
-    = label :event, :location, 'Event location'
-  %div
-  = text_field :event, 'location'
-  %div
-  = label :event, :date, 'Date'
-  %div
-  = date_select :event, :date
-  %div
-  = label :event, :time, 'Time'
-  %div
-  = time_select :event, :time
-  %div
-  = label :event, :description, 'Event Description'
-  %div
-  = text_area :event, 'description', :cols =>'40', :rows => '10'
-  %div
+  = render :partial => 'event_form'
   = submit_tag 'Update Event Info'

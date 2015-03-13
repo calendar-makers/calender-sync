@@ -14,10 +14,10 @@
     = @event.location
   %li
     Date:
-    = @event.date.strftime("%B %d, %Y")
+    = @event.start.strftime("%B %d, %Y")
   %li
     Time:
-    = @event.formatted_time
+    = @event.start.strftime("%l:%M%P")
 
 %h3 Description:
 

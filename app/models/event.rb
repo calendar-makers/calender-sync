@@ -1,26 +1,25 @@
 class Event < ActiveRecord::Base
   def Event.get_organization_events(org)
-  	Event.where(organization: org)
+    Event.where(organization: org)
   end
+
   def Event.get_events_for_month(month = 03, year = 2015)
-  	Event.where(date: (year.to_s+"-0"+month.to_s+"-01")..(year.to_s+"-0"+(month+1).to_s+"-01") )
+    Event.where(start: (year.to_s+"-0"+month.to_s+"-01")..(year.to_s+"-0"+(month+1).to_s+"-01") )
   end
+
   def Event.get_event_for_day(day, month, year)
-  	day = '0'+day.to_s if day.to_s.lenght < 2
-  	month = '0'+month.to_s if month.to_s.lenght <2
-  	year = year.to_s
-  	Event.where(date: "#{year}-#{month}-#{day}" )
+    day = '0'+day.to_s if day.to_s.lenght < 2
+    month = '0'+month.to_s if month.to_s.lenght <2
+    year = year.to_s
+    Event.where(start: "#{year}-#{month}-#{day}" )
   end
-  def day 
+
+  def day
     formatted_date
   end
+
   def formatted_date
-    d = date.strftime('%-d')
+    d = start.strftime('%-d')
     d.to_i
   end
-
-  def formatted_time
-    time.strftime('%l:%M%P')
-  end
-
 end

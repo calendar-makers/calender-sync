@@ -10,6 +10,6 @@ class Month
   end
 
   def today
-  	@day
+    @day
   end
 end
