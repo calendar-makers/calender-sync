@@ -1,3 +1,4 @@
+@javascript
 Feature: Display a calendar
 
   As a user,

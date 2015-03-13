@@ -1,9 +1,7 @@
-Capybara.default_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 Given /^(?:|I )am on the calendar page$/ do
-  #Capybara.use_default_driver
   visit '/calendar'
-  #Capybara.current_driver = :webkit
 end
 
 And /^the month is ([A-Za-z]*) (\d+)$/ do |month, year|
