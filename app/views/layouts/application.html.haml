@@ -11,11 +11,18 @@
     = csrf_meta_tags
 
     :javascript
+
       $(document).ready(function() {
         $('#calendar').fullCalendar({
             // put your options and callbacks here
-            
+          dayClick: function() {
+            alert('a day has been clicked!');
+          }
         })
+      });
+      $('#my-button').click(function() {
+        var moment = $('#calendar').fullCalendar('getDate');
+        alert("The current date of the calendar is " + moment.format());
       });
 
   %body
