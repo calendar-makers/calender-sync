@@ -19,10 +19,10 @@
             alert('a day has been clicked!');
           }
         })
-      });
-      $('#my-button').click(function() {
-        var moment = $('#calendar').fullCalendar('getDate');
-        alert("The current date of the calendar is " + moment.format());
+        $('#my-button').click(function() {
+          var moment = $('#calendar').fullCalendar('getDate');
+          alert("The current date of the calendar is " + moment.format());
+        })
       });
 
   %body
