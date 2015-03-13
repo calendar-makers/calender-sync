@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   	Event.where(organization: org)
   end
   def Event.get_events_for_month(month = 03, year = 2015)
-  	Event.where(date: (year.to_s+"-0"+month.to_s+"-01")..(year.to_s+"-0"+month.to_s+"-01") )
+  	Event.where(date: (year.to_s+"-0"+month.to_s+"-01")..(year.to_s+"-0"+(month+1).to_s+"-01") )
   end
   def Event.get_event_for_day(day, month, year)
   	day = '0'+day.to_s if day.to_s.lenght < 2
@@ -11,8 +11,12 @@ class Event < ActiveRecord::Base
   	year = year.to_s
   	Event.where(date: "#{year}-#{month}-#{day}" )
   end
+  def day 
+    formatted_date
+  end
   def formatted_date
-    date.strftime('%B %d, %Y')
+    d = date.strftime('%-d')
+    d.to_i
   end
 
   def formatted_time
