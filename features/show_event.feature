@@ -7,12 +7,12 @@ Feature: Show event details on the webpage for a particular event
 Background: Events have already been added to the database
 
   Given the following events exist:
-  | name             | organization       | description                               | date          | time  | location                   |
-  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 | 16:30 | The old Town Hall          |
-  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 | 00:00 | San Francisco City Library |
+  | name             | organization       | description                               | start               | location                   |
+  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |
+  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 
 Scenario: user clicks on link to get to event details
-  Given I am on the "events directory" page
+  Given I am on the "Events Directory" page
   And "Green Bean Mixer" exists
   When I click on "Green Bean Mixer"
   Then I should be on the details page for "Green Bean Mixer"

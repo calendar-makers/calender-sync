@@ -48,23 +48,24 @@ Then /(?:|I )should see "(.*)" link on "(.*)"$/ do |event_link, date|
 end
 
 Then /(?:|I )should see "(.*)"$/ do |value|
+  #possible failures if duplicates exist.
   page.should have_content(value)
 end
 
 Then /(?:|I )should not see "(.*)"$/ do |value|
-  page.should have_content(value)
+  page.should_not have_content(value)
 end
 
 Then /(?:|I )should see the flash message "(.*)"$/ do |message|
   @message == message
 end
 
-Then /the "(.*)" field should be populated with "(.*)"$/ do |field_name, value|
-  page.field(field_name).should have_content(value)
+Then /the "(.*)" field should be populated with "(.*)"$/ do |field, value|
+  field_labeled(field).value.should =~ /#{value}/
 end
 
-Then /the "(.*)" field should not be populated$/ do |field_name|
-  page.field(field_name).should_be_unused?
+Then /the "(.*)" field should not be populated$/ do |field|
+  field.labeled(field).value.should =~ ""
 end
 
 Given /^that I am logged in as "(.*)"$/ do |user_type|
@@ -72,6 +73,7 @@ Given /^that I am logged in as "(.*)"$/ do |user_type|
 end
 
 Then /^I should not see the "(.*)" event$/ do |event_name|
+  #pending based on calendar population, use "I should not see" for now
   pending
 end
 
@@ -103,14 +105,6 @@ end
 When /^(?:|I )click on the "(.*)" button$/ do |button|
   click_button(button)
 end
-
-#Then /^(?:|I )should see "(.*)"/ do |value|
-#    page.should have_content(value)
-#end
-
-#Then /^(?:|I )should see the field "(.*)"/ do |field|
-#    page.should have_content(value)
-#end
 
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
   field = find_by_id(field)

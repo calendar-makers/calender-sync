@@ -8,9 +8,9 @@ Background: I have logged in as an admin and have permission to create
 
 Scenario: redirect to create page when create new event button pushed
   Given I am on the "Calendar" page
-  And I click on the "new event" button
+  And I click on "new event"
   Then I should be on the "Create" page
-  And I should see the following fields: "Organization Name, Event Name, Event Description, Date, Event Location, Time"
+  And I should see the following fields: "Organization Name, Event Name, Description, Start Time, Location"
   And I should see the "Create Event" button
 
 Scenario: store information when all the fields are filled out
@@ -32,7 +32,7 @@ Scenario: make sure that that all event fields are filled in
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
   And I fill in the "Description" field with "Join us for a nature walk through old town San Francicso!"
-  And I select "3/19/2015"
+  And I select "3/19/2015" as the date
   And I fill in the "Location" field with "The Old Town Hall"
   And I click on the "Create Event" button
   Then I should be on the "Create" page
