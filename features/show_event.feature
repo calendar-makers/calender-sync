@@ -14,7 +14,7 @@ Background: Events have already been added to the database
 Scenario: user clicks on link to get to event details
   Given I am on the "Events Directory" page
   And "Green Bean Mixer" exists
-  When I click on "Green Bean Mixer"
+  When I click on the "Green Bean Mixer" link
   Then I should be on the details page for "Green Bean Mixer"
 
 Scenario: user is on an event page
@@ -28,8 +28,9 @@ Scenario: user is on an event page
 
 Scenario: user going from event page back to calendar page
   Given I am on the details page for "Nature Walk"
-  When I click on the "Back to calendar" button
-  Then I should be on the "calendar" page
+  When I click on the "Back to calendar" link
+  Then I should be on the "Events Directory" page   
+  #Then I should be on the "Calendar" page
 
 
 #add scenario for calendar (when populated)
