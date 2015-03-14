@@ -13,7 +13,6 @@ class EventsController < ActionController::Base
   def show
     begin
       @event = Event.find params[:id]
-      printer(@event)
     rescue ActiveRecord::RecordNotFound
       flash[:notice] = "404: This is not the event you are looking for."
       redirect_to events_path
@@ -21,17 +20,41 @@ class EventsController < ActionController::Base
   end
 
   def new
-    # default: render 'new' template
-    printer("I'm in new")
+    if flash[:notice] == nil
+      @message = ""
+    else
+      @message = "Please fill in the following fields before submitting: "
+      flash[:notice].each do |key|
+        @message += key + ", "
+      end
+    end
+    @message = @message[0..@message.length-3]
   end
 
   def create
+    result = Event.check_if_fields_valid(event_params)
+    if !result[:value]
+      flash[:notice] = result[:message]
+      redirect_to new_event_path
+      return
+    end
     @event = Event.create!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully added."
     redirect_to events_path
   end
 
   def edit
+    printer(flash[:notice])
+    if !flash[:notice].is_a?(Array) 
+      @message = ""
+    else
+      @message = "Please fill in the following fields before submitting: "
+      flash[:notice].each do |key|
+        @message += key + ", "
+      end
+    end
+    @message = @message[0..@message.length-3]
+
     begin
       @event = Event.find params[:id]
     rescue ActiveRecord::RecordNotFound
@@ -42,6 +65,13 @@ class EventsController < ActionController::Base
 
   def update
     @event = Event.find params[:id]
+    result = Event.check_if_fields_valid(event_params)
+    if !result[:value]
+      flash[:notice] = result[:message]
+      printer(flash[:notice])
+      redirect_to edit_event_path(@event)
+      return
+    end
     @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
     redirect_to event_path(@event)
