@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
@@ -50,7 +51,11 @@ RSpec.describe EventsController, type: :controller do
                            organization: 'nature loving',
                            start: '8-mar-2016',
                            description: 'watch coyotes')
-      put :update, { id: 1 }, { name: 'Dog Watch' }
+      put :update, { id: 1 }, { name: 'Dog Watch',
+                                location: 'San Francisco',
+                                organization: 'Nature Loving',
+                                start: '8-mar-2016',
+                                description: 'Pet Puppies' }
       expect(response).to redirect_to(event_path(event))
     end
   end

@@ -1,9 +1,3 @@
-def printer(arg1)
-  puts "******** LOG *********"
-  puts arg1.inspect
-  puts "******** END *********"
-end
-
 class EventsController < ActionController::Base
   def index
     @events = Event.all
@@ -11,12 +5,12 @@ class EventsController < ActionController::Base
   end
 
   def show
-    begin
-      @event = Event.find params[:id]
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "404: This is not the event you are looking for."
-      redirect_to events_path
-    end
+#    begin
+    @event = Event.find params[:id]
+#    rescue ActiveRecord::RecordNotFound
+#      flash[:notice] = "404: This is not the event you are looking for."
+#      redirect_to events_path
+#    end
   end
 
   def new
@@ -39,12 +33,12 @@ class EventsController < ActionController::Base
       return
     end
     @event = Event.create!(event_params)
+    params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
     redirect_to events_path
   end
 
   def edit
-    printer(flash[:notice])
     if !flash[:notice].is_a?(Array) 
       @message = ""
     else
@@ -55,12 +49,12 @@ class EventsController < ActionController::Base
     end
     @message = @message[0..@message.length-3]
 
-    begin
-      @event = Event.find params[:id]
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "404: This is not the event you are looking for."
-      redirect_to events_path
-    end
+    #begin
+    @event = Event.find params[:id]
+    #rescue ActiveRecord::RecordNotFound
+    #  flash[:notice] = "404: This is not the event you are looking for."
+    #  redirect_to events_path
+    #end
   end
 
   def update
@@ -68,7 +62,6 @@ class EventsController < ActionController::Base
     result = Event.check_if_fields_valid(event_params)
     if !result[:value]
       flash[:notice] = result[:message]
-      printer(flash[:notice])
       redirect_to edit_event_path(@event)
       return
     end

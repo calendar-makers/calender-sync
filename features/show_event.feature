@@ -30,7 +30,3 @@ Scenario: user going from event page back to calendar page
   Given I am on the "details" page for "Nature Walk"
   When I click on the "Back to calendar" link
   Then I should be on the "Events Directory" page   
-  #Then I should be on the "Calendar" page
-
-
-#add scenario for calendar (when populated)
