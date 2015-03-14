@@ -13,10 +13,10 @@ Background: Events have already been added to the database
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 
 Scenario: Delete event from the calendar
-  Given I am on the details page for "Nature Walk"
+  Given I am on the "details" page for "Nature Walk"
   And I should see the "Delete" button
   When I click on the "Delete" button
   Then I should be on the "Events Directory" page
   #And I should not see the "Nature Walk" event
-  And I should not see "Nature Walk"
+  And I should not see the "Nature Walk" link
   #And I should see "Nature Walk was successfully removed." #pending calendar population

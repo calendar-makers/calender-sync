@@ -23,18 +23,17 @@ Scenario: navigate to edit page and see all of the information
 Scenario: correctly change information results in change
   Given I am on the "Edit" page for "Nature Walk"
   And I fill in the "Location" field with "The New Town Hall"
-  And I click on the "Update Event Information" button
-  Then I should be on the "details" page
-  And I should see "Location: The New Town Hall"
-  And I should not see "Location: The Old Town Hall"
+  And I click on the "Update Event Info" button
+  Then I should be on the "Details" page for "Nature Walk"
+  And I should see "The New Town Hall" as the "Location"
 
 Scenario: make sure user correctly changes information in edit page
-  Given I am on the "Edit" page for "Nature in the City"'s "Nature Walk"
-  And I fill in the "Location" field with " "
-  And I click on the "Update Event Information" button
-  Then I should be on the "Edit" page
+  Given I am on the "Edit" page for "Nature Walk"
+  And I fill in the "Location" field with ""
+  And I click on the "Update Event Info" button
+  Then I should be on the "Edit" page for "Nature Walk"
   And I should see the flash message "Please complete the Edit page form"
   And the "Event Name" field should be populated with "Nature Walk"
-  And the "Add Event Details" field should be populated with "A walk through the city"
+  And the "Description" field should be populated with "A walk through the city"
   And the "Start" time field should be populated with "3/19/2015, 4:30pm"
-  And the "Location" field should be populated with " "
+  And the "Location" field should be populated with "The Old Town Hall"

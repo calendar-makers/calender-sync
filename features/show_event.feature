@@ -15,10 +15,10 @@ Scenario: user clicks on link to get to event details
   Given I am on the "Events Directory" page
   And "Green Bean Mixer" exists
   When I click on the "Green Bean Mixer" link
-  Then I should be on the details page for "Green Bean Mixer"
+  Then I should be on the "details" page for "Green Bean Mixer"
 
 Scenario: user is on an event page
-  Given I am on the details page for "Nature Walk"
+  Given I am on the "details" page for "Nature Walk"
   Then I should see "Nature Walk" as the "name"
   And I should see "Nature in the City" as the "organization"
   And I should see "4:30pm" as the "time"
@@ -27,7 +27,7 @@ Scenario: user is on an event page
   And I should see "The old Town Hall" as the "location"
 
 Scenario: user going from event page back to calendar page
-  Given I am on the details page for "Nature Walk"
+  Given I am on the "details" page for "Nature Walk"
   When I click on the "Back to calendar" link
   Then I should be on the "Events Directory" page   
   #Then I should be on the "Calendar" page

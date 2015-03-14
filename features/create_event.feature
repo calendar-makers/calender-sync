@@ -17,9 +17,9 @@ Scenario: store information when all the fields are filled out
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
   And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
-  And I select "3/19/2015" as the date
-  And I select "4:30 PM" as the time
+  And I select "3/19/2015, 4:30pm" as the date and time
   And I fill in the "Location" field with "The Old Town Hall"
+  And I fill in the "Organization" field with "trololol"
   And I click on the "Create Event" button
   Then I should be on the "Events Directory" page
   Then I should see the "Nature Walk" link

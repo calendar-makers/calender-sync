@@ -24,17 +24,13 @@ And /^(?:|I )fill in the "(.*)" field with "(.*)"$/ do |field, value|
   field.set value
 end
 
-And /^I select "([^"]*)" as the date$/ do |date|
-  date = Date.strptime(date, '%m/%d/%Y')
-  select date.year, :from => 'event_start_1i'
-  select date.strftime("%B"), :from => 'event_start_2i'
-  select date.day, :from => 'event_start_3i' 
-end
-
-And /^I select "([^"]*)" as the time$/ do |time|
-  time = Time.parse(time)
-  select time.hour, :from => 'event_start_4i'
-  select time.min, :from => 'event_start_5i'
+And /^I select "([^"]*)" as the date and time$/ do |value|
+  dt  = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
+  select dt.year, :from => 'event_start_1i'
+  select dt.strftime("%B"), :from => 'event_start_2i'
+  select dt.day, :from => 'event_start_3i' 
+  select dt.hour, :from => 'event_start_4i'
+  select dt.min, :from => 'event_start_5i'
 end
 
 Then /(?:|I )should see "(.*)" link on "(.*)"$/ do |event_link, date|
@@ -56,7 +52,7 @@ Then /(?:|I )should see the "(.*)" link$/ do |link|
   page.should have_link(link)
 end
 
-Then /(?:|I )should not see "(.*)" link$/ do |link|
+Then /(?:|I )should not see the "(.*)" link$/ do |link|
   page.should_not have_link(link)
 end
 =begin
@@ -74,6 +70,7 @@ Then /the "(.*)" field should be populated with "(.*)"$/ do |field, value|
 end
 
 Then /the "(.*)" time field should be populated with "(.*)"$/ do |field, value|
+  field = field.downcase
   date_time = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
   page.should have_field("event_#{field}_1i", with: date_time.year)
   page.should have_field("event_#{field}_2i", with: date_time.month)
@@ -120,18 +117,19 @@ When /^(?:|I )click on the "(.*)" button$/ do |button|
 end
 
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
+  field = field.downcase
   field = find_by_id(field)
   field.should have_content(value)
 end
 
 Then /^(?:|I )should be on the "(.*)" page for "(.*)"$/ do |page_name, event_name|
   current_path = URI.parse(current_url).path
-  path_to_event(page_name, event_name) != current_path
+  expect(path_to_event(page_name, event_name)).to eq(current_path)
 end
 
 Then /^(?:|I )should be on the "(.*)" page$/ do |page_name|
   current_path = URI.parse(current_url).path
-  path_to(page_name) == current_path
+  expect(path_to(page_name)).to eq(current_path)
 end
 
 Given(/^"(.*)" exists$/) do |arg|
@@ -160,7 +158,7 @@ def path_to_event(page_name, event_name)
   page_name = page_name.downcase
   case page_name
     when /^details/ then "/events/#{Event.find_by_name(event_name).id}"
-    when /^edit/ then "/events/#/#{Event.find_by_name(event_name).id}/edit"
+    when /^edit/ then "/events/#{Event.find_by_name(event_name).id}/edit"
     else
       begin
         page_name =~ /^the (.*) page$/
