@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails', '~>3.2.1'
   gem 'simplecov'
   gem 'rake'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 group :production do
