@@ -23,11 +23,12 @@ RSpec.describe EventsController, type: :controller do
 
   describe 'Creating New Event' do
     it 'should redirect to index' do
-      post :create, { name: 'coyote appreciation',
-                      location: 'yosemite',
-                      organization: 'nature loving',
-                      start: '8-mar-2016',
-                      description: 'watch coyotes' }
+      post :create, { event: { name: 'coyote appreciation',
+                               location: 'yosemite',
+                               organization: 'nature loving',
+                               start: '8-mar-2016',
+                               description: 'watch coyotes' }
+                    }
       expect(response).to redirect_to(events_path)
     end
   end
@@ -51,11 +52,12 @@ RSpec.describe EventsController, type: :controller do
                            organization: 'nature loving',
                            start: '8-mar-2016',
                            description: 'watch coyotes')
-      put :update, { id: 1 }, { name: 'Dog Watch',
-                                location: 'San Francisco',
-                                organization: 'Nature Loving',
-                                start: '8-mar-2016',
-                                description: 'Pet Puppies' }
+      put :update, { id: 1, event: { name: 'Dog Watch',
+                                     location: 'San Francisco',
+                                     organization: 'Nature Loving',
+                                     start: '8-mar-2016',
+                                     description: 'Pet Puppies' }
+                   }
       expect(response).to redirect_to(event_path(event))
     end
   end
