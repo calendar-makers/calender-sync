@@ -1,8 +1,8 @@
-Feature: User can RSVP for event through event details page
+Feature: See who RSVPed for event
 
-  As a vistor of the website
-  So that I can join the event with minimal overhead
-  I want to be able to RSVP for the event
+  As a user
+  So that I can predict who's attending the event
+  I want to be able to view who has RSVPed to the event
 
 Background:
   Given the following events exist:
@@ -28,17 +28,8 @@ Background:
   | 2        | 4        |
   | 2        | 5        |
 
-  And I am on the "Nature Walk" page
-  Then I should see the RSVP form
-
-Scenario: RSVP form, completed and submitted
-  When I fill out the RSVP form
-  And I press "Submit"
-  Then I should see a message confirming my submission
-  And I should see my information on the page
-
-Scenario: Attempt submission of incomplete RSVP form
-  When I do not fill out the entire RSVP form
-  And I press "Submit"
-  Then I should see a failed submission message
-  And I should not see my information on the page
+Scenario: User sees all event attendees
+  When I am on the "details" page for "Nature Walk"
+  Then I should see info about people attending "Nature Walk"
+  And I should not see info about people only attending "Green Bean Mixer"
+  And the list of attendees should be listed alphabetically by "last_name"

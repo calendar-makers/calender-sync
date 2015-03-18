@@ -11,6 +11,6 @@ Background:
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 
 Scenario: User should see all pictures related to the event
-  When I am on the "Nature Walk" page
+  When I am on the "details" page for "Nature Walk"
   Then I should see all the pictures for "Nature Walk"
   And I should not see any pictures for "Green Bean Mixer"
