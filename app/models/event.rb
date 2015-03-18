@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  has_many :guests, through: :registrations
+
   def self.check_if_fields_valid(arg1)
     result = {}
     result[:message] = []
