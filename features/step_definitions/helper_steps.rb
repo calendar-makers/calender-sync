@@ -1,4 +1,5 @@
-# Helper step definitions. Please don't use these as steps directly in feature files.
+# Helper step definitions. Please don't use these steps directly in feature
+# files, except for maybe When(/^I press "(.*)"$/).
 
 Then(/^the page should have the text "(.*)"$/) do |text|
   if page.respond_to? :should
