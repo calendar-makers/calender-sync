@@ -23,8 +23,9 @@ Given(/^the following registrations exist:$/) do |registrations_table|
   end
 end
 
-Then(/^I should see info about people attending "(.*?)"$/) do |event_name|
-  guests = Guest.where()
+Then(/^I should see info about people attending "(.*)"$/) do |event_name|
+  pending
+  guests = Guest.where(event_id: Event.find_by_name(event_name).id)
   with_scope('#attendees') do
     guests.each do |guest|
       guest.attributes.each do |column, value|
@@ -34,22 +35,20 @@ Then(/^I should see info about people attending "(.*?)"$/) do |event_name|
   end
 end
 
-Then(/^I should not see info about people only attending "(.*?)"$/) do |event_name|
-  guests = Guest.where()
-  with_scope('tr td') do
+Then(/^I should not see info about people who aren't attending "(.*)"$/) do |event_name|
+  pending
+  guests = Guest.where.not(event_id: Event.find_by_name(event_name).id)
+  with_scope('#attendees') do
     guests.each do |guest|
       guest.attributes.each do |name, value|
-        if page.respond_to? :should_not
-          expect(page).to have_no_content(value)
-        else
-          page.has_no_content?(value)
-        end
+        step %{the page should not have the text "#{value}"}
       end
     end
   end
 end
 
-Then(/^the list of attendees should be listed alphabetically by last name$/) do |arg1|
+Then(/^the list of attendees should be listed alphabetically by last name$/) do
+  pending
   ordered_guests = Guest.order(:last_name)
   prev_guest = nil
   order_guests.each do |guest|
@@ -61,6 +60,7 @@ Then(/^the list of attendees should be listed alphabetically by last name$/) do 
 end
 
 Then(/^I should see the RSVP form$/) do
+  pending
   expect(page).to have_field("#rsvp")
 end
 
@@ -75,7 +75,7 @@ When(/^I fill out the RSVP form (anonymously|non-anonymously)$/) do |anon|
   end
 end
 
-When(/^I press "(.*?)"$/) do |button|
+When(/^I press "(.*)"$/) do |button|
   click_button(button)
 end
 
