@@ -19,9 +19,9 @@ end
 When /^(?:|I )click on the calendar's (.*) arrow$/ do |link|
   case link
   when "next"
-  	page.execute_script("$('#calendar').fullCalendar('next')")
+    page.execute_script("$('#calendar').fullCalendar('next')")
   when "previous"
-  	page.execute_script("$('#calendar').fullCalendar('prev')")
+    page.execute_script("$('#calendar').fullCalendar('prev')")
   end
 end
 
