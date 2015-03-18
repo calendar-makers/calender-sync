@@ -7,16 +7,16 @@ end
 Given /(?:|I )should see the following fields: "(.*)"$/ do |fields|
   fields.split(', ').each do |field|
     field = field.rstrip
-    page.should have_content(field)
+    expect(page).to have_content(field)
   end
 end
 
 Then /(?:|I )should see the "(.*)" button$/ do |button_name|
-  page.should have_button(button_name)
+  expect(page).to have_button(button_name)
 end
 
 Then /(?:|I )should see the "(.*)" on the page$/ do |field|
-  page.should have_content(field)
+  expect(page).to have_content(field)
 end
 
 And /^(?:|I )fill in the "(.*)" field with "(.*)"$/ do |field, value|
@@ -34,7 +34,7 @@ And /^I select "([^"]*)" as the date and time$/ do |value|
 end
 
 Then /(?:|I )should see "(.*)" link on "(.*)"$/ do |event_link, date|
-  page.should have_link(event_link)
+  expect(page).to have_link(event_link)
   ## NEEDS MORE WORK TO CHECK THAT THE LINK IS ACTUALLY UNDER THE GIVEN DATE
   ## OR MAYBE SHOULD BE CHECKED SOMEWHERE ELSE???
 end
@@ -44,20 +44,20 @@ Then /(?:|I )should see "(.*)"$/ do |value|
   #Very poorly made test, avoid using 
   pending
   #possible failures if duplicates exist.
-  #page.should have_content(value)
+  #expect(page).to have_content(value)
 end
 =end
 
 Then /(?:|I )should see the "(.*)" link$/ do |link|
-  page.should have_link(link)
+  expect(page).to have_link(link)
 end
 
 Then /(?:|I )should not see the "(.*)" link$/ do |link|
-  page.should_not have_link(link)
+  expect(page).to_not have_link(link)
 end
 =begin
 Then /(?:|I )should not see "(.*)"$/ do |value|
-  page.should_not have_content(value)
+  expect(page).to_not have_content(value)
 end
 =end
 
@@ -66,21 +66,21 @@ Then /(?:|I )should see the flash message "(.*)"$/ do |message|
 end
 
 Then /the "(.*)" field should be populated with "(.*)"$/ do |field, value|
-  field_labeled(field).value.should =~ /#{value}/
+  expect(field_labeled(field).value).to match(/#{value}/)
 end
 
 Then /the "(.*)" time field should be populated with "(.*)"$/ do |field, value|
   field = field.downcase
   date_time = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
-  page.should have_field("event_#{field}_1i", with: date_time.year)
-  page.should have_field("event_#{field}_2i", with: date_time.month)
-  page.should have_field("event_#{field}_3i", with: date_time.day)
-  page.should have_field("event_#{field}_4i", with: date_time.hour)
-  page.should have_field("event_#{field}_5i", with: date_time.min)
+  expect(page).to have_field("event_#{field}_1i", with: date_time.year)
+  expect(page).to have_field("event_#{field}_2i", with: date_time.month)
+  expect(page).to have_field("event_#{field}_3i", with: date_time.day)
+  expect(page).to have_field("event_#{field}_4i", with: date_time.hour)
+  expect(page).to have_field("event_#{field}_5i", with: date_time.min)
 end
 
 Then /the "(.*)" field should not be populated$/ do |field|
-  field.labeled(field).value.should =~ ""
+  expect(field.labeled(field).value).to eq("")
 end
 
 Given /^that I am logged in as "(.*)"$/ do |user_type|
@@ -119,7 +119,7 @@ end
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
   field = field.downcase
   field = find_by_id(field)
-  field.should have_content(value)
+  expect(field).to have_content(value)
 end
 
 Then /^(?:|I )should be on the "(.*)" page for "(.*)"$/ do |page_name, event_name|
@@ -133,7 +133,7 @@ Then /^(?:|I )should be on the "(.*)" page$/ do |page_name|
 end
 
 Given(/^"(.*)" exists$/) do |arg|
-  page.should have_content(arg)
+  expect(page).to have_content(arg)
 end
 
 def path_to(page_name)
