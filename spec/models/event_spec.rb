@@ -11,8 +11,8 @@ RSpec.describe Event, type: :model do
                      start: '8-mar-2016',
                      description: 'watch coyotes' }
       result = Event.check_if_fields_valid(event_hash)
-      expect(Event.check_if_fields_valid(event_hash)[:message]).to be_empty
-      expect(Event.check_if_fields_valid(event_hash)[:value]).to be_truthy
+      expect(result[:message]).to be_empty
+      expect(result[:value]).to be_truthy
     end
 
     it "should return hash with :value => false if nil or empty string" do
