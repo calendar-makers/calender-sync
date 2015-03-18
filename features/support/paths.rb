@@ -16,6 +16,10 @@ module NavigationHelpers
     when /^Calendar$/ then calendar_path
     when /^Events Directory$/ then events_path
     when /^Create$/ then new_event_path
+
+    when /^RSVP$/ then pending # Vincent and Mike need to replace 'pending'
+    when /^Meetup Login$/ then pending # Vincent and Mike need to replace 'pending'
+
     when /^the (.*) page for (.*)$/
       if $1 == 'details'
         event_path(Event.find_by_name($2).id)

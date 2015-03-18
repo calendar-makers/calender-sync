@@ -31,5 +31,5 @@ Background:
 Scenario: User sees all event attendees
   When I am on the "details" page for "Nature Walk"
   Then I should see info about people attending "Nature Walk"
-  And I should not see info about people only attending "Green Bean Mixer"
+  And I should not see info about people who aren't attending "Nature Walk"
   And the list of attendees should be listed alphabetically by last name

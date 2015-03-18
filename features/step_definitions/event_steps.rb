@@ -119,6 +119,7 @@ When /^(?:|I )click on the "(.*)" button$/ do |button|
 end
 
 Then /^(?:|I )should see "(.*)" as the "(.*)"$/ do |value, field|
+  pending
   field = field.downcase
   field = find_by_id(field)
   expect(field).to have_content(value)
