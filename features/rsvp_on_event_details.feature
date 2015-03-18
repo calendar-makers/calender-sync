@@ -11,12 +11,12 @@ Background:
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 
   And the following guests exist:
-  | first_name | last_name | phone      | email            | address            | is_anon |
-  | John       | Smith     | 8165678521 | jsmith@site.com  | 12 Washington Blvd | False   |
-  | Jacob      | Harrison  | 9321234567 | jharry@gmail.com | 10 Whatever St     | True    |
-  | Adam       | Johnson   | 1239874321 | ajohns@yahoo.com | 38 Smithsonian Ave | True    |
-  | Mary       | Jackson   | 7894258967 | mjacks@msn.com   | 98 White Horse Ave | True    |
-  | Max        | Leroy     | 7231238900 | maxler@aol.com   | 69 Feeling St      | False   |
+  | first_name | last_name | phone          | email            | address            | is_anon |
+  | John       | Smith     | (816) 567-8521 | jsmith@site.com  | 12 Washington Blvd | false   |
+  | Jacob      | Harrison  | (932) 123-4567 | jharry@gmail.com | 10 Whatever St     | true    |
+  | Adam       | Johnson   | (123) 987-4321 | ajohns@yahoo.com | 38 Smithsonian Ave | true    |
+  | Mary       | Jackson   | (789) 425-8967 | mjacks@msn.com   | 98 White Horse Ave | true    |
+  | Max        | Leroy     | (723) 123-8900 | maxler@aol.com   | 69 Feeling St      | false   |
 
   And the following registrations exist:
   | event_id | guest_id |
@@ -32,7 +32,7 @@ Background:
   Then I should see the RSVP form
 
 Scenario: RSVP form, completed and submitted
-  When I fill out the RSVP form
+  When I fill out the RSVP form non-anonymously
   And I press "Submit"
   Then I should see a message confirming my submission
   And I should see my information on the page

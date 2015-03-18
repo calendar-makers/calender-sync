@@ -7,7 +7,7 @@ Feature: create an event and have it displayed on the calendar
 Background: I have logged in as an admin and have permission to create
 
 Scenario: redirect to create page when create new event button pushed
-  Given I am on the "Calendar" page
+  Given I am on the calendar page
   And I click on the "new event" link
   Then I should be on the "Create" page
   And I should see the following fields: "Organization Name, Event Name, Description, Start Time, Location"

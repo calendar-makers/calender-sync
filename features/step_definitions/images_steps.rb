@@ -1,8 +1,15 @@
-Then(/^I should see all the pictures for "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+require_relative 'helper_steps'
+
+Then(/^I should see all the pictures for "(.*)"$/) do |event_name|
+  Dir.foreach("app/assets/images/#{event_name}") do |item|
+    next if item == '.' or item == '..'
+    expect(page).to have_xpath("//img[@src=\"/assets/images/#{event_name}/#{item}\"]")
+  end
 end
 
-Then(/^I should not see any pictures for "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should not see any pictures for "(.*)"$/) do |event_name|
+  Dir.foreach("app/assets/images/#{event_name}") do |item|
+    next if item == '.' or item == '..'
+    expect(page).to_not have_xpath("//img[@src=\"/assets/images/#{event_name}/#{item}\"]")
+  end
 end
-

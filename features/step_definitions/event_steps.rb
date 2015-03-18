@@ -1,3 +1,5 @@
+require_relative 'helper_steps'
+
 Given /the following events exist/ do |events_table|
   events_table.hashes.each do |event|
     Event.create!(event)
@@ -136,37 +138,7 @@ Given(/^"(.*)" exists$/) do |arg|
   expect(page).to have_content(arg)
 end
 
-def path_to(page_name)
-  page_name = page_name.downcase
-  case page_name
-    when /^calendar$/ then '/calendar'
-    when /^events directory/ then '/events'
-    when /^create/ then '/events/new'
-    else
-      begin
-        page_name =~ /^the (.*) page$/
-        path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
-      rescue NoMethodError, ArgumentError
-        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-                  "Now, go and add a mapping in #{__FILE__}"
-      end
-  end
-end
-
 def path_to_event(page_name, event_name)
   page_name = page_name.downcase
-  case page_name
-    when /^details/ then "/events/#{Event.find_by_name(event_name).id}"
-    when /^edit/ then "/events/#{Event.find_by_name(event_name).id}/edit"
-    else
-      begin
-        page_name =~ /^the (.*) page$/
-        path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
-      rescue NoMethodError, ArgumentError
-        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-              "Now, go and add a mapping in #{__FILE__}"
-    end
-  end
+  path_to("the #{page_name} page for #{event_name}")
 end
