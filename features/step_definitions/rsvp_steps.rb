@@ -1,15 +1,4 @@
 require_relative 'helper_steps'
-require 'uri'
-require 'cgi'
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-
-module WithinHelpers
-  def with_scope(locator)
-    locator ? within(*selector_for(locator)) { yield } : yield
-  end
-end
-World(WithinHelpers)
 
 Given(/^the following guests exist:$/) do |guests_table|
   guests_table.hashes.each do |guest|
@@ -26,25 +15,13 @@ end
 Then(/^I should see info about people attending "(.*)"$/) do |event_name|
   pending
   guests = Guest.where(event_id: Event.find_by_name(event_name).id)
-  with_scope('#attendees') do
-    guests.each do |guest|
-      guest.attributes.each do |column, value|
-        step %{the page should have the text "#{value}"}
-      end
-    end
-  end
+  table_contents_under_id(guests, '#attendees', true)
 end
 
 Then(/^I should not see info about people who aren't attending "(.*)"$/) do |event_name|
   pending
   guests = Guest.where.not(event_id: Event.find_by_name(event_name).id)
-  with_scope('#attendees') do
-    guests.each do |guest|
-      guest.attributes.each do |name, value|
-        step %{the page should not have the text "#{value}"}
-      end
-    end
-  end
+  table_contents_under_id(guests, '#attendees', false)
 end
 
 Then(/^the list of attendees should be listed alphabetically by last name$/) do
@@ -98,4 +75,18 @@ end
 
 Then(/^I should see a failed submission message$/) do
   step %{the page should have the text "Please fill out all fields to RSVP."}
+end
+
+def table_contents_under_id(table, html_id, should_have_text)
+  with_scope("#{html_id}") do
+    table.each do |row|
+      row.attributes.each do |column, value|
+        if should_have_text
+          step %{the page should have the text "#{value}"}
+        else
+          step %{the page should not have the text "#{value}"}
+        end
+      end
+    end
+  end
 end
