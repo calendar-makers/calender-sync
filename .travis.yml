@@ -3,3 +3,4 @@ rvm:
   - 2.2.1
 before_install:
   - sudo apt-get install libqtwebkit-dev
+  - sudo apt-get install xvfb
