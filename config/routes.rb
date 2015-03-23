@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :events
   get '/', to: redirect('/calendar')
 
+  match "/auth/:provider/callback" => "sessions#create", via: [:get, :post]
+  match "/signout" => "sessions#destroy", via: [:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
