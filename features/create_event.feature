@@ -26,7 +26,7 @@ Scenario: store information when all the fields are filled out
   #And I should see "Nature Walk" link on "3/19/2015"
   #And I should see ""Nature Walk" was successfully added."
 
-#unimplemented 
+#unimplemented
 #Scenario: make sure that that all event fields are filled in
 #  Given I am on the "Create" page
 #  And I fill in the "Event Name" field with "Nature Walk"
