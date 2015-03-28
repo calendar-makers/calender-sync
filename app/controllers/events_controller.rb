@@ -1,4 +1,10 @@
 class EventsController < ActionController::Base
+  helper_method :message
+
+  def message
+    @message
+  end
+
   def index
     @events = Event.all
     @message = flash[:notice]
@@ -39,7 +45,7 @@ class EventsController < ActionController::Base
   end
 
   def edit
-    if !flash[:notice].is_a?(Array) 
+    if !flash[:notice].is_a?(Array)
       @message = ""
     else
       @message = "Please fill in the following fields before submitting: "

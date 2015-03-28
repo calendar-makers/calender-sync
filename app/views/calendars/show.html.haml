@@ -1,8 +1,8 @@
-= link_to "new event", new_event_path 
+= link_to "new event", new_event_path
 - if current_user
-  = link_to "Sign Out", "/signout"
+  = link_to "Sign Out", "/signout", id: "signout"
 - else
-  = link_to "login to Meetup", "/auth/meetup"
+  = link_to "login to Meetup", "/auth/meetup", id: "login"
 %button#my-button push me
 
 #calendar

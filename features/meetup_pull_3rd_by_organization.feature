@@ -39,7 +39,7 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
     And I should see the "Import Selected Events, Cancel" buttons
     And I check "Select Organization" for "Nature Matters, Green Carrots"
     And I click on the "Get Events" button
-    Then I should see the list of events containing "Nature Stroll", "Green Bean Mixer"
+    Then I should see the list "of events" containing: "Nature Stroll, Green Bean Mixer"
 
   Scenario: add new organization
     Given I click on the "add new organizations" button
@@ -60,18 +60,18 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
 #    And I should see the list "affiliated organizations" containing: "Modern Gardeners"
 
   Scenario: accept all events in successful pull
-    Given I "check" the check-box "Select Event" for "Nature Walk, Green Bean Mixer"
+    Given I check "Select Event" for "Nature Walk, Green Bean Mixer"
     And I click on the "Import Selected Events" button
     Then I should be on the "Events Directory" page
-    And I should see the "Nature Stroll", "Green Bean Mixer" links
-    And I should see the message "Successfully pulled events: "Nature Stroll, Green Bean Mixer" from Meetup
+    And I should see the "Nature Stroll, Green Bean Mixer" links
+    And I should see the message "Successfully pulled events: Nature Stroll, Green Bean Mixer from Meetup"
     # Later redirect to the actual calendar
 
   Scenario: accept all events in failed pull
-    Given I "check" the check-box "Select Event" for "Nature Walk, Green Bean Mixer"
+    Given I check "Select Event" for "Nature Walk, Green Bean Mixer"
     And I click on the "Import Selected Events" button
     Then I should be on the "Events Directory" page
-    And I should not see the "Nature Stroll", "Green Bean Mixer" links
+    And I should not see the "Nature Stroll, Green Bean Mixer" links
     And I should see the message "Could not pull events from Meetup"
     # Later redirect to the actual calendar
 
@@ -79,13 +79,13 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
     Given I click on the "Import Selected Events" button
     Then I should be on the "Events Directory" page
     And I should see the message "No events were accepted. Nothing to import."
-    And I should not see the "Nature Stroll", "Green Bean Mixer, New Nature, Gardening" links
+    And I should not see the "Nature Stroll, Green Bean Mixer, New Nature, Gardening" links
 
 
   Scenario: cancel operation
     Given I click on the "Cancel" button
     Then I should be on the "Events Directory" page
-    And I should not see the "Nature Stroll", "Green Bean Mixer, New Nature, Gardening" links
+    And I should not see the "Nature Stroll, Green Bean Mixer, New Nature, Gardening" links
 
 
 

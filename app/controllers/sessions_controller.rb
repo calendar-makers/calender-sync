@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def create
     auth = request.env["omniauth.auth"]
     # sign in or create new user
@@ -13,5 +13,9 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to '/', :notice => "Signed out!"
+  end
+
+  def failure
+    redirect_to '/', :alert => "Authentication failed, please try again."
   end
 end

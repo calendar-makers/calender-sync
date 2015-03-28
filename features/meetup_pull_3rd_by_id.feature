@@ -10,7 +10,9 @@ Feature: pull 3rd-party events created on Meetup by event ID and display them on
     #Given I have logged in as an admin on the app
     Given I have logged in as an admin on Meetup
     # NEED TO GET A REALISTIC USER ID
-    And the meetup event "Gardening" with id "123456" exists
+    And the following events exist on Meetup:
+      |id     | name             | organization       | description                | start               | location            |
+      |123456 | Gardening        | Nature in the City | Cultivating some things    | March 19 2015 16:30 | The old Town Hall   |
     And I am on the calendar page
     And I click on the "pull 3rd-party event by id" button
     Then I should be on the "import 3rd-party event by id" page
@@ -23,7 +25,7 @@ Feature: pull 3rd-party events created on Meetup by event ID and display them on
     And I click on the "Import Selected Events" button
     Then I should be on the "Events Directory" page
     And I should see the "Gardening" link
-    And I should see the message "Successfully pulled events: "Gardening" from Meetup
+    And I should see the message "Successfully pulled events: 'Gardening' from Meetup"
     # Later redirect to the actual calendar
 
   Scenario: fail to pull an event

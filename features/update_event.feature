@@ -32,7 +32,7 @@ Scenario: make sure user correctly changes information in edit page
   And I fill in the "Location" field with ""
   And I click on the "Update Event Info" button
   Then I should be on the "Edit" page for "Nature Walk"
-  And I should see the flash message "Please complete the Edit page form"
+  And I should see the message "Please fill in the following fields before submitting: location"
   And the "Event Name" field should be populated with "Nature Walk"
   And the "Description" field should be populated with "A walk through the city"
   And the "Start" time field should be populated with "3/19/2015, 4:30pm"

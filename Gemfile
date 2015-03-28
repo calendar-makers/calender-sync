@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # meetup gems
 gem 'omniauth'
 gem 'omniauth-meetup'
-gem 'meetup_client'
+gem 'httparty'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

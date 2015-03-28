@@ -23,4 +23,15 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe "Pull events from Meetup" do
+    context "when successful" do
+      it "returns the events" do
+
+      end
+    end
+    context 'when failure' do
+      it "responds with error"
+    end
+  end
+
 end
