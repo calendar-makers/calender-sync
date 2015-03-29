@@ -28,7 +28,7 @@ Feature: automatically pull rsvp list from Meetup and merge to rsvp list in the 
 
   Scenario: successfully pull the RSVP for an event
      ###  AGAIN CONSIDER USING NAMES INSTEAD OF IDs
-    And I go to the "details" page for event id: "123456"
+    Given I go to the "details" page for event id: "123456"
     Then I should see the following RSVP list:
       | name              | email              |
       | Ben Franklin      | b.f@gmail.com      |
@@ -38,11 +38,11 @@ Feature: automatically pull rsvp list from Meetup and merge to rsvp list in the 
       | Antonio Banderas  | a.b@gmail.com      |
       | Bruce Willis      | b.w@gmail.com      |
 
-    And I should see the message "Successfully merged RSVP lists for event id: 123456"
+    And I should see the message "The RSVP list for this event has been updated: Ben Franklin, George Obama, Chester Copperpot, Pepper Pot, Antonio Banderas, Bruce Willis have joined"
 
   Scenario: fail to pull the RSVP for an event
      ###  AGAIN CONSIDER USING NAMES INSTEAD OF IDs
-    And I go to the "details" page for event id: "123456"
+    Given I go to the "details" page for event id: "123456"
     Then I should see the following RSVP list:
       | name              | email              |
       | Ben Franklin      | b.f@gmail.com      |
@@ -58,7 +58,7 @@ Feature: automatically pull rsvp list from Meetup and merge to rsvp list in the 
       | Antonio Banderas  | a.b@gmail.com      |
       | Bruce Willis      | b.w@gmail.com      |
 
-    And I should see the message "Could not merge RSVP lists for event id: 123456"
+    And I should see the message "Could not merge RSVP lists for this event"
 
 
 

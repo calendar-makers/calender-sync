@@ -1,6 +1,11 @@
 -#  This file is app/views/events/index.html.haml
 %h1 Events Listing
 
+- # ONCE AUTHENTICATION IS DONE, THEN DISPLAY THIS MESSAGE ONLY FOR ADMIN????
+- if flash[:notice]
+  .notice
+    %h3= flash[:notice]
+
 %table#events
   %thead
     %tr

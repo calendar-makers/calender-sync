@@ -12,7 +12,58 @@ class EventsController < ActionController::Base
 #      flash[:notice] = "404: This is not the event you are looking for."
 #      redirect_to events_path
 #    end
+
+    new_guests = merge_rsvps(@event)
+
+    if new_guests
+      flash['notice'] = "The RSVP list for this event has been updated:
+        #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has") + " joined." if new_guests.size > 0}
+        The total number of participants, including invited guests, will be:
+        #{@event.count_event_participants}"
+
+    else
+      flash['notice'] = "Could not merge RSVP lists for this event"
+    end
   end
+
+
+  # Non-nil returned output is always valid
+  def get_remote_rsvps(event)
+    meetup = Meetup.new
+    meetup.pull_rsvps(event.meetup_id)
+  end
+
+  def merge_rsvps(event)
+    rsvps = get_remote_rsvps(event)
+
+    new_guest_names = []
+    if rsvps
+      rsvps.each do |rsvp|
+
+        guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
+
+        registration = Registration.find_by_guest_id(guest.id)
+        if registration.nil?
+          Registration.create!(event_id: event.id, guest_id: guest.id,
+                               invited_guests: rsvp[:invited_guests],
+                               created: rsvp[:created], updated: rsvp[:updated])
+        elsif registration.is_updated?(rsvp[:updated])
+          registration.update_attributes!(invited_guests: rsvp[:invited_guests],
+                                          updated: rsvp[:updated])
+        else # neither new nor updated
+          next
+        end
+
+        new_guest_names << guest.first_name + guest.last_name
+      end
+
+      new_guest_names
+    end
+  end
+
+
+
+
 
   def new
     if flash[:notice] == nil

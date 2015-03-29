@@ -1,6 +1,9 @@
 -# in app/views/movies/show.html.haml
 
 %h2 Details about #{@event.name}
+- if flash['notice']
+  .notice
+    %h3= flash['notice']
 %ul#details
   %li#name
     Name:

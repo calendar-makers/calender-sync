@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe CalendarsController do
- # let!(:meet) {Meetup.new({})}
+
 =begin
+  I THINK JAVASCRIPT IS MESSIGN THIS UP
   describe 'gets the calendar' do
-    it 'renders the calendar' do
-      #expect(response).to render_template("show")
-      #get :show
+    it 'renders the calendar' do     ############
+      expect(response).to redirect_to(events_path)  # UNTIL WE SWITCH TO THE CALENDAR
+      get :show                      ############
     end
   end
 =end

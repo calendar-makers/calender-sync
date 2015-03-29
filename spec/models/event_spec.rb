@@ -18,7 +18,7 @@ RSpec.describe Event, type: :model do
       event_hash = { name: '' }
       result = Event.check_if_fields_valid(event_hash)
       expect(result[:message]).to eq(['name'])
-      expect(result[:value]).to be_falsy
+      expect(result[:value]).to be_falsey
     end
   end
 
