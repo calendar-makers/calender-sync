@@ -13,4 +13,12 @@ class Event < ActiveRecord::Base
     end
     result
   end
+
+  def is_new?
+    Event.find_by_id(@id)
+  end
+
+  def is_updated?
+    @created < @updated
+  end
 end

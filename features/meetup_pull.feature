@@ -13,7 +13,7 @@ Feature: automatically pull existing events from Meetup onto the calendar
     And the following events exist on the calendar:
       | name             | organization       | description                               | start               | location                   |
       | Nature Walk      | Nature in the City | A walk through the city                   | March 22 2015 16:30 | The new Town Hall          |
-      | Fried Tomatoes   | Good Eaters        | If you like tomatoes just come          ! | March 15 2015 00:00 | San Francisco              |
+      | Fried Tomatoes   | Good Eaters        | If you like tomatoes just come!           | March 15 2015 00:00 | San Francisco              |
 
     And the following events exist on Meetup:
       | name             | organization       | description                               | start               | location                   |

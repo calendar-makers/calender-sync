@@ -6,6 +6,8 @@ class Meetup
   include HTTParty
   debug_output $stderr
 
+  attr_accessor
+
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
 
@@ -47,7 +49,10 @@ class Meetup
   def pull_events(group_id=GROUP_ID)
     @options = @options.merge(group_id: group_id)
     response = HTTParty.get("#{BASE_URL}/2/events?#{options_string(@options)}")
-    response.parsed_response['results']
+    response.parsed_response['results'].map {|event_data| build_event(event_data)}
+    #byebug
+    #e.each {|ex| puts  ex[:id] + '     ' +  ((ex[:location].nil?) ?'null':ex[:location])}
+    nil
   end
 
   def pull_rsvp(id)
@@ -58,6 +63,45 @@ class Meetup
 
 
   private
+
+  def build_event(data)
+    event = {id: data['id'],
+             name: data['name'],
+             description: data['description'],
+             organization: data['group']['name'],
+             location: build_location(data),
+             start: build_date(data),
+             duration: build_duration(data),
+             created: build_date(data),
+             updated: build_date(data),
+             url: data['event_url'],
+             how_to_find_us: data['how_to_find_us'],
+             status: data['status']}
+  end
+
+  def build_date(data)
+    millis_per_second = 1000
+    Time.at(data['time'] / millis_per_second).to_datetime
+  end
+
+  def build_duration(data)
+    millis_per_hour = 3600000
+    data['duration'].fdiv(millis_per_hour)
+  end
+
+
+  def build_location(data)
+    data = data['venue']
+    if data
+      location = []
+      location << data['address_1']
+      location << data['city']
+      location << data['zip']
+      location << data['state']
+      location << data['country']
+      location.join(', ')
+    end
+  end
 
   def options_string(options)
     @options.map { |k,v| "#{k}=#{v}" }.join("&")

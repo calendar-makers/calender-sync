@@ -1,9 +1,4 @@
 class EventsController < ActionController::Base
-  helper_method :message
-
-  def message
-    @message
-  end
 
   def index
     @events = Event.all
