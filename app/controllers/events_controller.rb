@@ -6,47 +6,46 @@ class EventsController < ActionController::Base
   end
 
   def show
-#    begin
     @event = Event.find params[:id]
-#    rescue ActiveRecord::RecordNotFound
-#      flash[:notice] = "404: This is not the event you are looking for."
-#      redirect_to events_path
-#    end
 
-    new_guests = merge_rsvps(@event)
+    new_guests = merge_meetup_rsvps(@event)
 
-    if new_guests
-      flash['notice'] = "The RSVP list for this event has been updated:
-        #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has") + " joined." if new_guests.size > 0}
-        The total number of participants, including invited guests, will be:
-        #{@event.count_event_participants}"
-
+    if new_guests.nil?
+      # FOR THE MOMENT ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE
+      # Once event pushing is done then it won't
+      flash[:notice] = "Could not merge RSVP list for this event."
+    elsif new_guests.empty?
+      flash[:notice] = "The RSVP list is synched with Meetup. #{@event.generate_participants_message}."
     else
-      flash['notice'] = "Could not merge RSVP lists for this event"
+      flash[:notice] = "The RSVP list for this event has been updated.
+        #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined.
+        #{@event.generate_participants_message}"
     end
   end
 
 
   # Non-nil returned output is always valid
   def get_remote_rsvps(event)
+    # Could pass arguments to constructor to refine search
     meetup = Meetup.new
     meetup.pull_rsvps(event.meetup_id)
   end
 
-  def merge_rsvps(event)
+
+  def merge_meetup_rsvps(event)
     rsvps = get_remote_rsvps(event)
 
-    new_guest_names = []
     if rsvps
+      new_guest_names = []
       rsvps.each do |rsvp|
 
         guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
 
-        registration = Registration.find_by_guest_id(guest.id)
+        registration = Registration.find_by({event_id: event.id, guest_id: guest.id})
         if registration.nil?
           Registration.create!(event_id: event.id, guest_id: guest.id,
                                invited_guests: rsvp[:invited_guests],
-                               created: rsvp[:created], updated: rsvp[:updated])
+                               updated: rsvp[:updated])
         elsif registration.is_updated?(rsvp[:updated])
           registration.update_attributes!(invited_guests: rsvp[:invited_guests],
                                           updated: rsvp[:updated])
@@ -54,7 +53,7 @@ class EventsController < ActionController::Base
           next
         end
 
-        new_guest_names << guest.first_name + guest.last_name
+        new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
       end
 
       new_guest_names

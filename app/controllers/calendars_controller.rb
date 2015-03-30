@@ -3,12 +3,12 @@ class CalendarsController < ApplicationController
   def show
     event_names = make_events_local(get_remote_events)
 
-    if event_names.empty?
-      flash[:notice] = "The Calendar and Meetup are synched"
-    elsif event_names
-      flash[:notice] = "Successfully pulled events: #{event_names.join(', ')}"
-    else
+    if event_names.nil?
       flash[:notice] = "Could not pull events from Meetup"
+    elsif event_names.empty?
+      flash[:notice] = "The Calendar and Meetup are synched"
+    else
+      flash[:notice] = "Successfully pulled events: #{event_names.join(', ')}"
     end
 
     # later redirect to calendar

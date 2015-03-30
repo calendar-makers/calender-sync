@@ -17,28 +17,11 @@ Feature: as an admin, create events on the website and push to meetup
 
 
 Scenario: successfully push newly created event to Meetup
-    Given the system pushes the event "Nature Walk" to Meetup
     Then I should see the message "Event successfully pushed to Meetup"
     And the "Calendar" event "Nature Walk" should exist
     And the "Meetup" event "Nature Walk" should exist
 
 Scenario: failed push of newly created event to Meetup (Implemented as a transaction)
-    Given the system pushes the event "Nature Walk" to Meetup
     Then I should see the message "Failed to push event to Meetup. Creation aborted."
     And the "Calendar" event "Nature Walk" should not exist
     And the "Meetup" event "Nature Walk" should not exist
-
-
-#      https://api.meetup.com/2/events?&group_urlname=nature-in-the-city&sign=true&key=2921522134e105851666a55e6d2616&format=xml
-
-#      API KEY    2921522134e105851666a55e6d2616
-
-       #GROUP ID
-#      <id>8870202</id>
-#      <urlname>Nature-in-the-City</urlname>
-#
-
-
-  #     #EVENT DATA
-  #     id = 219648262
-  #     name = market street prototyping festival

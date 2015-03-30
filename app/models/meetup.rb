@@ -23,15 +23,16 @@ class Meetup
     # All params other than key are optional
     @options[:body] = {} # CREATE A FUNCTION THAT CHECKS AND BUILDS BODY
     @options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
-    HTTParty.post("#{BASE_URL}/2/event", @options)
-    # Response is same as pull_event(id)
+    data = HTTParty.post("#{BASE_URL}/2/event", @options)
+    # Also returns the new event as pull_event(id) would
+    data.code == 200
   end
 
   # Consider deleting when pulling...check for some field in Meetup for that case
   def delete_event()
     # No args other than the key are required
     data = HTTParty.delete("#{BASE_URL}/2/event/#{id}?#{options_string}")
-    # response is HTTP200 for success otherwise 401
+    data.code == 200
   end
 
   def push_event()
@@ -39,7 +40,9 @@ class Meetup
     # Required parameters: group_id, group_urlname, name
     @options[:body] = {group_id: GROUP_ID, group_urlname: GROUP_URLNAME, name: 'Event Test'} # CREATE A FUNCTION THAT CHECKS AND BUILDS BODY
     @options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
-    HTTParty.post("#{BASE_URL}/2/event", @options)
+    data = HTTParty.post("#{BASE_URL}/2/event", @options)
+    # Also returns the new event as pull_event(id) would
+    data.code == 201 # HTTP code for creation
   end
 
   def pull_event(id)
@@ -57,7 +60,7 @@ class Meetup
   end
 
   def pull_rsvps(id)
-    @options = @options.merge({event_id: id})
+    @options = @options.merge({event_id: id, rsvp: 'yes'})
     data = HTTParty.get("#{BASE_URL}/2/rsvps?#{options_string}")
     if data.code == 200
       rsvps = data.parsed_response['results']

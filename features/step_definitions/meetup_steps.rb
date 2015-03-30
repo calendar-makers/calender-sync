@@ -56,8 +56,4 @@ And /^the following organizations are (not )?saved:$/ do |negative, table|
 
 end
 
-Given /^the system pushes the event "(.*)" to Meetup$/ do |name|
-
-end
-
 

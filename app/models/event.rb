@@ -24,11 +24,16 @@ class Event < ActiveRecord::Base
   end
 
   def count_event_participants
-    regis = self.registrations.all  #   .inject {|sum, regis| sum + 1 + regis.invited_guests}
+    regis = self.registrations
     sum = 0
     regis.each do |reg|
       sum += 1 + reg.invited_guests
     end
     sum
+  end
+
+  def generate_participants_message
+    "The total number of participants, including invited guests, so far is:
+     #{self.count_event_participants}"
   end
 end

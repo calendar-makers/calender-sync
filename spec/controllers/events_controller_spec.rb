@@ -73,4 +73,63 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to redirect_to(events_path)
     end
   end
+
+
+
+  describe 'pulling rsvps' do
+
+    context 'for single local event' do
+      let(:meetup_event_id) {'123'}
+      let(:event) {Event.create(name: 'coyote appreciation',
+                                location: 'yosemite',
+                                organization: 'nature loving',
+                                start: '8-mar-2016',
+                                description: 'watch coyotes',
+                                meetup_id: meetup_event_id)}
+      it 'should call merge_rsvps with valid event' do
+        expect_any_instance_of(EventsController).to receive(:merge_meetup_rsvps).with(event)
+        get :show, id: event.id
+      end
+
+      it 'should call get_remote_rsvps with valid event' do
+        expect_any_instance_of(EventsController).to receive(:get_remote_rsvps).with(event)
+        get :show, id: event.id
+      end
+
+      it 'should call pull_rsvps with valid event_id' do
+        expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id)
+        get :show, id: event.id
+      end
+    end
+
+    context 'for single meetup event' do
+      let(:meetup_event) {double()}
+      #let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912, :meetup_name=>"Amber Hasselbring", :invited_guests=>0}]}
+      before(:each) do
+        allow(Event).to receive(:find).and_return(meetup_event)
+        allow(meetup_event).to receive(:id).and_return(1)
+        allow(meetup_event).to receive(:meetup_id).and_return('219648262')
+        #allow_any_instance_of(Meetup).to receive(:pull_rsvps).with(:string).and_return(rsvp)
+      end
+
+      it 'should call merge_rsvps with valid event' do
+        expect_any_instance_of(EventsController).to receive(:merge_meetup_rsvps).with(meetup_event)
+        get :show, id: meetup_event.id
+      end
+
+      it 'should call get_remote_rsvps with valid event' do
+        expect_any_instance_of(EventsController).to receive(:get_remote_rsvps).with(meetup_event)
+        get :show, id: meetup_event.id
+      end
+
+      it 'should call pull_rsvps with valid event_id' do
+        expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event.meetup_id)
+        get :show, id: meetup_event.id
+      end
+
+      #it 'should set the flash to display' do
+      #  expect(flash[:notice]).to eq("fdf")
+      #end
+    end
+  end
 end

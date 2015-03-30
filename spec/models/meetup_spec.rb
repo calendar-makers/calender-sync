@@ -106,7 +106,7 @@ describe Meetup do
 
 
   describe 'pulls rsvps' do
-    let(:valid_event_id) {"219648262"}
+    let(:valid_event_id) {'219648262'}
 
     context 'with valid authorization key' do
       let(:good_user) {Meetup.new({key: '3837476f222cc2b6b365513821d38'})}
@@ -114,8 +114,8 @@ describe Meetup do
       context 'with valid event id' do
         let(:data) {good_user.pull_rsvps(valid_event_id)}
 
-        it 'returns the requested rsvp' do
-         # expect(data[:meetup_id]).to eq(valid_event_id)
+        it 'returns a possible collection of rsvps' do
+         expect(data[0][:event_id]).to eq(valid_event_id)
         end
       end
 
