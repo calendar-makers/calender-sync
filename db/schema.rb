@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329155225) do
-
-  create_table "Guests", force: :cascade do |t|
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "phone"
-    t.string  "email"
-    t.string  "address"
-    t.boolean "is_anon"
-    t.string  "meetup_id"
-  end
+ActiveRecord::Schema.define(version: 20150331062530) do
 
   create_table "events", force: :cascade do |t|
     t.string   "organization"
@@ -35,6 +25,16 @@ ActiveRecord::Schema.define(version: 20150329155225) do
     t.string   "url"
     t.string   "how_to_find_us"
     t.string   "status"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "phone"
+    t.string  "email"
+    t.string  "address"
+    t.boolean "is_anon"
+    t.string  "meetup_id"
   end
 
   create_table "registrations", force: :cascade do |t|
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(version: 20150329155225) do
     t.string   "provider"
     t.string   "uid"
     t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "expires_at"
+    t.string   "refresh_token"
   end
 
 end

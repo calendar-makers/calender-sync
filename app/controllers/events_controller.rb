@@ -60,10 +60,6 @@ class EventsController < ActionController::Base
     end
   end
 
-
-
-
-
   def new
     if flash[:notice] == nil
       @message = ""

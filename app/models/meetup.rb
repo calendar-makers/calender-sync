@@ -1,6 +1,5 @@
 require 'httparty'
 
-
 class Meetup
 
   include HTTParty
@@ -33,6 +32,18 @@ class Meetup
     # No args other than the key are required
     data = HTTParty.delete("#{BASE_URL}/2/event/#{id}?#{options_string}")
     data.code == 200
+  end
+
+  def dummy_push_event()
+    # solely for testing, push a dummy event to the sandbox
+    @options = {}
+    url = "Meetup-API-Testing"
+    id = '1556336'
+    name = 'Calendar Sync- dummy'
+    @options[:headers]= {'Content-Type' => 'application/x-www-form-urlencoded'}
+    @options[:query] = {group_id: id, group_urlname: url, name: name, access_token: User.first.token}
+    data = HTTParty.post("#{BASE_URL}/2/event", @options)
+    byebug
   end
 
   def push_event()

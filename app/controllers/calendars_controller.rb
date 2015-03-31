@@ -20,7 +20,7 @@ class CalendarsController < ApplicationController
     # We can also pass any options for the query
     # If so put them in the options hash, and pass it to the constructor
 
-    #options = {access_token: token}
+    options = {access_token: token}
     meetup = Meetup.new
 
     candidate_events = []
