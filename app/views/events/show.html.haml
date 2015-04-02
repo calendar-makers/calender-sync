@@ -1,6 +1,7 @@
 -# in app/views/movies/show.html.haml
+%div= @message
 
-%h2 Details about #{@event.name}
+%h1 Details about #{@event.name}
 %ul#details
   %li#name
     Name:
@@ -24,46 +25,50 @@
 
 %div= link_to 'Edit', edit_event_path(@event)
 
-%h3 Here's what's happening!
+%h2 Here's what's happening!
 -# Photos here
 
-%h3 Check out who's going!
+%h2 Check out who's going!
 %table#attendees
   %thead
     %tr
-      %th First Name
-      %th Last Name
-      %th Organization Name
-      %th Start Time
-      %th Description
+      %th Name
+      %th Phone Number
+      %th Email
+      %th Address
   %tbody
-    - @non_anon_guests_by_last_name.each do |guest|
+    - @non_anon_users_by_last_name.each do |user|
       %tr
-        %td= guest.first_name
-        %td= guest.last_name
-        %td= guest.phone
-        %td= guest.email
-        %td= guest.address
+        %td= user.first_name + ' ' + user.last_name
+        %td= user.phone
+        %td= user.email
+        %td= user.address
 
-%h3 RSVP Now!
-= form_tag guests_path, id: 'rsvp' do
-  %div= label :guest, :first_name, 'First Name'
-  %div= text_field :guest, :first_name
+%h2 RSVP Now!
+= form_tag users_path, id: 'rsvp' do
+  = hidden_field_tag :event_id, @event.id
 
-  %div= label :guest, :last_name, 'Last Name'
-  %div= text_field :guest, :last_name
+  %div= label :user, :first_name, 'First Name'
+  %div#first_name= text_field :user, :first_name
 
-  %div= label :guest, :phone, 'Phone'
-  %div= text_field :guest, :phone
+  %div= label :user, :last_name, 'Last Name'
+  %div#last_name= text_field :user, :last_name
 
-  %div= label :guest, :email, 'Email'
-  %div= text_field :guest, :email
+  %div= label :user, :phone, 'Phone'
+  %div#phone= text_field :user, :phone
 
-  %div= label :guest, :address, 'Address'
-  %div= text_area :guest, :address, :cols =>'40', :rows => '10'
+  %div= label :user, :email, 'Email'
+  %div#email= text_field :user, :email
 
-  %div= label :guest, :is_anon, 'Do you want to remain anonymous?'
-  %div= select :guest, :is_anon, options_for_select([['Select One...', nil], ['Yes', true], ['No', false]])
+  %div= label :user, :address, 'Address'
+  %div#address= text_area :user, :address, :cols =>'40', :rows => '10'
+
+  %div Do you want to remain anonymous?
+  = hidden_field :user, :is_anon, :value => nil
+  = label :user, :is_anon, 'Yes'
+  = radio_button :user, :is_anon, true
+  = label :user, :is_anon, 'No'
+  = radio_button :user, :is_anon, false
 
   %p= submit_tag "Submit"
 

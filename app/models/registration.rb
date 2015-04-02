@@ -1,4 +1,4 @@
 class Registration < ActiveRecord::Base
   belongs_to :event
-  belongs_to :guest
+  belongs_to :user
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do  
   resource :calendar, :only => [:show]
   resources :events
-  resources :guests
+  resources :users
   get '/', to: redirect('/calendar')
 
 
