@@ -23,5 +23,49 @@
 %p#description= @event.description
 
 %div= link_to 'Edit', edit_event_path(@event)
+
+%h3 Here's what's happening!
+-# Photos here
+
+%h3 Check out who's going!
+%table#attendees
+  %thead
+    %tr
+      %th First Name
+      %th Last Name
+      %th Organization Name
+      %th Start Time
+      %th Description
+  %tbody
+    - @non_anon_guests_by_last_name.each do |guest|
+      %tr
+        %td= guest.first_name
+        %td= guest.last_name
+        %td= guest.phone
+        %td= guest.email
+        %td= guest.address
+
+%h3 RSVP Now!
+= form_tag guests_path, id: 'rsvp' do
+  %div= label :guest, :first_name, 'First Name'
+  %div= text_field :guest, :first_name
+
+  %div= label :guest, :last_name, 'Last Name'
+  %div= text_field :guest, :last_name
+
+  %div= label :guest, :phone, 'Phone'
+  %div= text_field :guest, :phone
+
+  %div= label :guest, :email, 'Email'
+  %div= text_field :guest, :email
+
+  %div= label :guest, :address, 'Address'
+  %div= text_area :guest, :address, :cols =>'40', :rows => '10'
+
+  %div= label :guest, :is_anon, 'Do you want to remain anonymous?'
+  %div= select :guest, :is_anon, options_for_select([['Select One...', nil], ['Yes', true], ['No', false]])
+
+  %p= submit_tag "Submit"
+
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 = link_to 'Back to calendar', events_path

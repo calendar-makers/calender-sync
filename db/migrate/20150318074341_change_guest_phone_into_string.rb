@@ -1,5 +1,5 @@
 class ChangeGuestPhoneIntoString < ActiveRecord::Migration
   def change
-    change_column :Guests, :phone, :string
+    change_column :guests, :phone, :string
   end
 end

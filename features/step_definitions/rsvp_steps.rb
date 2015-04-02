@@ -14,13 +14,15 @@ end
 
 Then(/^I should see info about people attending "(.*)"$/) do |event_name|
   pending
-  guests = Guest.where(event_id: Event.find_by_name(event_name).id)
+  event = Event.find_by_name(event_name)
+  guests = event.guests
   table_contents_under_id(guests, '#attendees', true)
 end
 
 Then(/^I should not see info about people who aren't attending "(.*)"$/) do |event_name|
   pending
-  guests = Guest.where.not(event_id: Event.find_by_name(event_name).id)
+  event = Event.find_by_name(event_name)
+  guests = event.guests.where.not(event_id: Event.find_by_name(event_name).id)
   table_contents_under_id(guests, '#attendees', false)
 end
 
@@ -29,7 +31,7 @@ Then(/^the list of attendees should be listed alphabetically by last name$/) do
   ordered_guests = Guest.order(:last_name)
   prev_guest = nil
   order_guests.each do |guest|
-    if prev_guest != nil
+    if (prev_guest != nil) and (guest.events)
       assert page.body.match(/<td>#{prev_guest}<\/td>(.*)<td>#{guest}<\/td>/m), "#{prev_guest} is not before #{guest}"
     end
     prev_guest = guest
@@ -37,8 +39,7 @@ Then(/^the list of attendees should be listed alphabetically by last name$/) do
 end
 
 Then(/^I should see the RSVP form$/) do
-  pending
-  expect(page).to have_field("#rsvp")
+  expect(page).to have_css("#rsvp")
 end
 
 When(/^I fill out the RSVP form (anonymously|non-anonymously)$/) do |anon|
