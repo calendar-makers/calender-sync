@@ -1,8 +1,16 @@
 class EventsController < ActionController::Base
 
   def index
+    puts "*******************"
+    puts params
+    puts "********************"
     @events = Event.all
     @message = flash[:notice]
+    @events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
+    respond_to do |format|
+      format.html
+      format.json { render :json => @events }
+    end
   end
 
   def show
@@ -90,7 +98,7 @@ class EventsController < ActionController::Base
     
     @event = Event.create!(event_params)
     params[:event] = @event
-    flash[:notice] = "\"#{@event.name}\" was successfully added."
+    flash[:notice] = "\"#{@event.title}\" was successfully added."
     redirect_to events_path
   end
 
@@ -122,14 +130,14 @@ class EventsController < ActionController::Base
       return
     end
     @event.update_attributes!(event_params)
-    flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    redirect_to event_path(@event)
+    flash[:notice] = "\"#{@event.title}\" was successfully updated."
+    redirect_to calendar_path
   end
 
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-    flash[:notice] = "\"#{@event.name}\" was successfully removed."
+    flash[:notice] = "\"#{@event.title}\" was successfully removed."
     redirect_to events_path
   end
 
@@ -137,7 +145,7 @@ class EventsController < ActionController::Base
 
   #Never trust anything from the internet
   def event_params
-    params.require(:event).permit(:name, :organization,
+    params.require(:event).permit(:title, :organization,
                                   :start, :location,
                                   :description)
   end

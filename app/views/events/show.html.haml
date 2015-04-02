@@ -1,4 +1,4 @@
--# in app/views/movies/show.html.haml
+-# in app/views/events/show.html.haml
 
 %h2 Details about #{@event.name}
 - if flash['notice']
@@ -7,7 +7,7 @@
 %ul#details
   %li#name
     Name:
-    = @event.name
+    = @event.title
   %li#organization
     Organization:
     = @event.organization
@@ -27,4 +27,4 @@
 
 %div= link_to 'Edit', edit_event_path(@event)
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
-= link_to 'Back to calendar', events_path
+= link_to 'Back to calendar', calendar_path
