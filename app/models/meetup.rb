@@ -1,6 +1,5 @@
 require 'httparty'
 
-
 class Meetup
 
   include HTTParty
@@ -41,7 +40,20 @@ class Meetup
   end
 =end
 
-  def push_event(event)
+
+  def dummy_push_event()
+    # solely for testing, push a dummy event to the sandbox
+    @options = {}
+    url = "Meetup-API-Testing"
+    id = '1556336'
+    name = 'Calendar Sync- dummy'
+    @options[:headers]= {'Content-Type' => 'application/x-www-form-urlencoded'}
+    @options[:query] = {group_id: id, group_urlname: url, name: name, access_token: User.first.token}
+    data = HTTParty.post("#{BASE_URL}/2/event", @options)
+    byebug
+  end
+
+  def push_event()
     # Remember to check for allowed fields
     # Required parameters: group_id, group_urlname, name
     # Note: for the location, only the venue_id can be passed. Nothing else.
