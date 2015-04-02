@@ -1,0 +1,31 @@
+-# in app/views/movies/show.html.haml
+
+%h2 Details about #{@event.name}
+%ul#details
+  %li#name
+    Name:
+    = @event.name
+  %li#organization
+    Organization:
+    = @event.organization
+  %li#location
+    Location:
+    = @event.location
+  %li#date
+    Date:
+    = @event.start.strftime("%B %d, %Y")
+  %li#time
+    Time:
+    = @event.start.strftime("%l:%M%P")
+
+%h3 Description:
+
+%p#description= @event.description
+
+%div
+  %h4 Event Images
+  = image_tag @event.image.url(:small)
+
+%div= link_to 'Edit', edit_event_path(@event)
+= button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
+= link_to 'Back to calendar', events_path

@@ -1,0 +1,36 @@
+!!! 5
+%html
+  %head
+    %title Calendar
+    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'fullcalendar'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'jquery.min'
+    = javascript_include_tag 'moment.min'
+    = javascript_include_tag 'fullcalendar'
+    = csrf_meta_tags
+
+    :javascript
+
+      $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+          dayClick: function() {
+            alert('a day has been clicked!');
+          }
+        })
+        $('#my-button').click(function() {
+          var moment = $('#calendar').fullCalendar('getDate');
+          alert("The current date of the calendar is " + moment.format());
+        })
+      });
+
+  %body
+    %h1.title Calendar
+    #main
+      - if flash[:notice]
+        #notice.message= flash[:notice]
+      - elsif flash[:warning]
+        #warning.message= flash[:warning]
+
+      = yield
