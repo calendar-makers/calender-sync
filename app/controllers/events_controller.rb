@@ -23,11 +23,7 @@ class EventsController < ActionController::Base
     end
   end
 
-  # THE GOAL IS TO REUSE THESE FUNCTIONS ABOVE
   def third_party
-    # Get them all by meetup id... So make a pull for each one
-    # To display them get them with a generic pull by organization
-
     if !params[:id].blank?
       @events = Event.get_remote_events({event_id: params[:id]})
     elsif  !params[:group_urlname].blank?
@@ -43,12 +39,19 @@ class EventsController < ActionController::Base
       ids = EventsController.cleanup_ids(ids)
       options = {event_id: ids.join(',')}
       event_names = Event.make_events_local(Event.get_remote_events(options))
-      flash[:notice] = event_names
+      flash[:notice] = EventsController.display_message(event_names)
     else
       flash[:notice] = 'You must select at least one event. Please retry.'
+      return redirect_to third_party_events_path
     end
 
     redirect_to calendar_path
+  end
+
+  def self.display_message(events)
+    if events && events.size > 0
+      "Successfully added: #{events.join(', ')}"
+    end
   end
 
   def self.get_requested_ids(data)
@@ -60,7 +63,6 @@ class EventsController < ActionController::Base
     ids.each {|id| clean_ids << id.gsub("event", "")}
     clean_ids
   end
-
 
   def new
     if flash[:notice] == nil
@@ -83,11 +85,11 @@ class EventsController < ActionController::Base
       redirect_to new_event_path
       return
     end
-    
+
     # meetup push support
     # meetup = Meetup.new
     # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
-    
+
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."

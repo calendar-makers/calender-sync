@@ -148,6 +148,7 @@ describe Meetup do
     end
   end
 
+  # NEXT ITERATION
 =begin
   describe 'push events' do
     context 'with valid authorization key' do
@@ -225,7 +226,8 @@ describe Meetup do
     end
   end
 
-
+  # NEXT ITERATION
+=begin
   describe "Packages an event data into a hash" do
     let(:meetup) {Meetup.new}
     let(:id) {123}
@@ -241,6 +243,7 @@ describe Meetup do
     end
 
   end
+=end
 
 
   # TEST GET_MEETUP_VENUE_ID
@@ -248,10 +251,6 @@ describe Meetup do
   # TEST PUSH_EVENT
 
   # TEST CREATE_VENUE
-
-
-
-
 
 end
 
