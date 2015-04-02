@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to '/', :alert => "Authentication failed, please try again."
+    redirect_to '/calendar', :notice => params[:message]
   end
 end

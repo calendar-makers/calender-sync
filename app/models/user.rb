@@ -1,17 +1,18 @@
 class User < ActiveRecord::Base
   def self.create_with_omniauth(auth)
-    create! do |user|
+    ret = create do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.token = auth["credentials"]["token"]
       user.expires_at = auth["credentials"]["expires_at"]
       user.refresh_token = auth["credentials"]["refresh_token"]
     end
+    return ret
   end
 
   # refresh logic.
   def token_expired?
-    return Time.at(self.expires_at) < Time.now
+    return Time.at(self.expires_at) <= Time.now
   end
 
   def get_token
@@ -31,7 +32,7 @@ class User < ActiveRecord::Base
       self.save # remember to save changes to database!
     else
       # wat do if refresh fails? Try again? common case, refresh token already used
-      byebug
+      raise 'Unexpected error during refresh, #{data.code}'
     end
   end
 

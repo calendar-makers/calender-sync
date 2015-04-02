@@ -53,12 +53,13 @@ class Meetup
     byebug
   end
 
-  def push_event()
+  def push_event(parameters = {})
     # Remember to check for allowed fields
     # Required parameters: group_id, group_urlname, name
     # Note: for the location, only the venue_id can be passed. Nothing else.
     # To get the venue_id we have to make another api call to either create or get the venue first
     @options[:body] = {group_id: GROUP_ID, group_urlname: GROUP_URLNAME}.merge(get_event_data(event))
+    @options[:body].merge(parameters)
     @options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", @options)
     # Also returns the new event as pull_event(id) would

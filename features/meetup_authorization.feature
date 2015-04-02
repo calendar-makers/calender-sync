@@ -6,20 +6,13 @@ Feature: Set up O-Auth2 so admin can login to Meetup
 
 Scenario: admin attempts to login
     Given I am on the "Calendar" page
-    And I have not already logged in as an admin on Meetup
+    And I have not already logged in
     When I click on the "login" link
     Then I should be on the "Meetup Login" page
 
-Scenario: admin attempts to create event while not logged in
-    Given I am on the "Create" page
-    And I have not already logged in as an admin on Meetup
-    And I fill in the "Event Name" field with "Nature Walk"
-    And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
-    And I select "3/19/2015, 4:30pm" as the date and time
-    And I fill in the "Location" field with "The Old Town Hall"
-    And I fill in the "Organization" field with "trololol"
-    And I click on the "Create Event" button
-    Then I should be on the "Meetup Login" page
+#Scenario: admin attempts to create event while not logged in
+#    Given I create an event and submit it
+#    And I have not already logged in
 
 Scenario: admin attempts to login
     Given I am on the "Meetup Login" page

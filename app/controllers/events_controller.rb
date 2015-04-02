@@ -83,6 +83,11 @@ class EventsController < ActionController::Base
       redirect_to new_event_path
       return
     end
+    
+    # meetup push support
+    # meetup = Meetup.new
+    # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
+    
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
