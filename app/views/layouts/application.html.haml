@@ -29,8 +29,8 @@
     %h1.title Calendar
     #main
       - if flash[:notice]
-        #notice.message= flash[:notice]
+        %h3#notice.message= flash[:notice]
       - elsif flash[:warning]
-        #warning.message= flash[:warning]
+        %h3#warning.message= flash[:warning]
 
       = yield

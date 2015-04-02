@@ -77,22 +77,30 @@ RSpec.describe EventsController, type: :controller do
 
 
   describe 'pulling rsvps' do
+    let(:meetup_event_id) {'219648262'}
+    let(:event) {Event.create(name: 'coyote appreciation',
+                              location: 'yosemite',
+                              organization: 'nature loving',
+                              start: '8-mar-2016',
+                              description: 'watch coyotes',
+                              meetup_id: meetup_event_id)}
+    let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912, :meetup_name=>"Amber Hasselbring", :invited_guests=>0}]}
 
-    context 'for single local event' do
-      let(:meetup_event_id) {'123'}
-      let(:event) {Event.create(name: 'coyote appreciation',
-                                location: 'yosemite',
-                                organization: 'nature loving',
-                                start: '8-mar-2016',
-                                description: 'watch coyotes',
-                                meetup_id: meetup_event_id)}
+
+    before(:each) do
+      allow(Event).to receive(:find).and_return(event)
+      allow_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id).and_return(rsvp)
+    end
+
+    context 'for existing meetup event' do
+
       it 'should call merge_rsvps with valid event' do
-        expect_any_instance_of(EventsController).to receive(:merge_meetup_rsvps).with(event)
+        expect(event).to receive(:merge_meetup_rsvps)
         get :show, id: event.id
       end
 
       it 'should call get_remote_rsvps with valid event' do
-        expect_any_instance_of(EventsController).to receive(:get_remote_rsvps).with(event)
+        expect(event).to receive(:get_remote_rsvps)
         get :show, id: event.id
       end
 
@@ -100,36 +108,78 @@ RSpec.describe EventsController, type: :controller do
         expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id)
         get :show, id: event.id
       end
+
+      it 'should set the flash to display if new rsvps are pulled' do
+        get :show, id: event.id
+        expect(flash[:notice]).to eq("The RSVP list for this event has been updated." +
+                 " Amber Hasselbring has joined. The total number of participants," +
+                 " including invited guests, so far is: 1")
+      end
+
     end
 
-    context 'for single meetup event' do
-      let(:meetup_event) {double()}
-      #let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912, :meetup_name=>"Amber Hasselbring", :invited_guests=>0}]}
+    context 'with no new rsvp to pull for a given article' do
+
+      it 'should display that no new rsvps are pulled' do
+        allow(event).to receive(:merge_meetup_rsvps).and_return([])
+        get :show, id: event.id
+        expect(flash[:notice]).to eq("The RSVP list is synched with Meetup." +
+                       " The total number of participants, including invited guests, so far is: 0.")
+      end
+    end
+  end
+
+  describe "gets the event ids from the params hash" do
+    let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
+    it "Selects only ids which match /^event.*/" do
+      result = EventsController.get_requested_ids(data)
+      expect(result).to eq([:event123, :event12abc])
+    end
+  end
+
+  describe "removes unwanted words from user-input event ids" do
+    let(:dirty_ids) {['event123', 'event1456', 'eventABC']}
+    let(:clean_ids) {['123', '1456', 'ABC']}
+
+    it 'should return only pure ids' do
+      result = EventsController.cleanup_ids(dirty_ids)
+      expect(result).to eq(clean_ids)
+    end
+  end
+
+  describe "pulls 3rd party events" do
+    let(:ids) {['event123', 'event1456', 'eventABC']}
+    let(:event_names) {['nature', 'gardening', 'butterflies']}
+
+    before(:each) do
+      allow(Event).to receive(:make_events_local).and_return(event_names)
+    end
+
+    context 'for some requested ids' do
       before(:each) do
-        allow(Event).to receive(:find).and_return(meetup_event)
-        allow(meetup_event).to receive(:id).and_return(1)
-        allow(meetup_event).to receive(:meetup_id).and_return('219648262')
-        #allow_any_instance_of(Meetup).to receive(:pull_rsvps).with(:string).and_return(rsvp)
+        allow(EventsController).to receive(:get_requested_ids).and_return(ids)
       end
 
-      it 'should call merge_rsvps with valid event' do
-        expect_any_instance_of(EventsController).to receive(:merge_meetup_rsvps).with(meetup_event)
-        get :show, id: meetup_event.id
+      it "should return the pulled event names" do
+        get :pull_third_party
+        expect(flash[:notice]).to eq(event_names)
+      end
+    end
+
+    context 'no requested ids' do
+      before(:each) do
+        allow(EventsController).to receive(:get_requested_ids).and_return([])
       end
 
-      it 'should call get_remote_rsvps with valid event' do
-        expect_any_instance_of(EventsController).to receive(:get_remote_rsvps).with(meetup_event)
-        get :show, id: meetup_event.id
+      it "should return no pulled event names" do
+        get :pull_third_party
+        expect(flash[:notice]).to eq('You must select at least one event. Please retry.')
       end
+    end
 
-      it 'should call pull_rsvps with valid event_id' do
-        expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event.meetup_id)
-        get :show, id: meetup_event.id
-      end
-
-      #it 'should set the flash to display' do
-      #  expect(flash[:notice]).to eq("fdf")
-      #end
+    it "should redirect to the calendar" do
+      get :pull_third_party
+      expect(response).to redirect_to(calendar_path)
     end
   end
 end

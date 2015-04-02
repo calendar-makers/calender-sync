@@ -8,7 +8,7 @@ class EventsController < ActionController::Base
   def show
     @event = Event.find params[:id]
 
-    new_guests = merge_meetup_rsvps(@event)
+    new_guests = @event.merge_meetup_rsvps
 
     if new_guests.nil?
       # FOR THE MOMENT ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE
@@ -17,50 +17,48 @@ class EventsController < ActionController::Base
     elsif new_guests.empty?
       flash[:notice] = "The RSVP list is synched with Meetup. #{@event.generate_participants_message}."
     else
-      flash[:notice] = "The RSVP list for this event has been updated.
-        #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined.
-        #{@event.generate_participants_message}"
+      flash[:notice] = "The RSVP list for this event has been updated." +
+        " #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined." +
+        " #{@event.generate_participants_message}"
     end
   end
 
+  # THE GOAL IS TO REUSE THESE FUNCTIONS ABOVE
+  def third_party
+    # Get them all by meetup id... So make a pull for each one
+    # To display them get them with a generic pull by organization
 
-  # Non-nil returned output is always valid
-  def get_remote_rsvps(event)
-    # Could pass arguments to constructor to refine search
-    meetup = Meetup.new
-    meetup.pull_rsvps(event.meetup_id)
+    #@events = Event.all
+
+    #YOU MUST PULL ALL THE EVENTS DICTATED BY THE USER CHOICE
+   # either id or group name
+   # THEN YOU PULL THOSE EVENTS AND YOU PUT THEM in @events, then you let
+   # the view appear on its own
   end
 
-
-  def merge_meetup_rsvps(event)
-    rsvps = get_remote_rsvps(event)
-
-    if rsvps
-      new_guest_names = []
-      rsvps.each do |rsvp|
-
-        guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
-
-        registration = Registration.find_by({event_id: event.id, guest_id: guest.id})
-        if registration.nil?
-          Registration.create!(event_id: event.id, guest_id: guest.id,
-                               invited_guests: rsvp[:invited_guests],
-                               updated: rsvp[:updated])
-        elsif registration.is_updated?(rsvp[:updated])
-          registration.update_attributes!(invited_guests: rsvp[:invited_guests],
-                                          updated: rsvp[:updated])
-        else # neither new nor updated
-          next
-        end
-
-        new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
-      end
-
-      new_guest_names
+  def pull_third_party
+    ids = EventsController.get_requested_ids(params)
+    if ids.size > 0
+      ids = EventsController.cleanup_ids(ids)
+      options = {event_id: ids.join(',')}
+      event_names = Event.make_events_local(Event.get_remote_events(options))
+      flash[:notice] = event_names
+    else
+      flash[:notice] = 'You must select at least one event. Please retry.'
     end
+
+    redirect_to calendar_path
   end
 
+  def self.get_requested_ids(data)
+    data.keys.select {|k| k =~ /^event.+$/}
+  end
 
+  def self.cleanup_ids(ids)
+    clean_ids = []
+    ids.each {|id| clean_ids << id.gsub("event", "")}
+    clean_ids
+  end
 
 
 
@@ -69,8 +67,10 @@ class EventsController < ActionController::Base
       @message = ""
     else
       @message = "Please fill in the following fields before submitting: "
-      flash[:notice].each do |key|
-        @message += key + ", "
+      if flash[:notice].respond_to?(:each)
+        flash[:notice].each do |key|
+          @message += key + ", "
+        end
       end
     end
     @message = @message[0..@message.length-3]

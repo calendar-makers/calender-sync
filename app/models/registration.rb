@@ -6,4 +6,6 @@ class Registration < ActiveRecord::Base
   def is_updated?(latest_update)
     updated < latest_update
   end
+
+
 end

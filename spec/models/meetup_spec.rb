@@ -138,6 +138,110 @@ describe Meetup do
     end
   end
 
+=begin
+  describe 'push events' do
+    context 'with valid authorization key' do
+      let(:good_user) {Meetup.new({key: '3837476f222cc2b6b365513821d38'})}
+
+      context 'with existing local event' do
+        let(:data) {good_user.push_event()}
+
+        it 'returns a possible collection of events' do
+          expect(data.size).to be > 0
+        end
+      end
+
+      context 'with invalid organization id' do
+        let(:data) {good_user.pull_events('invalid_id')}
+
+        it 'returns nil' do
+          expect(data).to be_nil
+        end
+      end
+    end
+
+    context 'with invalid authorization' do
+      let(:bad_user) {Meetup.new({key: 'invalid_id'})}
+      let(:data) {bad_user.pull_events}
+
+      it 'returns nil' do
+        expect(data).to be_nil
+      end
+    end
+  end
+=end
+
+  describe "Obtains the venue data" do
+    let(:meetup) {Meetup.new}
+    context "from a valid event" do
+      let(:event) {Event.create!(address_1: '145 Peeep st.',
+                                city: 'Gendale', zip: '6789',
+                                state: 'CA', country: 'USA')}
+      it "returns a hash of venue fields" do
+        result = meetup.get_event_venue_data(event)
+        expect(result).to eq({address_1: '145 Peeep st.',
+                              city: 'Gendale', zip: '6789',
+                              state: 'CA', country: 'USA'})
+      end
+    end
+
+    context "from an invalid event" do
+      it "returns nothing" do
+        result = meetup.get_event_venue_data(nil)
+        expect(result).to be_empty
+      end
+    end
+  end
+
+  describe "Builds a venue" do
+    let(:meetup) {Meetup.new}
+    context "from valid API-sent data" do
+      let(:data) {{'venue'=> {'address_1'=> '145 Peeep st.',
+                                 'city'=> 'Gendale', 'zip'=> '6789',
+                                 'state'=> 'CA', 'country'=> 'USA'}}}
+      it "returns a hash of venue fields" do
+        result = meetup.build_venue(data)
+        expect(result).to eq({address_1: '145 Peeep st.',
+                              city: 'Gendale', zip: '6789',
+                              state: 'CA', country: 'USA'})
+      end
+    end
+
+    context "from invalid data" do
+      it "returns nothing" do
+        result = meetup.build_venue(nil)
+        expect(result).to be_empty
+      end
+    end
+  end
+
+
+  describe "Packages an event data into a hash" do
+    let(:meetup) {Meetup.new}
+    let(:id) {123}
+    let(:event) {{name: 'Nature', description: 'Nice one',
+                  start: Time.now, duration: '2', how_to_find_us: 'do not'}}
+
+    it "returns a hash of venue fields" do
+      allow_any_instance_of(Meetup).to receive(:get_meetup_venue_id).and_return(id)
+      result = meetup.get_event_data(event)
+      expect(result).to eq({name: 'Nature', description: 'Nice one',
+                               venue_id: id, time: Time.now.to_i,
+                               duration: '2', how_to_find_us: 'do not'})
+    end
+
+  end
+
+
+  # TEST GET_MEETUP_VENUE_ID
+
+  # TEST PUSH_EVENT
+
+  # TEST CREATE_VENUE
+
+
+
+
 
 end
 

@@ -23,22 +23,21 @@ Feature: pull 3rd-party events created on Meetup by event ID and display them on
   Scenario: successfully pull an event
     Given I fill in the "Event ID" field with "123456"
     And I click on the "Import Selected Events" button
-    Then I should be on the "Events Directory" page
+    Then I should be on the "Calendar" page
     And I should see the "Gardening" link
     And I should see the message "Successfully pulled events: 'Gardening' from Meetup"
-    # Later redirect to the actual calendar
 
   Scenario: fail to pull an event
     Given I fill in the "Event ID" field with "123456"
     And I click on the "Import Selected Events" button
-    Then I should be on the "Events Directory" page
+    Then I should be on the "Calendar" page
     And I should see the message "Could not pull events from Meetup"
     And I should not see the "Gardening" link
     # Later redirect to the actual calendar
 
   Scenario: cancel operation
     Given I click on the "Cancel" button
-    Then I should be on the "Events Directory" page
+    Then I should be on the "Calendar" page
     And I should not see the "Gardening" link
 
 
