@@ -14,6 +14,6 @@ class CalendarsController < ApplicationController
         flash[:notice] = "Successfully pulled events: #{event_names.join(', ')}"
       end
     end
-
   end
 end
+

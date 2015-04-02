@@ -5,11 +5,11 @@
 
 = form_tag third_party_events_path do
 
-  = label :event, :id, 'ID'
-  = text_field :event, 'id'
+  = label_tag 'id', 'ID'
+  = text_field_tag 'id'
   </br>
-  = label :event, :id, 'Group Name'
-  = text_field :event, 'group_url_name'
+  = label_tag 'group_urlname', 'Group Name'
+  = text_field_tag 'group_urlname'
   </br>
   </br>
   = submit_tag 'Search'
@@ -35,7 +35,7 @@
         %tr
           - id = event.meetup_id
           %td= check_box_tag "event" + (id.nil? ? "" : id)
-          %td= link_to event.name, event_path(event)
+          %td= (link_to event.name, event_path(event)) if event.id
           %td= event.organization
           %td= event.format_date
           %td= event.duration
