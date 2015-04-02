@@ -44,7 +44,7 @@ describe Meetup do
     context 'with valid authorization key' do
       let(:good_user) {Meetup.new({key: '3837476f222cc2b6b365513821d38'})}
 
-      context 'with valid organization id' do
+      context 'with valid default group id' do
         let(:data) {good_user.pull_events}
 
         it 'returns a possible collection of events' do
@@ -52,10 +52,20 @@ describe Meetup do
         end
       end
 
-      context 'with invalid organization id' do
-        let(:data) {good_user.pull_events('invalid_id')}
+      context 'with valid event id' do
 
         it 'returns nil' do
+          good_user.options.merge!({event_id: 'invalid_id'})
+          data = good_user.pull_events
+          expect(data).to be_nil
+        end
+      end
+
+      context 'with valid group_urlname' do
+
+        it 'returns nil' do
+          good_user.options.merge!({event_id: 'invalid_name'})
+          data = good_user.pull_events
           expect(data).to be_nil
         end
       end

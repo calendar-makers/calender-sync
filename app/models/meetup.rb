@@ -80,7 +80,7 @@ class Meetup
     build_event(data.parsed_response) if data.code == 200
   end
 
-  def pull_events()
+  def pull_events
     if @options[:event_id].nil? && @options[:group_urlname].nil?
       @options.merge!(group_id: GROUP_ID) # if user gave no options, then pull by default group id
     end
