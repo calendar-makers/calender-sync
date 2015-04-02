@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   match "/auth/:provider/callback" => "sessions#create", via: [:get, :post]
   match "/signout" => "sessions#destroy", via: [:get]
-
+  match "/auth/failure" => "sessions#failure", via: [:get]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

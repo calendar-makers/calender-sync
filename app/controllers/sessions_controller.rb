@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to '/calendar', :notice => "Signed out!"
+    redirect_to '/', :notice => "Signed out!"
   end
 
   def failure
-    redirect_to '/', :alert => "Authentication failed, please try again."
+    redirect_to '/calendar', :notice => params[:message]
   end
 end
