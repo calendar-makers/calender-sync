@@ -41,7 +41,6 @@ class Event < ActiveRecord::Base
     # Here we can pass the token to the API call if needed.
     # We can also pass any options for the query
     # If so put them in the options hash, and pass it to the constructor
-
     #options = {access_token: token}
     meetup = Meetup.new(options)
 

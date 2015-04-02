@@ -28,12 +28,13 @@ class EventsController < ActionController::Base
     # Get them all by meetup id... So make a pull for each one
     # To display them get them with a generic pull by organization
 
-    #@events = Event.all
-
-    #YOU MUST PULL ALL THE EVENTS DICTATED BY THE USER CHOICE
-   # either id or group name
-   # THEN YOU PULL THOSE EVENTS AND YOU PUT THEM in @events, then you let
-   # the view appear on its own
+    if !params[:id].blank?
+      @events = Event.get_remote_events({event_id: params[:id]})
+    elsif  !params[:group_urlname].blank?
+      @events = Event.get_remote_events({group_urlname: params[:group_urlname]})
+    else
+      @events = []
+    end
   end
 
   def pull_third_party
@@ -60,7 +61,7 @@ class EventsController < ActionController::Base
     clean_ids
   end
 
-  
+
   def new
     if flash[:notice] == nil
       @message = ""
