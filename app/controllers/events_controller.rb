@@ -3,6 +3,7 @@ class EventsController < ActionController::Base
     puts "*******************"
     puts params
     puts "********************"
+    @date = '2014-05-01'
     @events = Event.all
     @message = flash[:notice]
     @events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])

@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
   $('#calendar').fullCalendar({
       // put your options and callbacks here
@@ -14,6 +15,9 @@ $(document).ready(function() {
     }
     
   });
+
+  go_to_date(date);
+
   console.log("hello world");
   $.getJSON('events.json', function(data){
     console.log("I'm in the json call");
@@ -24,4 +28,11 @@ $(document).ready(function() {
     var moment = $('#calendar').fullCalendar('getDate');
     alert("The current date of the calendar is " + moment.format());
   })
+
 });
+
+function go_to_date(date){
+  console.log("I'm going to date")
+  console.log(date)
+  $('#calendar').fullCalendar('gotoDate', date)
+}

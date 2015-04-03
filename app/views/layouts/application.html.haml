@@ -2,6 +2,8 @@
 %html
   %head
     %title Calendar
+    :javascript
+      var date = "#{@date}"
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
@@ -9,9 +11,10 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     
+
+
+    
     = csrf_meta_tags
-
-
 
   %body
     %h1.title Calendar
@@ -20,6 +23,6 @@
         #notice.message= flash[:notice]
       - elsif flash[:warning]
         #warning.message= flash[:warning]
-
       = yield
       = javascript_include_tag 'my_calendar'
+      
