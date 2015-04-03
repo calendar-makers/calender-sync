@@ -22,14 +22,14 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'Creating New Event' do
-    it 'should redirect to index' do
+    it 'should redirect to calendar' do
       post :create, { event: { name: 'coyote appreciation',
                                location: 'yosemite',
                                organization: 'nature loving',
                                start: '8-mar-2016',
                                description: 'watch coyotes' }
                     }
-      expect(response).to redirect_to(events_path)
+      expect(response).to redirect_to(calendar_path)
     end
   end
 
@@ -58,7 +58,7 @@ RSpec.describe EventsController, type: :controller do
                                      start: '8-mar-2016',
                                      description: 'Pet Puppies' }
                    }
-      expect(response).to redirect_to(event_path(event))
+      expect(response).to redirect_to(calendar_path)
     end
   end
 
@@ -70,7 +70,7 @@ RSpec.describe EventsController, type: :controller do
                    start: '8-mar-2016',
                    description: 'watch coyotes')
       delete :destroy, { id: 1 }
-      expect(response).to redirect_to(events_path)
+      expect(response).to redirect_to(calendar_path)
     end
   end
 
