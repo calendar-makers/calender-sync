@@ -4,8 +4,6 @@ Feature: create an event and have it displayed on the calendar
   so that I can add events to my calendar
   I want to be able to create events
 
-Background: I have logged in as an admin and have permission to create
-
 Scenario: redirect to create page when create new event button pushed
   Given I am on the calendar page
   And I click on the "new event" link
@@ -27,8 +25,8 @@ Scenario: store information when all the fields are filled out
   And I fill in the "Location" field with "The Old Town Hall"
   And I fill in the "Organization" field with "trololol"
   And I click on the "Create Event" button
-  Then I should be on the "Events Directory" page
-  Then I should see the "Nature Walk" link
+  Then I should be on the "Calendar" page
+  #Then I should see the "Nature Walk" link
   #And I should see "Nature Walk" link on "3/19/2015"
   #And I should see ""Nature Walk" was successfully added."
 

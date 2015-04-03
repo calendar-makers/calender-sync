@@ -16,7 +16,6 @@ Scenario: Delete event from the calendar
   Given I am on the "details" page for "Nature Walk"
   And I should see the "Delete" button
   When I click on the "Delete" button
-  Then I should be on the "Events Directory" page
-  #And I should not see the "Nature Walk" event
+  Then I should be on the "Calendar" page
   And I should not see the "Nature Walk" link
-  #And I should see "Nature Walk was successfully removed." #pending calendar population
+  And I should see ""Nature Walk" was successfully removed" on the page

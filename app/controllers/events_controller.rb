@@ -87,16 +87,7 @@ class EventsController < ActionController::Base
   end
 
   def edit
-    if !flash[:notice].is_a?(Array)
-      @message = ""
-    else
-      @message = "Please fill in the following fields before submitting: "
-      flash[:notice].each do |key|
-        @message += key + ", "
-      end
-    end
-    @message = @message[0..@message.length-3]
-
+    form_validation_msg
     @event = Event.find params[:id]
   end
 
@@ -131,6 +122,8 @@ class EventsController < ActionController::Base
   def form_validation_msg
     if flash[:notice] == nil
       @message = ""
+    elsif !flash[:notice].is_a?(Array)
+      @message = flash[:notice]
     else
       @message = "Please fill in the following fields before submitting: "
       flash[:notice].each do |key|

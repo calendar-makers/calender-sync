@@ -14,8 +14,8 @@ Then /I should see the "(.*)" button$/ do |button_name|
   expect(page).to have_button(button_name)
 end
 
-Then /I should see the "(.*)" on the page$/ do |field|
-  expect(page).to have_content(field)
+Then /I should see(?:| the) "(.*)" on the page$/ do |content|
+  expect(page).to have_content(content)
 end
 
 And /^I fill in the "(.*)" field with "(.*)"$/ do |field, value|

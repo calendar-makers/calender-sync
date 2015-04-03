@@ -24,8 +24,7 @@ Scenario: correctly change information results in change
   Given I am on the "Edit" page for "Nature Walk"
   And I fill in the "Location" field with "The New Town Hall"
   And I click on the "Update Event Info" button
-  Then I should be on the "Details" page for "Nature Walk"
-  And I should see "The New Town Hall" as the "Location"
+  Then I should be on the "Calendar" page
 
 Scenario: make sure user correctly changes information in edit page
   Given I am on the "Edit" page for "Nature Walk"
