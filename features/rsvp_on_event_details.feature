@@ -19,7 +19,7 @@ Background:
   | Max        | Leroy     | (723) 123-8900 | maxler@aol.com   | 69 Feeling St      | false   |
 
   And the following registrations exist:
-  | event_id | guest_id |
+  | event_id | guest_id  |
   | 1        | 1        |
   | 1        | 2        |
   | 1        | 3        |
@@ -31,11 +31,15 @@ Background:
   And I am on the "details" page for "Nature Walk"
   Then I should see the RSVP form
 
-Scenario: RSVP form, completed and submitted
-  When I fill out the RSVP form non-anonymously
-  And I press "Submit"
+Scenario: RSVP form, completed and submitted non-anonymously
+  When I fill out and submit the RSVP form non-anonymously
   Then I should see a message confirming my submission
   And I should see my information on the page
+
+Scenario: RSVP form, completed and submitted anonymously
+  When I fill out and submit the RSVP form anonymously
+  Then I should see a message confirming my submission
+  And I should not see my information on the page
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the entire RSVP form

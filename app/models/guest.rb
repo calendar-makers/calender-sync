@@ -1,13 +1,15 @@
 class Guest < ActiveRecord::Base
+  has_many :registrations
   has_many :events, through: :registrations
   has_many :registrations
 
-  def all_non_anon
-    Guest.where(is_anon: false)
-  end
-
-  def all_anon
-    Guest.where(is_anon: true)
+  def self.fields_valid?(fields)
+    fields.each do |k, v|
+      if v == nil || v == ''
+        return false
+      end
+    end
+    true
   end
 
   # Best effort. Meetup names have no specific format

@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150402194548) do
 
   create_table "Guests", force: :cascade do |t|
@@ -22,6 +23,9 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.boolean "is_anon"
     t.string  "meetup_id"
   end
+=======
+ActiveRecord::Schema.define(version: 20150403020552) do
+>>>>>>> d3ac21964b7b564f343efc26e7a4a8f52e7f3dc0
 
   create_table "events", force: :cascade do |t|
     t.string   "organization"
@@ -40,6 +44,15 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.string   "zip"
     t.string   "state"
     t.string   "country"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "phone"
+    t.string  "email"
+    t.string  "address"
+    t.boolean "is_anon"
   end
 
   create_table "registrations", force: :cascade do |t|

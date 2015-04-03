@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 -# in app/views/events/show.html.haml
 
 %h2 Details about #{@event.name}
 - if flash['notice']
   .notice
     %h3= flash['notice']
+=======
+-# in app/views/movies/show.html.haml
+%div= @message
+
+%h1 Details about #{@event.name}
+>>>>>>> d3ac21964b7b564f343efc26e7a4a8f52e7f3dc0
 %ul#details
   %li#name
     Name:
@@ -26,5 +33,53 @@
 %p#description= @event.description
 
 %div= link_to 'Edit', edit_event_path(@event)
+
+%h2 Here's what's happening!
+-# Photos here
+
+%h2 Check out who's going!
+%table#attendees
+  %thead
+    %tr
+      %th Name
+      %th Phone Number
+      %th Email
+      %th Address
+  %tbody
+    - @non_anon_guests_by_last_name.each do |guest|
+      %tr
+        %td= guest.first_name + ' ' + guest.last_name
+        %td= guest.phone
+        %td= guest.email
+        %td= guest.address
+
+%h2 RSVP Now!
+= form_tag guests_path, id: 'rsvp' do
+  = hidden_field_tag :event_id, @event.id
+
+  %div= label :guest, :first_name, 'First Name'
+  %div#first_name= text_field :guest, :first_name
+
+  %div= label :guest, :last_name, 'Last Name'
+  %div#last_name= text_field :guest, :last_name
+
+  %div= label :guest, :phone, 'Phone'
+  %div#phone= text_field :guest, :phone
+
+  %div= label :guest, :email, 'Email'
+  %div#email= text_field :guest, :email
+
+  %div= label :guest, :address, 'Address'
+  %div#address= text_area :guest, :address, :cols =>'40', :rows => '10'
+
+  %div Do you want to remain anonymous?
+  = hidden_field :guest, :is_anon, :value => nil
+  = label :guest, :is_anon, 'Yes'
+  = radio_button :guest, :is_anon, true
+  = label :guest, :is_anon, 'No'
+  = radio_button :guest, :is_anon, false
+
+  %p= submit_tag "Submit"
+
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 = link_to 'Back to calendar', calendar_path

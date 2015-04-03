@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resource :calendar, :only => [:show]
+<<<<<<< HEAD
   resources :events do
     collection do
       get 'third_party'
@@ -8,6 +9,10 @@ Rails.application.routes.draw do
     end
   end
 
+=======
+  resources :events
+  resources :guests
+>>>>>>> d3ac21964b7b564f343efc26e7a4a8f52e7f3dc0
   get '/', to: redirect('/calendar')
 
   match "/auth/:provider/callback" => "sessions#create", via: [:get, :post]

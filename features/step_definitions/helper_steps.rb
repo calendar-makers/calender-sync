@@ -16,19 +16,3 @@ World(WithinHelpers)
 When(/^(.*) within (.*[^:])$/) do |step_string, parent|
   with_scope(parent) { step %{#{step_string}} }
 end
-
-Then(/^the page should have the text "(.*)"$/) do |text|
-  if page.respond_to? :should
-     page.should have_content(text)
-  else
-     page.has_content?(text)
-  end
-end
-
-Then(/^the page should not have the text "(.*)"$/) do |text|
-  if page.respond_to? :should
-     page.should have_no_content(text)
-  else
-     page.has_no_content?(text)
-  end
-end

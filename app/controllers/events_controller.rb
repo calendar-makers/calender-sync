@@ -14,6 +14,7 @@ class EventsController < ActionController::Base
   end
 
   def show
+<<<<<<< HEAD
     @event = Event.find params[:id]
 
     new_guests = @event.merge_meetup_rsvps
@@ -28,6 +29,15 @@ class EventsController < ActionController::Base
       flash[:notice] = "The RSVP list for this event has been updated." +
         " #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined." +
         " #{@event.generate_participants_message}"
+=======
+    begin
+      @message = flash[:notice]
+      @event = Event.find params[:id]
+      @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = "404: This is not the event you are looking for."
+      redirect_to events_path
+>>>>>>> d3ac21964b7b564f343efc26e7a4a8f52e7f3dc0
     end
   end
 
@@ -71,6 +81,7 @@ class EventsController < ActionController::Base
 
 
   def new
+<<<<<<< HEAD
     if flash[:notice] == nil
       @message = ""
     else
@@ -82,6 +93,9 @@ class EventsController < ActionController::Base
       end
     end
     @message = @message[0..@message.length-3]
+=======
+    form_validation_msg
+>>>>>>> d3ac21964b7b564f343efc26e7a4a8f52e7f3dc0
   end
 
   def create
@@ -148,5 +162,17 @@ class EventsController < ActionController::Base
     params.require(:event).permit(:title, :organization,
                                   :start, :location,
                                   :description)
+  end
+
+  def form_validation_msg
+    if flash[:notice] == nil
+      @message = ""
+    else
+      @message = "Please fill in the following fields before submitting: "
+      flash[:notice].each do |key|
+        @message += key + ", "
+      end
+    end
+    @message = @message[0..@message.length-3]
   end
 end
