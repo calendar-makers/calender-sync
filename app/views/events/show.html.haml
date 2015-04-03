@@ -37,38 +37,38 @@
       %th Email
       %th Address
   %tbody
-    - @non_anon_users_by_last_name.each do |user|
+    - @non_anon_guests_by_last_name.each do |guest|
       %tr
-        %td= user.first_name + ' ' + user.last_name
-        %td= user.phone
-        %td= user.email
-        %td= user.address
+        %td= guest.first_name + ' ' + guest.last_name
+        %td= guest.phone
+        %td= guest.email
+        %td= guest.address
 
 %h2 RSVP Now!
-= form_tag users_path, id: 'rsvp' do
+= form_tag guests_path, id: 'rsvp' do
   = hidden_field_tag :event_id, @event.id
 
-  %div= label :user, :first_name, 'First Name'
-  %div#first_name= text_field :user, :first_name
+  %div= label :guest, :first_name, 'First Name'
+  %div#first_name= text_field :guest, :first_name
 
-  %div= label :user, :last_name, 'Last Name'
-  %div#last_name= text_field :user, :last_name
+  %div= label :guest, :last_name, 'Last Name'
+  %div#last_name= text_field :guest, :last_name
 
-  %div= label :user, :phone, 'Phone'
-  %div#phone= text_field :user, :phone
+  %div= label :guest, :phone, 'Phone'
+  %div#phone= text_field :guest, :phone
 
-  %div= label :user, :email, 'Email'
-  %div#email= text_field :user, :email
+  %div= label :guest, :email, 'Email'
+  %div#email= text_field :guest, :email
 
-  %div= label :user, :address, 'Address'
-  %div#address= text_area :user, :address, :cols =>'40', :rows => '10'
+  %div= label :guest, :address, 'Address'
+  %div#address= text_area :guest, :address, :cols =>'40', :rows => '10'
 
   %div Do you want to remain anonymous?
-  = hidden_field :user, :is_anon, :value => nil
-  = label :user, :is_anon, 'Yes'
-  = radio_button :user, :is_anon, true
-  = label :user, :is_anon, 'No'
-  = radio_button :user, :is_anon, false
+  = hidden_field :guest, :is_anon, :value => nil
+  = label :guest, :is_anon, 'Yes'
+  = radio_button :guest, :is_anon, true
+  = label :guest, :is_anon, 'No'
+  = radio_button :guest, :is_anon, false
 
   %p= submit_tag "Submit"
 
