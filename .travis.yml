@@ -1,11 +1,8 @@
 language: ruby
 rvm:
   - 2.2.1
-<<<<<<< HEAD
 before_install:
   - sudo apt-get install libqtwebkit-dev
   - sudo apt-get install xvfb
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-=======
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

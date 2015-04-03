@@ -1,7 +1,6 @@
 -# edit.html.haml using partial
 
 %h1 Edit Existing Event
-<<<<<<< HEAD
 - if @message
     .notice
         %h3= @message
@@ -9,13 +8,5 @@
 = form_tag event_path(@event), :method => :put do
     = render :partial => 'event_form'
     = submit_tag 'Update Event Info'
-=======
-%div
-= @message
-%div
-	= form_tag event_path(@event), :method => :put do
-		= render :partial => 'event_form'
-		= submit_tag 'Update Event Info'
 %div
 	= render :partial => 'image_form'
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

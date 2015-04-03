@@ -28,14 +28,6 @@ Background:
   | 2        | 4        |
   | 2        | 5        |
 
-<<<<<<< HEAD
 Scenario: Guest sees all event attendees
   When I am on the "details" page for "Nature Walk"
   Then I should see attendees of "Nature Walk" listed alphabetically by last name
-=======
-Scenario: User sees all event attendees
-  When I am on the "details" page for "Nature Walk"
-  Then I should see info about people attending "Nature Walk"
-  And I should not see info about people who aren't attending "Nature Walk"
-  And the list of attendees should be listed alphabetically by last name
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

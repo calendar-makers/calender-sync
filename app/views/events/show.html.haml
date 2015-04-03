@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 -# in app/views/events/show.html.haml
 
 %h1 Details about #{@event.name}
 - if flash['notice']
   .notice
     %h3= flash['notice']
-=======
--# in app/views/movies/show.html.haml
-
-%h2 Details about #{@event.name}
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 %ul#details
   %li#name
     Name:
@@ -31,7 +25,6 @@
 
 %p#description= @event.description
 
-<<<<<<< HEAD
 %div= link_to 'Edit', edit_event_path(@event)
 
 %h2 Here's what's happening!
@@ -81,9 +74,6 @@
 
   %p= submit_tag "Submit"
 
-= button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
-= link_to 'Back to calendar', calendar_path
-=======
 %div
   %h4 Event Images
   = image_tag @event.image.url(:medium)
@@ -91,4 +81,3 @@
 %div= link_to 'Edit', edit_event_path(@event)
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 = link_to 'Back to calendar', events_path
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
