@@ -1,5 +1,3 @@
-require_relative 'helper_steps'
-
 Then(/^I should see all the pictures for "(.*)"$/) do |event_name|
   pending
   Dir.foreach("app/assets/images/#{event_name}") do |item|

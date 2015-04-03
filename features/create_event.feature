@@ -13,6 +13,12 @@ Scenario: redirect to create page when create new event button pushed
   And I should see the following fields: "Organization Name, Event Name, Description, Start Time, Location"
   And I should see the "Create Event" button
 
+Scenario: Require all fields to be filled during event creation
+  Given I am on the "Create" page
+  And I click on the "Create Event" button
+  Then I should be on the "Create" page
+  And I should see "Please fill in the following fields" on the page
+
 Scenario: store information when all the fields are filled out
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"

@@ -5,14 +5,9 @@ class EventsController < ActionController::Base
   end
 
   def show
-    begin
-      @message = flash[:notice]
-      @event = Event.find params[:id]
-      @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = "404: This is not the event you are looking for."
-      redirect_to events_path
-    end
+    @message = flash[:notice]
+    @event = Event.find params[:id]
+    @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
   end
 
   def new
