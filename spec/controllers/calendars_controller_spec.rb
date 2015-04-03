@@ -11,7 +11,7 @@ describe CalendarsController do
   end
 
 
-  describe 'pulling' do
+  describe 'pulling in #show' do
     context 'multiple events' do
 
       it 'should get remote meetup events' do
@@ -26,7 +26,7 @@ describe CalendarsController do
         get :show
       end
 
-      it 'should call pull with default group_id' do
+      it 'should indirectly call pull with default group_id' do
         expect_any_instance_of(Meetup).to receive(:pull_events).with(no_args)
         get :show
       end
@@ -36,6 +36,26 @@ describe CalendarsController do
         allow(Event).to receive(:make_events_local).and_return(event_names)
         get :show
         expect(flash[:notice]).to eq("Successfully pulled events: #{event_names.join(", ")}")
+      end
+    end
+
+    context "with failed result" do
+      let(:event_names) {nil}
+
+      it "should display a failure message" do
+        allow(Event).to receive(:make_events_local).and_return(event_names)
+        get :show
+        expect(flash[:notice]).to eq("Could not pull events from Meetup")
+      end
+    end
+
+    context "with zero events returned (i.e. synch status)" do
+      let(:event_names) {[]}
+
+      it "should display a failure message" do
+        allow(Event).to receive(:make_events_local).and_return(event_names)
+        get :show
+        expect(flash[:notice]).to eq("The Calendar and Meetup are synched")
       end
     end
   end

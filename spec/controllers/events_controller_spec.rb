@@ -75,7 +75,7 @@ describe EventsController do
 
 
 
-  describe 'pulling rsvps' do
+  describe 'pulling rsvps in #show' do
     let(:meetup_event_id) {'219648262'}
     let(:event) {Event.create(name: 'coyote appreciation',
                               location: 'yosemite',
@@ -98,12 +98,12 @@ describe EventsController do
         get :show, id: event.id
       end
 
-      it 'should call get_remote_rsvps with valid event' do
+      it 'should indirectly call get_remote_rsvps with valid event' do
         expect(event).to receive(:get_remote_rsvps)
         get :show, id: event.id
       end
 
-      it 'should call pull_rsvps with valid event_id' do
+      it 'should indirectly call pull_rsvps with valid event_id' do
         expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id)
         get :show, id: event.id
       end
@@ -124,6 +124,15 @@ describe EventsController do
         get :show, id: event.id
         expect(flash[:notice]).to eq("The RSVP list is synched with Meetup." +
                        " The total number of participants, including invited guests, so far is: 0.")
+      end
+    end
+
+    context 'with failed result' do
+
+      it 'should display a failure message' do
+        allow(event).to receive(:merge_meetup_rsvps).and_return(nil)
+        get :show, id: event.id
+        expect(flash[:notice]).to eq('Could not merge RSVP list for this event.')
       end
     end
   end

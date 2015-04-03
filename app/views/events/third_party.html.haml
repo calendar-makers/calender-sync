@@ -1,5 +1,7 @@
 .titles
   %h1 Third Party Events
+  - if flash[:notice]
+    %h3= flash[:notice]
 .subtitles
   %h3 Filter by ID or by Group Name
 

@@ -11,14 +11,15 @@ class EventsController < ActionController::Base
     new_guests = @event.merge_meetup_rsvps
 
     if new_guests.nil?
-      # FOR THE MOMENT ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE
-      # Once event pushing is done then it won't
-      flash[:notice] = "Could not merge RSVP list for this event."
+      # NOTE ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE.
+      # That is OK, given that is happens only during testing
+      # because in production, no event will be only local
+      flash[:notice] = 'Could not merge RSVP list for this event.'
     elsif new_guests.empty?
       flash[:notice] = "The RSVP list is synched with Meetup. #{@event.generate_participants_message}."
     else
-      flash[:notice] = "The RSVP list for this event has been updated." +
-        " #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined." +
+      flash[:notice] = 'The RSVP list for this event has been updated.' \
+        " #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined." \
         " #{@event.generate_participants_message}"
     end
   end
@@ -68,7 +69,7 @@ class EventsController < ActionController::Base
     if flash[:notice] == nil
       @message = ""
     else
-      @message = "Please fill in the following fields before submitting: "
+      @message = 'Please fill in the following fields before submitting: '
       if flash[:notice].respond_to?(:each)
         flash[:notice].each do |key|
           @message += key + ", "
@@ -100,7 +101,7 @@ class EventsController < ActionController::Base
     if !flash[:notice].is_a?(Array)
       @message = ""
     else
-      @message = "Please fill in the following fields before submitting: "
+      @message = 'Please fill in the following fields before submitting: '
       flash[:notice].each do |key|
         @message += key + ", "
       end

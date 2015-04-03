@@ -55,6 +55,9 @@ group :development, :test do
   gem 'rspec-rails', '~>3.2.1'
   gem 'simplecov'
   gem 'rake'
+  gem 'reek'
+  gem 'flog'
+  gem 'flay'
 end
 
 group :production do
