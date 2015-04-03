@@ -1,5 +1,3 @@
-require_relative 'helper_steps'
-
 Given /^I have (not )?(?:already )?logged in as an admin on Meetup$/ do |did_login|
   # For the moment just using the API key
   # But push and edit actions can only be done by her

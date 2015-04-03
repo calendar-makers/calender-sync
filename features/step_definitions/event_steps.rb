@@ -1,5 +1,3 @@
-require_relative 'helper_steps'
-
 Given /^the following events (?:exist:|exist on the calendar:)$/ do |events_table|
   events_table.hashes.each do |event|
     Event.create!(event)
@@ -32,17 +30,6 @@ And /^I select "([^"]*)" as the date and time$/ do |value|
   select dt.day, :from => 'event_start_3i'
   select dt.hour, :from => 'event_start_4i'
   select dt.min, :from => 'event_start_5i'
-end
-
-Then /^I should see "(.*)" on "(.*)"$/ do |event_link, date|
-  pending
-  #expect(page).to have_link(event_link)
-  # NOT TESTABLE UNTIL THE CALENDAR CAN BE POPULATED
-end
-
-Then /^I click the event "(.*)"$/ do |event_link|
-  pending
-  # NOT TESTABLE UNTIL THE CALENDAR CAN BE POPULATED
 end
 
 Then /I should (not )?see the "(.*)" link$/ do |negative, link|
@@ -78,19 +65,6 @@ end
 
 Then /the "(.*)" field should not be populated$/ do |field|
   expect(field.labeled(field).value).to eq("")
-end
-
-Then /^I should not see the "(.*)" event$/ do |event_name|
-  #pending based on calendar population, use "I should not see" for now
-  pending
-end
-
-Then(/^I should see filter\/search options$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should see calendar navigation tools$/) do
-  pending # express the regexp above with the code you wish you had
 end
 
 Given /^I am on the "(.*)" page(?: for "(.*)")?$/ do |page_name, event_name|
