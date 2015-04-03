@@ -24,7 +24,7 @@
 
 %div
   %h4 Event Images
-  = image_tag @event.image.url(:small)
+  = image_tag @event.image.url(:medium)
 
 %div= link_to 'Edit', edit_event_path(@event)
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'

@@ -256,7 +256,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
-  paperclip (~> 4.2)
+  paperclip
   pg
   rails (= 4.2.0)
   rake

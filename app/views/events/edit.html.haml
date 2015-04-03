@@ -4,6 +4,8 @@
 %div
 = @message
 %div
-= form_tag event_path(@event), :method => :put do
-  = render :partial => 'event_form'
-  = submit_tag 'Update Event Info'
+	= form_tag event_path(@event), :method => :put do
+		= render :partial => 'event_form'
+		= submit_tag 'Update Event Info'
+%div
+	= render :partial => 'image_form'
