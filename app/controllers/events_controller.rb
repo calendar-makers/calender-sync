@@ -66,7 +66,6 @@ class EventsController < ActionController::Base
     clean_ids
   end
 
-
   def new
     form_validation_msg
   end
@@ -98,12 +97,7 @@ class EventsController < ActionController::Base
     end
     @message = @message[0..@message.length-3]
 
-    #begin
     @event = Event.find params[:id]
-    #rescue ActiveRecord::RecordNotFound
-    #  flash[:notice] = "404: This is not the event you are looking for."
-    #  redirect_to events_path
-    #end
   end
 
   def update
@@ -128,11 +122,10 @@ class EventsController < ActionController::Base
 
   private
 
-  #Never trust anything from the internet
   def event_params
     params.require(:event).permit(:name, :organization,
                                   :start, :location,
-                                  :description)
+                                  :description, :image)
   end
 
   def form_validation_msg

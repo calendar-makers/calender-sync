@@ -1,9 +1,8 @@
 -# in app/views/events/show.html.haml
+%div= @message
 
 %h1 Details about #{@event.name}
-- if flash['notice']
-  .notice
-    %h3= flash['notice']
+
 %ul#details
   %li#name
     Name:
@@ -28,7 +27,7 @@
 %div= link_to 'Edit', edit_event_path(@event)
 
 %h2 Here's what's happening!
--# Photos here
+= image_tag @event.image.url(:medium)
 
 %h2 Check out who's going!
 %table#attendees
@@ -74,10 +73,5 @@
 
   %p= submit_tag "Submit"
 
-%div
-  %h4 Event Images
-  = image_tag @event.image.url(:medium)
-
-%div= link_to 'Edit', edit_event_path(@event)
 = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 = link_to 'Back to calendar', events_path
