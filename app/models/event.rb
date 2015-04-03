@@ -59,7 +59,7 @@ class Event < ActiveRecord::Base
 
   def self.make_events_local(events)
     if events
-      names = []
+      events_bin = []
       events.each do |event|
         stored_event = Event.find_by_meetup_id(event[:meetup_id])
         if stored_event.nil?
@@ -70,10 +70,10 @@ class Event < ActiveRecord::Base
           next
         end
 
-        names << event[:name]
+        events_bin << event
       end
 
-      names
+      events_bin
     end
   end
 

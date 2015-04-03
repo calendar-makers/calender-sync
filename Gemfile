@@ -58,6 +58,8 @@ group :development, :test do
   gem 'reek'
   gem 'flog'
   gem 'flay'
+  gem 'vcr'
+  gem 'fakeweb'
 end
 
 group :production do

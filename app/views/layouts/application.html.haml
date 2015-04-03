@@ -29,7 +29,15 @@
     %h1.title Calendar
     #main
       - if flash[:notice]
-        %h3#notice.message= flash[:notice]
+        - data = flash[:notice]
+        %h3#notice.message
+          -byebug
+          - if data.respond_to?(:each)
+            = data[0]
+            - data[1..data.size].each do |event|
+              = link_to event[:name], event[:url]
+          -else
+            = data
       - elsif flash[:warning]
         %h3#warning.message= flash[:warning]
 
