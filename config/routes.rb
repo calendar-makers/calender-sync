@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Rails.application.routes.draw do
   resource :calendar, :only => [:show]
   resources :events do
@@ -14,6 +15,13 @@ Rails.application.routes.draw do
   match "/signout" => "sessions#destroy", via: [:get]
   match "/auth/failure" => "sessions#failure", via: [:get]
 
+=======
+Rails.application.routes.draw do  
+  resource :calendar, :only => [:show]
+  resources :events
+  get '/', to: redirect('/calendar')
+
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

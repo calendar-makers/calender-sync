@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+<<<<<<< HEAD
 
   def show
     # For the moment keep running this task at every page view.
@@ -17,3 +18,8 @@ class CalendarsController < ApplicationController
   end
 end
 
+=======
+  def show
+  end
+end
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

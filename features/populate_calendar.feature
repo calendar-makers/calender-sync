@@ -1,7 +1,11 @@
 Feature: Populate calendar with events
 
   As an admin
+<<<<<<< HEAD
   So that I can advertise my events to website visitors
+=======
+  So that I can advertise my events to website vistors
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
   I want to be able to populate my calendar with events
 
 Background: Events have already been added to the database
@@ -22,4 +26,8 @@ Scenario: see events on the calendar page
   Given I am on the calendar page
   Then I should see "Nature Walk" on "April 4"
   When I click the event "Nature Walk"
+<<<<<<< HEAD
   Then I should be on the "details" page for "Nature Walk"
+=======
+  Then I should be on the details page for "Nature Walk"
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

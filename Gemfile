@@ -21,11 +21,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+<<<<<<< HEAD
 # meetup gems
 gem 'omniauth'
 gem 'omniauth-meetup'
 gem 'httparty'
 
+=======
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,10 +54,17 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'capybara-webkit' #i(rachel) did 'brew install qt' on mac [or 'apt-get install libqtwebkit-dev' on linux] to get this gem working for headless javascript tests in cucumber
+<<<<<<< HEAD
   gem 'headless'
   gem 'rspec-rails', '~>3.2.1'
   gem 'simplecov'
   gem 'rake'
+=======
+  gem 'rspec-rails', '~>3.2.1'
+  gem 'simplecov'
+  gem 'rake'
+  gem 'codeclimate-test-reporter', require: nil
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end
 
 group :production do
@@ -63,3 +73,8 @@ end
 
 gem 'haml-rails'
 gem 'rubocop', :require => false
+<<<<<<< HEAD
+=======
+
+gem 'paperclip'
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

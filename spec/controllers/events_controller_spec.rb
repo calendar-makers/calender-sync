@@ -73,6 +73,7 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to redirect_to(events_path)
     end
   end
+<<<<<<< HEAD
 
 
 
@@ -182,4 +183,6 @@ RSpec.describe EventsController, type: :controller do
       expect(response).to redirect_to(calendar_path)
     end
   end
+=======
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end

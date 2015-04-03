@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150402194548) do
 
   create_table "events", force: :cascade do |t|
@@ -33,12 +34,18 @@ ActiveRecord::Schema.define(version: 20150402194548) do
   end
 
   create_table "guests", force: :cascade do |t|
+=======
+ActiveRecord::Schema.define(version: 20150402064812) do
+
+  create_table "Guests", force: :cascade do |t|
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
     t.string  "first_name"
     t.string  "last_name"
     t.string  "phone"
     t.string  "email"
     t.string  "address"
     t.boolean "is_anon"
+<<<<<<< HEAD
     t.string  "meetup_id"
   end
 
@@ -47,11 +54,31 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.integer  "guest_id"
     t.integer  "invited_guests"
     t.datetime "updated"
+=======
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "organization"
+    t.string   "name"
+    t.string   "location"
+    t.string   "description"
+    t.datetime "start"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "guest_id"
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
   end
 
   add_index "registrations", ["event_id"], name: "index_registrations_on_event_id"
   add_index "registrations", ["guest_id"], name: "index_registrations_on_guest_id"
 
+<<<<<<< HEAD
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
@@ -62,4 +89,6 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.string   "refresh_token"
   end
 
+=======
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end

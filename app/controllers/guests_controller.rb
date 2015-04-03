@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class GuestsController < ActionController::Base
   def create
     event = Event.find(params[:event_id])
@@ -23,4 +24,7 @@ class GuestsController < ActionController::Base
                                   :phone, :email,
                                   :address, :is_anon)
   end
+=======
+class GuestsController < ApplicationController
+>>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end
