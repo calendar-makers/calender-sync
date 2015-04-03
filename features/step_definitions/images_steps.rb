@@ -1,5 +1,3 @@
-require_relative 'helper_steps'
-
 Then(/^I should see all the pictures for "(.*)"$/) do |event_name|
   pending
   id_num = Event.find_by_name(event_name).id

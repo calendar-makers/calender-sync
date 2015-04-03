@@ -15,7 +15,6 @@ class EventsController < ActionController::Base
     @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
 
     new_guests = @event.merge_meetup_rsvps
-
     if new_guests.nil?
       # FOR THE MOMENT ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE
       # Once event pushing is done then it won't
