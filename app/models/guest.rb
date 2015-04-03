@@ -1,5 +1,4 @@
 class Guest < ActiveRecord::Base
-<<<<<<< HEAD
   has_many :registrations
   has_many :events, through: :registrations
   has_many :registrations
@@ -32,16 +31,4 @@ class Guest < ActiveRecord::Base
     Guest.create!(first_name: first, last_name: last,
                   is_anon: false, meetup_id: rsvp[:meetup_id])
   end
-
-=======
-  has_many :events, through: :registrations
-
-  def all_non_anon
-    Guest.where(is_anon: false)
-  end
-
-  def all_anon
-    Guest.where(is_anon: true)
-  end
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end

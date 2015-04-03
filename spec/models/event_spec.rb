@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 require 'spec_helper'
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -26,7 +23,6 @@ RSpec.describe Event, type: :model do
     end
   end
 
-<<<<<<< HEAD
   describe "Checks the number of participants for an event" do
     it "returns the string reporting the total participants" do
       total_participants = 100000
@@ -93,7 +89,4 @@ RSpec.describe Event, type: :model do
       end
     end
   end
-
-=======
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 end

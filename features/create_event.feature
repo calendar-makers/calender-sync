@@ -26,11 +26,7 @@ Scenario: store information when all the fields are filled out
   #And I should see "Nature Walk" link on "3/19/2015"
   #And I should see ""Nature Walk" was successfully added."
 
-<<<<<<< HEAD
 #unimplemented
-=======
-#unimplemented 
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
 #Scenario: make sure that that all event fields are filled in
 #  Given I am on the "Create" page
 #  And I fill in the "Event Name" field with "Nature Walk"
@@ -44,8 +40,4 @@ Scenario: store information when all the fields are filled out
 #  And the "Add Event Details" field should be populated with "Join us for a nature walk through old town San Francicso!"
 #  And the "Date" field should be populated with "3/19/2015"
 #  And the "Location" field should be populated with "The Old Town Hall"
-<<<<<<< HEAD
 #  And the "Time" field should not be populated
-=======
-#  And the "Time" field should not be populated
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

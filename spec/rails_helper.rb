@@ -27,13 +27,8 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-<<<<<<< HEAD
-
   config.include Rails.application.routes.url_helpers
 
-=======
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

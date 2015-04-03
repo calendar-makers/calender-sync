@@ -4,15 +4,9 @@ Feature: as an admin, create events on the website and push to meetup
     So I don't have to create events redundantly
     I want to have events I create on the website automatically push to Meetup
 
-<<<<<<< HEAD
   Background: create an event on local calendar
     Given I am on the "Create" page
     And I have logged in as an admin on Meetup
-=======
-Scenario: admin attempts to create event while logged in
-    Given I am on the "Create" page
-    And I am already logged into Meetup
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
     And I fill in the "Event Name" field with "Nature Walk"
     And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
     And I select "3/19/2015, 4:30pm" as the date and time
@@ -20,8 +14,6 @@ Scenario: admin attempts to create event while logged in
     And I fill in the "Organization" field with "trololol"
     And I click on the "Create Event" button
     Then I should be on the "Events Directory" page
-<<<<<<< HEAD
-
 
 Scenario: successfully push newly created event to Meetup
     Then I should see the message "Event successfully pushed to Meetup"
@@ -32,6 +24,4 @@ Scenario: failed push of newly created event to Meetup (Implemented as a transac
     Then I should see the message "Failed to push event to Meetup. Creation aborted."
     And the "Calendar" event "Nature Walk" should not exist
     And the "Meetup" event "Nature Walk" should not exist
-=======
     And I should see "Event successfully pushed to Meetup"
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8

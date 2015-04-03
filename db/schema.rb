@@ -61,4 +61,5 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.integer  "expires_at"
     t.string   "refresh_token"
   end
+
 end
