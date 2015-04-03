@@ -1,6 +1,4 @@
 class EventsController < ActionController::Base
-<<<<<<< HEAD
-
   def index
     @events = Event.all
     @message = flash[:notice]
@@ -72,32 +70,6 @@ class EventsController < ActionController::Base
 
   def new
     form_validation_msg
-=======
-  def index
-    @events = Event.all
-    @message = flash[:notice]
-  end
-
-  def show
-#    begin
-    @event = Event.find params[:id]
-#    rescue ActiveRecord::RecordNotFound
-#      flash[:notice] = "404: This is not the event you are looking for."
-#      redirect_to events_path
-#    end
-  end
-
-  def new
-    if flash[:notice] == nil
-      @message = ""
-    else
-      @message = "Please fill in the following fields before submitting: "
-      flash[:notice].each do |key|
-        @message += key + ", "
-      end
-    end
-    @message = @message[0..@message.length-3]
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
   end
 
   def create
@@ -107,13 +79,9 @@ class EventsController < ActionController::Base
       redirect_to new_event_path
       return
     end
-<<<<<<< HEAD
-    
     # meetup push support
     # meetup = Meetup.new
     # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
-    
-    byebug
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
@@ -122,16 +90,6 @@ class EventsController < ActionController::Base
 
   def edit
     if !flash[:notice].is_a?(Array)
-=======
-    @event = Event.create!(event_params)
-    params[:event] = @event
-    flash[:notice] = "\"#{@event.name}\" was successfully added."
-    redirect_to events_path
-  end
-
-  def edit
-    if !flash[:notice].is_a?(Array) 
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
       @message = ""
     else
       @message = "Please fill in the following fields before submitting: "
@@ -158,24 +116,15 @@ class EventsController < ActionController::Base
       return
     end
     @event.update_attributes!(event_params)
-<<<<<<< HEAD
-    flash[:notice] = "\"#{@event.title}\" was successfully updated."
-    redirect_to calendar_path
-=======
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    redirect_to event_path(@event)
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
+    redirect_to calendar_path
   end
 
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-<<<<<<< HEAD
-    flash[:notice] = "\"#{@event.title}\" was successfully removed."
-=======
     flash[:notice] = "\"#{@event.name}\" was successfully removed."
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
-    redirect_to events_path
+    redirect_to calendar_path
   end
 
   private
@@ -184,7 +133,6 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization,
                                   :start, :location,
-<<<<<<< HEAD
                                   :description)
   end
 
@@ -198,8 +146,5 @@ class EventsController < ActionController::Base
       end
     end
     @message = @message[0..@message.length-3]
-=======
-                                  :description, :image)
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
   end
 end

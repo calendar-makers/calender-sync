@@ -1,6 +1,4 @@
 class CalendarsController < ApplicationController
-<<<<<<< HEAD
-
   def show
     # For the moment keep running this task at every page view.
     # But later I should switch to a scheduler (the link is on the browser)
@@ -17,9 +15,3 @@ class CalendarsController < ApplicationController
     end
   end
 end
-
-=======
-  def show
-  end
-end
->>>>>>> 3a3b7d8334a271907db884dd25e901be52f884e8
