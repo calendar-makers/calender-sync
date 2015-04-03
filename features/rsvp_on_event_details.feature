@@ -10,7 +10,7 @@ Background:
   | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 
-  And the following guests exist:
+  And the following users exist:
   | first_name | last_name | phone          | email            | address            | is_anon |
   | John       | Smith     | (816) 567-8521 | jsmith@site.com  | 12 Washington Blvd | false   |
   | Jacob      | Harrison  | (932) 123-4567 | jharry@gmail.com | 10 Whatever St     | true    |
@@ -19,7 +19,7 @@ Background:
   | Max        | Leroy     | (723) 123-8900 | maxler@aol.com   | 69 Feeling St      | false   |
 
   And the following registrations exist:
-  | event_id | guest_id |
+  | event_id | user_id  |
   | 1        | 1        |
   | 1        | 2        |
   | 1        | 3        |
@@ -31,14 +31,21 @@ Background:
   And I am on the "details" page for "Nature Walk"
   Then I should see the RSVP form
 
-Scenario: RSVP form, completed and submitted
-  When I fill out the RSVP form non-anonymously
-  And I press "Submit"
+Scenario: RSVP form, completed and submitted non-anonymously
+  When I fill out and submit the RSVP form non-anonymously
   Then I should see a message confirming my submission
   And I should see my information on the page
+  And the list of attendees for "Nature Walk" should be sorted alphabetically by last name
+
+Scenario: RSVP form, completed and submitted anonymously
+  When I fill out and submit the RSVP form anonymously
+  Then I should see a message confirming my submission
+  And I should not see my information on the page
+  And the list of attendees for "Nature Walk" should be sorted alphabetically by last name
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the entire RSVP form
   And I press "Submit"
   Then I should see a failed submission message
   And I should not see my information on the page
+  And the list of attendees for "Nature Walk" should be sorted alphabetically by last name

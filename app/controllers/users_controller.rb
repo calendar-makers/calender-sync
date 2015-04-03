@@ -1,15 +1,14 @@
 class UsersController < ActionController::Base
   def create
-    result = User.check_if_fields_valid(user_params)
     event = Event.find(params[:event_id])
-    if !result[:value]
-      flash[:notice] = result[:message]
+    if !User.fields_valid?(user_params)
+      flash[:notice] = "Please fill out all fields to RSVP."
       redirect_to event_path(event.id)
       return
     end
     @user = User.create!(user_params)
     params[:user] = @user
-    flash[:notice] = "You successfully RSVPed!"
+    flash[:notice] = "You successfully registered for this event!"
 
     registration = @user.registrations.build({:event_id => params[:event_id], :user_id => @user.id})
     @user.save

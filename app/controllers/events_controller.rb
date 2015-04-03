@@ -6,11 +6,7 @@ class EventsController < ActionController::Base
 
   def show
     begin
-      if !flash[:notice].is_a?(Array) 
-        @message = flash[:notice]
-      else
-        form_validation_msg
-      end
+      @message = flash[:notice]
       @event = Event.find params[:id]
       @non_anon_users_by_last_name = @event.users.order(:last_name).where(is_anon: false)
     rescue ActiveRecord::RecordNotFound
