@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/mbs729/calendar-sync/app/controllers/calendars_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/calendars_controller.rb": [
         1,
         1,
         null,
@@ -12,15 +12,15 @@
         11,
         0,
         11,
-        11,
-        null,
         0,
+        null,
+        11,
         null,
         null,
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/application_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -36,19 +36,19 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/helpers/application_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/helpers/guests_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/guests_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/helpers/sessions_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/event.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/event.rb": [
         1,
         1,
         1,
@@ -60,6 +60,7 @@
         null,
         null,
         null,
+        1,
         null,
         1,
         0,
@@ -71,7 +72,7 @@
         null,
         null,
         null,
-        0,
+        111,
         null,
         null,
         1,
@@ -92,7 +93,7 @@
         null,
         null,
         1,
-        0,
+        407,
         null,
         null,
         1,
@@ -123,9 +124,9 @@
         11,
         11,
         11,
-        0,
-        0,
-        0,
+        11,
+        407,
+        407,
         null,
         null,
         null,
@@ -137,8 +138,8 @@
         11,
         11,
         11,
-        0,
-        0,
+        407,
+        407,
         null,
         0,
         0,
@@ -146,7 +147,7 @@
         0,
         null,
         null,
-        0,
+        407,
         null,
         null,
         11,
@@ -196,7 +197,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/meetup.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/meetup.rb": [
         1,
         null,
         1,
@@ -285,8 +286,8 @@
         null,
         11,
         11,
-        0,
-        0,
+        11,
+        418,
         null,
         null,
         null,
@@ -324,40 +325,21 @@
         null,
         null,
         null,
-        0,
+        407,
         null,
         null,
         null,
         1,
-        0,
+        407,
         null,
         null,
         null,
         null,
-        0,
+        319,
         null,
-        0,
-        null,
-        null,
+        88,
         null,
         null,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         null,
         null,
         null,
@@ -366,30 +348,8 @@
         null,
         null,
         null,
-        1,
+        null,
         0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         1,
@@ -399,8 +359,49 @@
         0,
         0,
         0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
         0,
         0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        814,
+        814,
+        null,
+        null,
+        1,
+        407,
+        407,
+        407,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        407,
+        319,
+        319,
+        319,
+        319,
+        319,
+        319,
+        319,
         null,
         null,
         null,
@@ -429,7 +430,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/events_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/events_controller.rb": [
         1,
         1,
         10,
@@ -566,7 +567,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/registration.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/registration.rb": [
         1,
         1,
         1,
@@ -576,7 +577,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/guest.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/guest.rb": [
         1,
         1,
         1,
@@ -612,7 +613,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/guests_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/guests_controller.rb": [
         1,
         1,
         3,
@@ -641,23 +642,23 @@
         null
       ]
     },
-    "timestamp": 1428039325
+    "timestamp": 1428098324
   },
   "RSpec": {
     "coverage": {
-      "/home/mbs729/calendar-sync/app/helpers/application_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/helpers/guests_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/guests_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/helpers/sessions_helper.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/calendars_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/calendars_controller.rb": [
         1,
         1,
         null,
@@ -668,15 +669,15 @@
         5,
         2,
         3,
+        1,
+        null,
         2,
         null,
-        1,
-        null,
         null,
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/application_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -692,7 +693,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/events_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/events_controller.rb": [
         1,
         1,
         0,
@@ -829,7 +830,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/controllers/sessions_controller.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/controllers/sessions_controller.rb": [
         1,
         1,
         null,
@@ -852,7 +853,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/event.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/event.rb": [
         1,
         1,
         1,
@@ -864,6 +865,7 @@
         null,
         null,
         null,
+        1,
         null,
         1,
         0,
@@ -896,7 +898,7 @@
         null,
         null,
         1,
-        2,
+        39,
         null,
         null,
         1,
@@ -927,9 +929,9 @@
         4,
         4,
         4,
-        0,
-        0,
-        0,
+        2,
+        74,
+        74,
         null,
         null,
         null,
@@ -941,8 +943,8 @@
         3,
         2,
         2,
-        0,
-        0,
+        37,
+        37,
         null,
         0,
         0,
@@ -950,7 +952,7 @@
         0,
         null,
         null,
-        0,
+        37,
         null,
         null,
         2,
@@ -1000,7 +1002,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/guest.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/guest.rb": [
         1,
         1,
         1,
@@ -1036,7 +1038,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/meetup.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/meetup.rb": [
         1,
         null,
         1,
@@ -1125,8 +1127,8 @@
         null,
         5,
         5,
-        1,
-        38,
+        3,
+        114,
         null,
         null,
         null,
@@ -1164,19 +1166,19 @@
         null,
         null,
         null,
-        38,
+        112,
         null,
         null,
         null,
         1,
-        40,
+        114,
         null,
         null,
         null,
         null,
-        31,
+        89,
         null,
-        9,
+        25,
         null,
         null,
         null,
@@ -1214,14 +1216,14 @@
         null,
         null,
         1,
-        81,
-        81,
+        229,
+        229,
         null,
         null,
         1,
-        39,
-        39,
-        39,
+        113,
+        113,
+        113,
         null,
         null,
         null,
@@ -1233,14 +1235,14 @@
         null,
         null,
         1,
-        39,
-        31,
-        31,
-        31,
-        31,
-        31,
-        31,
-        31,
+        113,
+        89,
+        89,
+        89,
+        89,
+        89,
+        89,
+        89,
         null,
         null,
         null,
@@ -1269,7 +1271,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/registration.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/registration.rb": [
         1,
         1,
         1,
@@ -1279,7 +1281,7 @@
         null,
         null
       ],
-      "/home/mbs729/calendar-sync/app/models/user.rb": [
+      "/Users/rachel/Google Drive/school/sem6/cs169/merge/calendar-sync/app/models/user.rb": [
         1,
         1,
         2,
@@ -1321,6 +1323,6 @@
         null
       ]
     },
-    "timestamp": 1428039296
+    "timestamp": 1428098416
   }
 }
