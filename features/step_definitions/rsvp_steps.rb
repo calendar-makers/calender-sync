@@ -14,14 +14,21 @@ end
 
 Then(/^I should see attendees of "(.*)" listed alphabetically by last name$/) do |event_name|
   event = Event.find_by_name(event_name)
-  ordered_guests = event.guests.order(:last_name)
+  ordered_non_anon_guests = event.guests.where(is_anon: false).order(:last_name)
   prev_guest = nil
-  ordered_guests.each do |guest|
-    puts guest
+  ordered_non_anon_guests.each do |guest|
     if (prev_guest != nil) && (prev_guest != '')
-      assert page.body.match(/<td>#{prev_guest.last_name}<\/td>(.*)<td>#{guest.last_name}<\/td>/m), "#{prev_guest} is not before #{guest}"
+      assert page.body.match(/<td>(.*)#{prev_guest.last_name}<\/td>(.*)<td>(.*)#{guest.last_name}<\/td>/m), "#{prev_guest} is not before #{guest}"
     end
     prev_guest = guest
+  end
+end
+
+Then(/^I should not see anonymous attendees of "(.*)"$/) do |event_name|
+  event = Event.find_by_name(event_name)
+  anon_guests = event.guests.where(is_anon: true)
+  anon_guests.each do |guest|
+    step %{the page should not have the text "#{guest.first_name} #{guest.last_name}"}
   end
 end
 

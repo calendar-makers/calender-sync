@@ -31,3 +31,4 @@ Background:
 Scenario: Guest sees all event attendees
   When I am on the "details" page for "Nature Walk"
   Then I should see attendees of "Nature Walk" listed alphabetically by last name
+  But I should not see anonymous attendees of "Nature Walk"
