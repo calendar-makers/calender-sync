@@ -85,10 +85,11 @@ class EventsController < ActionController::Base
     # meetup = Meetup.new
     # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
     
+    byebug
     @event = Event.create!(event_params)
     params[:event] = @event
-    flash[:notice] = "\"#{@event.title}\" was successfully added."
-    redirect_to events_path
+    flash[:notice] = "\"#{@event.name}\" was successfully added."
+    redirect_to calendar_path
   end
 
   def edit
@@ -134,7 +135,7 @@ class EventsController < ActionController::Base
 
   #Never trust anything from the internet
   def event_params
-    params.require(:event).permit(:title, :organization,
+    params.require(:event).permit(:name, :organization,
                                   :start, :location,
                                   :description)
   end
