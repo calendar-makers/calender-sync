@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   def as_json(options = {})
   {
     :id => self.id,
-    :title => self.title,
+    :title => self.name,
     :start => start.iso8601,
     :url => Rails.application.routes.url_helpers.event_path(id)
   }
