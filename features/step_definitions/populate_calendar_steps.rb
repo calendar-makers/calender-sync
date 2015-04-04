@@ -11,7 +11,7 @@ Then /^I(?:| should) see the event "(.*)" on "(.*)"$/ do |title, date|
   step %Q(I am on the calendar page)
 
   # # this worked before trying to merge with meetup
-  # expect(success).to eq(true)
+  # expect(page).to have_content(@title)
 end
 
 When /^I click the event$/ do

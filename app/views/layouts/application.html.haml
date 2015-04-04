@@ -27,7 +27,7 @@
 
   %body
     %h1.title Calendar
-    #main
+    %div{:id => "main", :style => "width:75%;"}
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
       - elsif flash[:warning]

@@ -13,6 +13,8 @@ $(document).ready(function() {
       });
     },
 
+    eventColor: '#66CC00',
+
     header: {
       left:   'today prev,next',
       center: 'title',
