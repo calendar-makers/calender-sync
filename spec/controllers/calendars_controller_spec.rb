@@ -30,14 +30,14 @@ describe CalendarsController do
         expect_any_instance_of(Meetup).to receive(:pull_events).with(no_args)
         get :show
       end
-=begin
+
       it 'should display the newly added event names in a message' do
-        event_names = ['chester', 'copperpot', 'chunk', 'willy']
-        allow(Event).to receive(:make_events_local).and_return(event_names)
+        events = [Event.new(name: 'chester'), Event.new(name: 'copperpot')]
+        allow(Event).to receive(:make_events_local).and_return(events)
         get :show
-        expect(flash[:notice]).to eq("Successfully pulled events: chester, copperpot, chunk, willy")
+        expect(flash[:notice]).to eq("Successfully pulled events: #{events[0][:name]}, #{events[1][:name]} from Meetup")
       end
-=end
+
     end
 
     context "with failed result" do

@@ -59,7 +59,6 @@ Then /^I should see "(.*)" as the "(.*)"$/ do |value, field|
 end
 
 Then /^I should see (?:the flash message |the message )?"([^"]*)"$/ do |message|
-  byebug
   expect(page).to have_content(message)
 end
 

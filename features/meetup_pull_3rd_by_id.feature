@@ -20,23 +20,27 @@ Feature: pull 3rd-party events created on Meetup by event ID and display them on
     Given I fill in the "ID" field with "220680184"
     And I click on the "Search" button
     Then I should be on the "third_party" page
-    And I should see the message "Walk the Moon"
+    And I should see the list "#matched_events" containing: "Walk the Moon"
 
   Scenario: successfully pull an event
-    Given I searched an event id "220680184"
+    Given I searched an event by id: "220680184"
     And I check "Select" for "event220680184"
     And I click on the "Add Events" button
     Then I should be on the "Calendar" page
-    And I should see the message "Successfully added: 'Walk the Moon'"
-
-
+    And I should see the message "Successfully added: Walk the Moon"
 
   Scenario: fail to pull an event
-    Given I fill in the "Event ID" field with "123456"
-    And I click on the "Import Selected Events" button
+    Given I searched an event by id: "220680184"
+    And I check "Select" for "event220680184"
+    And I attempt to click on the "Add Events" button
     Then I should be on the "Calendar" page
-    And I should see the message "Could not pull events from Meetup"
-    And I should not see the "Gardening" link
+    And I should see the message "Could not add event. Please retry."
+
+  Scenario: attempt to pull no selected events
+    Given I searched an event by id: "220680184"
+    And I attempt to click on the "Add Events" button
+    Then I should be on the "third_party" page
+    And I should see the message "You must select at least one event. Please retry."
 
 
 

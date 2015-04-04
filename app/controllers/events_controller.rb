@@ -39,8 +39,8 @@ class EventsController < ActionController::Base
     if ids.size > 0
       ids = EventsController.cleanup_ids(ids)
       options = {event_id: ids.join(',')}
-      event_names = Event.make_events_local(Event.get_remote_events(options))
-      flash[:notice] = EventsController.display_message(event_names)
+      events = Event.make_events_local(Event.get_remote_events(options))
+      flash[:notice] = EventsController.display_message(events)
     else
       flash[:notice] = 'You must select at least one event. Please retry.'
       return redirect_to third_party_events_path
@@ -50,10 +50,15 @@ class EventsController < ActionController::Base
   end
 
   def self.display_message(events)
-    if events && events.size > 0
-      "Successfully added: #{events.join(', ')}"
+    if events.blank?
+      "Could not add event. Please retry."
+    elsif events.size > 0
+      names = []
+      events.each {|event| names << event[:name]}
+      "Successfully added: #{names.join(', ')}"
     end
   end
+
 
   def self.get_requested_ids(data)
     data.keys.select {|k| k =~ /^event.+$/}

@@ -69,16 +69,97 @@ events = <<-JSON
 JSON
 
 third_party_event = <<-JSON
-{"utc_offset":-25200000,"venue":{"country":"us","city":"San Francisco, 94108","address_1":"1111 California St. ","name":"The Masonic ","lon":-122.412956,"id":22529952,"state":"CA","lat":37.791183,"repinned":false},"headcount":0,"visibility":"public","waitlist_count":0,"created":1424581842000,"rating":{"count":0,"average":0},"maybe_rsvp_count":0,"description":"<p>Great band, cheap ticket price, what's not to like?<br/><a href=\"http://concerts.livenation.com/event/1C004D84AF7B433A" class="linkified">http://concerts.livenation.com/event/1C004D84AF7B433A</a></p>","event_url":"http://www.meetup.com/LiveMusicSF/events/220680184/","yes_rsvp_count":22,"name":"Walk the Moon","id":"220680184","time":1426384800000,"updated":1426396186000,"group":{"join_mode":"open","created":1270427879000,"name":"Live Music San Francisco","group_lon":-122.41999816894531,"id":1625447,"urlname":"LiveMusicSF","group_lat":37.75,"who":"Music Lovers"},"status":"past"}
+{"results":[{"utc_offset":-25200000,
+             "venue":{"country":"us","city":"San Francisco, 94108","address_1":"1111 California St. ","name":"The Masonic ","lon":-122.412956,"id":22529952,"state":"CA","lat":37.791183,"repinned":false},
+             "headcount":0,
+             "visibility":"public",
+             "waitlist_count":0,
+             "created":1424581842000,
+             "rating":{"count":0,"average":0},
+             "maybe_rsvp_count":0,
+             "description": "<p>Great band, cheap ticket price, what's not to like?<br/></p>",
+             "event_url":"http://www.meetup.com/LiveMusicSF/events/220680184/",
+             "yes_rsvp_count":22,
+             "name":"Walk the Moon",
+             "id":"220680184",
+             "time":1426384800000,
+             "updated":1426396186000,
+             "group":{"join_mode":"open","created":1270427879000,"name":"Live Music San Francisco","group_lon":-122.41999816894531,"id":1625447,"urlname":"LiveMusicSF","group_lat":37.75,"who":"Music Lovers"},
+             "status":"past"}],
+"meta":{"next":"",
+        "method":"Events",
+        "total_count":1,
+        "link":"https://api.meetup.com/2/events",
+        "count":1,
+        "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+        "lon":"",
+        "title":"Meetup Events v2",
+        "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220680184&page=200&fields=&key=3837476f222cc2b6b365513821d38&order=time&desc=false&status=upcoming",
+        "id":"",
+        "updated":1426396186000,
+        "lat":""}}
 JSON
 
 third_party_events = <<-JSON
-
+{"results":[{"utc_offset":-28800000,
+             "venue":{"zip":"94110",
+             "country":"us",
+             "city":"San Francisco",
+             "address_1":"998 Valencia (at 21st)",
+             "name":"Viracocha",
+             "lon":-122.421135,
+             "id":2583081,
+             "state":"CA",
+             "lat":37.756908,
+             "repinned":false},
+             "headcount":0,
+             "visibility":"public",
+             "waitlist_count":0,
+             "created":1425061031000,
+             "rating":{"count":1,"average":5},
+             "maybe_rsvp_count":0,
+             "description":"<p>Come to a night of amazing live music by three female-led bands, at the intimate and beautiful Viracocha in SF!<br/>Wisps and Willows' CD release, Dara Ackerman and full band, and The Kilbanes' debut of their newest Rock Opera. It's going to be a fantastic night.<br/>See article about the coming event on examiner.com here: <br/>Tickets at the door, cash only, $10-20 sliding scale. Doors open at 7pm, show at 8pm.<br/>We can't wait to see you there!<br/>Love, Wisps and Willows, The Kilbanes, and Dara Ackerman</p>",
+             "event_url":"http://www.meetup.com/LiveMusicSF/events/220804867/",
+             "yes_rsvp_count":5,
+             "name":"Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ",
+             "id":"220804867",
+             "time":1425700800000,
+             "updated":1425936698000,
+             "group":{"join_mode":"open","created":1270427879000,"name":"Live Music San Francisco","group_lon":-122.41999816894531,"id":1625447,"urlname":"LiveMusicSF","group_lat":37.75,"who":"Music Lovers"},
+             "status":"past"},
+           {"utc_offset":-25200000,
+             "venue":{"country":"us","city":"San Francisco, 94108","address_1":"1111 California St. ","name":"The Masonic ","lon":-122.412956,"id":22529952,"state":"CA","lat":37.791183,"repinned":false},
+             "headcount":0,
+             "visibility":"public",
+             "waitlist_count":0,
+             "created":1424581842000,
+             "rating":{"count":0,"average":0},
+             "maybe_rsvp_count":0,
+             "description": "<p>Great band, cheap ticket price, what's not to like?<br/></p>",
+             "event_url":"http://www.meetup.com/LiveMusicSF/events/220680184/",
+             "yes_rsvp_count":22,
+             "name":"Walk the Moon",
+             "id":"220680184",
+             "time":1426384800000,
+             "updated":1426396186000,
+             "group":{"join_mode":"open","created":1270427879000,"name":"Live Music San Francisco","group_lon":-122.41999816894531,"id":1625447,"urlname":"LiveMusicSF","group_lat":37.75,"who":"Music Lovers"},
+             "status":"past"}],
+"meta":{"next":"",
+        "method":"Events",
+        "total_count":2,
+        "link":"https://api.meetup.com/2/events",
+        "count":2,
+        "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+        "lon":"",
+        "title":"Meetup Events v2",
+        "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220804867&page=200&fields=&key=3837476f222cc2b6b365513821d38&order=time&desc=false&status=upcoming",
+        "id":"",
+        "updated":1425936698000,
+        "lat":""}}
 JSON
 
 
 unauthorized = <<-JSON
-{"details"=>"API requests must be key-signed, oauth-signed, or accompanied by a key: http://www.meetup.com/meetup_api/docs/#authentication", "code"=>"not_authorized", "problem"=>"You are not authorized to make that request"}, @response=#<Net::HTTPUnauthorized 401 Unauthorized readbody=true>, @headers={"server"=>["cloudflare-nginx"], "date"=>["Sat, 04 Apr 2015 03:04:21 GMT"], "content-type"=>["application/json;charset=utf-8"], "transfer-encoding"=>["chunked"], "connection"=>["close"], "set-cookie"=>["__cfduid=dd6f0cc3cd9301dd1ef6091310b7edec01428116660; expires=Sun, 03-Apr-16 03:04:20 GMT; path=/; domain=.meetup.com; HttpOnly"], "x-meetup-server"=>["api17.int.meetup.com"], "x-meetup-request-id"=>["a1a41939-c470-4c57-a637-11a63a03ef93"], "www-authenticate"=>["OAuth realm=\"https://api.meetup.com/\""], "vary"=>["Accept-Encoding,User-Agent"], "cf-ray"=>["1d19c908a55d0d73-SJC"]}
 JSON
 
 error = <<-JSON
@@ -87,12 +168,15 @@ JSON
 
 not_found = <<-JSON
 {"details":"The resource you have requested can not be found","code":"not_found","problem":"Not Found"}
-mike@imperium:~/Documents/calendar-sync$
-
 JSON
 
 
 FakeWeb.allow_net_connect = false
-FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_id=8870202||group_urlname=nature-in-the-city)}, :body => events, :content_type => 'application/json')
-FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events\?(?:event_id=)}, :body => third_party_event, :content_type => 'application/json')
-FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_urlname=(?!nature\-in\-the\-city).*$)}, :body => third_party_events, :content_type => 'application/json')
+#FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_id=8870202||group_urlname=nature-in-the-city)}, :body => events, :content_type => 'application/json')
+#FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events\?event_id=220680184}, :body => third_party_event, :content_type => 'application/json')
+
+                              #https://api.meetup.com/2/events?key=3837476f222cc2b6b365513821d38&group_id=8870202
+FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=[^,]*|, :body => third_party_event, :content_type => 'application/json')
+FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, :body => events, :content_type => 'application/json')
+FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, :body => third_party_events, :content_type => 'application/json')
+FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=.*,.*|, :body => third_party_events, :content_type => 'application/json')
