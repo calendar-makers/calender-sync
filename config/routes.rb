@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :guests
   get '/', to: redirect('/calendar')
 
-  match "/auth/:provider/callback" => "sessions#create", via: [:get, :post]
+  match "/auth/:provider/callback" => "sessions#create", via: [:get,:post]
   match "/signout" => "sessions#destroy", via: [:get]
   match "/auth/failure" => "sessions#failure", via: [:get]
 end

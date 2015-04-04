@@ -3,6 +3,16 @@ Given /^I have (not )?(?:already )?logged in as an admin on Meetup$/ do |did_log
   # But push and edit actions can only be done by her
 end
 
+Given /^I have( not | )already logged in to Meetup$/ do |did_log_in|
+  visit path_to("Calendar")
+  if did_log_in == ' not '
+    expect(page).to have_link("login to Meetup")
+  else
+    click_link('login to Meetup')
+    expect(page).to have_link("Sign Out")
+  end
+end
+
 Given /^the following events exist on Meetup:$/ do |events_table|
   events_table.hashes.each do |event|
     #Event.create!(event)

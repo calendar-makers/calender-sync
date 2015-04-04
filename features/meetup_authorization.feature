@@ -4,33 +4,18 @@ Feature: Set up O-Auth2 so admin can login to Meetup
     So that I can interact with Meetup
     I want to be able to login to Meetup from the website
 
+@omniauth_test
 Scenario: admin attempts to login
-    Given I am on the "Calendar" page
-    And I have not already logged in
-    When I click on the "login" link
-    Then I should be on the "Meetup Login" page
+    Given I have not already logged in to Meetup
+    When I click on the "login to Meetup" link
+    Then I should be on the "Calendar" page
+    And I should see "Signed in!"
+# ERROR: if app is approved by Meetup user, will auto redirect
+# how do I emulate this behavior?
 
-#Scenario: admin attempts to create event while not logged in
-#    Given I create an event and submit it
-#    And I have not already logged in
-
-Scenario: admin attempts to login
-    Given I am on the "Meetup Login" page
-    And I fill in the "Login" field with "admin"
-    And I fill in the "Password" field with "password"
-    And I click on the "Submit" button
-    Then I should be on the "Events Directory" page
-    And I should see "Succesfully logged in"
-
-Scenario: admin attempts to login unsuccessfully
-    Given I am on the "Meetup Login" page
-    And I click on the "Submit" button
-    Then I should be on the "Meetup Login" page
-    And I should see "Unsuccessful login!"
-
+@omniauth_test
 Scenario: admin attempts to logout
-    Given I am on the "Events Directory" page
-    And I have already logged in as an admin on Meetup
-    When I click on the "signout" button
-    Then I should see "Succesfully logged out"
-    And I should be on the "Events Directory" page
+    Given I have already logged in to Meetup
+    When I click on the "Sign Out" link
+    Then I should see "Signed out!"
+    And I should be on the "Calendar" page
