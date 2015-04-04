@@ -69,5 +69,5 @@ events = <<-JSON
 JSON
 
 
-FakeWeb.allow_net_connect = false
+FakeWeb.allow_net_connect = true
 FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_id=8870202||group_urlname=nature-in-the-city)}, :body => events, :content_type => 'application/json')
