@@ -89,9 +89,6 @@ RSpec.describe Event, type: :model do
       end
     end
   end
-<<<<<<< HEAD
-=======
-
   describe "#format_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
     let(:formatted_date) {'10/31/2002 at 12:02AM'}
@@ -168,7 +165,4 @@ RSpec.describe Event, type: :model do
       end
     end
   end
-
-
->>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a
 end

@@ -1,13 +1,8 @@
 require 'rails_helper'
 
-<<<<<<< HEAD
-RSpec.describe Guest, type: :model do
-  describe "parse a name pulled from meetup event rsvp" do
-=======
 describe Guest do
 
   describe "::parse_meetup_name" do
->>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a
     context "with a name including both first and last" do
       let(:good_name) {'Chester Copperpot'}
 

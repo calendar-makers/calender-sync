@@ -25,13 +25,5 @@ Feature: automatically pull existing events from Meetup onto the calendar
 
   Scenario: failed pull from Meetup
     Given I am on the "Calendar" page
-<<<<<<< HEAD
-    #///////////  WHEN CALENDAR WORKS REMOVE NEXT LINE
-    And I am on the "Events Directory" page
-    Then I should see the "Nature Walk, Fried Tomatoes" links
-    And I should not see the "Nature Stroll, Green Bean Mixer, New Nature, Gardening" links
-    And I should see the message "Could not pull events from Meetup"
-=======
     And I should not see the "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" links
     And I should see the message "Could not pull events from Meetup"
->>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a

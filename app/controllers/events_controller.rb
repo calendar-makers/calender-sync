@@ -81,17 +81,9 @@ class EventsController < ActionController::Base
       redirect_to new_event_path
       return
     end
-<<<<<<< HEAD
     # meetup push support
     # meetup = Meetup.new
     # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
-=======
-
-    # meetup push support
-    # meetup = Meetup.new
-    # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
-
->>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
@@ -99,21 +91,7 @@ class EventsController < ActionController::Base
   end
 
   def edit
-<<<<<<< HEAD
     form_validation_msg
-=======
-    if !flash[:notice].is_a?(Array)
-      @message = ""
-    else
-      @message = 'Please fill in the following fields before submitting: '
-      flash[:notice].each do |key|
-        @message += key + ", "
-      end
-    end
-    @message = @message[0..@message.length-3]
-
-    #begin
->>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a
     @event = Event.find params[:id]
   end
 
