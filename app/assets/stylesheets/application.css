@@ -20,6 +20,8 @@ html, body {
     color: DarkSlateGrey;
     font-family: "Gotham", Helvetica, sans-serif;
     font-size: 11pt;
+/*    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 10pt;*/
 }
 div#main {
     margin: 0;
@@ -33,6 +35,7 @@ a {
     background: transparent;
     color: maroon;
     text-decoration: underline;
+/*    font-weight: bold;*/
 }
 h1 {
     color: maroon;
@@ -59,6 +62,7 @@ table#movies {
 }
 table#movies th {
     border: 2px solid white;
+/*    font-weight: bold;*/
     background-color: wheat;
 }
 table#movies th, table#movies td {
@@ -76,5 +80,6 @@ table#movies th.hilite {
 form label {
     display: block;
     line-height: 25px;
+   /* font-weight: bold;*/
     color: maroon;
 }
