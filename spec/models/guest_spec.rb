@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Guest, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
   describe "parse a name pulled from meetup event rsvp" do
     context "with a name including both first and last" do
       let(:good_name) {'Chester Copperpot'}
