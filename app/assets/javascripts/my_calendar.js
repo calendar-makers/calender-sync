@@ -34,7 +34,7 @@ $(document).ready(function() {
   $('#my-button').click(function() {
     var moment = $('#calendar').fullCalendar('getDate');
     alert("The current date of the calendar is " + moment.format());
-  })
+  });
 });
 
 function go_to_date(date){
