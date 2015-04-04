@@ -11,9 +11,18 @@ $(document).ready(function() {
         console.log(data);
         callback(data);
       });
+    },
+
+    header: {
+      left:   'today prev,next',
+      center: 'title',
+      right:  ''
     }
     
   });
+
+  go_to_date(date);
+
   console.log("hello world");
   $.getJSON('events.json', function(data){
     console.log("I'm in the json call");
@@ -25,3 +34,9 @@ $(document).ready(function() {
     alert("The current date of the calendar is " + moment.format());
   })
 });
+
+function go_to_date(date){
+  console.log("I'm going to date")
+  console.log(date)
+  $('#calendar').fullCalendar('gotoDate', date)
+}
