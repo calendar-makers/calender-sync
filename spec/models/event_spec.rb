@@ -23,7 +23,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "Checks the number of participants for an event" do
+  describe "#generate_participants_message" do
     it "returns the string reporting the total participants" do
       total_participants = 100000
       allow_any_instance_of(Event).to receive(:count_event_participants).and_return(total_participants)
@@ -32,7 +32,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "Computes the total number of attendees for an event" do
+  describe "#count_events_participants" do
     let(:event) {Event.new}
 
     context "with at least a positive rsvp" do
@@ -53,7 +53,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "Checks if an event was never pulled from Meetup before" do
+  describe "#is_new?" do
     context "with a new event" do
       it "returns positive" do
         event = Event.new
@@ -72,7 +72,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "Checks if a local event has been updated on meetup" do
+  describe "#is_updated" do
     context "with updated event" do
       it "returns true" do
         event = Event.new(updated: Time.now)
@@ -89,4 +89,86 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+<<<<<<< HEAD
+=======
+
+  describe "#format_date" do
+    let(:date) {Time.utc(2002, 10, 31, 0, 2)}
+    let(:formatted_date) {'10/31/2002 at 12:02AM'}
+
+    it "returns the date in a simpler form" do
+      event = Event.new(start: date)
+      result = event.format_date
+      expect(result).to eq(formatted_date)
+    end
+  end
+
+  describe "::make_events_local" do
+    context "with new events" do
+      let(:event) {[Event.new]}
+
+      it "saves the event in the db" do
+        expect_any_instance_of(Event).to receive(:save!)
+        Event.make_events_local(event)
+      end
+
+      it "updates an already stored event" do
+        event[0][:meetup_id] = '123'
+        event[0][:updated] = Time.now + 200000
+        old_event = Event.new(updated: Time.now)
+
+        allow(Event).to receive(:find_by_meetup_id).and_return(old_event)
+        expect(old_event).to receive(:update_attributes!)
+        Event.make_events_local(event)
+      end
+
+      it "does nothing for an old unchanged event" do
+        event[0][:meetup_id] = '123'
+        event[0][:updated] = Time.now
+        stored_event = Event.new(updated: Time.now)
+
+        allow(Event).to receive(:find_by_meetup_id).and_return(stored_event)
+        expect(stored_event).not_to receive(:update_attributes)
+        Event.make_events_local(event)
+      end
+    end
+  end
+
+  describe "#merge_meetup_rsvps" do
+    context "with new events" do
+      let(:event) {Event.new(id: 1)}
+      let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912,
+                    :meetup_name=>"Amber Hasselbring", :invited_guests=>0,
+                    :updated=> Time.now}]}
+      let(:guest) {Guest.new(id: 1, first_name: 'chester', last_name: 'copperpot')}
+
+      before(:each) do
+        allow_any_instance_of(Event).to receive(:get_remote_rsvps).and_return(rsvp)
+        allow(Guest).to receive(:find_guest_by_meetup_rsvp).and_return(guest)
+      end
+
+      it "saves the rsvp in the db" do
+        allow(Registration).to receive(:find_by).and_return(nil)
+        expect(Registration).to receive(:create!)
+        event.merge_meetup_rsvps
+      end
+
+      it "updates an already stored event" do
+        old_rsvp = Registration.new(updated: Time.now - 30000)
+        allow(Registration).to receive(:find_by).and_return(old_rsvp)
+        expect(old_rsvp).to receive(:update_attributes!)
+        event.merge_meetup_rsvps
+      end
+
+      it "does nothing for an old unchanged event" do
+        stored_rsvp = Registration.new(updated: Time.now)
+        allow(Registration).to receive(:find_by).and_return(stored_rsvp)
+        expect(stored_rsvp).not_to receive(:update_attributes!)
+        event.merge_meetup_rsvps
+      end
+    end
+  end
+
+
+>>>>>>> a0660ac2106676a243726d02fa3e63287ffd494a
 end

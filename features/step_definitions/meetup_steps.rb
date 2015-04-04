@@ -14,9 +14,9 @@ Given /^I have( not | )already logged in to Meetup$/ do |did_log_in|
 end
 
 Given /^the following events exist on Meetup:$/ do |events_table|
-  events_table.hashes.each do |event|
+  #events_table.hashes.each do |event|
     #Event.create!(event)
-  end
+  #end
 end
 
 And /^the "(.*)" event "(.*)" should (not )?exist$/ do |platform, event_name, negative|

@@ -85,21 +85,21 @@ class Event < ActiveRecord::Base
 
   def self.make_events_local(events)
     if events
-      names = []
+      events_bin = []
       events.each do |event|
-        if event.is_new?
+        stored_event = Event.find_by_meetup_id(event[:meetup_id])
+        if stored_event.nil?
           event.save!
-        elsif event.is_updated?(event[:updated])
-          stored_event = Event.find_by_meetup_id(event[:meetup_id])
+        elsif stored_event.is_updated?(event[:updated])
           stored_event.update_attributes!(event.attributes)
         else # already stored and unchanged since
           next
         end
 
-        names << event[:name]
+        events_bin << event
       end
 
-      names
+      events_bin
     end
   end
 

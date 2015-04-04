@@ -1,7 +1,6 @@
-require 'spec_helper'
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+describe EventsController do
   describe 'Checking Show' do
     it "should render 'show' page" do
       event = Event.create(name: 'coyote appreciation',
@@ -74,7 +73,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe 'pulling rsvps' do
+  describe 'pulling rsvps in #show' do
     let(:meetup_event_id) {'219648262'}
     let(:event) {Event.create(name: 'coyote appreciation',
                               location: 'yosemite',
@@ -97,12 +96,12 @@ RSpec.describe EventsController, type: :controller do
         get :show, id: event.id
       end
 
-      it 'should call get_remote_rsvps with valid event' do
+      it 'should indirectly call get_remote_rsvps with valid event' do
         expect(event).to receive(:get_remote_rsvps)
         get :show, id: event.id
       end
 
-      it 'should call pull_rsvps with valid event_id' do
+      it 'should indirectly call pull_rsvps with valid event_id' do
         expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id)
         get :show, id: event.id
       end
@@ -125,9 +124,18 @@ RSpec.describe EventsController, type: :controller do
                        " The total number of participants, including invited guests, so far is: 0.")
       end
     end
+
+    context 'with failed result' do
+
+      it 'should display a failure message' do
+        allow(event).to receive(:merge_meetup_rsvps).and_return(nil)
+        get :show, id: event.id
+        expect(flash[:notice]).to eq('Could not merge RSVP list for this event.')
+      end
+    end
   end
 
-  describe "gets the event ids from the params hash" do
+  describe "::get_requested_ids" do
     let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
     it "Selects only ids which match /^event.*/" do
       result = EventsController.get_requested_ids(data)
@@ -135,7 +143,7 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
-  describe "removes unwanted words from user-input event ids" do
+  describe "::cleanup_ids" do
     let(:dirty_ids) {['event123', 'event1456', 'eventABC']}
     let(:clean_ids) {['123', '1456', 'ABC']}
 
@@ -158,9 +166,14 @@ RSpec.describe EventsController, type: :controller do
         allow(EventsController).to receive(:get_requested_ids).and_return(ids)
       end
 
-      it "should return the pulled event names" do
+      it "should return a message with the added events" do
         get :pull_third_party
-        expect(flash[:notice]).to eq(event_names)
+        expect(flash[:notice]).to eq(EventsController.display_message(event_names))
+      end
+
+      it "should redirect to the calendar" do
+        get :pull_third_party
+        expect(response).to redirect_to(calendar_path)
       end
     end
 
@@ -169,15 +182,71 @@ RSpec.describe EventsController, type: :controller do
         allow(EventsController).to receive(:get_requested_ids).and_return([])
       end
 
+      it "should redirect back to third party" do
+        get :pull_third_party
+        expect(response).to redirect_to(third_party_events_path)
+      end
+
       it "should return no pulled event names" do
         get :pull_third_party
         expect(flash[:notice]).to eq('You must select at least one event. Please retry.')
       end
     end
+  end
 
-    it "should redirect to the calendar" do
-      get :pull_third_party
-      expect(response).to redirect_to(calendar_path)
+  describe "#third_party" do
+    context "get" do
+      it "renders the third_party template" do
+        get :third_party
+        expect(response).to render_template('third_party')
+      end
+
+      it "assigns empty events" do
+        get :third_party
+        expect(assigns(:events)).to eq([])
+      end
+    end
+
+    context "post" do
+      let(:event) {[Event.new]}
+
+      before(:each) do
+        allow(Event).to receive(:get_remote_events).and_return(event)
+      end
+
+      it "renders the third_party template" do
+        post :third_party
+        expect(response).to render_template('third_party')
+      end
+
+      it "assigns events for posted id" do
+        get :third_party, id: "123"
+        expect(assigns(:events)).to eq(event)
+      end
+
+      it "assigns events for posted group_urlname" do
+        get :third_party, group_urlname: "gruppetto"
+        expect(assigns(:events)).to eq(event)
+      end
+    end
+  end
+
+  describe "::display_message" do
+
+    context "with at least one event" do
+      let(:event_names) {['gardening', 'swimming', 'dying']}
+
+      it "returns a message with the added event names" do
+        result = EventsController.display_message(event_names)
+        expect(result).to eq("Successfully added: gardening, swimming, dying")
+      end
+    end
+
+    context "with no events" do
+      it "returns nothing" do
+        result = EventsController.display_message([])
+        expect(result).to eq(nil)
+      end
     end
   end
 end

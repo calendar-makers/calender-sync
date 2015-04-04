@@ -56,6 +56,11 @@ group :development, :test do
   gem 'simplecov'
   gem 'rake'
   gem 'codeclimate-test-reporter', require: nil
+  gem 'reek'
+  gem 'flog'
+  gem 'flay'
+  gem 'vcr'
+  gem 'fakeweb'
 end
 
 group :production do

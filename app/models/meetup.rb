@@ -16,7 +16,6 @@ class Meetup
 
   def initialize(options={})
     # Needs either a key, or a token.
-    # Don't think you can send both...
     admin_data = options[:access_token] ? {} : {key: options[:key]||API_KEY}
     @options = options.merge(admin_data)
   end
@@ -38,7 +37,7 @@ class Meetup
     data = HTTParty.delete("#{BASE_URL}/2/event/#{id}?#{options_string}")
     data.code == 200
   end
-=end
+
 
 
   def dummy_push_event()
@@ -74,13 +73,14 @@ class Meetup
     # if there are multiple matches then it will return ERROR CODE 409 Conflict
     # which will contain a list of possible matches.
   end
+=end
 
   def pull_event(id)
     data = HTTParty.get("#{BASE_URL}/2/event/#{id}?#{options_string}")
     build_event(data.parsed_response) if data.code == 200
   end
 
-  def pull_events()
+  def pull_events
     if @options[:event_id].nil? && @options[:group_urlname].nil?
       @options.merge!(group_id: GROUP_ID) # if user gave no options, then pull by default group id
     end
@@ -141,6 +141,8 @@ class Meetup
     end
   end
 
+  # NEXT ITERATION
+=begin
   # Used to package event data to be sent in push_event
   # Likely to be used in edit_event as well
   def get_event_data(event)
@@ -165,6 +167,7 @@ class Meetup
   def find_venue_match(event, venues)
 
   end
+=end
 
   # Used to package venue data to be sent in create_venue
   def get_event_venue_data(event)
@@ -190,7 +193,7 @@ class Meetup
   # NOTE: I ADDED ALL THESE 5 FIELDS IN THE DB because it was necessary
   # to create new venues(i.e. request new venues).
   # THIS MAKES THE "LOCATION" column USELESS.
-  # SHOULD REMOVE but NOT NOW...IT's MAJOR REFACTORING. Would you consider keeping it for easy printing???
+  # SHOULD REMOVE but NOT NOW...IT's MAJOR REFACTORING. Will do next iteration
 
   # For some events the 'venue' field does not exist
   def build_location(data)
