@@ -12,10 +12,17 @@ class CalendarsController < ApplicationController
       elsif events.empty?
         flash[:notice] = "The Calendar and Meetup are synched"
       else
-        byebug
-        flash[:notice] = ['Successfully pulled events: '] + events.each {|event| [event[:name], event[:url]]}
+        #flash[:notice] = ['Successfully pulled events: '] + CalendarsController.get_event_info(events)
+        flash[:notice] = 'Successfully pulled events: ' + CalendarsController.get_event_info(events)
       end
     end
   end
+
+  def self.get_event_info(events)
+    info = []
+    events.each {|event| info << event[:name]}
+    info.join(', ')
+  end
 end
+
 
