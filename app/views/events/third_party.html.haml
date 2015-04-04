@@ -1,0 +1,58 @@
+.titles
+  %h1 Third Party Events
+  - if flash[:notice]
+    %h3= flash[:notice]
+.subtitles
+  %h3 Filter by ID or by Group Name
+
+= form_tag third_party_events_path do
+
+  = label_tag 'id', 'ID'
+  = text_field_tag 'id'
+  </br>
+  = label_tag 'group_urlname', 'Group Name'
+  = text_field_tag 'group_urlname'
+  </br>
+  </br>
+  = submit_tag 'Search'
+
+</br>
+</br>
+%h2 Matched Events
+</br>
+= form_tag pull_third_party_events_path do
+  %table#third_party_table
+    %thead
+      %tr
+        %th Select
+        %th Name
+        %th Group
+        %th Start Time
+        %th Duration
+        %th Location
+        %th Meetup Link
+
+    %tbody
+      - @events.each do |event|
+        %tr
+          - id = event.meetup_id
+          %td= check_box_tag "event" + (id.nil? ? "" : id)
+          %td= (link_to event.name, event_path(event)) if event.id
+          %td= event.organization
+          %td= event.format_date
+          %td= event.duration
+          %td= event.location
+          - if event.url =~ /www.meetup.com/
+            %td= link_to 'go', event.url
+
+  </br>
+  = submit_tag 'Add Events'
+
+</br>
+
+</br>
+</br>
+= link_to 'Back to Calendar', calendar_path
+</br>
+</br>
+= link_to 'Events Directory', events_path

@@ -1,0 +1,10 @@
+-# edit.html.haml using partial
+
+%h1 Edit Existing Event
+%h3= @message
+
+= form_tag event_path(@event), :method => :put do
+  = render :partial => 'event_form'
+  = submit_tag 'Update Event Info'
+
+= render :partial => 'image_form'

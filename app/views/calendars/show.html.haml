@@ -1,0 +1,13 @@
+= link_to "new event", new_event_path
+</br>
+- if current_user
+  = link_to "Sign Out", "/signout", id: "signout"
+- else
+  = link_to "login to Meetup", "/auth/meetup", id: "login"
+</br>
+%button#my-button push me
+</br>
+= link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
+
+
+#calendar{:style => "width:70%; margin-left:15%;"}
