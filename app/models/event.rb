@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
 
 
   def self.make_events_local(events)
-    if events
+    if !events.blank?
       events_bin = []
       events.each do |event|
         stored_event = Event.find_by_meetup_id(event[:meetup_id])
@@ -90,7 +90,7 @@ class Event < ActiveRecord::Base
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
 
-    if rsvps
+    if !rsvps.blank?
       new_guest_names = []
       rsvps.each do |rsvp|
 
@@ -116,7 +116,7 @@ class Event < ActiveRecord::Base
   end
 
   def format_date
-    start.strftime("%m/%d/%Y at %I:%M%p")
+    start.strftime("%m/%d/%Y at %I:%M%p") if start
   end
 
 

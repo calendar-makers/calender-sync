@@ -178,8 +178,10 @@ class Meetup
   end
 
   def build_date(data)
-    millis_per_second = 1000
-    Time.at(data / millis_per_second).to_datetime
+    if data
+      millis_per_second = 1000
+      Time.at(data / millis_per_second).to_datetime
+    end
   end
 
   def build_duration(data)

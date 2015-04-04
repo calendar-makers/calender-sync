@@ -68,6 +68,31 @@ events = <<-JSON
         "lat":""}}
 JSON
 
+third_party_event = <<-JSON
+{"utc_offset":-25200000,"venue":{"country":"us","city":"San Francisco, 94108","address_1":"1111 California St. ","name":"The Masonic ","lon":-122.412956,"id":22529952,"state":"CA","lat":37.791183,"repinned":false},"headcount":0,"visibility":"public","waitlist_count":0,"created":1424581842000,"rating":{"count":0,"average":0},"maybe_rsvp_count":0,"description":"<p>Great band, cheap ticket price, what's not to like?<br/><a href=\"http://concerts.livenation.com/event/1C004D84AF7B433A" class="linkified">http://concerts.livenation.com/event/1C004D84AF7B433A</a></p>","event_url":"http://www.meetup.com/LiveMusicSF/events/220680184/","yes_rsvp_count":22,"name":"Walk the Moon","id":"220680184","time":1426384800000,"updated":1426396186000,"group":{"join_mode":"open","created":1270427879000,"name":"Live Music San Francisco","group_lon":-122.41999816894531,"id":1625447,"urlname":"LiveMusicSF","group_lat":37.75,"who":"Music Lovers"},"status":"past"}
+JSON
+
+third_party_events = <<-JSON
+
+JSON
+
+
+unauthorized = <<-JSON
+{"details"=>"API requests must be key-signed, oauth-signed, or accompanied by a key: http://www.meetup.com/meetup_api/docs/#authentication", "code"=>"not_authorized", "problem"=>"You are not authorized to make that request"}, @response=#<Net::HTTPUnauthorized 401 Unauthorized readbody=true>, @headers={"server"=>["cloudflare-nginx"], "date"=>["Sat, 04 Apr 2015 03:04:21 GMT"], "content-type"=>["application/json;charset=utf-8"], "transfer-encoding"=>["chunked"], "connection"=>["close"], "set-cookie"=>["__cfduid=dd6f0cc3cd9301dd1ef6091310b7edec01428116660; expires=Sun, 03-Apr-16 03:04:20 GMT; path=/; domain=.meetup.com; HttpOnly"], "x-meetup-server"=>["api17.int.meetup.com"], "x-meetup-request-id"=>["a1a41939-c470-4c57-a637-11a63a03ef93"], "www-authenticate"=>["OAuth realm=\"https://api.meetup.com/\""], "vary"=>["Accept-Encoding,User-Agent"], "cf-ray"=>["1d19c908a55d0d73-SJC"]}
+JSON
+
+error = <<-JSON
+{"details":"Perhaps you're missing a required parameter. You can find full documentation of the api here: http://www.meetup.com/meetup_api/docs/","code":"bad_request","problem":"The API request is malformed"}
+JSON
+
+not_found = <<-JSON
+{"details":"The resource you have requested can not be found","code":"not_found","problem":"Not Found"}
+mike@imperium:~/Documents/calendar-sync$
+
+JSON
+
 
 FakeWeb.allow_net_connect = false
 FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_id=8870202||group_urlname=nature-in-the-city)}, :body => events, :content_type => 'application/json')
+FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events\?(?:event_id=)}, :body => third_party_event, :content_type => 'application/json')
+FakeWeb.register_uri(:get, %r{https://api\.meetup\.com/2/events.*(?:group_urlname=(?!nature\-in\-the\-city).*$)}, :body => third_party_events, :content_type => 'application/json')
