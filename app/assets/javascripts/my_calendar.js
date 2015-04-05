@@ -23,7 +23,7 @@ $(document).ready(function() {
     
   });
 
-  go_to_date(date);
+  // go_to_date(date);
 
   console.log("hello world");
   $.getJSON('events.json', function(data){
