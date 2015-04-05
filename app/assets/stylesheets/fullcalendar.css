@@ -48,7 +48,6 @@ body .fc { /* extra precedence to overcome jqui */
 
 .fc-unthemed .fc-today {
 	background: #FFF0E6;
-
 }
 
 .fc-highlight { /* when user is selecting cells */
@@ -622,6 +621,7 @@ be a descendant of the grid when it is being dragged.
 
 .fc-day-grid-event .fc-time {
 	font-weight: normal;
+}
 
 .fc-day-grid-event .fc-resizer { /* enlarge the default hit area */
 	left: -3px;
