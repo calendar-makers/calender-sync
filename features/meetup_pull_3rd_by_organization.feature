@@ -4,7 +4,7 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
   So that I can support other 3rd-party organizations with similar interests to my own
   I want to be able to collect their Meetup events and display them on my calendar
 
-  Background: 3rd-party Events have already been created on Meetup
+  Background: No 3rd-party events have ever been pulled on the calendar before
 
     Given the following events exist on Meetup:
       |                          name                                   |    organization          |   group_urlname   |   event_id  |
@@ -21,21 +21,22 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
     Given I fill in the "Group Name" field with "LiveMusicSF"
     And I click on the "Search" button
     Then I should be on the "third_party" page
-    And I should see the list "#matched_events" containing: "'Wisps & Willows', 'The Kilbanes, and Dara Ackerman at Viracocha! '"
-    And I should see the message "Walk the Moon"
+    And I should see the list "#matched_events" containing: "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ' 'Walk the Moon'"
 
   Scenario: successfully pull events
     Given I searched events by group_urlname: "LiveMusicSF"
     And I check "Select" for "event220680184, event220804867"
     And I click on the "Add Events" button
     Then I should be on the "Calendar" page
+    And the Meetup events "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ' 'Walk the Moon'" should exist
     And I should see the message "Successfully added: Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! , Walk the Moon"
 
-  Scenario: fail to pull an event
+  Scenario: fail to pull events
     Given I searched events by group_urlname: "LiveMusicSF"
-    And I check "Select" for "event220680184"
-    And I attempt to click on the "Add Events" button
+    And I check "Select" for "event220680184, event220804867"
+    And I click on the "Add Events" button
     Then I should be on the "Calendar" page
+    And the Meetup events "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ' 'Walk the Moon'" should not exist
     And I should see the message "Could not add event. Please retry."
 
   Scenario: attempt to pull no selected events
@@ -43,6 +44,27 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
     And I attempt to click on the "Add Events" button
     Then I should be on the "third_party" page
     And I should see the message "You must select at least one event. Please retry."
+
+  Scenario: re-pull unchanged events
+    Given I already pulled by group_urlname: "220680184"
+    And I searched events by group_urlname: "LiveMusicSF"
+    And I check "Select" for "event220680184, event220804867"
+    And I click on the "Add Events" button
+    Then I should be on the "Calendar" page
+    And the Meetup events "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ' 'Walk the Moon'" should exist
+    And I should see the message "These events are already in the Calendar, and are up to date."
+
+  Scenario: successfully pull updated events
+    Given I already pulled by group_urlname: "220680184"
+    And the Meetup event Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! is renamed to Wisps
+    And I searched events by group_urlname: "LiveMusicSF"
+    And I check "Select" for "event220680184, event220804867"
+    And I click on the "Add Events" button
+    Then I should be on the "Calendar" page
+    And the Meetup event "Wisps" should exist
+    And the Meetup event "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! '" should not exist
+    And I should see the message "Successfully added: Wisps"
+
 
 
 

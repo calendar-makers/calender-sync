@@ -14,13 +14,13 @@ class EventsController < ActionController::Base
       # NOTE ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE.
       # That is OK, given that is happens only during testing
       # because in production, no event will be only local
-      flash[:notice] = 'Could not merge RSVP list for this event.'
+      flash[:notice] = 'Could not merge the RSVP list for this event.'
     elsif new_guests.empty?
       flash[:notice] = "The RSVP list is synched with Meetup. #{@event.generate_participants_message}."
     else
       flash[:notice] = 'The RSVP list for this event has been updated.' \
         " #{new_guests.join(', ')} #{(new_guests.size > 1 ? "have" : "has")} joined." \
-        " #{@event.generate_participants_message}"
+        " #{@event.generate_participants_message}."
     end
   end
 
@@ -50,12 +50,14 @@ class EventsController < ActionController::Base
   end
 
   def self.display_message(events)
-    if events.blank?
+    if events.nil?
       "Could not add event. Please retry."
+    elsif events.empty?
+      "These events are already in the Calendar, and are up to date."
     elsif events.size > 0
       names = []
       events.each {|event| names << event[:name]}
-      "Successfully added: #{names.join(', ')}"
+      "Successfully added: #{names.join(', ')}."
     end
   end
 
@@ -91,10 +93,6 @@ class EventsController < ActionController::Base
       redirect_to new_event_path
       return
     end
-
-    # meetup push support
-    # meetup = Meetup.new
-    # meetup.push_event(event_params) # DOES NOT WORK, no param validation atm
 
     @event = Event.create!(event_params)
     params[:event] = @event

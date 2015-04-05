@@ -65,7 +65,7 @@ class Event < ActiveRecord::Base
         if stored_event.nil?
           event.save!
         elsif stored_event.is_updated?(event[:updated])
-          stored_event.update_attributes!(event.attributes)
+          stored_event.update(event)
         else # already stored and unchanged since
           next
         end
@@ -75,6 +75,12 @@ class Event < ActiveRecord::Base
 
       events_bin
     end
+  end
+
+  def update(new_event)
+    new_pairs = new_event.attributes
+    modified_pairs = new_pairs.select {|key, value| value && value != self[key]}
+    update_attributes(modified_pairs)
   end
 
 
@@ -89,7 +95,6 @@ class Event < ActiveRecord::Base
 
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
-
     if !rsvps.blank?
       new_guest_names = []
       rsvps.each do |rsvp|

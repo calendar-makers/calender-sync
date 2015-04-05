@@ -4,61 +4,42 @@ Feature: automatically pull rsvp list from Meetup and merge to rsvp list in the 
   So that I can view the RSVP of an event in one place
   I want to see a merged RSVP list on my website
 
-  Background: A 3rd party event exists and it is successfully pulled to the calendar. Both sides have their respective RSVPs
+  Background: The calendar has never pulled Meetup events before:
 
-    # SHOULD WE LOGIN TO EITHER OR BOTH?
-    #Given I have logged in as an admin on the app
-    Given I have logged in as an admin on Meetup
-    # NEED TO GET A REALISTIC USER ID
-    And the following events exist on Meetup:
-      |id     | name             | organization       | description                | start               | location            |
-      |123456 | Gardening        | Nature in the City | Cultivating some things    | March 19 2015 16:30 | The old Town Hall   |
-    And the "meetup" event with id "123456" has the following RSVP list:
-      | name              | email              |
-      | Ben Franklin      | b.f@gmail.com      |
-      | George Obama      | g.o@gmail.com      |
-      | Chester Copperpot | c.c@gmail.com      |
-      | Pepper Pot        | p.p@gmail.com      |
-    ####  CONSIDERING USING NAMES INSTEAD OF IDs FOR THE CALENDAR... FOR THE MOMENT AT LEAST.
-    And I pull the meetup event with id: "123456"
-    And the "calendar" event with id "123456" has the following RSVP list:
-      | name              | email              |
-      | Antonio Banderas  | a.b@gmail.com      |
-      | Bruce Willis      | b.w@gmail.com      |
+    Given the following events exist on Meetup:
+      |                 name                    |    organization    |   event_id   |
+      | Market Street Prototyping Festival      | Nature in the city | 219648262    |
+      | Nerds on Safari: Market Street          | Nature in the city | 220706208    |
+      | Volunteer at the Adah Bakalinsky Steps! | Nature in the city | 214161012    |
+
+    And the "meetup" event "Market Street Prototyping Festival" has the following RSVP list:
+      | name              | invited guests |
+      | Amber Hasselbring |     0          |
+      | Angela Lau        |     1          |
+      | Laura             |     0          |
+
+    And I am on the calendar page
 
   Scenario: successfully pull the RSVP for an event
-     ###  AGAIN CONSIDER USING NAMES INSTEAD OF IDs
-    Given I go to the "details" page for event id: "123456"
-    Then I should see the following RSVP list:
-      | name              | email              |
-      | Ben Franklin      | b.f@gmail.com      |
-      | George Obama      | g.o@gmail.com      |
-      | Chester Copperpot | c.c@gmail.com      |
-      | Pepper Pot        | p.p@gmail.com      |
-      | Antonio Banderas  | a.b@gmail.com      |
-      | Bruce Willis      | b.w@gmail.com      |
-
-    And I should see the message "The RSVP list for this event has been updated: Ben Franklin, George Obama, Chester Copperpot, Pepper Pot, Antonio Banderas, Bruce Willis have joined"
+    Given I go to the "details" page for event: "Market Street Prototyping Festival"
+    Then I should see the message "The RSVP list for this event has been updated. Angela Lau, Amber Hasselbring, Laura have joined. The total number of participants, including invited guests, so far is: 4."
 
   Scenario: fail to pull the RSVP for an event
-     ###  AGAIN CONSIDER USING NAMES INSTEAD OF IDs
-    Given I go to the "details" page for event id: "123456"
-    Then I should see the following RSVP list:
-      | name              | email              |
-      | Ben Franklin      | b.f@gmail.com      |
-      | George Obama      | g.o@gmail.com      |
-      | Chester Copperpot | c.c@gmail.com      |
-      | Pepper Pot        | p.p@gmail.com      |
-    And I should not see the following RSVP list:
-      | name              | email              |
-      | Ben Franklin      | b.f@gmail.com      |
-      | George Obama      | g.o@gmail.com      |
-      | Chester Copperpot | c.c@gmail.com      |
-      | Pepper Pot        | p.p@gmail.com      |
-      | Antonio Banderas  | a.b@gmail.com      |
-      | Bruce Willis      | b.w@gmail.com      |
+    Given I go to the "details" page for event: "Market Street Prototyping Festival"
+    Then I should see the message "Could not merge the RSVP list for this event."
 
-    And I should see the message "Could not merge RSVP lists for this event"
+  Scenario: re-pull the RSVP for an event
+    Given I already pulled the RSVP list for the event: "Market Street Prototyping Festival"
+    And I go to the "details" page for event: "Market Street Prototyping Festival"
+    Then I should see the message "The RSVP list is synched with Meetup. The total number of participants, including invited guests, so far is: 4."
+
+  Scenario: re-pull the updated RSVP for an event
+    Given I already pulled the RSVP list for the event: "Market Street Prototyping Festival"
+    And Laura updates her RSVP by increasing her guest count to 4
+    And Paul responds yes to the RSVP and sets his guest count to 3
+    And I go to the "details" page for event: "Market Street Prototyping Festival"
+    Then I should see the message "The RSVP list for this event has been updated. Laura , Paul have joined. The total number of participants, including invited guests, so far is: 11."
+
 
 
 

@@ -1,5 +1,3 @@
-require 'httparty'
-
 class Meetup
 
   include HTTParty
