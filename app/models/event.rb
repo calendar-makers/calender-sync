@@ -1,6 +1,32 @@
 class Event < ActiveRecord::Base
+  has_many :registrations
   has_many :guests, through: :registrations
   has_many :registrations
+
+  has_attached_file :image, styles: {small: "150x100", medium: "300x200", large: "450,300" }, :url => "/assets/:id/:style/:basename.:extension", :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
+
+  #validates_attachment_presence :image
+  #validates_attachment_size :image, :less_than => 5.megabytes
+  #validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
+
+  do_not_validate_attachment_file_type :image
+
+  # scope :between, lambda {|start_time, end_time|
+  #   {:conditions => ["? < start < ?", Event.format_date(start_time), Event.format_date(end_time)] }
+  # }
+
+  def as_json(options = {})
+  {
+    :id => self.id,
+    :title => self.name,
+    :start => start.iso8601,
+    :url => Rails.application.routes.url_helpers.event_path(id)
+  }
+  end
+
+  # def self.scoped(options=nil)
+  #   options ? where(nil).apply_finder_options(options, true) : where(nil)
+  # end
 
   def self.check_if_fields_valid(arg1)
     result = {}

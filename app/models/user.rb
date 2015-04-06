@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
       self.save # remember to save changes to database!
     else
       # wat do if refresh fails? Try again? common case, refresh token already used
-      raise 'Unexpected error during refresh, #{data.code}'
+      raise 'Unexpected error during refresh'
     end
   end
 

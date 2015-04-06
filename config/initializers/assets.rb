@@ -14,4 +14,4 @@ Rails.application.config.assets.precompile += %w( jquery.min.js )
 Rails.application.config.assets.precompile += %w( moment.min.js )
 Rails.application.config.assets.precompile += %w( fullcalendar.js )
 Rails.application.config.assets.precompile += %w( application.css )
-
+Rails.application.config.assets.precompile += %w( my_calendar.js )

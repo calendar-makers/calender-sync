@@ -14,8 +14,4 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to '/', :notice => "Signed out!"
   end
-
-  def failure
-    redirect_to '/calendar', :notice => params[:message]
-  end
 end

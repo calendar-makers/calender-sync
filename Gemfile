@@ -55,10 +55,11 @@ group :development, :test do
   gem 'rspec-rails', '~>3.2.1'
   gem 'simplecov'
   gem 'rake'
+
+  gem 'codeclimate-test-reporter', require: nil
   gem 'reek'
   gem 'flog'
   gem 'flay'
-  gem 'vcr'
   gem 'fakeweb'
 end
 
@@ -68,3 +69,4 @@ end
 
 gem 'haml-rails'
 gem 'rubocop', :require => false
+gem 'paperclip'

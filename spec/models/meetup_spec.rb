@@ -4,9 +4,6 @@ describe Meetup do
   let(:meetup) {Meetup.new}
 
   describe '#build_date' do
-    #let(:date) {Time.utc(2000, 'jan', 1, 20, 15, 1)}
-    #let(:date_in_millis) {date.to_i * 1000}
-    # saturday april 11 2015 12am
     let(:date) {Time.gm(2015,4,11,0)}
     let(:date_in_millis) {1428735600000}
     let(:utc_offset) {-25200000}

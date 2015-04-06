@@ -1,15 +1,20 @@
 class EventsController < ActionController::Base
-
   def index
     @events = Event.all
     @message = flash[:notice]
+    @events = Event.between(params['start'], params['end']) if (params['start'] && params['end'])
+    respond_to do |format|
+      format.html
+      format.json { render :json => @events }
+    end
   end
 
   def show
+    @message = flash[:notice]
     @event = Event.find params[:id]
+    @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
 
     new_guests = @event.merge_meetup_rsvps
-
     if new_guests.nil?
       # NOTE ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE.
       # That is OK, given that is happens only during testing
@@ -61,7 +66,6 @@ class EventsController < ActionController::Base
     end
   end
 
-
   def self.get_requested_ids(data)
     data.keys.select {|k| k =~ /^event.+$/}
   end
@@ -84,6 +88,7 @@ class EventsController < ActionController::Base
       end
     end
     @message = @message[0..@message.length-3]
+    form_validation_msg
   end
 
   def create
@@ -97,7 +102,7 @@ class EventsController < ActionController::Base
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
-    redirect_to events_path
+    redirect_to calendar_path
   end
 
   def edit
@@ -110,13 +115,8 @@ class EventsController < ActionController::Base
       end
     end
     @message = @message[0..@message.length-3]
-
-    #begin
+    form_validation_msg
     @event = Event.find params[:id]
-    #rescue ActiveRecord::RecordNotFound
-    #  flash[:notice] = "404: This is not the event you are looking for."
-    #  redirect_to events_path
-    #end
   end
 
   def update
@@ -129,22 +129,35 @@ class EventsController < ActionController::Base
     end
     @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    redirect_to event_path(@event)
+    redirect_to calendar_path
   end
 
   def destroy
     @event = Event.find params[:id]
     @event.destroy
     flash[:notice] = "\"#{@event.name}\" was successfully removed."
-    redirect_to events_path
+    redirect_to calendar_path
   end
 
   private
 
-  #Never trust anything from the internet
   def event_params
     params.require(:event).permit(:name, :organization,
                                   :start, :location,
-                                  :description)
+                                  :description, :image)
+  end
+
+  def form_validation_msg
+    if flash[:notice] == nil
+      @message = ""
+    elsif !flash[:notice].is_a?(Array)
+      @message = flash[:notice]
+    else
+      @message = "Please fill in the following fields before submitting: "
+      flash[:notice].each do |key|
+        @message += key + ", "
+      end
+    end
+    @message = @message[0..@message.length-3]
   end
 end
