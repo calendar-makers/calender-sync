@@ -448,8 +448,6 @@ FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 ########################################
 
 
-
-
 # meetup_pull.feature
 #########################################
 Before('@meetup_pull') do

@@ -53,7 +53,8 @@ class Event < ActiveRecord::Base
     regis = self.registrations
     sum = 0
     regis.each do |reg|
-      sum += 1 + reg.invited_guests
+      guest_count = reg.invited_guests
+      sum += 1 + (guest_count ? guest_count : 0 )
     end
     sum
   end

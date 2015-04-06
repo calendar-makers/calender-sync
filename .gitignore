@@ -19,3 +19,8 @@
 !/log/.keep
 /tmp
 */.DS_Store
+/.idea
+.idea
+coverage
+/coverage
+

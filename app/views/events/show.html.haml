@@ -3,6 +3,9 @@
 
 %h1 Details about #{@event.name}
 
+- if message = flash[:notice]
+  %h3= message
+
 %ul#details
   %li#name
     Name:

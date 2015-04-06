@@ -1,4 +1,3 @@
-require_relative 'helper_steps'
 require 'httparty'
 require 'cucumber/rspec/doubles'
 
