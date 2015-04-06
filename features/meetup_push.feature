@@ -6,7 +6,7 @@ Feature: as an admin, create events on the website and push to meetup
 
   Background: create an event on local calendar
     Given I am on the "Create" page
-    And I have logged in as an admin on Meetup
+    And I have logged in as an admin on Meetu
     And I fill in the "Event Name" field with "Nature Walk"
     And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
     And I select "3/19/2015, 4:30pm" as the date and time

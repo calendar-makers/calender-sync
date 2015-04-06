@@ -65,7 +65,7 @@ class Event < ActiveRecord::Base
         if stored_event.nil?
           event.save!
         elsif stored_event.is_updated?(event[:updated])
-          stored_event.update(event)
+          stored_event.apply_update(event)
         else # already stored and unchanged since
           next
         end
@@ -77,12 +77,11 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def update(new_event)
+  def apply_update(new_event)
     new_pairs = new_event.attributes
     modified_pairs = new_pairs.select {|key, value| value && value != self[key]}
     update_attributes(modified_pairs)
   end
-
 
   # Gets meetup rsvps corresponding to a given event id
   # Non-nil returned output is always valid
@@ -91,7 +90,6 @@ class Event < ActiveRecord::Base
     meetup = Meetup.new
     meetup.pull_rsvps(meetup_id)
   end
-
 
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
@@ -120,9 +118,9 @@ class Event < ActiveRecord::Base
     end
   end
 
+
   def format_date
     start.strftime("%m/%d/%Y at %I:%M%p") if start
   end
-
 
 end

@@ -118,9 +118,9 @@ class Meetup
        ##############################  READ COMMENTS ON TOP OF BUILD LOCATION TO UNDERSTAND THE REDUNDANCY
        location: build_location(data),
        ##############################
-       start: build_date(data['time']),
+       start: build_date(data['time'], data['utc_offset']),
        duration: build_duration(data),
-       updated: build_date(data['updated']),
+       updated: build_date(data['updated'], data['utc_offset']),
        url: data['event_url'],
        how_to_find_us: data['how_to_find_us'],
        status: data['status']}.merge(build_venue(data))
@@ -175,10 +175,11 @@ class Meetup
     venue
   end
 
-  def build_date(data)
-    if data
+  def build_date(time, utc_offset)
+    if time
+      (time = time + utc_offset) if utc_offset
       millis_per_second = 1000
-      Time.at(data / millis_per_second).to_datetime
+      Time.at(time / millis_per_second).to_datetime
     end
   end
 
@@ -213,7 +214,7 @@ class Meetup
      meetup_id: data['member']['member_id'],
      meetup_name: data['member']['name'],
      invited_guests: data['guests'],
-     updated: build_date(data['mtime'])}
+     updated: build_date(data['mtime'], data['utc_offset'])}
   end
 
   def options_string

@@ -1,7 +1,6 @@
 require_relative 'helper_steps'
 require 'httparty'
 require 'cucumber/rspec/doubles'
-#require Rails.root.join("features/support/stored_data")
 
 # NOTE if names contain commas the I separated them with single quotation marks
 And /^the Meetup events? "(.*)" should (not )?exist$/ do |event_names, negative|
@@ -17,6 +16,10 @@ And /^the Meetup events? "(.*)" should (not )?exist$/ do |event_names, negative|
       expect(Event.find_by_name(name)).not_to be_nil
     end
   end
+end
+
+Then /^the "(.*?)" events? "(.*?)" should (not )?exist$/ do |platform, names, negative|
+  pending # express the regexp above with the code you wish you had
 end
 
 # NOTE This works but I'm currently using the fakeweb array of responses

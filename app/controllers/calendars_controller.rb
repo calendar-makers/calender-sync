@@ -8,11 +8,11 @@ class CalendarsController < ApplicationController
       events = Event.make_events_local(Event.get_remote_events)
 
       if events.nil?
-        flash[:notice] = "Could not pull events from Meetup"
+        flash.now.notice = "Could not pull events from Meetup"
       elsif events.empty?
-        flash[:notice] = "The Calendar and Meetup are synched"
+        flash.now.notice = "The Calendar and Meetup are synched"
       else
-        flash[:notice] = 'Successfully pulled events: ' + CalendarsController.get_event_info(events) + ' from Meetup'
+        flash.now.notice = 'Successfully pulled events: ' + CalendarsController.get_event_info(events) + ' from Meetup'
       end
     end
   end

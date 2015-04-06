@@ -101,62 +101,70 @@ RSpec.describe Event, type: :model do
   end
 
   describe "::make_events_local" do
-    context "with new events" do
-      let(:event) {[Event.new]}
+    let(:event) {[Event.new]}
 
+    context "with new events" do
       it "saves the event in the db" do
         expect_any_instance_of(Event).to receive(:save!)
         Event.make_events_local(event)
       end
+    end
 
-      it "updates an already stored event" do
+    context "with an updated event" do
+      it "updates an already stored event with the fields of the input event" do
         event[0][:meetup_id] = '123'
         event[0][:updated] = Time.now + 200000
-        old_event = Event.new(updated: Time.now)
+        old_event = Event.new(updated: Time.now, meetup_id: '123')
 
-        allow(Event).to receive(:find_by_meetup_id).and_return(old_event)
-        expect(old_event).to receive(:update_attributes!)
+        allow(Event).to receive(:find_by_meetup_id).with('123').and_return(old_event)
+        expect(old_event).to receive(:apply_update)
         Event.make_events_local(event)
       end
+    end
 
+    context "with an old event" do
       it "does nothing for an old unchanged event" do
         event[0][:meetup_id] = '123'
         event[0][:updated] = Time.now
-        stored_event = Event.new(updated: Time.now)
+        stored_event = Event.new(updated: Time.now, meetup_id: '123')
 
-        allow(Event).to receive(:find_by_meetup_id).and_return(stored_event)
-        expect(stored_event).not_to receive(:update_attributes)
+        allow(Event).to receive(:find_by_meetup_id).with('123').and_return(stored_event)
+        expect(stored_event).not_to receive(:apply_update)
         Event.make_events_local(event)
       end
     end
   end
 
   describe "#merge_meetup_rsvps" do
-    context "with new events" do
-      let(:event) {Event.new(id: 1)}
-      let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912,
-                    :meetup_name=>"Amber Hasselbring", :invited_guests=>0,
-                    :updated=> Time.now}]}
-      let(:guest) {Guest.new(id: 1, first_name: 'chester', last_name: 'copperpot')}
+    let(:event) {Event.new(id: 1)}
+    let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912,
+                  :meetup_name=>"Amber Hasselbring", :invited_guests=>0,
+                  :updated=> Time.now}]}
+    let(:guest) {Guest.new(id: 1, first_name: 'chester', last_name: 'copperpot')}
 
       before(:each) do
         allow_any_instance_of(Event).to receive(:get_remote_rsvps).and_return(rsvp)
         allow(Guest).to receive(:find_guest_by_meetup_rsvp).and_return(guest)
       end
 
+    context "with new events" do
       it "saves the rsvp in the db" do
         allow(Registration).to receive(:find_by).and_return(nil)
         expect(Registration).to receive(:create!)
         event.merge_meetup_rsvps
       end
+    end
 
+    context "with an updated event" do
       it "updates an already stored event" do
         old_rsvp = Registration.new(updated: Time.now - 30000)
         allow(Registration).to receive(:find_by).and_return(old_rsvp)
         expect(old_rsvp).to receive(:update_attributes!)
         event.merge_meetup_rsvps
       end
+    end
 
+    context "with an old unchanged event" do
       it "does nothing for an old unchanged event" do
         stored_rsvp = Registration.new(updated: Time.now)
         allow(Registration).to receive(:find_by).and_return(stored_rsvp)
@@ -167,4 +175,26 @@ RSpec.describe Event, type: :model do
   end
 
 
+  describe "#apply_update" do
+    let(:event) {Event.new(name: 'walking')}
+
+    context "with updated event" do
+      let(:other_event) {Event.new(name: 'sitting')}
+
+      it "computes the updated key value pairs and updates self" do
+        expect(event).to receive(:update_attributes).with('name' => 'sitting')
+        event.apply_update(other_event)
+      end
+    end
+
+    context "with unchanged event" do
+      let(:other_event) {Event.new(name: 'walking')}
+
+      it "finds no updated key value pairs and it does not update self" do
+        expect(event).to receive(:update_attributes).with({})
+        event.apply_update(other_event)
+      end
+    end
+
+  end
 end

@@ -1,3 +1,4 @@
+@meetup_pull
 Feature: automatically pull existing events from Meetup onto the calendar
 
   As a user of the website
@@ -13,19 +14,19 @@ Feature: automatically pull existing events from Meetup onto the calendar
       | Nerds on Safari: Market Street          | Nature in the city | 220706208    |
       | Volunteer at the Adah Bakalinsky Steps! | Nature in the city | 214161012    |
 
-  @pull
+  @successful_pull_meetup
   Scenario: perform a successful pull from Meetup
     Given I am on the "Calendar" page
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should exist
     And I should see the message "Successfully pulled events: Market Street Prototyping Festival, Nerds on Safari: Market Street, Volunteer at the Adah Bakalinsky Steps! from Meetup"
 
-  @fail
+  @failed_pull_meetup
   Scenario: failed pull from Meetup
     Given I am on the "Calendar" page
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should not exist
     And I should see the message "Could not pull events from Meetup"
 
-  @mod_pull
+  @repeated_changed_pull_meetup
   Scenario: perform a successful pull of updated events from Meetup
     Given I already pulled from Meetup
     And the meetup event "Market Street Prototyping Festival" is updated to the name "Prototyping Festival"
@@ -34,7 +35,7 @@ Feature: automatically pull existing events from Meetup onto the calendar
     And the Meetup events "Market Street Prototyping Festival" should not exist
     And I should see the message "Successfully pulled events: Prototyping Festival from Meetup"
 
-  @pull
+  @repeated_unchanged_pull_meetup
   Scenario: perform a successful pull of unchanged events from Meetup
     Given I already pulled from Meetup
     And I am on the "Calendar" page

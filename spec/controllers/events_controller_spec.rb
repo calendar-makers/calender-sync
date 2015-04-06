@@ -112,7 +112,7 @@ describe EventsController do
         get :show, id: event.id
         expect(flash[:notice]).to eq("The RSVP list for this event has been updated." +
                  " Amber Hasselbring has joined. The total number of participants," +
-                 " including invited guests, so far is: 1")
+                 " including invited guests, so far is: 1.")
       end
 
     end
@@ -132,7 +132,7 @@ describe EventsController do
       it 'should display a failure message' do
         allow(event).to receive(:merge_meetup_rsvps).and_return(nil)
         get :show, id: event.id
-        expect(flash[:notice]).to eq('Could not merge RSVP list for this event.')
+        expect(flash[:notice]).to eq('Could not merge the RSVP list for this event.')
       end
     end
   end
@@ -240,13 +240,23 @@ describe EventsController do
 
       it "returns a message with the added event names" do
         result = EventsController.display_message(events)
-        expect(result).to eq("Successfully added: gardening, swimming")
+        expect(result).to eq("Successfully added: gardening, swimming.")
       end
     end
 
-    context "with no events" do
+    context "with zero events" do
+      let(:events) {[]}
+
+      it "returns a message stating that the RSVP for the event is up to date with Meetup" do
+        result = EventsController.display_message(events)
+        expect(result).to eq("These events are already in the Calendar, and are up to date.")
+      end
+    end
+
+    context "with nil" do
+      let(:events) {}
       it "returns a failure message" do
-        result = EventsController.display_message([])
+        result = EventsController.display_message(events)
         expect(result).to eq("Could not add event. Please retry.")
       end
     end
