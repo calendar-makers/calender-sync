@@ -58,7 +58,7 @@ h2 {
 #panel {
     width:24%; 
     float:right; 
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
 }
 table#movies {
     margin: 10px;

@@ -13,7 +13,7 @@
     = csrf_meta_tags
 
   %body{:style => "width:75%; margin-left:12.5%;"}
-    %h1.title Nature in the City
+    %h1.title Nature in the City [header placeholder]
     %main
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
@@ -22,3 +22,6 @@
 
       = yield
       = javascript_include_tag 'my_calendar'
+    
+    </br></br></br></br></br>
+    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"} [footer placeholder]
