@@ -29,7 +29,7 @@ body .fc { /* extra precedence to overcome jqui */
 .fc-unthemed .fc-divider,
 .fc-unthemed .fc-row,
 .fc-unthemed .fc-popover {
-	border-color: #ddd;
+	border-color: #ccc;
 	font-weight: 200;
 }
 
@@ -808,11 +808,11 @@ a.fc-more:hover {
 }
 
 .fc-other-month {
-  background: #fbfbfb;
+  background: #f9f9f9;
 }
 
 .fc-day-number.fc-other-month {
-	opacity: 0.3;
+	opacity: 0.4;
 	filter: alpha(opacity=30); /* for IE */
 	/* opacity with small font can sometimes look too faded
 	   might want to set the 'color' property instead

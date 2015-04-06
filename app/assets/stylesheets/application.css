@@ -16,16 +16,11 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: White;
-    color: DarkSlateGrey;
     font-family: "Gotham", Helvetica, sans-serif;
+    color: #7f7f7f;
     font-size: 11pt;
 /*    font-family: Tahoma, Verdana, sans-serif;
     font-size: 10pt;*/
-}
-div#main {
-    margin: 0;
-    padding: 0 20px 20px;
 }
 div#new{
     margin: 0;
@@ -33,26 +28,37 @@ div#new{
 }
 a {
     background: transparent;
-    color: maroon;
+    color: #6f6f6f;
     text-decoration: underline;
-/*    font-weight: bold;*/
 }
 h1 {
-    color: maroon;
+    color: #9f9f9f;
     font-size: 150%;
-    font-style: italic;
     display: block;
     width: 100%;
-    border-bottom: 1px solid DarkSlateGrey;
+    font-style: normal;
+    font-weight: 500;
 }
 h1.title {
     margin: 0 0 1em;
     padding: 10px;
-    background-color: orange;
-    color: white;
-    border-bottom: 4px solid gold;
+    color: #9f9f9f;
+    border-bottom: 4px solid #ff9900;
     font-size: 2em;
     font-style: normal;
+    font-weight: 500;
+}
+h2 {
+    font-weight: normal;
+}
+#calendar {
+    width:74%; 
+    float:left; 
+}
+#panel {
+    width:24%; 
+    float:right; 
+    border: 1px solid #ccc;
 }
 table#movies {
     margin: 10px;
@@ -80,6 +86,4 @@ table#movies th.hilite {
 form label {
     display: block;
     line-height: 25px;
-   /* font-weight: bold;*/
-    color: maroon;
 }

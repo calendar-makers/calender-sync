@@ -2,6 +2,8 @@
 %html
   %head
     %title Calendar
+    :javascript
+      var date = "#{@date}"
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
@@ -10,23 +12,8 @@
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
 
-    :javascript
-
-      $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-          dayClick: function() {
-            alert('a day has been clicked!');
-          }
-        })
-        $('#my-button').click(function() {
-          var moment = $('#calendar').fullCalendar('getDate');
-          alert("The current date of the calendar is " + moment.format());
-        })
-      });
-
-  %body
-    %h1.title Calendar
+  %body{:style => "width:75%; margin-left:12.5%;"}
+    %h1.title Nature in the City
     %main
       - if flash[:notice]
         %h3#notice.message= flash[:notice]

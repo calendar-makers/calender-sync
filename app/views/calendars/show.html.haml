@@ -5,9 +5,16 @@
 - else
   = link_to "login to Meetup", "/auth/meetup", id: "login"
 </br>
-%button#my-button push me
-</br>
 = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
+</br></br>
 
+%h1 Events Calendar
+</br>
 
-#calendar{:style => "width:70%; margin-left:15%;"}
+#wrap
+  #calendar
+  #div{:style => "width=2%;"}
+  #panel
+    %h2 Event Details
+    %p Click an event!
+  %div{:style => "clear:both;"}
