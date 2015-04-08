@@ -1,3 +1,4 @@
+@javascript
 Feature: Be able to create, edit, and delete events via a panel on the calendar page
 
   As an admin
