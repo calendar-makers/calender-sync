@@ -17167,3 +17167,149 @@ Processing by EventsController#show as HTML
   [1m[35mGuest Load (0.2ms)[0m  SELECT "guests".* FROM "guests" INNER JOIN "registrations" ON "guests"."id" = "registrations"."guest_id" WHERE "registrations"."event_id" = ? AND "guests"."is_anon" = 'f'  ORDER BY "guests"."first_name" ASC  [["event_id", 4]]
   Rendered events/show.html.haml (15.3ms)
 Completed 200 OK in 1244ms (Views: 17.5ms | ActiveRecord: 104.5ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:28:50 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x000000050264a8@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 33ms (ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:29:59 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:29:59 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x00000005bb3af0@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 23ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:30:00 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:30:00 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x00000005bb3af0@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:31:28 -0700
+
+ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
+  app/controllers/application_controller.rb:8:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/calendars_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (4.6ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (57.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (22.6ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (46.0ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:31:51 -0700
+
+ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
+  app/controllers/application_controller.rb:8:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/calendars_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.6ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (49.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (19.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (39.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:32:07 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:32:07 -0700
+
+ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
+  app/controllers/application_controller.rb:8:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/calendars_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.6ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (22.7ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (72.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (19.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (39.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:32:10 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:32:10 -0700
+
+ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
+  app/controllers/application_controller.rb:8:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/calendars_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (49.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (19.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (39.7ms)
