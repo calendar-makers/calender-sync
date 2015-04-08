@@ -15,6 +15,47 @@
   #calendar
   #div{:style => "width=2%;"}
   #panel
-    %h2 Event Details
-    %p Click an event! <i>(not yet functional)</i>
+    %h2{:style => "font-weight:200;"} Event Details
+    - unless @event
+      %p Click an event! <i>(not yet functional)</i>
+    - else
+      #image
+        <i>image resizing has to be done, maybe to resize along with page size?</i>
+        = # image_tag @event.image.url(:small)
+      </br>
+
+      #name
+        .left What
+        .right
+          = @event.name
+        %div{:style => "clear:both;"}
+
+      #date_time
+        .left When
+        .right 
+          = @when
+        %div{:style => "clear:both;"}
+
+      #location
+        .left Where
+        .right 
+          = @event.location
+          </br><i>map may be coming soon!</i>
+        %div{:style => "clear:both;"}
+        
+      #description
+        = @event.description
+
+      </br>
+      </br>
+
+      #rsvp
+        <i>rsvp under construction</i>
+        = # maybe we should put a link to an rsvp form page or popup...
+      </br>
+      </br>
+      - if current_user
+        = button_to 'Edit', event_path(@event), :method => :edit
+        = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
+
   %div{:style => "clear:both;"}
