@@ -144,3 +144,12 @@ Given /I already pulled by group_urlname: "(.*)"/ do |urlname|
   step %Q{I am on the "third_party" page}
 end
 
+## BUNDLE TOGETHER Under "the "Nature Walk" event should exist on both platforms "
+#And the "Calendar" event "Nature Walk" should not exist
+#And the "Meetup" event "Nature Walk" should not exist
+
+
+## BUNDLE TOGETHER UNDER  "Then the event "Market Street Prototyping Festival" should be renamed to "Festival" on "both" platforms
+#Then the "Calendar" event "Market Street Prototyping Festival" should be renamed to "Festival"
+#And the "Meetup" event "Market Street Prototyping Festival" should be renamed to "Festival"
+

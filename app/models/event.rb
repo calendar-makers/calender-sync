@@ -60,7 +60,7 @@ class Event < ActiveRecord::Base
   end
 
   def generate_participants_message
-    "The total number of participants, including invited guests, so far is:" +
+    'The total number of participants, including invited guests, so far is:' \
       " #{self.count_event_participants}"
   end
 
@@ -147,7 +147,7 @@ class Event < ActiveRecord::Base
 
 
   def format_date
-    start.strftime("%m/%d/%Y at %I:%M%p") if start
+    start.strftime('%m/%d/%Y at %I:%M%p') if start
   end
 
 end

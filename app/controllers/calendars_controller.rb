@@ -8,6 +8,10 @@ class CalendarsController < ApplicationController
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)
 
+      ## CHECK FOR DELETION and do if needed
+      # Pluck the list of meetup_ids from database and compare with list of meetup_ids in events
+      # The difference (literally subtraction) at this point (i.e. after creation of new ones... will be in need of deletion)
+
       if events.nil?
         flash.now.notice = "Could not pull events from Meetup"
       elsif events.empty?
