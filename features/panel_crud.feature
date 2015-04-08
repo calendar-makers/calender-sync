@@ -14,6 +14,11 @@ Background: Events have already been added to the database
 
   And I am on the calendar page
 
+Scenario: Show event details panel when I click an event
+  When I click on the "Nature Walk" event
+  Then I should see a panel with all the details about "Nature Walk"
+  And I should see the "Edit Event" link
+
 Scenario: Show the new event panel to create events
   When I click on the "new event" link
   Then I should see the "Create Event" panel
