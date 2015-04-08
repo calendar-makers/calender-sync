@@ -53,7 +53,8 @@ class Event < ActiveRecord::Base
     regis = self.registrations
     sum = 0
     regis.each do |reg|
-      sum += 1 + reg.invited_guests
+      guest_count = reg.invited_guests
+      sum += 1 + (guest_count ? guest_count : 0 )
     end
     sum
   end
@@ -84,14 +85,14 @@ class Event < ActiveRecord::Base
 
 
   def self.make_events_local(events)
-    if events
+    if !events.blank?
       events_bin = []
       events.each do |event|
         stored_event = Event.find_by_meetup_id(event[:meetup_id])
         if stored_event.nil?
           event.save!
         elsif stored_event.is_updated?(event[:updated])
-          stored_event.update_attributes!(event.attributes)
+          stored_event.apply_update(event)
         else # already stored and unchanged since
           next
         end
@@ -103,6 +104,11 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def apply_update(new_event)
+    new_pairs = new_event.attributes
+    modified_pairs = new_pairs.select {|key, value| value && value != self[key]}
+    update_attributes(modified_pairs)
+  end
 
   # Gets meetup rsvps corresponding to a given event id
   # Non-nil returned output is always valid
@@ -112,11 +118,9 @@ class Event < ActiveRecord::Base
     meetup.pull_rsvps(meetup_id)
   end
 
-
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
-
-    if rsvps
+    if !rsvps.blank?
       new_guest_names = []
       rsvps.each do |rsvp|
 
@@ -141,7 +145,9 @@ class Event < ActiveRecord::Base
     end
   end
 
+
   def format_date
-    start.strftime("%m/%d/%Y at %I:%M%p")
+    start.strftime("%m/%d/%Y at %I:%M%p") if start
   end
+
 end

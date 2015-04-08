@@ -16,6 +16,7 @@ module NavigationHelpers
     when /^Calendar$/ then calendar_path
     when /^Events Directory$/ then events_path
     when /^Create$/ then new_event_path
+    when /^third_party$/ then third_party_events_path
 
     when /^RSVP$/ then pending # Vincent and Mike need to replace 'pending'
     when /^Meetup Login$/ then pending # Vincent and Mike need to replace 'pending'

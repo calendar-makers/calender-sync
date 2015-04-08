@@ -4,11 +4,12 @@ describe Meetup do
   let(:meetup) {Meetup.new}
 
   describe '#build_date' do
-    let(:date) {Time.utc(2000, 'jan', 1, 20, 15, 1)}
-    let(:date_in_millis) {date.to_i * 1000}
+    let(:date) {Time.gm(2015,4,11,0)}
+    let(:date_in_millis) {1428735600000}
+    let(:utc_offset) {-25200000}
 
     it 'gets a time in milliseconds and returns a DateTime' do
-      expect(meetup.build_date(date_in_millis)).to eq(date)
+      expect(meetup.build_date(date_in_millis, utc_offset)).to eq(date)
     end
   end
 
