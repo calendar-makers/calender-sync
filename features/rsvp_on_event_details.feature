@@ -34,15 +34,19 @@ Background:
 Scenario: RSVP form, completed and submitted non-anonymously
   When I fill out and submit the RSVP form non-anonymously
   Then I should see a message confirming my submission
-  And I should see my information on the page
+  And I should see my first name on the page
 
 Scenario: RSVP form, completed and submitted anonymously
   When I fill out and submit the RSVP form anonymously
   Then I should see a message confirming my submission
-  And I should not see my information on the page
+  And I should not see my first name on the page
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the entire RSVP form
   And I press "Submit"
   Then I should see a failed submission message
-  And I should not see my information on the page
+  And I should not see my first name on the page
+
+Scenario: Fail submission if email already exists
+  When I fill out and submit the RSVP form with email "jsmith@site.com"
+  Then I should see a message saying that the email "jsmith@site.com" is already registered
