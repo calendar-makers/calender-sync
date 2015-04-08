@@ -5,16 +5,19 @@ class CalendarsController < ApplicationController
 
     @date = '2014-05-01'
 
+    # all for the panel...
+    #@event = Event.find(1);
+    #@when = @event.start.strftime("%a, %b %-d, %Y at %l:%M %P") + " to (infinity and beyond...)"
+
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)
 
       if events.nil?
-        flash[:notice] = "Could not pull events from Meetup"
+        flash.now.notice = "Could not pull events from Meetup"
       elsif events.empty?
-        flash[:notice] = "The Calendar and Meetup are synched"
+        flash.now.notice = "The Calendar and Meetup are synched"
       else
-        #flash[:notice] = ['Successfully pulled events: '] + CalendarsController.get_event_info(events)
-        flash[:notice] = 'Successfully pulled events: ' + CalendarsController.get_event_info(events)
+        flash.now.notice = 'Successfully pulled events: ' + CalendarsController.get_event_info(events) + ' from Meetup'
       end
     end
   end

@@ -10,17 +10,32 @@ Given(/^the following registrations exist:$/) do |registrations_table|
   end
 end
 
-Then(/^I should see attendees of "(.*)" listed alphabetically by last name$/) do |event_name|
+When(/^I fill out and submit the RSVP form with email "(.*)"$/) do |email|
+  fill_in('guest_first_name', :with => 'Jonathan')
+  fill_in('guest_last_name', :with => 'Smith')
+  fill_in('guest_phone', :with => '956-865-1475')
+  fill_in('guest_email', :with => email)
+  fill_in('guest_address', :with => '12 Place Blvd.')
+  choose('guest_is_anon_false')
+  click_button('Submit')
+end
+
+Then(/^I should see attendees of "(.*)" listed alphabetically by first name$/) do |event_name|
   event = Event.find_by_name(event_name)
-  ordered_non_anon_guests = event.guests.where(is_anon: false).order(:last_name)
+  ordered_non_anon_guests = event.guests.where(is_anon: false).order(:first_name)
+
   prev_guest = nil
   ordered_non_anon_guests.each do |guest|
     if (prev_guest != nil) && (prev_guest != '')
-      assert page.body.match(/<td>(.*)#{prev_guest.last_name}<\/td>(.*)<td>(.*)#{guest.last_name}<\/td>/m), "#{prev_guest} is not before #{guest}"
+      puts "prev_guest is: " + prev_guest.first_name
+      puts "guest is: " + guest.first_name
+      puts page.body.match(/<td>#{prev_guest.first_name}<\/td>(.*)<td>#{guest.first_name}<\/td>/m)
+      expect(page).to have_content(/#{prev_guest.first_name}(.*)#{guest.first_name}/)
     end
     prev_guest = guest
   end
 end
+
 
 Then(/^I should not see anonymous attendees of "(.*)"$/) do |event_name|
   event = Event.find_by_name(event_name)
@@ -56,11 +71,11 @@ Then(/^I should see a message confirming my submission$/) do
   step %{the page should have the text "You successfully registered for this event!"}
 end
 
-Then(/^I should( not)? see my information on the page$/) do |should_not|
+Then(/^I should( not)? see my first name on the page$/) do |should_not|
   if should_not
-    step %{the page should not have the text "Alexander Hamilton"}
+    step %{the page should not have the text "Alexander"}
   else
-    step %{the page should have the text "Alexander Hamilton"}
+    step %{the page should have the text "Alexander"}
   end
 end
 
@@ -83,4 +98,8 @@ Then(/^the page should( not)? have the text "(.*)"$/) do |should_not, text|
   else
     expect(page).to have_content(text)
   end
+end
+
+Then(/^I should see a message saying that the email "(.*)" is already registered$/) do |email|
+  step %{the page should have the text "#{email} is already registered for this event!"}
 end
