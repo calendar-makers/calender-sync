@@ -4,12 +4,14 @@ When(/^I upload an image$/) do
 end
 
 Then(/^I should see the picture "(.*)" for "(.*)"$/) do |image_name, event_name|
+  pending
   id_num = Event.find_by_name(event_name).id
   puts image_name
-  expect(page).to have_xpath("//img[@src=\"/public/assets/#{id_num}/medium/#{image_name}\"]")
+  expect(page).to have_xpath("//img[@src=\"/assets/#{id_num}/medium/#{image_name}/^.*$/\"]")
 end
 
 Then(/^I should not see any pictures for "(.*)"$/) do |event_name|
+  pending
   id_num = Event.find_by_name(event_name).id
   Dir.foreach("public/assets/#{id_num}/medium") do |item|
     next if item == '.' or item == '..'
