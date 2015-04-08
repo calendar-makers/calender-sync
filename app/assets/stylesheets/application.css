@@ -55,10 +55,35 @@ h2 {
     width:74%; 
     float:left; 
 }
+.space {
+    width:2%;
+}
 #panel {
     width:24%; 
     float:right; 
     /* border: 1px solid #ccc; */
+}
+#name, #date_time, #location {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+#location {
+    border-bottom: 1px solid #ccc;
+}
+#date_time {
+    background: #f9f9f9;
+}
+.left {
+    width: 19%;
+    float: left;
+    text-align: right;
+}
+.right {
+    width: 79%;
+    float: right;
+    text-align: left;
+    border-left: 1px solid #ccc;
 }
 table#movies {
     margin: 10px;
