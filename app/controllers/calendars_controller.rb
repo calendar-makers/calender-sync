@@ -5,6 +5,10 @@ class CalendarsController < ApplicationController
 
     @date = '2014-05-01'
 
+    # all for the panel...
+    @event = Event.find(1);
+    @when = @event.start.strftime("%a, %b %-d, %Y at %l:%M %P") + " to (infinity and beyond...)"
+
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)
 
