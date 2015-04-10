@@ -63,7 +63,7 @@
         = # maybe we should put a link to an rsvp form page or popup...
       </br>
       </br>
-      - if current_user
+      - if @current_user
         = button_to 'Edit', event_path(@event), :method => :edit
         = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 
