@@ -28,5 +28,5 @@ Scenario: Show the event editing panel
   But I should not see "Nature Walk" on "March 19" on the calendar
 
 Scenario: Delete an event
-  When delete the event "Green Bean Mixer"
+  When I delete the event "Green Bean Mixer"
   Then "Green Bean Mixer" should not be on the calendar
