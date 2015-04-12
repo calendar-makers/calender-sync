@@ -6,13 +6,16 @@ class GuestsController < ActionController::Base
       redirect_to event_path(event.id)
       return
     end
-    @guest = Guest.create!(guest_params)
-    params[:guest] = @guest
-    flash[:notice] = "You successfully registered for this event!"
 
-    registration = @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
-    @guest.save
-
+    @guest = Guest.find_by_email(guest_params[:email]) || Guest.create!(guest_params)
+    if @guest.events.include?(event)
+      flash[:notice] = "#{@guest.email} is already registered for this event!"
+    else
+      params[:guest] = @guest
+      flash[:notice] = "You successfully registered for this event!"
+      registration = @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
+      @guest.save
+    end
     redirect_to event_path(event.id)
   end
 

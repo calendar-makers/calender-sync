@@ -12,9 +12,9 @@ class EventsController < ActionController::Base
   def show
     @message = flash[:notice]
     @event = Event.find params[:id]
-    @non_anon_guests_by_last_name = @event.guests.order(:last_name).where(is_anon: false)
-
     new_guests = @event.merge_meetup_rsvps
+    @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+
     if new_guests.nil?
       # NOTE ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE.
       # That is OK, given that is happens only during testing

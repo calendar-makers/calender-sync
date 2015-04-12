@@ -41,9 +41,9 @@
       %th Email
       %th Address
   %tbody
-    - @non_anon_guests_by_last_name.each do |guest|
+    - @non_anon_guests_by_first_name.each do |guest|
       %tr
-        %td= guest.first_name + ' ' + guest.last_name
+        %td= guest.first_name
         %td= guest.phone
         %td= guest.email
         %td= guest.address

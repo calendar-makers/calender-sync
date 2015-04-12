@@ -1,9 +1,5 @@
 $(document).ready(function() {
   $('#calendar').fullCalendar({
-      // put your options and callbacks here
-    dayClick: function() {
-      alert('a day has been clicked!');
-    },
     
     events: function(start, end, timezone, callback){
       $.getJSON('events.json', function(data){
@@ -13,12 +9,12 @@ $(document).ready(function() {
       });
     },
 
-    eventColor: '#66CC00',
+    eventColor: '#62C400',
 
     header: {
-      left:   'today prev,next',
+      left:   'today',
       center: 'title',
-      right:  ''
+      right:  'prev,next'
     }
     
   });
@@ -30,11 +26,7 @@ $(document).ready(function() {
     console.log("I'm in the json call");
     console.log(data);
   });
-  
-  $('#my-button').click(function() {
-    var moment = $('#calendar').fullCalendar('getDate');
-    alert("The current date of the calendar is " + moment.format());
-  });
+
 });
 
 function go_to_date(date){

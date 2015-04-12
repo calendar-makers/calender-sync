@@ -4,14 +4,14 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore coverage
+# Ignore coverage, remember to remove for submission
 /coverage
+
+# Ignore tmp
+/tmp
 
 # Ignore bundler config.
 /.bundle
-
-/.DS_Store
-/app/.DS_Store
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -23,7 +23,4 @@
 /tmp
 /.idea
 */.DS_Store
-
-
-
-
+coverage
