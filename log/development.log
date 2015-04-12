@@ -17167,3 +17167,458 @@ Processing by EventsController#show as HTML
   [1m[35mGuest Load (0.2ms)[0m  SELECT "guests".* FROM "guests" INNER JOIN "registrations" ON "guests"."id" = "registrations"."guest_id" WHERE "registrations"."event_id" = ? AND "guests"."is_anon" = 'f'  ORDER BY "guests"."first_name" ASC  [["event_id", 4]]
   Rendered events/show.html.haml (15.3ms)
 Completed 200 OK in 1244ms (Views: 17.5ms | ActiveRecord: 104.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-11 22:22:38 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-11 22:22:38 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (7.3ms)
+Completed 200 OK in 1172ms (Views: 503.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/fullcalendar-11dcb3e31297df89995cf262fa1d7195.css?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/application-3a13ffd4b0518f825939e95547959773.css?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/fullcalendar-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/my_calendar-1c5c704d1c9cce959223d5516f5a633c.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/panel-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/assets/application-11f0c41bb825e7a12cd5c66289cef4a4.js?body=1" for 127.0.0.1 at 2015-04-11 22:22:39 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:22:40 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.1ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 95ms (Views: 93.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:22:40 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.7ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 118ms (Views: 117.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:22:40 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.9ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 80ms (Views: 78.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2015-04-11 22:23:53 -0700
+Processing by EventsController#new as HTML
+  Rendered events/_event_form.html.haml (14.1ms)
+  Rendered events/new.html.haml (22.3ms)
+Completed 200 OK in 30ms (Views: 29.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2015-04-11 22:23:57 -0700
+Processing by EventsController#new as HTML
+  Rendered events/_event_form.html.haml (4.5ms)
+  Rendered events/new.html.haml (9.5ms)
+Completed 200 OK in 14ms (Views: 12.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/third_party" for 127.0.0.1 at 2015-04-11 22:25:08 -0700
+Processing by EventsController#third_party as HTML
+  Rendered events/third_party.html.haml (5.0ms)
+Completed 200 OK in 17ms (Views: 16.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/third_party" for 127.0.0.1 at 2015-04-11 22:25:19 -0700
+Processing by EventsController#third_party as HTML
+  Rendered events/third_party.html.haml (2.2ms)
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/third_party" for 127.0.0.1 at 2015-04-11 22:25:29 -0700
+Processing by EventsController#third_party as HTML
+  Rendered events/third_party.html.haml (1.4ms)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2015-04-11 22:25:39 -0700
+Processing by EventsController#new as HTML
+  Rendered events/_event_form.html.haml (4.0ms)
+  Rendered events/new.html.haml (8.3ms)
+Completed 200 OK in 10ms (Views: 9.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:27:46 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.2ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 94ms (Views: 91.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/events/9" for 127.0.0.1 at 2015-04-11 22:27:50 -0700
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 9]]
+  [1m[35mGuest Load (0.2ms)[0m  SELECT "guests".* FROM "guests" INNER JOIN "registrations" ON "guests"."id" = "registrations"."guest_id" WHERE "registrations"."event_id" = ? AND "guests"."is_anon" = 'f'  ORDER BY "guests"."first_name" ASC  [["event_id", 9]]
+  Rendered events/show.html.haml (50.0ms)
+Completed 200 OK in 691ms (Views: 51.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:28:01 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (2.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 93ms (Views: 89.7ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/events/2" for 127.0.0.1 at 2015-04-11 22:28:02 -0700
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mGuest Load (0.1ms)[0m  [1mSELECT "guests".* FROM "guests" INNER JOIN "registrations" ON "guests"."id" = "registrations"."guest_id" WHERE "registrations"."event_id" = ? AND "guests"."is_anon" = 'f'  ORDER BY "guests"."first_name" ASC[0m  [["event_id", 2]]
+  Rendered events/show.html.haml (17.5ms)
+Completed 200 OK in 730ms (Views: 21.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-11 22:38:00 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (2.5ms)
+Completed 200 OK in 829ms (Views: 131.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/jquery.min.map" for 127.0.0.1 at 2015-04-11 22:38:22 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-11 22:46:05 -0700
+Processing by CalendarsController#show as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 834ms (Views: 113.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/fullcalendar-11dcb3e31297df89995cf262fa1d7195.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/application-3a13ffd4b0518f825939e95547959773.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/fullcalendar-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/my_calendar-1c5c704d1c9cce959223d5516f5a633c.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/assets/application-b1f0131a11f851c1ddf7f37c9a59177b.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:06 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.9ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 75ms (Views: 73.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:07 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.1ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 108ms (Views: 105.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:07 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 63ms (Views: 62.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/events/1" for 127.0.0.1 at 2015-04-11 22:46:10 -0700
+
+ActionController::RoutingError (No route matches [POST] "/events/1"):
+  actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.1.0) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.1ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (15.1ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (64.7ms)
+Cannot render console with content type application/x-www-form-urlencodedAllowed content types: [#<Mime::Type:0x0000000285a370 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x00000002859e70 @synonyms=[], @symbol=:text, @string="text/plain">]
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-11 22:46:28 -0700
+Processing by CalendarsController#show as HTML
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 728ms (Views: 146.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/fullcalendar-11dcb3e31297df89995cf262fa1d7195.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/application-3a13ffd4b0518f825939e95547959773.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/fullcalendar-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/my_calendar-1c5c704d1c9cce959223d5516f5a633c.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/panel-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/application-11f0c41bb825e7a12cd5c66289cef4a4.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (2.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 74ms (Views: 70.5ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.7ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 79ms (Views: 77.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:29 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 62ms (Views: 61.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/events/1" for 127.0.0.1 at 2015-04-11 22:46:30 -0700
+
+ActionController::RoutingError (No route matches [POST] "/events/1"):
+  actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.1.0) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/mbs729/.rvm/rubies/ruby-2.2.1/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.7ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/mbs729/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (26.4ms)
+Cannot render console with content type application/x-www-form-urlencodedAllowed content types: [#<Mime::Type:0x0000000285a370 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x00000002859e70 @synonyms=[], @symbol=:text, @string="text/plain">]
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-11 22:46:50 -0700
+Processing by CalendarsController#show as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 843ms (Views: 117.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/fullcalendar-11dcb3e31297df89995cf262fa1d7195.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/application-3a13ffd4b0518f825939e95547959773.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/fullcalendar-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/my_calendar-1c5c704d1c9cce959223d5516f5a633c.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/assets/application-b1f0131a11f851c1ddf7f37c9a59177b.js?body=1" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.4ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 69ms (Views: 67.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.5ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 73ms (Views: 72.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:46:51 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.6ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 60ms (Views: 58.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:48:14 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.8ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 68ms (Views: 66.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-11 22:48:15 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.6ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 65ms (Views: 63.8ms | ActiveRecord: 0.6ms)

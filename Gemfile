@@ -61,6 +61,8 @@ group :development, :test do
   gem 'flog'
   gem 'flay'
   gem 'fakeweb'
+
+  gem 'react-rails', '~> 1.0'
 end
 
 group :production do
