@@ -26,7 +26,7 @@ describe Meetup do
     end
   end
 
-  describe '#build_event' do
+  describe '#parse_event' do
     let(:time) {double}
     let(:location) {double}
     let(:venue) {{id: '123'}}
@@ -55,15 +55,15 @@ describe Meetup do
       allow(meetup).to receive(:build_date).and_return(time)
       allow(meetup).to receive(:build_duration).and_return(time)
       allow(meetup).to receive(:build_location).and_return(location)
-      allow(meetup).to receive(:build_venue).and_return(venue)
+      allow(meetup).to receive(:parse_venue).and_return(venue)
     end
 
     it 'gets a hash with info and returns an event hash' do
-      expect(meetup.build_event(data)).to eq(event)
+      expect(meetup.parse_event(data)).to eq(event)
     end
   end
 
-  describe '#build_rsvp' do
+  describe '#parse_rsvp' do
     let(:time) {double}
     let(:data) {{'event' => {'id' => '123'},
                  'member' => {'member_id' => '123', 'name' => 'pete'},
@@ -80,7 +80,7 @@ describe Meetup do
     end
 
     it 'gets a hash with info and returns an rsvp hash' do
-      expect(meetup.build_rsvp(data)).to eq(rsvp)
+      expect(meetup.parse_rsvp(data)).to eq(rsvp)
     end
   end
 
@@ -147,7 +147,7 @@ describe Meetup do
     before(:each) do
       allow(data).to receive(:parsed_response).and_return(results)
       allow(results).to receive(:[]).with('results').and_return(events)
-      allow_any_instance_of(Meetup).to receive(:build_event).with(any_args).and_return(event)
+      allow_any_instance_of(Meetup).to receive(:parse_event).with(any_args).and_return(event)
       allow(HTTParty).to receive(:get).with(any_args).and_return(data)
     end
 
@@ -295,7 +295,7 @@ describe Meetup do
 
     before(:each) do
       allow(data).to receive(:parsed_response).and_return(results)
-      allow_any_instance_of(Meetup).to receive(:build_event).with(results).and_return(event)
+      allow_any_instance_of(Meetup).to receive(:parse_event).with(results).and_return(event)
       allow(event).to receive(:[]).with(:meetup_id).and_return(valid_event_id)
       allow(HTTParty).to receive(:get).with(any_args).and_return(data)
     end
@@ -389,7 +389,7 @@ describe Meetup do
     before(:each) do
       allow(data).to receive(:parsed_response).and_return(results)
       allow(results).to receive(:[]).with('results').and_return(rsvps)
-      allow_any_instance_of(Meetup).to receive(:build_rsvp).with(any_args).and_return(rsvp)
+      allow_any_instance_of(Meetup).to receive(:parse_rsvp).with(any_args).and_return(rsvp)
       allow(HTTParty).to receive(:get).with(any_args).and_return(data)
       allow(rsvp).to receive(:[]).with(:event_id).and_return(valid_event_id)
     end
@@ -438,22 +438,25 @@ describe Meetup do
     end
   end
 
-  # NEXT ITERATION
-=begin
+  ####################################################################
+
   describe '#push_event' do
     context 'with valid authorization key' do
-      let(:good_user) {Meetup.new({key: '3837476f222cc2b6b365513821d38'})}
+      let(:good_user) {Meetup.new({key: '3837476f222cc2b6b365513821d38', group_id:'1556336',
+                                  group_urlname:'Meetup-API-Testing'})}
+      let(:event) {Event.new(name: 'Swimming', venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+                                 city: 'San Francisco', zip: '94111')}
 
       context 'with existing local event' do
-        let(:data) {good_user.push_event()}
+        let(:data) {good_user.push_event(event)}
 
         it 'returns a possible collection of events' do
-          expect(data.size).to be > 0
+          expect(data).to be_truthy
         end
       end
 
       context 'with invalid organization id' do
-        let(:data) {good_user.pull_events('invalid_id')}
+        let(:data) {good_user.pull_events}
 
         it 'returns nil' do
           expect(data).to be_nil
@@ -470,18 +473,16 @@ describe Meetup do
       end
     end
   end
-=end
 
-  describe "#get_event_venue_data" do
-    let(:meetup) {Meetup.new}
 
+  describe "::get_event_venue_data" do
     context "from a valid event" do
-      let(:event) {Event.create!(address_1: '145 Peeep st.',
+      let(:event) {Event.new(venue_name: 'Playa', address_1: '145 Peeep st.',
                                 city: 'Gendale', zip: '6789',
                                 state: 'CA', country: 'USA')}
       it "returns a hash of venue fields" do
-        result = meetup.get_event_venue_data(event)
-        expect(result).to eq({address_1: '145 Peeep st.',
+        result = Meetup.get_event_venue_data(event)
+        expect(result).to eq({name: 'Playa', address_1: '145 Peeep st.',
                               city: 'Gendale', zip: '6789',
                               state: 'CA', country: 'USA'})
       end
@@ -489,23 +490,23 @@ describe Meetup do
 
     context "from an invalid event" do
       it "returns nothing" do
-        result = meetup.get_event_venue_data(nil)
+        result = Meetup.get_event_venue_data(nil)
         expect(result).to be_empty
       end
     end
   end
 
-  describe "#build_venue" do
+  describe "#parse_venue" do
     let(:meetup) {Meetup.new}
 
     context "from valid API-sent data" do
-      let(:data) {{'venue'=> {'address_1'=> '145 Peeep st.',
+      let(:data) {{'venue'=> {'name' => 'Plaza', 'address_1'=> '145 Peeep st.',
                                  'city'=> 'Gendale', 'zip'=> '6789',
                                  'state'=> 'CA', 'country'=> 'USA'}}}
 
       it "returns a hash of venue fields" do
-        result = meetup.build_venue(data)
-        expect(result).to eq({address_1: '145 Peeep st.',
+        result = meetup.parse_venue(data)
+        expect(result).to eq({venue_name: 'Plaza', address_1: '145 Peeep st.',
                               city: 'Gendale', zip: '6789',
                               state: 'CA', country: 'USA'})
       end
@@ -513,15 +514,13 @@ describe Meetup do
 
     context "from invalid data" do
       it "returns nothing" do
-        result = meetup.build_venue(nil)
+        result = meetup.parse_venue(nil)
         expect(result).to be_empty
       end
     end
   end
 
-  # NEXT ITERATION
-=begin
-  describe "Packages an event data into a hash" do
+  describe "#get_event_data" do
     let(:meetup) {Meetup.new}
     let(:id) {123}
     let(:event) {{name: 'Nature', description: 'Nice one',
@@ -534,16 +533,129 @@ describe Meetup do
                                venue_id: id, time: Time.now.to_i,
                                duration: '2', how_to_find_us: 'do not'})
     end
+  end
+
+  describe "#create_venue" do
+    let(:new_event) {Event.new(venue_name: 'Pepperpot', address_1: '145 Jackson st',
+                           city: 'Moon', zip: '94111',
+                           state: 'CA', country: 'us')}
+    let(:old_event) {Event.new(venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+                               city: 'San Francisco', zip: '94111',
+                               state: 'CA', country: 'us')}
+    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', address_1: '',
+                               city: 'Sa', zip: '94111',
+                               state: 'CA', country: 'us')}
+
+    let(:data) {double}
+
+
+    context "with valid key" do
+      let(:good_user) {Meetup.new(group_urlname: 'Meetup-API-Testing')}
+      before(:each) do
+        allow(HTTParty).to receive(:post).and_return(data)
+      end
+
+      it "gets a response from meetup with new venue data" do
+        allow(data).to receive(:code).and_return(201)
+        response = good_user.create_venue(new_event)
+        expect(response.code).to eq(201)
+      end
+
+      it "gets a response from meetup with old venue data" do
+        allow(data).to receive(:code).and_return(409)
+        response = good_user.create_venue(old_event)
+        expect(response.code).to eq(409)
+      end
+
+      it "gets a response from meetup with failure" do
+        allow(data).to receive(:code).and_return(400)
+        response = good_user.create_venue(invalid_event)
+        expect(response.code).to eq(400)
+      end
+    end
+
+    context "with invalid key" do
+      let(:bad_user) {Meetup.new(group_urlname: 'Meetup-API-Testing', key:'wrongkey')}
+      before(:each) do
+        allow(HTTParty).to receive(:post).and_return(data)
+        allow(data).to receive(:code).and_return(401)
+      end
+
+      it "gets a not authorized error response from meetup" do
+        response = bad_user.create_venue(new_event)
+        expect(response.code).to eq(401)
+      end
+
+    end
+  end
+
+  describe "#get_meetup_venue_id" do
+    let(:new_event) {Event.new(venue_name: 'Pepperpot', address_1: '145 Jackson st',
+                               city: 'Moon', zip: '94111',
+                               state: 'CA', country: 'us')}
+    let(:old_event) {Event.new(venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+                               city: 'San Francisco', zip: '94111',
+                               state: 'CA', country: 'us')}
+    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', address_1: '',
+                                   city: 'Sa', zip: '94111',
+                                   state: 'CA', country: 'us')}
+    let(:id) {'1234'}
+    let(:data) {double}
+    let(:response) {double}
+
+
+    context "with valid key" do
+      let(:good_user) {Meetup.new(group_urlname: 'Meetup-API-Testing')}
+      before(:each) do
+        allow(good_user).to receive(:create_venue).and_return(data)
+      end
+
+      it "gets a response from meetup with new venue data" do
+        allow(data).to receive(:code).and_return(201)
+        allow(data).to receive(:parsed_response).and_return(response)
+        allow(response).to receive(:[]).and_return(id)
+        response = good_user.get_meetup_venue_id(new_event)
+        expect(response).to eq(id)
+      end
+
+      it "gets a response from meetup with old venue data" do
+        errors = double
+        error =  double
+        venue = double
+        allow(data).to receive(:code).and_return(409)
+        allow(data).to receive(:parsed_response).and_return(response)
+        allow(response).to receive(:[]).with('errors').and_return(errors)
+        allow(errors).to receive(:[]).with(0).and_return(error)
+        allow(error).to receive(:[]).with('potential_matches').and_return(venue)
+        allow(venue).to receive(:[]).with('id').and_return(id)
+        response = good_user.get_meetup_venue_id(old_event)
+        expect(response).to eq(id)
+      end
+
+      it "gets a response from meetup with failure" do
+        allow(data).to receive(:code).and_return(400)
+        response = good_user.get_meetup_venue_id(invalid_event)
+        expect(response).to eq('')
+      end
+    end
+
+    context "with invalid key" do
+      let(:bad_user) {Meetup.new(group_urlname: 'Meetup-API-Testing', key:'wrongkey')}
+      before(:each) do
+        allow(bad_user).to receive(:create_venue).and_return(data)
+        allow(data).to receive(:code).and_return(401)
+      end
+
+      it "gets a not authorized error response from meetup" do
+        response = bad_user.get_meetup_venue_id(new_event)
+        expect(response).to eq('')
+      end
+
+    end
 
   end
-=end
 
 
-  # TEST GET_MEETUP_VENUE_ID
-
-  # TEST PUSH_EVENT
-
-  # TEST CREATE_VENUE
 
 end
 

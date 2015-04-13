@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402194548) do
+ActiveRecord::Schema.define(version: 20150413033827) do
 
   create_table "events", force: :cascade do |t|
     t.string   "organization"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150402194548) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "venue_name"
   end
 
   create_table "guests", force: :cascade do |t|
