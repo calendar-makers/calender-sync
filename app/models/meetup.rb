@@ -18,8 +18,7 @@ class Meetup
     @options = options.merge(admin_data)
   end
 
-  # FOR FUTURE ITERATIONS
-=begin
+
   def edit_event(id)
     # All params other than key are optional
     @options[:body] = {} # CREATE A FUNCTION THAT CHECKS AND BUILDS BODY
@@ -45,7 +44,7 @@ class Meetup
     id = '1556336'
     name = 'Calendar Sync- dummy'
     @options[:headers]= {'Content-Type' => 'application/x-www-form-urlencoded'}
-    @options[:query] = {group_id: id, group_urlname: url, name: name, access_token: User.first.token}
+    @options[:body] = {group_id: id, group_urlname: url, name: name, key:'3837476f222cc2b6b365513821d38'}
     data = HTTParty.post("#{BASE_URL}/2/event", @options)
     byebug
   end
@@ -71,7 +70,12 @@ class Meetup
     # if there are multiple matches then it will return ERROR CODE 409 Conflict
     # which will contain a list of possible matches.
   end
-=end
+
+
+
+
+
+
 
   def pull_event(id)
     data = HTTParty.get("#{BASE_URL}/2/event/#{id}?#{options_string}")

@@ -17167,3 +17167,179 @@ Processing by EventsController#show as HTML
   [1m[35mGuest Load (0.2ms)[0m  SELECT "guests".* FROM "guests" INNER JOIN "registrations" ON "guests"."id" = "registrations"."guest_id" WHERE "registrations"."event_id" = ? AND "guests"."is_anon" = 'f'  ORDER BY "guests"."first_name" ASC  [["event_id", 4]]
   Rendered events/show.html.haml (15.3ms)
 Completed 200 OK in 1244ms (Views: 17.5ms | ActiveRecord: 104.5ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-04-12 16:18:57 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (0.6ms)[0m  SELECT "events".* FROM "events"
+  Rendered events/index.html.haml (32.0ms)
+Completed 200 OK in 88ms (Views: 58.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-12 16:19:02 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-12 16:19:02 -0700
+Processing by CalendarsController#show as HTML
+  Rendered calendars/show.html.haml within layouts/application (8.4ms)
+Completed 200 OK in 1129ms (Views: 349.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/fullcalendar-11dcb3e31297df89995cf262fa1d7195.css?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/fullcalendar-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/my_calendar-1c5c704d1c9cce959223d5516f5a633c.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/application-621e9cb019279851d64a63a4b19ef42e.css?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/panel-c7173933dd7418c168b0ae6f93cad2c7.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/application-11f0c41bb825e7a12cd5c66289cef4a4.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.6ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 42ms (Views: 41.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 37ms (Views: 36.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:19:04 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 35ms (Views: 34.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events/third_party" for 127.0.0.1 at 2015-04-12 16:19:53 -0700
+Processing by EventsController#third_party as HTML
+  Rendered events/third_party.html.haml (9.4ms)
+Completed 200 OK in 34ms (Views: 33.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/events/pull_third_party" for 127.0.0.1 at 2015-04-12 16:20:25 -0700
+Processing by EventsController#pull_third_party as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pLtvrqTBuEog+y3Vb3ZFENc44GSjROnHIVs7jdM7M/+g0B/SwRL+cBLREYUOpNlrJB5elT9eKSvSu/9SeRJsmw==", "commit"=>"Add Events"}
+Redirected to http://localhost:3000/events/third_party
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/events/third_party" for 127.0.0.1 at 2015-04-12 16:20:25 -0700
+Processing by EventsController#third_party as HTML
+  Rendered events/third_party.html.haml (7.2ms)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events" for 127.0.0.1 at 2015-04-12 16:20:40 -0700
+Processing by EventsController#index as HTML
+  [1m[35mEvent Load (0.7ms)[0m  SELECT "events".* FROM "events"
+  Rendered events/index.html.haml (11.4ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-12 16:20:45 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-12 16:20:45 -0700
+Processing by CalendarsController#show as HTML
+  Rendered calendars/show.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 860ms (Views: 113.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-12 16:20:45 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.7ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 40ms (Views: 38.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.7ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 45ms (Views: 44.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-12 16:20:46 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.6ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 32ms (Views: 31.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/auth/meetup" for 127.0.0.1 at 2015-04-12 16:20:54 -0700
+
+
+Started GET "/auth/meetup" for 127.0.0.1 at 2015-04-12 16:20:54 -0700
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
