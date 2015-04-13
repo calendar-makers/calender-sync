@@ -3,14 +3,7 @@ class CalendarsController < ApplicationController
     # For the moment keep running this task at every page view.
     # But later I should switch to a scheduler (the link is on the browser)
 
-    @date = '2014-05-01'
-
-    # all for the panel...
-    @current_user = true
-    @event = Event.find(1)
-    full_sanitizer = Rails::Html::FullSanitizer.new
-    @event.description = full_sanitizer.sanitize(@event.description)
-    @when = @event.start.strftime("%a, %b %-d, %Y at %l:%M %P") + " to (infinity and beyond...)"
+    @datetime = '2014-05-01 03:00pm'
 
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)

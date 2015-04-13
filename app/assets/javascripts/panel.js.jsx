@@ -1,7 +1,15 @@
 /** @jsx React.DOM */
-var Event = React.createClass({
-  render: function() {
-    return (
+var base = function() {
+  return (
+    <div>
+      <h2 style={{fontWeight: 200}}>Event Details</h2>
+      <p>Click an event!</p>
+    </div>
+  )
+}
+
+var show = function() {
+  return (
     <div>
       <h2 style={{fontWeight: 200}}>Event Details</h2>
       <div id="image">
@@ -15,7 +23,7 @@ var Event = React.createClass({
         </div>
         <div className="right">
           <p>
-            Nature Walk
+            {this.props.name}
           </p>
         </div>
         <div style={{clear: 'both'}}></div>
@@ -26,7 +34,7 @@ var Event = React.createClass({
         </div>
         <div className="right">
           <p>
-            April 12, 2015 11:00am
+            {this.props.start}
           </p>
         </div>
         <div style={{clear: 'both'}}></div>
@@ -37,7 +45,7 @@ var Event = React.createClass({
         </div>
         <div className="right">
           <p>
-            Yosemite
+            {this.props.location}
           </p>
           <p>
             <i>map may be coming soon!</i>
@@ -47,7 +55,7 @@ var Event = React.createClass({
       </div>
       <br/>  
       <div id="description">
-        Walk through a forest.
+        {this.props.description}
       </div>
       <br/>
       <br/>
@@ -60,8 +68,12 @@ var Event = React.createClass({
       <div id="crud"></div>
       /* if @current user, then show edit and delete button */
     </div>
-    )}
-  });
+  );
+}
+
+var Event = React.createClass({
+  render: show
+});
 
 var ready = function() {
   React.render(
