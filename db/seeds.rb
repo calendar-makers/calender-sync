@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 events = [{ name: 'Gardening', location: 'San Francisco', organization: 'Nature in the City',
-            start: '1-Jan-2012', description: 'Gardening at San Francisco' },
+            start: '1-Apr-2015', end: '2-Apr-2015', description: 'Gardening at San Francisco' },
           { name: 'Green Bean Mixer', location: 'Los Angeles', organization: 'Green Thumb',
-            start: '3-Mar-2016', description: 'Talk about nature.'},
+            start: '12-Apr-2015', end: '13-Apr-2015', description: 'Talk about nature.'},
          ]
 
 events.each do |event|
