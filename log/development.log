@@ -17313,3 +17313,575 @@ ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
   Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
   Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.4ms)
   Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (39.7ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:36:58 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CalendarsController#show as HTML
+Completed 500 Internal Server Error in 15132ms
+
+SocketError (getaddrinfo: Name or service not known):
+  app/models/meetup.rb:85:in `pull_events'
+  app/models/event.rb:75:in `get_remote_events'
+  app/controllers/calendars_controller.rb:13:in `show'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (23.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.1ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (53.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.7ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (21.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (48.4ms)
+  [1m[36mUser Load (1.9ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mEvent Load (18.1ms)[0m  SELECT "events".* FROM "events"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "users" SET "token" = ?, "expires_at" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["token", "4c0c1055e9e05487be70431757984440"], ["expires_at", 1428536368], ["updated_at", "2015-04-08 22:39:28.587222"], ["id", 1]]
+  [1m[36m (94.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.5ms)[0m  SELECT  "events".* FROM "events"  ORDER BY "events"."id" DESC LIMIT 1
+  [1m[36mEvent Load (0.4ms)[0m  [1mSELECT  "events".* FROM "events"  ORDER BY "events"."id" DESC LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:42:13 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "219648262"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "220706208"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytgbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytgbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "221198835"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "219647661"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220197569"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "nzbgflythbmb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgythbvb"]]
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgythbwb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytjbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytjbcc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytkbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytkbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytlblb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflytlblb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytlbtb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytlbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytmbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytmbbc"]]
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytnbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytnbxb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220423545"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "kccgflytpbsb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytpbsb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytpbtb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytpbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytqbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytqbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvcbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvcbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflyvdbrb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflyvdbrb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvdbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvdbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvfbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvfbbc"]]
+  Rendered calendars/show.html.haml within layouts/application (8.8ms)
+Completed 200 OK in 1359ms (Views: 505.9ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.8ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 67ms (Views: 65.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:15 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.1ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 87ms (Views: 85.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:16 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.8ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 63ms (Views: 61.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/auth/meetup" for 127.0.0.1 at 2015-04-08 15:42:30 -0700
+
+
+Started GET "/auth/meetup" for 127.0.0.1 at 2015-04-08 15:42:30 -0700
+
+
+Started GET "/auth/meetup/callback?code=add6ad4354bdf20a056581509f0da676&state=adad08a9ab71c4ff59dee04996f1756dad1c113f22412e67" for 127.0.0.1 at 2015-04-08 15:42:31 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"code"=>"add6ad4354bdf20a056581509f0da676", "state"=>"adad08a9ab71c4ff59dee04996f1756dad1c113f22412e67", "provider"=>"meetup"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? LIMIT 1  [["provider", "meetup"], ["uid", "184911456"]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+Processing by CalendarsController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered calendars/show.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 141ms (Views: 139.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:32 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.1ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 74ms (Views: 72.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:33 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.4ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 84ms (Views: 81.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:33 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.8ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 69ms (Views: 67.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/signout" for 127.0.0.1 at 2015-04-08 15:42:33 -0700
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:42:33 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:42:33 -0700
+Processing by CalendarsController#show as HTML
+  Rendered calendars/show.html.haml within layouts/application (8.6ms)
+Completed 200 OK in 137ms (Views: 136.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:34 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.4ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 75ms (Views: 72.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:42:34 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 84ms (Views: 80.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:43:01 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:43:01 -0700
+Processing by CalendarsController#show as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "219648262"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220706208"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytgbxb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytgbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "221198835"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "219647661"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "220197569"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "nzbgflythbmb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgythbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgythbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytjbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytjbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytkbxb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytkbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "kccgflytlblb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytlblb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytlbtb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytlbvb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytmbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytmbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytnbwb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytnbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "220423545"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytpbsb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflytpbsb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytpbtb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytpbcc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytqbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytqbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvcbvb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgyvcbwb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflyvdbrb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "kccgflyvdbrb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvdbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgyvdbcc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvfbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgyvfbbc"]]
+  Rendered calendars/show.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 785ms (Views: 144.2ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.8ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 74ms (Views: 71.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.9ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 87ms (Views: 85.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:43:02 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.8ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 73ms (Views: 71.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:43:09 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:43:09 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x00000005349220@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:45:56 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:45:56 -0700
+
+ActionController::RoutingError (undefined method `slice' for 3000:Fixnum):
+  app/controllers/application_controller.rb:9:in `<class:ApplicationController>'
+  app/controllers/application_controller.rb:1:in `<top (required)>'
+  app/controllers/calendars_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.8ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (24.2ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (75.9ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_markup.html (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/style.css within layouts/inlined_string (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_inner_console_markup.html within layouts/inlined_string (0.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/_prompt_box_markup.html within layouts/inlined_string (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/console.js within layouts/javascript (20.4ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/main.js within layouts/javascript (0.3ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/error_page.js within layouts/javascript (0.5ms)
+  Rendered /home/vincent/.rvm/gems/ruby-2.2.1/gems/web-console-2.1.0/lib/web_console/templates/index.html (40.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:46:25 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:46:25 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "219648262"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "220706208"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytgbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytgbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "221198835"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "219647661"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220197569"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "nzbgflythbmb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgythbvb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgythbwb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytjbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytjbcc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytkbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytkbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytlblb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflytlblb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytlbtb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytlbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytmbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytmbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytnbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytnbxb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220423545"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "kccgflytpbsb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytpbsb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytpbtb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytpbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytqbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytqbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvcbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvcbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflyvdbrb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflyvdbrb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvdbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvdbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvfbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvfbbc"]]
+  Rendered calendars/show.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 941ms (Views: 187.4ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.8ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 73ms (Views: 70.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.8ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 89ms (Views: 87.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:46:26 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.8ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 68ms (Views: 66.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:49:54 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.4ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "219648262"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "220706208"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytgbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytgbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "221198835"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "219647661"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220197569"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "nzbgflythbmb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgythbvb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgythbwb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytjbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytjbcc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytkbxb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytkbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytlblb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflytlblb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytlbtb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytlbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytmbzb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytmbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytnbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytnbxb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220423545"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "kccgflytpbsb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytpbsb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "dmlzzgytpbtb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytpbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgytqbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytqbbc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvcbvb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvcbwb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "jlcgflyvdbrb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflyvdbrb"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvdbbc"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvdbcc"]]
+  [1m[36mEvent Load (0.1ms)[0m  [1mSELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1[0m  [["meetup_id", "qdwhxgyvfbzb"]]
+  [1m[35mEvent Load (0.1ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvfbbc"]]
+  Rendered calendars/show.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 886ms (Views: 148.4ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-08 15:49:55 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:49:56 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.5ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 67ms (Views: 64.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:49:56 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (1.2ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 92ms (Views: 90.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-08 15:49:56 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (1.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 78ms (Views: 76.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:50:15 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:50:15 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x000000066126e0@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:50:42 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:50:42 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x007f10a433b948@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 23ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-08 15:50:44 -0700
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-08 15:50:44 -0700
+Processing by CalendarsController#show as HTML
+Redirected to https://localhost/calendar
+Filter chain halted as #<Proc:0x007f10a433b948@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
+Completed 301 Moved Permanently in 1ms (ActiveRecord: 0.0ms)

@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   # force SSL so meetup redirect_url works
-  force_ssl(port=3000)
-
+  force_ssl if Rails.env.production?
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
