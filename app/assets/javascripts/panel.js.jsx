@@ -9,9 +9,6 @@ var Event = React.createClass({
         <h3 className="eventStart">
           {this.props.start}
         </h3>
-        <h3 className="eventEnd">
-          {this.props.end}
-        </h3>
         <h3 className="eventLocation">
           {this.props.location}
         </h3>
@@ -25,7 +22,7 @@ var Event = React.createClass({
 
 var ready = function () {
   React.render(
-    <Event name="Nature Walk" start='3-Apr-2015' end='5-Apr-2015' location='Yosemite' description="Walk through a forest!"/>,
+    <Event name="Nature Walk" start='3-Apr-2015' location='Yosemite' description="Walk through a forest!"/>,
     document.getElementById('events')
   );
 };
