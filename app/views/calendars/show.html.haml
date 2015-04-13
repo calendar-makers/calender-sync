@@ -13,7 +13,6 @@
 
 #wrap
   #calendar
-  .space
   #panel
     %h2{:style => "font-weight:200;"} Event Details
     - unless @event
@@ -63,6 +62,8 @@
         = # maybe we should put a link to an rsvp form page or popup...
       </br>
       </br>
+
+      #crud
       - if @current_user
         = button_to 'Edit', event_path(@event), :method => :edit
         = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'

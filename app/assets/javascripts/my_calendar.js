@@ -27,6 +27,17 @@ $(document).ready(function() {
     console.log(data);
   });
 
+  $('#panel').height($('#calendar').height());
+  
+  var timer,
+    $win = $(window);
+  $win.on('resize', function() {
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      $('#panel').height($('#calendar').height());
+    }, 250);
+  });
+
 });
 
 function go_to_date(date){
