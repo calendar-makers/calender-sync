@@ -26,6 +26,9 @@ gem 'omniauth'
 gem 'omniauth-meetup'
 gem 'httparty'
 
+gem 'react-rails', '~> 1.0'
+gem 'responders', '~> 2.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -61,8 +64,6 @@ group :development, :test do
   gem 'flog'
   gem 'flay'
   gem 'fakeweb'
-
-  gem 'react-rails', '~> 1.0'
 end
 
 group :production do
