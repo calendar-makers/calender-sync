@@ -13,14 +13,12 @@ $(document).ready(function() {
     eventColor: '#62C400',
 
     eventClick: function(calEvent, jsEvent, view) {
-      var startCopy = moment(calEvent.start)
-      var startTime = startCopy.format('MMMM Do YYYY, h:mm a');
-      var eventEnd = startCopy.add(calEvent.duration, 'hour');
+      var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
       var endTime;
-      if (calEvent.duration >= 24) {
-        endTime = eventEnd.format('MMMM Do YYYY, h:mm a');
+      if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
+        endTime = calEvent.end.format('MMMM Do YYYY, h:mm a');
       } else {
-        endTime = eventEnd.format('h:mm a');
+        endTime = calEvent.end.format('h:mm a');
       }
       React.render(
         <Event name={calEvent.title} start={startTime} end={endTime} location={calEvent.location} description={calEvent.description}/>,
