@@ -1,14 +1,37 @@
 %div= label :event, :name, 'Event Name'
 %div= text_field :event, 'name'
 
-%div= label :event, :location, 'Location'
-%div= text_field :event, 'location'
+//%div= label :event, :organization, 'Organization Name'
+//%div= text_field :event, :organization, value: 'Nature in the City'
 
-%div= label :event, :organization, 'Organization Name'
-%div= text_field :event, :organization
+%div= label :event, :venue_name, "Venue Name"
+%div= text_field :event, 'venue_name'
+
+%div= label :event, :address_1, 'Address'
+%div= text_field :event, 'address_1'
+
+%div= label :event, :city, 'City'
+%div= text_field :event, 'city'
+
+%div= label :event, :zip, 'Zip'
+%div= text_field :event, 'zip', size: '6'
+
+%div= label :event, :state, 'State'
+%div= select :event, 'state', options_for_select(us_states, 'CA')
+
+%div= label :event, :country, 'Country'
+%div= country_select :event, 'country', {selected: "US"}, {style: 'width: 150px'}
 
 %div= label :event, :start, 'Start Time'
 %div= datetime_select :event, :start
 
+//%div= select_datetime Time.now,  order: [:month, :day, :year, :hour, :minute], ampm: true
+
+%div= label :event, :end, 'End Time'
+%div= datetime_select :event, :end
+
 %div= label :event, :description, 'Description'
 %div= text_area :event, 'description', :cols =>'40', :rows => '10'
+
+%div= label :event, :how_to_find_us, 'How to find us'
+%div= text_area :event, 'how_to_find_us', :cols =>'40', :rows => '8'

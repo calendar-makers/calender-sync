@@ -27,7 +27,7 @@ describe CalendarsController do
       end
 
       it 'should indirectly call pull with default group_id' do
-        expect_any_instance_of(Meetup).to receive(:pull_events).with(no_args)
+        expect_any_instance_of(Meetup).to receive(:pull_events)
         get :show
       end
 

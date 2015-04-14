@@ -43,4 +43,6 @@ Rails.application.configure do
   Rails.application.configure do
     config.react.variant = :development
   end
+
+  config.action_controller.include_all_helpers = true
 end

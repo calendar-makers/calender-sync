@@ -99,13 +99,19 @@ class EventsController < ActionController::Base
       return
     end
 
-    @event = Event.create!(event_params)
-    params[:event] = @event
-    flash[:notice] = "\"#{@event.name}\" was successfully added."
-    respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :json => @event }
+    @event = Event.new(event_params)
+    meetup = Meetup.new
+    if remote_event = meetup.push_event(@event)
+      @event.update_meetup_fields(remote_event)
+      @event.save!
+      params[:event] = @event
+      flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
+
+    else
+     flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
     end
+
+      redirect_to calendar_path
   end
 
   def edit
@@ -148,9 +154,9 @@ class EventsController < ActionController::Base
   private
 
   def event_params
-    params.require(:event).permit(:name, :organization,
-                                  :start, :location,
-                                  :description, :image)
+    params.require(:event).permit(:name, :organization, :venue_name, :address_1,
+                                  :city, :zip, :state, :country, :start, :end,
+                                  :description, :how_to_find_us, :image)
   end
 
   def form_validation_msg
