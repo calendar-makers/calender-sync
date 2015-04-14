@@ -14,7 +14,7 @@ var displayEventPanel = function() {
         </div>
         <div className="right">
           <p>
-            {this.props.start} to {this.props.end}
+            {this.props.timePeriod}
           </p>
         </div>
         <div style={{clear: 'both'}}></div>

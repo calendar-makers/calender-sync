@@ -15,13 +15,24 @@ $(document).ready(function() {
     eventClick: function(calEvent, jsEvent, view) {
       var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
       var endTime;
-      if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
+      var eventEnd = calEvent.end;
+      if (eventEnd == null) {
+        endTime = null;
+      } else if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
         endTime = calEvent.end.format('MMMM Do YYYY, h:mm a');
       } else {
         endTime = calEvent.end.format('h:mm a');
       }
+
+      var timePeriod;
+      if (endTime == null) {
+        timePeriod = startTime;
+      } else {
+        timePeriod = startTime + ' to ' + endTime;
+      }
+
       React.render(
-        <Event name={calEvent.title} start={startTime} end={endTime} location={calEvent.location} description={calEvent.description}/>,
+        <Event name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>,
         document.getElementById('panel')
       );
     },
@@ -33,8 +44,6 @@ $(document).ready(function() {
     }
 
   });
-
-  // go_to_date(date);
 
   console.log("hello world");
   $.getJSON('events.json', function(data){
@@ -54,9 +63,3 @@ $(document).ready(function() {
   });
 
 });
-
-function go_to_date(date){
-  console.log("I'm going to date")
-  console.log(date)
-  $('#calendar').fullCalendar('gotoDate', date)
-}
