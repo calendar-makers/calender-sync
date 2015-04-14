@@ -1,5 +1,3 @@
-include ActionView::Helpers::SanitizeHelper
-
 class Meetup
 
   include HTTParty
@@ -115,7 +113,7 @@ class Meetup
   def build_event(data)
      {meetup_id: data['id'],
        name: data['name'],
-       description: strip_tags(data['description']),
+       description: data['description'],
        organization: data['group']['name'],
        ##############################  READ COMMENTS ON TOP OF BUILD LOCATION TO UNDERSTAND THE REDUNDANCY
        location: build_location(data),
