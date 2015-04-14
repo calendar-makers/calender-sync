@@ -34,9 +34,7 @@ var displayEventPanel = function() {
         <div style={{clear: 'both'}}></div>
       </div>
       <br/>
-      <div id="description">
-        {this.props.description}
-      </div>
+      <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
       <br/>
       <br/>
       <div id="rsvp">
