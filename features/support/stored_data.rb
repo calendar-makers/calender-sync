@@ -447,6 +447,25 @@ FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rs
 FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 ########################################
 
+# meetup_push.feature
+#########################################
+Before('@meetup_push') do
+  FakeWeb.clean_registry
+  FakeWeb.allow_net_connect = true
+end
+
+# Set defaults
+After('@meetup_push') do
+  FakeWeb.allow_net_connect = false
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+end
+#########################################
+
 
 # meetup_pull.feature
 #########################################

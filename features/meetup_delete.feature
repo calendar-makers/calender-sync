@@ -6,7 +6,7 @@ Feature: Enforce event lists consistency by deleting events locally and remotely
 
   Background: The Calendar and Meetup are currently synched
 
-    Given I have logged in as an admin on Meetup
+    Given I am an authorized organizer of the group
     And the following events exist on Meetup and on the Calendar
       |                 name                    |    organization    |   event_id   |
       | Market Street Prototyping Festival      | Nature in the city | 219648262    |

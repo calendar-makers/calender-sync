@@ -69,10 +69,10 @@ class Event < ActiveRecord::Base
     # We can also pass any options for the query
     # If so put them in the options hash, and pass it to the constructor
     #options = {access_token: token}
-    meetup = Meetup.new(options)
+    meetup = Meetup.new
 
     candidate_events = []
-    meetup_events = meetup.pull_events
+    meetup_events = meetup.pull_events(options)
     if meetup_events
       meetup_events.each do |event|
         return nil unless true   # ANY VALIDATION???? Check meetup.rb for details
@@ -148,6 +148,21 @@ class Event < ActiveRecord::Base
 
   def format_date
     start.strftime('%m/%d/%Y at %I:%M%p') if start
+  end
+
+  def location
+    location = []
+    location << self['address_1']
+    location << self['city']
+    location << self['zip']
+    location << self['state']
+    location << self['country']
+    location.join(', ')
+  end
+
+  def update_meetup_fields(event)
+    keys = [:meetup_id, :updated, :url, :status]
+    keys.each {|k| self[k] = event[k]}
   end
 
 end

@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-events = [{ name: 'Gardening', location: 'San Francisco', organization: 'Nature in the City',
+events = [{ name: 'Gardening', organization: 'Nature in the City',
             start: '1-Jan-2012', description: 'Gardening at San Francisco' },
-          { name: 'Green Bean Mixer', location: 'Los Angeles', organization: 'Green Thumb',
+          { name: 'Green Bean Mixer',  organization: 'Green Thumb',
             start: '3-Mar-2016', description: 'Talk about nature.'},
          ]
 

@@ -26,6 +26,10 @@ gem 'omniauth'
 gem 'omniauth-meetup'
 gem 'httparty'
 
+# countries and states gems
+gem 'country_select', github: 'stefanpenner/country_select'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

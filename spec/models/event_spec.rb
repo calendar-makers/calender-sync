@@ -198,4 +198,15 @@ RSpec.describe Event, type: :model do
     end
 
   end
+
+  describe '#location' do
+    let(:location_data) {{'address_1' => '145 peep st', 'city' => 'New York',
+                          'zip' => '90210', 'state' => 'NY', 'country' => 'US'}}
+    let(:event) {Event.new(location_data)}
+    let(:location) {[]}
+    it 'returns a complete location string' do
+      location_data.each {|k, v| location << v}
+      expect(event.location).to eq(location.join(', '))
+    end
+  end
 end
