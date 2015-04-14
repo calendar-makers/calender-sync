@@ -13,8 +13,9 @@ $(document).ready(function() {
     eventColor: '#62C400',
 
     eventClick: function(calEvent, jsEvent, view) {
-      var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
-      var eventEnd = calEvent.start.add(calEvent.duration, 'hour');
+      var startCopy = moment(calEvent.start)
+      var startTime = startCopy.format('MMMM Do YYYY, h:mm a');
+      var eventEnd = startCopy.add(calEvent.duration, 'hour');
       var endTime;
       if (calEvent.duration >= 24) {
         endTime = eventEnd.format('MMMM Do YYYY, h:mm a');
