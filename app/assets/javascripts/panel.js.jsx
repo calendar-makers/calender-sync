@@ -1,14 +1,5 @@
 /** @jsx React.DOM */
-var base = function() {
-  return (
-    <div>
-      <h2 style={{fontWeight: 200}}>Event Details</h2>
-      <p>Click an event!</p>
-    </div>
-  )
-}
-
-var show = function() {
+var displayEventPanel = function() {
   return (
     <div>
       <h2 style={{fontWeight: 200}}>Event Details</h2>
@@ -34,7 +25,7 @@ var show = function() {
         </div>
         <div className="right">
           <p>
-            {this.props.start}
+            {this.props.start} to {this.props.end}
           </p>
         </div>
         <div style={{clear: 'both'}}></div>
@@ -53,7 +44,7 @@ var show = function() {
         </div>
         <div style={{clear: 'both'}}></div>
       </div>
-      <br/>  
+      <br/>
       <div id="description">
         {this.props.description}
       </div>
@@ -72,14 +63,36 @@ var show = function() {
 }
 
 var Event = React.createClass({
-  render: show
+  loadEventsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(events) {
+        this.setState({events: events});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  handleEventSubmit: function(event) {
+    var events = this.state.events;
+    var newEvents = events.concat([event]);
+    this.setState({events: newEvents});
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: {'event': event},
+      success: function(data) {
+        this.loadEventsFromServer();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  render: displayEventPanel
 });
-
-var ready = function() {
-  React.render(
-    <Event name="Nature Walk" start='3-Apr-2015' location='Yosemite' description="Walk through a forest!"/>,
-    document.getElementById('panel')
-  );
-};
-
-$(document).ready(ready);

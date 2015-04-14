@@ -102,7 +102,10 @@ class EventsController < ActionController::Base
     @event = Event.create!(event_params)
     params[:event] = @event
     flash[:notice] = "\"#{@event.name}\" was successfully added."
-    redirect_to calendar_path
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :json => @event }
+    end
   end
 
   def edit
@@ -129,7 +132,10 @@ class EventsController < ActionController::Base
     end
     @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    redirect_to calendar_path
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :json => @event }
+    end
   end
 
   def destroy
