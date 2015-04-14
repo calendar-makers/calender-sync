@@ -2,23 +2,12 @@
 var displayEventPanel = function() {
   return (
     <div>
-      <h2 style={{fontWeight: 200}}>Event Details</h2>
+      <h2 style={{fontWeight: 200}}>{this.props.name}</h2>
       <div id="image">
         <i>image resizing has to be done, maybe to resize along with page size?</i>
         // image here
       </div>
       <br/>
-      <div id="name">
-        <div className="left">
-          <p>What</p>
-        </div>
-        <div className="right">
-          <p>
-            {this.props.name}
-          </p>
-        </div>
-        <div style={{clear: 'both'}}></div>
-      </div>
       <div id="date_time">
         <div className="left">
           <p>When</p>
