@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fbcc2d0b-7056-4a88-b271-938d543f6244" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/helpers/states_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tmp/cache/assets/test/sprockets/2f5173deea6c795b8fdde723bb4b63af" afterPath="$PROJECT_DIR$/tmp/cache/assets/test/sprockets/2f5173deea6c795b8fdde723bb4b63af" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/development.sqlite3" afterPath="$PROJECT_DIR$/db/development.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tmp/cache/assets/test/sprockets/f7cbd26ba1d28d48de824f0e94586655" afterPath="$PROJECT_DIR$/tmp/cache/assets/test/sprockets/f7cbd26ba1d28d48de824f0e94586655" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.sqlite3" afterPath="$PROJECT_DIR$/db/test.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/_event_form.html.haml" afterPath="$PROJECT_DIR$/app/views/events/_event_form.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/calendar-sync.iml" afterPath="$PROJECT_DIR$/.idea/calendar-sync.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/development.rb" afterPath="$PROJECT_DIR$/config/environments/development.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/event.rb" afterPath="$PROJECT_DIR$/app/models/event.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/event_spec.rb" afterPath="$PROJECT_DIR$/spec/models/event_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/events_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/events_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/meetup.rb" afterPath="$PROJECT_DIR$/app/models/meetup.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/meetup_delete.feature" afterPath="$PROJECT_DIR$/features/meetup_delete.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/meetup_edit.feature" afterPath="$PROJECT_DIR$/features/meetup_edit.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/meetup_push.feature" afterPath="$PROJECT_DIR$/features/meetup_push.feature" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/meetup_spec.rb" afterPath="$PROJECT_DIR$/spec/models/meetup_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/step_definitions/meetup_steps.rb" afterPath="$PROJECT_DIR$/features/step_definitions/meetup_steps.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/show.html.haml" afterPath="$PROJECT_DIR$/app/views/events/show.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/support/stored_data.rb" afterPath="$PROJECT_DIR$/features/support/stored_data.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/test.log" afterPath="$PROJECT_DIR$/log/test.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="fbcc2d0b-7056-4a88-b271-938d543f6244" name="Default" comment="" />
     <ignored path="calendar-sync.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -172,7 +143,7 @@
           <file leaf-file-name="meetup_steps.rb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/features/step_definitions/meetup_steps.rb">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.25669292" vertical-offset="2370" max-vertical-offset="3213">
+                <state vertical-scroll-proportion="0.31650487" vertical-offset="2370" max-vertical-offset="3213">
                   <caret line="149" column="22" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
                   <folding />
                 </state>
@@ -206,7 +177,7 @@
           <file leaf-file-name="meetup_delete.feature" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.21417323" vertical-offset="0" max-vertical-offset="697">
+                <state vertical-scroll-proportion="0.26407766" vertical-offset="0" max-vertical-offset="697">
                   <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
                   <folding />
                 </state>
@@ -288,10 +259,10 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1709" />
-    <option name="y" value="314" />
-    <option name="width" value="1615" />
-    <option name="height" value="999" />
+    <option name="x" value="3120" />
+    <option name="y" value="21" />
+    <option name="width" value="1440" />
+    <option name="height" value="879" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1094,7 +1065,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1709" y="314" width="1615" height="999" extended-state="0" />
+    <frame x="3120" y="21" width="1440" height="879" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1109,7 +1080,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.051800378" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23382519" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27069646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1541,7 +1512,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21417323" vertical-offset="0" max-vertical-offset="697">
+        <state vertical-scroll-proportion="0.26407766" vertical-offset="0" max-vertical-offset="697">
           <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
           <folding />
         </state>
@@ -1549,7 +1520,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/features/step_definitions/meetup_steps.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25669292" vertical-offset="2370" max-vertical-offset="3213">
+        <state vertical-scroll-proportion="0.31650487" vertical-offset="2370" max-vertical-offset="3213">
           <caret line="149" column="22" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
           <folding />
         </state>
