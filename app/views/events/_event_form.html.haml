@@ -1,8 +1,8 @@
 %div= label :event, :name, 'Event Name'
 %div= text_field :event, 'name'
 
-//%div= label :event, :organization, 'Organization Name'
-//%div= text_field :event, :organization, value: 'Nature in the City'
+%div= label :event, :organization, 'Organization Name'
+%div= text_field :event, :organization, value: 'Nature in the City'
 
 %div= label :event, :venue_name, "Venue Name"
 %div= text_field :event, 'venue_name'
@@ -24,8 +24,6 @@
 
 %div= label :event, :start, 'Start Time'
 %div= datetime_select :event, :start
-
-//%div= select_datetime Time.now,  order: [:month, :day, :year, :hour, :minute], ampm: true
 
 %div= label :event, :end, 'End Time'
 %div= datetime_select :event, :end

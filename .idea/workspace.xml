@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fbcc2d0b-7056-4a88-b271-938d543f6244" name="Default" comment="" />
+    <list default="true" id="fbcc2d0b-7056-4a88-b271-938d543f6244" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/development.sqlite3" afterPath="$PROJECT_DIR$/db/development.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/test.sqlite3" afterPath="$PROJECT_DIR$/db/test.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/_event_form.html.haml" afterPath="$PROJECT_DIR$/app/views/events/_event_form.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/application_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/application_controller_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/calendar-sync.iml" afterPath="$PROJECT_DIR$/.idea/calendar-sync.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/create_event.feature" afterPath="$PROJECT_DIR$/features/create_event.feature" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/delete_event.feature" afterPath="$PROJECT_DIR$/features/delete_event.feature" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/event.rb" afterPath="$PROJECT_DIR$/app/models/event.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/event_spec.rb" afterPath="$PROJECT_DIR$/spec/models/event_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/events_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/events_controller_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/meetup_spec.rb" afterPath="$PROJECT_DIR$/spec/models/meetup_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/show.html.haml" afterPath="$PROJECT_DIR$/app/views/events/show.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/support/stored_data.rb" afterPath="$PROJECT_DIR$/features/support/stored_data.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/test.log" afterPath="$PROJECT_DIR$/log/test.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/third_party.html.haml" afterPath="$PROJECT_DIR$/app/views/events/third_party.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features/update_event.feature" afterPath="$PROJECT_DIR$/features/update_event.feature" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="calendar-sync.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -31,13 +52,13 @@
     <SUITE FILE_PATH="coverage/calendar-sync@_merge_meetup_rsvps_with_new_events_saves_the_rsvp_in_the_db__calendar_sync.coverage" NAME="#merge_meetup_rsvps with new events saves the rsvp in the db: calendar-sync Coverage Results" MODIFIED="1427969964616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_event_with_valid_authorization_key__calendar_sync.coverage" NAME="Meetup#pull_event with valid authorization key: calendar-sync Coverage Results" MODIFIED="1428029750571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@makes_passed_events_local__calendar_sync.coverage" NAME="makes passed events local: calendar-sync Coverage Results" MODIFIED="1427965394333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@pulling_rsvps_for_single_local_event__calendar_sync.coverage" NAME="pulling rsvps for single local event: calendar-sync Coverage Results" MODIFIED="1427933478829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_Obtains_the_venue_data_from_a_valid_event__calendar_sync.coverage" NAME="Meetup Obtains the venue data from a valid event: calendar-sync Coverage Results" MODIFIED="1427854010282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_with_valid_authorization_key_with_valid_id__pull_event_with_valid_authorization_key_with_valid_id__calendar_sync.coverage" NAME="Meetup with valid authorization key with valid id #pull_event with valid authorization key with valid id: calendar-sync Coverage Results" MODIFIED="1428028421689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@formats_the_date__calendar_sync.coverage" NAME="formats the date: calendar-sync Coverage Results" MODIFIED="1427964756527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_Obtains_the_venue_data_from_a_valid_event__calendar_sync.coverage" NAME="Meetup Obtains the venue data from a valid event: calendar-sync Coverage Results" MODIFIED="1427854010282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@pulling_rsvps_for_single_local_event__calendar_sync.coverage" NAME="pulling rsvps for single local event: calendar-sync Coverage Results" MODIFIED="1427933478829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Guest__parse_meetup_name__calendar_sync.coverage" NAME="Guest::parse_meetup_name: calendar-sync Coverage Results" MODIFIED="1427971677346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@makes_input_events_local_with_new_events_updates_an_already_stored_event__calendar_sync.coverage" NAME="makes input events local with new events updates an already stored event: calendar-sync Coverage Results" MODIFIED="1427967996606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@formats_the_date__calendar_sync.coverage" NAME="formats the date: calendar-sync Coverage Results" MODIFIED="1427964756527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@removing_unwanted_words_from_user_input_event_ids__calendar_sync.coverage" NAME="removing unwanted words from user-input event ids: calendar-sync Coverage Results" MODIFIED="1427936741862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@makes_input_events_local_with_new_events_updates_an_already_stored_event__calendar_sync.coverage" NAME="makes input events local with new events updates an already stored event: calendar-sync Coverage Results" MODIFIED="1427967996606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_pulling_multiple_events_should_get_remote_meetup_events__calendar_sync.coverage" NAME="CalendarsController pulling multiple events should get remote meetup events: calendar-sync Coverage Results" MODIFIED="1427928989728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_event_with_valid_authorization_key_with_valid_id__calendar_sync.coverage" NAME="Meetup#pull_event with valid authorization key with valid id: calendar-sync Coverage Results" MODIFIED="1428029630537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Run_spec__meetup_spec___calendar_sync.coverage" NAME="Run spec 'meetup_spec': calendar-sync Coverage Results" MODIFIED="1428033723909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
@@ -64,19 +85,19 @@
     <SUITE FILE_PATH="coverage/calendar-sync@pulling_rsvps_for_single_meetup_event_should_call_merge_rsvps_with_valid_event__calendar_sync.coverage" NAME="pulling rsvps for single meetup event should call merge_rsvps with valid event: calendar-sync Coverage Results" MODIFIED="1427933099011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_edit_event_with_valid_authorization_key_with_existing_event_returns_true_for_a_successful_push__calendar_sync.coverage" NAME="Meetup#edit_event with valid authorization key with existing event returns true for a successful push: calendar-sync Coverage Results" MODIFIED="1428923455107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_pulling_multiple_events_should_call_pull_with_default_group_id__calendar_sync.coverage" NAME="CalendarsController pulling multiple events should call pull with default group_id: calendar-sync Coverage Results" MODIFIED="1427928820951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@EventsController_third_party_post_assigns_events_for_posted_id__calendar_sync.coverage" NAME="EventsController#third_party post assigns events for posted id: calendar-sync Coverage Results" MODIFIED="1427974472776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@make_sure_user_correctly_changes_information_in_edit_page__calendar_sync__2_.coverage" NAME="make sure user correctly changes information in edit page: calendar-sync (2) Coverage Results" MODIFIED="1427510566353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@EventsController_third_party_post_assigns_events_for_posted_id__calendar_sync.coverage" NAME="EventsController#third_party post assigns events for posted id: calendar-sync Coverage Results" MODIFIED="1427974472776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@pulls_3rd_party_events__calendar_sync.coverage" NAME="pulls 3rd party events: calendar-sync Coverage Results" MODIFIED="1427938270928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_get_matched_event_id__calendar_sync.coverage" NAME="Meetup.get_matched_event_id: calendar-sync Coverage Results" MODIFIED="1428911005412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@perform_a_successful_pull_from_Meetup__calendar_sync.coverage" NAME="perform a successful pull from Meetup: calendar-sync Coverage Results" MODIFIED="1428059944507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_rsvps_with_valid_authorization_key_with_valid_event_id__calendar_sync.coverage" NAME="Meetup#pull_rsvps with valid authorization key with valid event id: calendar-sync Coverage Results" MODIFIED="1428030790935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_parse_venue__calendar_sync.coverage" NAME="Meetup#parse_venue: calendar-sync Coverage Results" MODIFIED="1428896704026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@_merge_meetup_rsvps__calendar_sync.coverage" NAME="#merge_meetup_rsvps: calendar-sync Coverage Results" MODIFIED="1427970718284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@perform_a_successful_pull_from_Meetup__calendar_sync.coverage" NAME="perform a successful pull from Meetup: calendar-sync Coverage Results" MODIFIED="1428059944507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_get_matched_event_id__calendar_sync.coverage" NAME="Meetup.get_matched_event_id: calendar-sync Coverage Results" MODIFIED="1428911005412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pulls_rsvps_with_valid_authorization_key_with_valid_event_id_returns_the_requested_rsvp__calendar_sync.coverage" NAME="Meetup pulls rsvps with valid authorization key with valid event id returns the requested rsvp: calendar-sync Coverage Results" MODIFIED="1427670694170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_push_event__calendar_sync.coverage" NAME="Meetup#push_event: calendar-sync Coverage Results" MODIFIED="1428971596297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@_merge_meetup_rsvps__calendar_sync.coverage" NAME="#merge_meetup_rsvps: calendar-sync Coverage Results" MODIFIED="1427970718284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_parse_venue__calendar_sync.coverage" NAME="Meetup#parse_venue: calendar-sync Coverage Results" MODIFIED="1428896704026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@_merge_meetup_rsvps_with_new_events_updates_an_already_stored_event__calendar_sync.coverage" NAME="#merge_meetup_rsvps with new events updates an already stored event: calendar-sync Coverage Results" MODIFIED="1427970621771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_get_event_data__calendar_sync.coverage" NAME="Meetup#get_event_data: calendar-sync Coverage Results" MODIFIED="1428962003860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_push_event__calendar_sync.coverage" NAME="Meetup#push_event: calendar-sync Coverage Results" MODIFIED="1428971596297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@makes_passed_events_local_with_new_events_saves_the_event_in_the_db__calendar_sync.coverage" NAME="makes passed events local with new events saves the event in the db: calendar-sync Coverage Results" MODIFIED="1427966316815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_get_event_data__calendar_sync.coverage" NAME="Meetup#get_event_data: calendar-sync Coverage Results" MODIFIED="1428962003860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController__calendar_sync.coverage" NAME="CalendarsController: calendar-sync Coverage Results" MODIFIED="1427935541621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_Obtains_the_venue_data_from_a_valid_event_returns_a_hash_of_venue_fields__calendar_sync.coverage" NAME="Meetup Obtains the venue data from a valid event returns a hash of venue fields: calendar-sync Coverage Results" MODIFIED="1427853763509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_pulling_multiple_events_should_make_remote_meetup_events_local__calendar_sync.coverage" NAME="CalendarsController pulling multiple events should make remote meetup events local: calendar-sync Coverage Results" MODIFIED="1427929191945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
@@ -84,27 +105,27 @@
     <SUITE FILE_PATH="coverage/calendar-sync@EventsController_third_party_get_assigns_empty_events__calendar_sync.coverage" NAME="EventsController#third_party get assigns empty events: calendar-sync Coverage Results" MODIFIED="1427973938345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_event_with_valid_authorization_key_with_valid_event_id_returns_the_requested_event__calendar_sync.coverage" NAME="Meetup#pull_event with valid authorization key with valid event id returns the requested event: calendar-sync Coverage Results" MODIFIED="1428021667182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_events_with_valid_authorization_key_with_valid_group_id__DEFAULT_pull_type___calendar_sync.coverage" NAME="Meetup#pull_events with valid authorization key with valid group id (DEFAULT pull type): calendar-sync Coverage Results" MODIFIED="1428031521692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@meetup_pull__calendar_sync.coverage" NAME="meetup_pull: calendar-sync Coverage Results" MODIFIED="1427406090354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_pull_events_with_valid_authorization_key_with_valid_group_urlname_returns_the_requested_events__calendar_sync.coverage" NAME="Meetup#pull_events with valid authorization key with valid group_urlname returns the requested events: calendar-sync Coverage Results" MODIFIED="1428031827939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@meetup_pull__calendar_sync.coverage" NAME="meetup_pull: calendar-sync Coverage Results" MODIFIED="1427406090354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@EventsController_third_party_post_renders_the_third_party_template__calendar_sync.coverage" NAME="EventsController#third_party post renders the third_party template: calendar-sync Coverage Results" MODIFIED="1427974176688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@parse_a_name_pulled_from_meetup_event_rsvp__calendar_sync.coverage" NAME="parse a name pulled from meetup event rsvp: calendar-sync Coverage Results" MODIFIED="1427938895033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_gets_the_calendar_renders_the_calendar__calendar_sync.coverage" NAME="CalendarsController gets the calendar renders the calendar: calendar-sync Coverage Results" MODIFIED="1427932485578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_builds_location_from_input_data__calendar_sync.coverage" NAME="Meetup builds location from input data: calendar-sync Coverage Results" MODIFIED="1427610216217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_gets_the_calendar_renders_the_calendar__calendar_sync.coverage" NAME="CalendarsController gets the calendar renders the calendar: calendar-sync Coverage Results" MODIFIED="1427932485578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@parse_a_name_pulled_from_meetup_event_rsvp__calendar_sync.coverage" NAME="parse a name pulled from meetup event rsvp: calendar-sync Coverage Results" MODIFIED="1427938895033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@test__calendar_sync.coverage" NAME="test: calendar-sync Coverage Results" MODIFIED="1427406154495" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@pulling_rsvps_multiple_events__calendar_sync.coverage" NAME="pulling rsvps multiple events: calendar-sync Coverage Results" MODIFIED="1427670940791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@removes_unwanted_words_from_user_input_event_ids__calendar_sync.coverage" NAME="removes unwanted words from user-input event ids: calendar-sync Coverage Results" MODIFIED="1427937011008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@EventsController_third_party_get_renders_the_third_party_template__calendar_sync.coverage" NAME="EventsController#third_party get renders the third_party template: calendar-sync Coverage Results" MODIFIED="1427973321322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@removes_unwanted_words_from_user_input_event_ids__calendar_sync.coverage" NAME="removes unwanted words from user-input event ids: calendar-sync Coverage Results" MODIFIED="1427937011008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_create_venue_with_valid_key__calendar_sync.coverage" NAME="Meetup#create_venue with valid key: calendar-sync Coverage Results" MODIFIED="1428894823862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_computes_a_date_from_input_data__calendar_sync.coverage" NAME="Meetup computes a date from input data: calendar-sync Coverage Results" MODIFIED="1427608144130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@pulling_rsvps_for_single_event_should_call_pull_rsvps_with_valid_event_id__calendar_sync.coverage" NAME="pulling rsvps for single event should call pull_rsvps with valid event_id: calendar-sync Coverage Results" MODIFIED="1427672283692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_push_event_with_valid_authorization_key_with_existing_local_event_returns_a_possible_collection_of_events__calendar_sync.coverage" NAME="Meetup#push_event with valid authorization key with existing local event returns a possible collection of events: calendar-sync Coverage Results" MODIFIED="1428907657231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@EventsController__display_message__calendar_sync.coverage" NAME="EventsController::display_message: calendar-sync Coverage Results" MODIFIED="1427975822348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_push_event_with_valid_authorization_key_with_existing_local_event_returns_a_possible_collection_of_events__calendar_sync.coverage" NAME="Meetup#push_event with valid authorization key with existing local event returns a possible collection of events: calendar-sync Coverage Results" MODIFIED="1428907657231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Meetup_push_event_with_valid_authorization_key_with_existing_local_event__calendar_sync.coverage" NAME="Meetup#push_event with valid authorization key with existing local event: calendar-sync Coverage Results" MODIFIED="1428907708003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Run_spec__events_controller_spec___calendar_sync.coverage" NAME="Run spec 'events_controller_spec': calendar-sync Coverage Results" MODIFIED="1427937029440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Computes_the_total_number_of_attendees_for_an_event__calendar_sync.coverage" NAME="Computes the total number of attendees for an event: calendar-sync Coverage Results" MODIFIED="1427837520942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Run_spec__events_controller_spec___calendar_sync.coverage" NAME="Run spec 'events_controller_spec': calendar-sync Coverage Results" MODIFIED="1427937029440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@CalendarsController_pulling_multiple_events__calendar_sync.coverage" NAME="CalendarsController pulling multiple events: calendar-sync Coverage Results" MODIFIED="1427547450177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
-    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_Obtains_the_venue_data_from_an_invalid_event_returns_nil__calendar_sync.coverage" NAME="Meetup Obtains the venue data from an invalid event returns nil: calendar-sync Coverage Results" MODIFIED="1427854037445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
     <SUITE FILE_PATH="coverage/calendar-sync@Run_spec__guest_spec___calendar_sync.coverage" NAME="Run spec 'guest_spec': calendar-sync Coverage Results" MODIFIED="1427971686717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
+    <SUITE FILE_PATH="coverage/calendar-sync@Meetup_Obtains_the_venue_data_from_an_invalid_event_returns_nil__calendar_sync.coverage" NAME="Meetup Obtains the venue data from an invalid event returns nil: calendar-sync Coverage Results" MODIFIED="1427854037445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="calendar-sync" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -117,76 +138,28 @@
     <favorites_list name="calendar-sync" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.47504738">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="meetup.rb" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/models/meetup.rb">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="704" max-vertical-offset="3434">
-                  <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="stored_data.rb" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/features/support/stored_data.rb">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="7526" max-vertical-offset="11458">
-                  <caret line="438" column="22" selection-start-line="438" selection-start-column="22" selection-end-line="438" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="meetup_steps.rb" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/features/step_definitions/meetup_steps.rb">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.31650487" vertical-offset="2370" max-vertical-offset="3213">
-                  <caret line="149" column="22" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="meetup_push.feature" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/features/meetup_push.feature">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
-                  <caret line="8" column="50" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="51" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="meetup_edit.feature" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/features/meetup_edit.feature">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="765">
-                  <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="meetup_delete.feature" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.26407766" vertical-offset="0" max-vertical-offset="697">
-                  <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="event_spec.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/models/event_spec.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3893">
+              <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41144115" vertical-offset="0" max-vertical-offset="909">
+              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -194,10 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/calendars/third_party.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/calendars/show.html.haml" />
-        <option value="$PROJECT_DIR$/app/models/registration.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/spec/controllers/calendars_spec.rb" />
         <option value="$PROJECT_DIR$/spec/models/guest_spec.rb" />
         <option value="$PROJECT_DIR$/features/support/vcr.rb" />
@@ -217,34 +186,38 @@
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
         <option value="$PROJECT_DIR$/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/events/third_party.html.haml" />
-        <option value="$PROJECT_DIR$/spec/controllers/events_controller_spec.rb" />
         <option value="$PROJECT_DIR$/features/support/env.rb" />
         <option value="$PROJECT_DIR$/features/step_definitions/rsvp_steps.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20150331062530_change_expires_from_user.rb" />
         <option value="$PROJECT_DIR$/app/controllers/calendars_controller.rb" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/controllers/sessions_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
         <option value="$PROJECT_DIR$/app/helpers/states_helper.rb" />
         <option value="$PROJECT_DIR$/db/schema.rb" />
         <option value="$PROJECT_DIR$/db/seeds.rb" />
-        <option value="$PROJECT_DIR$/spec/models/event_spec.rb" />
-        <option value="$PROJECT_DIR$/app/views/events/_event_form.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/events/show.html.haml" />
-        <option value="$PROJECT_DIR$/spec/models/meetup_spec.rb" />
-        <option value="$PROJECT_DIR$/app/models/event.rb" />
-        <option value="$PROJECT_DIR$/features/support/stored_data.rb" />
         <option value="$PROJECT_DIR$/app/controllers/events_controller.rb" />
-        <option value="$PROJECT_DIR$/app/models/meetup.rb" />
         <option value="$PROJECT_DIR$/features/meetup_push.feature" />
-        <option value="$PROJECT_DIR$/features/step_definitions/meetup_steps.rb" />
         <option value="$PROJECT_DIR$/features/meetup_edit.feature" />
         <option value="$PROJECT_DIR$/features/meetup_delete.feature" />
+        <option value="$PROJECT_DIR$/features/step_definitions/meetup_steps.rb" />
+        <option value="$PROJECT_DIR$/app/views/events/_event_form.html.haml" />
+        <option value="$PROJECT_DIR$/features/create_event.feature" />
+        <option value="$PROJECT_DIR$/app/models/meetup.rb" />
+        <option value="$PROJECT_DIR$/spec/models/meetup_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/application_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/controllers/events_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/features/support/stored_data.rb" />
+        <option value="$PROJECT_DIR$/app/models/event.rb" />
+        <option value="$PROJECT_DIR$/app/views/events/third_party.html.haml" />
+        <option value="$PROJECT_DIR$/features/delete_event.feature" />
+        <option value="$PROJECT_DIR$/app/views/events/show.html.haml" />
+        <option value="$PROJECT_DIR$/features/update_event.feature" />
+        <option value="$PROJECT_DIR$/spec/models/event_spec.rb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -259,10 +232,10 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="3120" />
-    <option name="y" value="21" />
-    <option name="width" value="1440" />
-    <option name="height" value="879" />
+    <option name="x" value="1486" />
+    <option name="y" value="-13" />
+    <option name="width" value="1643" />
+    <option name="height" value="1072" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -668,7 +641,7 @@
     </key>
   </component>
   <component name="RunManager" selected="RSpec.Meetup#push_event: calendar-sync">
-    <configuration default="false" name="Meetup#push_event: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+    <configuration default="false" name="#location: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="calendar-sync" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -689,10 +662,10 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/meetup_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/event_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Meetup#push_event" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="#location" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -742,43 +715,6 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="Meetup::get_event_venue_data: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="calendar-sync" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/meetup_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Meetup::get_event_venue_data" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="Meetup#get_event_data: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="calendar-sync" />
@@ -816,7 +752,7 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="#location: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+    <configuration default="false" name="Meetup#push_event: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="calendar-sync" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -837,10 +773,47 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/event_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/meetup_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="#location" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Meetup#push_event" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Meetup::get_event_venue_data: calendar-sync" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="calendar-sync" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/models/meetup_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Meetup::get_event_venue_data" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -1035,19 +1008,19 @@
       <item index="1" class="java.lang.String" itemvalue="Rake.spec: calendar-sync" />
       <item index="2" class="java.lang.String" itemvalue="Rails.Production: calendar-sync" />
       <item index="3" class="java.lang.String" itemvalue="Rails.Development: calendar-sync" />
-      <item index="4" class="java.lang.String" itemvalue="RSpec.Meetup#push_event: calendar-sync" />
+      <item index="4" class="java.lang.String" itemvalue="RSpec.#location: calendar-sync" />
       <item index="5" class="java.lang.String" itemvalue="RSpec.Meetup#edit_event with valid authorization key with existing event returns true for a successful push: calendar-sync" />
-      <item index="6" class="java.lang.String" itemvalue="RSpec.Meetup::get_event_venue_data: calendar-sync" />
-      <item index="7" class="java.lang.String" itemvalue="RSpec.Meetup#get_event_data: calendar-sync" />
-      <item index="8" class="java.lang.String" itemvalue="RSpec.#location: calendar-sync" />
+      <item index="6" class="java.lang.String" itemvalue="RSpec.Meetup#get_event_data: calendar-sync" />
+      <item index="7" class="java.lang.String" itemvalue="RSpec.Meetup#push_event: calendar-sync" />
+      <item index="8" class="java.lang.String" itemvalue="RSpec.Meetup::get_event_venue_data: calendar-sync" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.Meetup#push_event: calendar-sync" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.#location: calendar-sync" />
+        <item index="0" class="java.lang.String" itemvalue="RSpec.Meetup::get_event_venue_data: calendar-sync" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.Meetup#push_event: calendar-sync" />
         <item index="2" class="java.lang.String" itemvalue="RSpec.Meetup#get_event_data: calendar-sync" />
-        <item index="3" class="java.lang.String" itemvalue="RSpec.Meetup::get_event_venue_data: calendar-sync" />
-        <item index="4" class="java.lang.String" itemvalue="RSpec.Meetup#edit_event with valid authorization key with existing event returns true for a successful push: calendar-sync" />
+        <item index="3" class="java.lang.String" itemvalue="RSpec.Meetup#edit_event with valid authorization key with existing event returns true for a successful push: calendar-sync" />
+        <item index="4" class="java.lang.String" itemvalue="RSpec.#location: calendar-sync" />
       </list>
     </recent_temporary>
   </component>
@@ -1065,28 +1038,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3120" y="21" width="1440" height="879" extended-state="0" />
+    <frame x="1486" y="-13" width="1643" height="1072" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.083333336" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.051800378" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27069646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17877448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27069646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.083333336" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1105,9 +1078,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08149084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06837607" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06837607" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1131,37 +1104,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/features/meetup_push.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="595">
-          <caret line="3" column="70" selection-start-line="2" selection-start-column="4" selection-end-line="4" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="697">
-          <caret line="3" column="68" selection-start-line="2" selection-start-column="2" selection-end-line="4" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/meetup_edit.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20150329110331_add_meetup_columns_to_guests.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.028716216" vertical-offset="0" max-vertical-offset="592">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/registration_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23684211" vertical-offset="0" max-vertical-offset="646">
@@ -1194,13 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
           <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/meetup_pull_3rd_by_organization.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445">
-          <caret line="0" column="32" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1250,13 +1185,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/rails_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35172415" vertical-offset="0" max-vertical-offset="969">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/features/support/env.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1775457" vertical-offset="0" max-vertical-offset="1122">
@@ -1294,19 +1222,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43014303" vertical-offset="0" max-vertical-offset="909">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/sessions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.05610561" vertical-offset="0" max-vertical-offset="909">
           <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1314,7 +1233,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44884488" vertical-offset="0" max-vertical-offset="909">
           <caret line="24" column="79" selection-start-line="24" selection-start-column="79" selection-end-line="24" selection-end-column="79" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1326,35 +1244,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6963277" vertical-offset="0" max-vertical-offset="1581">
-          <caret line="29" column="63" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/calendars_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2881356" vertical-offset="0" max-vertical-offset="708">
           <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/events_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="4573">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1362,7 +1255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.615385" vertical-offset="319" max-vertical-offset="969">
           <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1378,7 +1270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="757" max-vertical-offset="1479">
           <caret line="79" column="53" selection-start-line="79" selection-start-column="53" selection-end-line="79" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,7 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="867">
           <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1394,7 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29651162" vertical-offset="0" max-vertical-offset="1088">
           <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1410,55 +1299,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20782396" vertical-offset="0" max-vertical-offset="818">
           <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/event_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.626943" vertical-offset="2933" max-vertical-offset="3706">
-          <caret line="201" column="25" selection-start-line="201" selection-start-column="25" selection-end-line="201" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/events/_event_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="731">
-          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/events/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13212435" vertical-offset="204" max-vertical-offset="1581">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/create_event.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/event.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2268" max-vertical-offset="2958">
-          <caret line="164" column="38" selection-start-line="164" selection-start-column="38" selection-end-line="164" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/meetup_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7395" max-vertical-offset="12376">
-          <caret line="451" column="78" selection-start-line="451" selection-start-column="78" selection-end-line="451" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1470,26 +1310,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/events_controller.rb">
+    <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25507247" vertical-offset="1558" max-vertical-offset="3026">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.15178572" vertical-offset="0" max-vertical-offset="896">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/meetup.rb">
+    <entry file="file://$PROJECT_DIR$/features/meetup_edit.feature">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="704" max-vertical-offset="3434">
-          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/support/stored_data.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7526" max-vertical-offset="11458">
-          <caret line="438" column="22" selection-start-line="438" selection-start-column="22" selection-end-line="438" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.15178572" vertical-offset="0" max-vertical-offset="896">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -1497,31 +1329,167 @@
     <entry file="file://$PROJECT_DIR$/features/meetup_push.feature">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
-          <caret line="8" column="50" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="51" />
+          <caret line="16" column="63" selection-start-line="10" selection-start-column="3" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/meetup_edit.feature">
+    <entry file="file://$PROJECT_DIR$/app/views/events/_event_form.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12" max-vertical-offset="765">
-          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features/meetup_delete.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26407766" vertical-offset="0" max-vertical-offset="697">
-          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.508046" vertical-offset="0" max-vertical-offset="870">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/features/step_definitions/meetup_steps.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31650487" vertical-offset="2370" max-vertical-offset="3213">
-          <caret line="149" column="22" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.6633663" vertical-offset="2304" max-vertical-offset="3213">
+          <caret line="171" column="57" selection-start-line="171" selection-start-column="57" selection-end-line="171" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/models/meetup_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03794643" vertical-offset="0" max-vertical-offset="12410">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/meetup.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6083608" vertical-offset="2525" max-vertical-offset="3434">
+          <caret line="116" column="32" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/rails_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3179318" vertical-offset="0" max-vertical-offset="969">
+          <caret line="17" column="73" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/calendars_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44884488" vertical-offset="0" max-vertical-offset="1632">
+          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/application_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16831683" vertical-offset="0" max-vertical-offset="909">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/controllers/events_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11221122" vertical-offset="0" max-vertical-offset="4522">
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/events_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1870187" vertical-offset="0" max-vertical-offset="3026">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/event.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52566963" vertical-offset="2045" max-vertical-offset="3009">
+          <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/create_event.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18973215" vertical-offset="0" max-vertical-offset="969">
+          <caret line="10" column="170" selection-start-line="10" selection-start-column="170" selection-end-line="10" selection-end-column="170" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/support/stored_data.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49888393" vertical-offset="7169" max-vertical-offset="11526">
+          <caret line="448" column="31" selection-start-line="448" selection-start-column="31" selection-end-line="448" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/meetup_pull_3rd_by_organization.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34151787" vertical-offset="357" max-vertical-offset="1445">
+          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/events/third_party.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69309175" vertical-offset="153" max-vertical-offset="1122">
+          <caret line="45" column="60" selection-start-line="45" selection-start-column="60" selection-end-line="45" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/events/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26953566" vertical-offset="0" max-vertical-offset="1581">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/delete_event.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18973215" vertical-offset="0" max-vertical-offset="896">
+          <caret line="10" column="138" selection-start-line="10" selection-start-column="138" selection-end-line="10" selection-end-column="138" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/update_event.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14961496" vertical-offset="0" max-vertical-offset="909">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/models/event_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1216" max-vertical-offset="3893">
+          <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41144115" vertical-offset="0" max-vertical-offset="909">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
           <folding />
         </state>
       </provider>

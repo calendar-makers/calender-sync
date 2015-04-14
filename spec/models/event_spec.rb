@@ -90,13 +90,24 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "#format_date" do
+  describe "#format_start_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
     let(:formatted_date) {'10/31/2002 at 12:02AM'}
 
     it "returns the date in a simpler form" do
       event = Event.new(start: date)
-      result = event.format_date
+      result = event.format_start_date
+      expect(result).to eq(formatted_date)
+    end
+  end
+
+  describe "#format_end_date" do
+    let(:date) {Time.utc(2002, 10, 31, 0, 2)}
+    let(:formatted_date) {'10/31/2002 at 12:02AM'}
+
+    it "returns the date in a simpler form" do
+      event = Event.new(end: date)
+      result = event.format_end_date
       expect(result).to eq(formatted_date)
     end
   end

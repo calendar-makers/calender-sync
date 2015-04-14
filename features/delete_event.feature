@@ -8,7 +8,7 @@ Background: Events have already been added to the database
   #Authentication not yet implemented
   #Given that I am logged in as "admin"
   And the following events exist:
-  | name             | organization       | description                               | start               | location                   |
+  | name             | organization       | description                               | start               | venue_name                 |
   | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
 

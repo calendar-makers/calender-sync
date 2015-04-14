@@ -145,9 +145,12 @@ class Event < ActiveRecord::Base
     end
   end
 
-
-  def format_date
+  def format_start_date
     start.strftime('%m/%d/%Y at %I:%M%p') if start
+  end
+
+  def format_end_date
+    self.end.strftime('%m/%d/%Y at %I:%M%p') if self.end
   end
 
   def location

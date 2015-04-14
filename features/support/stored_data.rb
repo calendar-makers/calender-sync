@@ -445,6 +445,10 @@ FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
 FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+
+#   MUST GET FAKE REQUESTS HERE
+FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => nil, :content_type => 'application/json'}])
+FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => nil, :content_type => 'application/json'}]) # THIS IS FOR PUSHES
 ########################################
 
 # meetup_push.feature

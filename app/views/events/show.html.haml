@@ -21,10 +21,10 @@
     = @event.location
   %li#start
     Start:
-    = @event.start.strftime("%B %d, %Y at %l:%M%P")
+    = @event.start.strftime("%B %d, %Y at %l:%M%P") if @event.start
   %li#end
     End:
-    = @event.end.strftime("%B %d, %Y at %l:%M%P")
+    = @event.end.strftime("%B %d, %Y at %l:%M%P") if @event.end
 
 %h3 Description:
 
