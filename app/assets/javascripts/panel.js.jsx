@@ -23,7 +23,7 @@ var displayEventPanel = function() {
         <div className="left">
           <p>Where</p>
         </div>
-        <div className="right">
+        <div className="right" style={{whiteSpace: 'pre-wrap'}}>
           <p>
             {this.props.location}
           </p>

@@ -155,12 +155,14 @@ class Event < ActiveRecord::Base
 
   def location
     location = []
-    location << self['address_1']
-    location << self['city']
-    location << self['zip']
-    location << self['state']
-    location << self['country']
-    location.join(', ')
+    location << self.address_1
+    if self.state != nil
+      location << self.city.to_s + ', ' + self.state.to_s + ' ' + self.zip.to_s
+    else
+      location << self.city.to_s + self.zip.to_s
+    end
+    location << self.country
+    location.join("\n")
   end
 
   def update_meetup_fields(event)
