@@ -32,7 +32,7 @@ $(document).ready(function() {
       }
 
       React.render(
-        <Event name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>,
+        <Event event_id={calEvent.id} name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>,
         document.getElementById('panel')
       );
     },

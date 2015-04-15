@@ -44,9 +44,9 @@ var displayEventPanel = function() {
       <br/>
       <br/>
       <div>
-        <input type='button' id='editEvent' value='Edit'/>
+        <button id='editEvent'>Edit</button>
         {' '}
-        <input type='button' id='deleteEvent' value='Delete'/>
+        <button id='deleteEvent'>Delete</button>
       </div>
       <div id="editEvent"></div>
       /* if @current user, then show edit and delete button */
