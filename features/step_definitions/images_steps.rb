@@ -1,4 +1,4 @@
-When(/^I upload an image$/) do 
+When(/^I upload an image$/) do
   attach_file('image', File.join(Rails.root, '/features/upload_Files/nature1.jpg'), :visible => false)
   click_button "Upload"
 end
