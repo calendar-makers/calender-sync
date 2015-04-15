@@ -11,5 +11,4 @@ Background: events are loaded into database
 
 Scenario: see the panel
   Given I am on the calendar page
-  Then I should see the Event Details panel
-  And it should say "Click an event!"
+  Then I should see the default panel

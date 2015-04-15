@@ -8,9 +8,9 @@ Feature: Be able to create, edit, and delete events via a panel on the calendar 
 Background: Events have already been added to the database
 
   Given the following events exist:
-  | name             | organization       | description                               | start               | location                   |
-  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |
-  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
+  | name             | description             | start         | end           | location                   |
+  | Nature Walk      | A walk through the city | March 19 2015 | March 21 2015 | The old Town Hall          |
+  | Green Bean Mixer | Come if you like beans! | March 12 2015 | March 13 2015 | San Francisco City Library |
 
   And I am on the calendar page
 
