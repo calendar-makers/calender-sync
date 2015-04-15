@@ -99,10 +99,22 @@ class EventsController < ActionController::Base
       return
     end
 
-    @event = Event.create!(event_params)
-    params[:event] = @event
-    flash[:notice] = "\"#{@event.name}\" was successfully added."
-    redirect_to calendar_path
+    @event = Event.new(event_params)
+    meetup = Meetup.new
+    if remote_event = meetup.push_event(@event)
+      @event.update_meetup_fields(remote_event)
+      @event.save!
+      params[:event] = @event
+      flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
+
+    else
+     flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :json => @event }
+    end
   end
 
   def edit
@@ -129,22 +141,25 @@ class EventsController < ActionController::Base
     end
     @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    redirect_to calendar_path
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :json => @event }
+    end
   end
 
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-    flash[:notice] = "\"#{@event.name}\" was successfully removed."
+    flash[:notice] = "'#{@event.name}' was successfully removed."
     redirect_to calendar_path
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:name, :organization,
-                                  :start, :location,
-                                  :description, :image)
+    params.require(:event).permit(:name, :organization, :venue_name, :address_1,
+                                  :city, :zip, :state, :country, :start, :end,
+                                  :description, :how_to_find_us, :image_file_name)
   end
 
   def form_validation_msg

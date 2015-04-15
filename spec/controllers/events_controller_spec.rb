@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe EventsController do
+  let(:event) {Event.create(name: 'coyote appreciation',
+                                    organization: 'nature loving',
+                                    start: '8-mar-2016',
+                                    description: 'watch coyotes')}
   describe 'Checking Show' do
     it "should render 'show' page" do
-      event = Event.create(name: 'coyote appreciation',
-                           location: 'yosemite',
-                           organization: 'nature loving',
-                           start: '8-mar-2016',
-                           description: 'watch coyotes')
-      get :show, { id: 1 }
+      allow_any_instance_of(Meetup).to receive(:pull_rsvps).and_return(nil)
+      get :show, id: event.id
       expect(response).to render_template(:show)
     end
   end
@@ -22,8 +22,9 @@ describe EventsController do
 
   describe 'Creating New Event' do
     it 'should redirect to calendar' do
+      allow(event).to receive(:merge_meetup_rsvps).and_return(nil)
+      allow_any_instance_of(Meetup).to receive(:push_event).and_return(nil)
       post :create, { event: { name: 'coyote appreciation',
-                               location: 'yosemite',
                                organization: 'nature loving',
                                start: '8-mar-2016',
                                description: 'watch coyotes' }
@@ -35,7 +36,6 @@ describe EventsController do
   describe 'Getting page to edit event info' do
     it "should render to 'edit' page" do
       Event.create(name: 'coyote appreciation',
-                   location: 'yosemite',
                    organization: 'nature loving',
                    start: '8-mar-2016',
                    description: 'watch coyotes')
@@ -47,12 +47,10 @@ describe EventsController do
   describe 'Updating Event' do
     it 'should redirect to index' do
       event = Event.create(name: 'coyote appreciation',
-                           location: 'yosemite',
                            organization: 'nature loving',
                            start: '8-mar-2016',
                            description: 'watch coyotes')
       put :update, { id: 1, event: { name: 'Dog Watch',
-                                     location: 'San Francisco',
                                      organization: 'Nature Loving',
                                      start: '8-mar-2016',
                                      description: 'Pet Puppies' }
@@ -64,7 +62,6 @@ describe EventsController do
   describe 'Destroying Event' do
     it 'should delete the selected event' do
       Event.create(name: 'coyote appreciation',
-                   location: 'yosemite',
                    organization: 'nature loving',
                    start: '8-mar-2016',
                    description: 'watch coyotes')
@@ -77,7 +74,6 @@ describe EventsController do
   describe 'pulling rsvps in #show' do
     let(:meetup_event_id) {'219648262'}
     let(:event) {Event.create(name: 'coyote appreciation',
-                              location: 'yosemite',
                               organization: 'nature loving',
                               start: '8-mar-2016',
                               description: 'watch coyotes',
@@ -159,6 +155,7 @@ describe EventsController do
     let(:events) {[Event.new(name: 'nature'), Event.new(name: 'gardening'), Event.new(name: 'butterflies')]}
 
     before(:each) do
+      allow(Event).to receive(:get_remote_events).and_return(nil)
       allow(Event).to receive(:make_events_local).and_return(events)
     end
 

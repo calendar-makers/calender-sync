@@ -90,13 +90,24 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "#format_date" do
+  describe "#format_start_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
     let(:formatted_date) {'10/31/2002 at 12:02AM'}
 
     it "returns the date in a simpler form" do
       event = Event.new(start: date)
-      result = event.format_date
+      result = event.format_start_date
+      expect(result).to eq(formatted_date)
+    end
+  end
+
+  describe "#format_end_date" do
+    let(:date) {Time.utc(2002, 10, 31, 0, 2)}
+    let(:formatted_date) {'10/31/2002 at 12:02AM'}
+
+    it "returns the date in a simpler form" do
+      event = Event.new(end: date)
+      result = event.format_end_date
       expect(result).to eq(formatted_date)
     end
   end
@@ -197,5 +208,16 @@ RSpec.describe Event, type: :model do
       end
     end
 
+  end
+
+  describe '#location' do
+    let(:location_data) {{'address_1' => '145 peep st', 'city' => 'New York',
+                          'zip' => '90210', 'state' => 'NY', 'country' => 'US'}}
+    let(:event) {Event.new(location_data)}
+    let(:location) {[]}
+    it 'returns a complete location string' do
+      location_data.each {|k, v| location << v}
+      expect(event.location).to eq(location.join(', '))
+    end
   end
 end

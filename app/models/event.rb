@@ -16,12 +16,15 @@ class Event < ActiveRecord::Base
   # }
 
   def as_json(options = {})
-  {
-    :id => self.id,
-    :title => self.name,
-    :start => start.iso8601,
-    :url => Rails.application.routes.url_helpers.event_path(id)
-  }
+    {
+      :id => self.id,
+      :title => self.name,
+      :start => self.start.iso8601,
+      :end => (self.end ? self.end.iso8601 : nil),
+      :location => self.location,
+      :description => self.description,
+      :temp => Rails.application.routes.url_helpers.event_path(id)
+    }
   end
 
   # def self.scoped(options=nil)
@@ -60,7 +63,7 @@ class Event < ActiveRecord::Base
   end
 
   def generate_participants_message
-    "The total number of participants, including invited guests, so far is:" +
+    'The total number of participants, including invited guests, so far is:' \
       " #{self.count_event_participants}"
   end
 
@@ -69,10 +72,10 @@ class Event < ActiveRecord::Base
     # We can also pass any options for the query
     # If so put them in the options hash, and pass it to the constructor
     #options = {access_token: token}
-    meetup = Meetup.new(options)
+    meetup = Meetup.new
 
     candidate_events = []
-    meetup_events = meetup.pull_events
+    meetup_events = meetup.pull_events(options)
     if meetup_events
       meetup_events.each do |event|
         return nil unless true   # ANY VALIDATION???? Check meetup.rb for details
@@ -145,9 +148,29 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def format_start_date
+    start.strftime('%m/%d/%Y at %I:%M%p') if start
+  end
 
-  def format_date
-    start.strftime("%m/%d/%Y at %I:%M%p") if start
+  def format_end_date
+    self.end.strftime('%m/%d/%Y at %I:%M%p') if self.end
+  end
+
+  def location
+    location = []
+    location << self.address_1
+    if self.state != nil
+      location << self.city.to_s + ', ' + self.state.to_s + ' ' + self.zip.to_s
+    else
+      location << self.city.to_s + self.zip.to_s
+    end
+    location << self.country
+    location.join("\n")
+  end
+
+  def update_meetup_fields(event)
+    keys = [:meetup_id, :updated, :url, :status]
+    keys.each {|k| self[k] = event[k]}
   end
 
 end

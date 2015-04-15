@@ -11,7 +11,7 @@ describe ApplicationController, type: :controller do
       expect(controller.current_user).to be_nil
     end
     it 'should return current user if user is logged in' do
-      controller.stub(:current_user).and_return(@user)
+      allow(controller).to receive(:current_user).and_return(@user)
       expect(controller.current_user).to eq(@user)
     end
   end

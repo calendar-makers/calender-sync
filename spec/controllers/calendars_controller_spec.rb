@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe CalendarsController do
+  before(:each) do
+    allow_any_instance_of(Meetup).to receive(:pull_events).and_return(nil)
+  end
 
 
   describe 'gets the calendar' do
@@ -27,7 +30,7 @@ describe CalendarsController do
       end
 
       it 'should indirectly call pull with default group_id' do
-        expect_any_instance_of(Meetup).to receive(:pull_events).with(no_args)
+        expect_any_instance_of(Meetup).to receive(:pull_events)
         get :show
       end
 

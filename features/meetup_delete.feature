@@ -1,3 +1,4 @@
+@meetup_delete
 Feature: Enforce event lists consistency by deleting events locally and remotely as required
 
   As an admin of the website
@@ -5,31 +6,30 @@ Feature: Enforce event lists consistency by deleting events locally and remotely
   I want to have automatic deletions between the Calendar events and the Meetup events
 
   Background: The Calendar and Meetup are currently synched
-
-    Given I have logged in as an admin on Meetup
+    Given I am an authorized organizer of the group
     And the following events exist on Meetup and on the Calendar
-      |                 name                    |    organization    |   event_id   |
-      | Market Street Prototyping Festival      | Nature in the city | 219648262    |
-      | Nerds on Safari: Market Street          | Nature in the city | 220706208    |
-      | Volunteer at the Adah Bakalinsky Steps! | Nature in the city | 214161012    |
+      |    name      |    organization    |   event_id   |
+      | Nature Walk  | Nature in the city | 221850455    |
 
-
+  @calendar_successful_deletion
   Scenario: deletion initiated on Calendar
-    Given I am on the "details" page for "Market Street Prototyping Festival"
+    Given I am on the "details" page for "Nature Walk"
     And I click on the "Delete" button
     Then I should be on the "Calendar" page
-    And the "Market Street Prototyping Festival" should exist on "neither" platform
-    And I should see the message "Market Street Prototyping Festival was successfully removed."
+    And the "Nature Walk" event should exist on "neither" platforms
+    And I should see the message "'Nature Walk' was successfully removed."
 
+  @calendar_failed_deletion
   Scenario: failed deletion initiated on Calendar
-    Given I am on the "details" page for "Market Street Prototyping Festival"
+    Given I am on the "details" page for "Nature Walk"
     And I click on the "Delete" button
     Then I should be on the "Calendar" page
-    And the "Market Street Prototyping Festival" should exist on "both" platform
-    And I should see the message "Could not remove Market Street Prototyping Festival"
+    And the "Nature Walk" event should exist on "both" platforms
+    And I should see the message "Could not remove 'Nature Walk'"
 
+  @meetup_successful_deletion
   Scenario: deletion initiated on Meetup
-    Given the event "Market Street Prototyping Festival" is deleted on Meetup
-    And I am on the "Calendar" page
-    And the "Market Street Prototyping Festival" should exist on "neither" platform
+    Given the event "Nature Walk" is deleted on Meetup
+    And I am on the "Calendar" page  # THIS REQUIRES YOU DO AUTOMATIC DELETION ON show in CALENDAR
+    And the "Nature Walk" event should exist on "neither" platforms
     And I should see the message "The Calendar and Meetup are synched"
