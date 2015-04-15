@@ -4,9 +4,9 @@ describe Meetup do
   let(:meetup) {Meetup.new}
 
   describe '::build_date' do
-    let(:date) {Time.gm(2015,4,11,0)}
-    let(:date_in_millis) {1428735600000}
-    let(:utc_offset) {-25200000}
+    let(:date) {Time.utc(2015,4,11,0)}
+    let(:date_in_millis) {date.to_i*1000}
+    let(:utc_offset) {}
 
     it 'gets a time in milliseconds and returns a DateTime' do
       expect(Meetup.build_date(date_in_millis, utc_offset)).to eq(date)
@@ -14,7 +14,7 @@ describe Meetup do
   end
 
   describe '::parse_event' do
-    let(:time) {double}
+    let(:time) {Time.now.to_i}
     let(:location) {double}
     let(:venue) {{id: '123'}}
     let(:data) {{'id' => '123',
@@ -22,6 +22,8 @@ describe Meetup do
                  'description' => 'what not',
                  'group' => {'name' => 'nature'},
                  'time' => time,
+                 'duration' => time,
+                 'utc_offset' => 1000,
                  'updated' => time,
                  'event_url' => 'url',
                  'how_to_find_us' => 'do not',
@@ -30,9 +32,8 @@ describe Meetup do
                   name: 'paul',
                   description: 'what not',
                   organization: 'nature',
-                  location: location,
                   start: time,
-                  duration: time,
+                  end: time,
                   updated: time,
                   url: 'url',
                   how_to_find_us: 'do not',
@@ -41,7 +42,6 @@ describe Meetup do
     before(:each) do
       allow(Meetup).to receive(:build_date).and_return(time)
       allow(Meetup).to receive(:build_duration).and_return(time)
-      allow(Meetup).to receive(:build_location).and_return(location)
       allow(Meetup).to receive(:parse_venue).and_return(venue)
     end
 
@@ -431,15 +431,17 @@ describe Meetup do
                                   group_urlname:'Meetup-API-Testing'})}
 
       context 'with existing local event' do
-        it 'returns true for a successful push' do
+        it 'returns a hash with event data for a successful push' do
           allow(good_user).to receive(:get_event_data).and_return(name: 'Testello', description: 'event o mine',
                                                                   venue_id: 1515715,
                                                                   time: DateTime.new(2015,5,10).to_i*1000,
                                                                   how_to_find_us: 'Follow the line')
           allow(HTTParty).to receive(:post).and_return(data)
           allow(data).to receive(:code).and_return(201)
-          data = good_user.push_event(event)
-          expect(data).to be_instance_of(Hash)
+          allow(data).to receive(:parsed_response).and_return(data)
+          allow(Meetup).to receive(:parse_event).with(data).and_return(Hash.new)
+          result = good_user.push_event(event)
+          expect(result).to be_instance_of(Hash)
         end
       end
     end
@@ -517,8 +519,8 @@ describe Meetup do
       allow_any_instance_of(Meetup).to receive(:get_meetup_venue_id).and_return(id)
       result = meetup.get_event_data(event)
       expect(result).to eq({name: 'Nature', description: 'Nice one',
-                               venue_id: id, time: Time.now.to_i*1000,
-                               duration: '1000000000', how_to_find_us: 'do not'})
+                               venue_id: id, time: Time.now.to_i*1000 + Meetup::UTC_OFFSET,
+                               duration: 1000000000, how_to_find_us: 'do not'})
     end
   end
 

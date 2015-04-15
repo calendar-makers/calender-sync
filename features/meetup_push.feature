@@ -18,12 +18,14 @@ Feature: push new calendar events to meetup
     And I fill in the "Description" field with "Join us for a nature walk through old town Los Angeles!"
     And I fill in the "How to find us" field with "Turn right at Sunset and Vine"
 
+  @successful_push
   Scenario: successfully push the newly created event to Meetup
       Given I click on the "Create Event" button
       Then I should be on the "Calendar" page
       And I should see the message "'Nature Walk' was successfully added and pushed to Meetup."
       And the "Nature Walk" event should exist on "both" platforms
 
+  @failed_push
   Scenario: failed push of newly created event to Meetup (Implemented as a transaction)
       Given I click on the "Create Event" button
       Then I should be on the "Calendar" page

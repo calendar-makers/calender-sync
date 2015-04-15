@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe CalendarsController do
+  before(:each) do
+    allow_any_instance_of(Meetup).to receive(:pull_events).and_return(nil)
+  end
 
 
   describe 'gets the calendar' do

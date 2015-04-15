@@ -8,7 +8,7 @@ Scenario: redirect to create page when create new event button pushed
   Given I am on the calendar page
   And I click on the "new event" link
   Then I should be on the "Create" page
-  And I should see the following fields: "Organization Name, Event Name, Description, Start Time, Location"
+  And I should see the following fields: "Organization Name, Event Name, Venue Name, Address, City, Zip, State, Country, Description, Start Time, End Time, How to find us"
   And I should see the "Create Event" button
 
 Scenario: Require all fields to be filled during event creation
@@ -20,10 +20,14 @@ Scenario: Require all fields to be filled during event creation
 Scenario: store information when all the fields are filled out
   Given I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
-  And I fill in the "Description" field with "Join us for a nature walk through old town San Franciso!"
-  And I select "3/19/2015, 4:30pm" as the date and time
-  And I fill in the "Location" field with "The Old Town Hall"
-  And I fill in the "Organization" field with "trololol"
+  And I fill in the "Venue Name" field with "Steps"
+  And I fill in the "Address" field with "145 Jackson st"
+  And I fill in the "City" field with "Glendale"
+  And I fill in the "Zip" field with "90210"
+  And I select "8/18/2015, 4:30pm" as the "start" date and time
+  And I select "8/22/2015, 4:30pm" as the "end" date and time
+  And I fill in the "Description" field with "Join us for a nature walk through old town Los Angeles!"
+  And I fill in the "How to find us" field with "Turn right at Sunset and Vine"
   And I click on the "Create Event" button
   Then I should be on the "Calendar" page
   #Then I should see the "Nature Walk" link

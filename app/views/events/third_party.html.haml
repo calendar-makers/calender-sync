@@ -29,7 +29,7 @@
         %th Name
         %th Group
         %th Start Time
-        %th Duration
+        %th End Time
         %th Location
         %th Meetup Link
 
@@ -42,8 +42,8 @@
           - id = event.id
           %td.names= id ? (link_to name, event_path(id)) : name
           %td= (organization = event.organization) ? organization : 'N/A'
-          %td= (date = event.format_date) ? date : 'N/A'
-          %td= (duration = event.duration) ? duration : 'N/A'
+          %td= (start = event.format_start_date) ? start : 'N/A'
+          %td= (end_date = event.format_end_date) ? end_date : 'N/A'
           %td= (location = event.location) ? location : 'N/A'
           - if (url = event.url) =~ /www.meetup.com/
             %td= link_to 'go', url
