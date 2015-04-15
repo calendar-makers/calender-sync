@@ -51,14 +51,14 @@ $(document).ready(function() {
     console.log(data);
   });
 
-  $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
+  $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));
 
   var timer,
     $win = $(window);
   $win.on('resize', function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-      $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
+      $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));
     }, 250);
   });
 
