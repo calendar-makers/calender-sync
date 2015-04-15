@@ -7,6 +7,9 @@
 # Ignore coverage
 /coverage
 
+# Ignore tmp
+/tmp
+
 # Ignore bundler config.
 /.bundle
 
