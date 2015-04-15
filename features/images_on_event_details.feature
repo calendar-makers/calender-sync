@@ -6,11 +6,11 @@ Feature: See images for a particular event
 
 Background:
   Given the following events exist:
-  | name             | organization       | description                               | start               | location                   |
-  | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |
-  | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015 00:00 | San Francisco City Library |
+    | name             | organization       | description                               | venue_name                 | address_1      | city     | zip   | start                | end                  | how_to_find_us     |
+    | Nature Walk      | Nature in the City | A walk through the city                   | The Old Town Hall          | 145 Jackson st | Glendale | 90210 | March 19 2015, 16:30 | March 19 2015, 20:30 | First door on left |
+    | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | San Francisco City Library | 45 Seneca st   | Phoenix  | 91210 | April 20 2015, 8:30  | April 21 2015, 8:30  | Second door on left|
 
-Scenario: User should see all pictures related to the event
+  Scenario: User should see all pictures related to the event
   Given I am on the "Edit" page for "Nature Walk"
   When I upload an image
   And I am on the "details" page for "Nature Walk"

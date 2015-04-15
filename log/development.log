@@ -25046,3 +25046,10 @@ Started GET "/events.json" for 127.0.0.1 at 2015-04-14 01:54:12 -0700
 Processing by EventsController#index as JSON
   [1m[35mEvent Load (0.7ms)[0m  SELECT "events".* FROM "events"
 Completed 200 OK in 52ms (Views: 49.6ms | ActiveRecord: 0.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "events" ("name", "organization", "start", "end", "description", "how_to_find_us", "venue_name", "address_1", "city", "zip") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Gardening"], ["organization", "Nature in the City"], ["start", "2015-03-19 16:30:00.000000"], ["end", "2015-03-19 20:30:00.000000"], ["description", "Gardening at San Francisco"], ["how_to_find_us", "first door to the left"], ["venue_name", "The Old Town Hall"], ["address_1", "145 Jackson st"], ["city", "Glendale"], ["zip", "90210"]]
+  [1m[35m (137.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "events" ("name", "organization", "start", "end", "description", "how_to_find_us", "venue_name", "address_1", "city", "zip") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Green Bean Mixer"], ["organization", "Green Thumb"], ["start", "2015-04-20 08:30:00.000000"], ["end", "2015-04-21 08:30:00.000000"], ["description", "Talk about nature."], ["how_to_find_us", "first door to the right"], ["venue_name", "San Francisco Library"], ["address_1", "35 Seneca st"], ["city", "New York"], ["zip", "91211"]]
+  [1m[36m (139.8ms)[0m  [1mcommit transaction[0m

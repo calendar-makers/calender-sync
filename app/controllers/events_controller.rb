@@ -144,7 +144,7 @@ class EventsController < ActionController::Base
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-    flash[:notice] = "\"#{@event.name}\" was successfully removed."
+    flash[:notice] = "'#{@event.name}' was successfully removed."
     redirect_to calendar_path
   end
 
@@ -153,7 +153,7 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :address_1,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image)
+                                  :description, :how_to_find_us, :image_file_name)
   end
 
   def form_validation_msg

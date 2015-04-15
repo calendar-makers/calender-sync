@@ -156,11 +156,14 @@ Given /I already pulled by group_urlname: "(.*)"/ do |urlname|
 end
 
 And /"(.*)" should (not )?exist on "(.*)"/ do |event_name, negative, platform|
-  event = Event.find_by_name(event_name)
-  if platform.downcase! == 'calendar'
+  platform = platform.downcase
+  if platform == 'calendar'
+    event = Event.find_by_name(event_name)
     negative ? (expect(event).to be_nil) : (expect(event).not_to be_nil)
   elsif platform == 'meetup'
-    negative ? (expect(event[:meetup_id]).to be_nil) : (expect(event[:meetup_id]).not_to be_nil)
+    meetup = Meetup.new
+    event_id = 221850455
+    negative ? (expect(meetup.pull_event(event_id)).to be_nil) : (expect(meetup.pull_event(event_id)).not_to be_nil)
   else
     raise Error.new
   end
@@ -174,6 +177,10 @@ And /the "(.*)" event should exist on "(both|neither)" platforms/ do |event_name
     step %Q{"#{event_name}" should exist on "Calendar"}
     step %Q{"#{event_name}" should exist on "Meetup"}
   end
+end
+
+And /the following events exist on Meetup and on the Calendar/ do |data|
+  step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
 end
 
 
