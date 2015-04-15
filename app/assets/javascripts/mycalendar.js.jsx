@@ -51,14 +51,14 @@ $(document).ready(function() {
     console.log(data);
   });
 
-  $('#panel').height($('#calendar').height());
+  $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
 
   var timer,
     $win = $(window);
   $win.on('resize', function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-      $('#panel').height($('#calendar').height());
+      $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
     }, 250);
   });
 

@@ -55,13 +55,24 @@ h2 {
     width:74%; 
     float:left;
 }
-#panel {
+
+
+#panel_header {
+    border: 1px solid #ccc;
+}
+
+#panel_wrapper {
     width:24%; 
     float:right;
     padding: 0.6%;
-/*    border: 1px solid #ccc; */
-    overflow: scroll;
+    border: 1px solid #ccc;
 }
+
+#panel {
+  overflow: scroll;
+  border: 1px solid #ccc;
+}
+
 #name, #date_time, #location {
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;

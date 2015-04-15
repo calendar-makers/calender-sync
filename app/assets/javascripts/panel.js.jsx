@@ -43,7 +43,12 @@ var displayEventPanel = function() {
       </div>
       <br/>
       <br/>
-      <div id="crud"></div>
+      <div>
+        <input type='button' id='editEvent' value='Edit'/>
+        {' '}
+        <input type='button' id='deleteEvent' value='Delete'/>
+      </div>
+      <div id="editEvent"></div>
       /* if @current user, then show edit and delete button */
     </div>
   );

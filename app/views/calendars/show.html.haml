@@ -13,9 +13,11 @@
 
 #wrap
   #calendar
-  #panel
-    %h2{:style => "font-weight:200;"} Event Details
-    - unless @event
-      %p Click an event!
+  #panel_wrapper
+    #panel_header
+      %h2{:style => "font-weight:200;"} Event Details
+    #panel
+      - unless @event
+        %p Click an event!
 
   %div{:style => "clear:both;"}
