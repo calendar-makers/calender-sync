@@ -17885,3 +17885,549 @@ Processing by CalendarsController#show as HTML
 Redirected to https://localhost/calendar
 Filter chain halted as #<Proc:0x007f10a433b948@/home/vincent/.rvm/gems/ruby-2.2.1/gems/actionpack-4.2.0/lib/action_controller/metal/force_ssl.rb:65> rendered or redirected
 Completed 301 Moved Permanently in 1ms (ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+
+  [1m[36m (107.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (98.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddFieldsToEvent (20150309052155)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "events" ADD "organization" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "events" ADD "event_name" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "events" ADD "details" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "events" ADD "date" date[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "events" ADD "time" time
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "events" ADD "location" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150309052155"]]
+  [1m[36m (106.2ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeNameColumn (20150309093209)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "details" varchar, "date" date, "time" time, "location" varchar) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "events"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "events"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "details" varchar, "date" date, "time" time, "location" varchar) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "aevents"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "aevents"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150309093209"]]
+  [1m[35m (106.6ms)[0m  commit transaction
+Migrating to AddDescriptionColumn (20150309094321)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "events" ADD "description" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150309094321"]]
+  [1m[35m (104.9ms)[0m  commit transaction
+Migrating to RemoveDetailsFromEvents (20150310130514)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "details" varchar, "date" date, "time" time, "location" varchar, "description" varchar) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "events"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "events"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "date" date, "time" time, "location" varchar, "description" varchar) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "aevents"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "aevents"[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150310130514"]]
+  [1m[36m (115.6ms)[0m  [1mcommit transaction[0m
+Migrating to EditDateTimeField (20150313190416)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "date" date, "time" time, "location" varchar, "description" varchar) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "events"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "events"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "time" time, "location" varchar, "description" varchar) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "aevents"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "aevents"
+  [1m[36m (0.1ms)[0m  [1mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "time" time, "location" varchar, "description" varchar) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "events"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "events"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "location" varchar, "description" varchar) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aevents"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aevents"
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "events" ADD "start" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150313190416"]]
+  [1m[36m (105.5ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeNameToTitle (20150313212611)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "title" varchar, "location" varchar, "description" varchar, "start" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "events"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "events"[0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "title" varchar, "location" varchar, "description" varchar, "start" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aevents"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "aevents"
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150313212611"]]
+  [1m[35m (119.4ms)[0m  commit transaction
+Migrating to AddFieldsToGuests (20150318033526)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "guests" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "phone" integer, "email" varchar, "address" varchar) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150318033526"]]
+  [1m[35m (121.0ms)[0m  commit transaction
+Migrating to CreateRegistration (20150318053141)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "registrations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "guest_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_registrations_on_event_id" ON "registrations" ("event_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_registrations_on_guest_id" ON "registrations" ("guest_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150318053141"]]
+  [1m[35m (126.5ms)[0m  commit transaction
+Migrating to ChangeGuestPhoneIntoString (20150318074341)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "aguests" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "phone" integer, "email" varchar, "address" varchar) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "guests"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "guests"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "guests" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "phone" varchar, "email" varchar, "address" varchar) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "aguests"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "aguests"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150318074341"]]
+  [1m[36m (132.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddAnonBooleanToGuest (20150318074948)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "guests" ADD "is_anon" boolean[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150318074948"]]
+  [1m[36m (121.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20150324014917)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar, "uid" varchar, "token" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150324014917"]]
+  [1m[36m (106.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddColumnsToEvents (20150329043901)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "events" ADD "meetup_id" varchar[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "duration" integer
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "events" ADD "created" datetime[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "updated" datetime
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "events" ADD "url" varchar[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "events" ADD "how_to_find_us" varchar
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "events" ADD "status" varchar[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150329043901"]]
+  [1m[36m (124.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddMeetupColumnsToGuests (20150329110331)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "guests" ADD "meetup_id" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150329110331"]]
+  [1m[36m (121.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddFriendColumnToRegistrations (20150329123530)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "registrations" ADD "invited_guests" integer[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150329123530"]]
+  [1m[36m (112.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddCreatedUpdatedColumnsToRegistrations (20150329125258)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "registrations" ADD "created" datetime[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "registrations" ADD "updated" datetime
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150329125258"]]
+  [1m[35m (112.3ms)[0m  commit transaction
+Migrating to RemoveCreatedFromRegistrations (20150329155209)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "aregistrations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "guest_id" integer, "invited_guests" integer, "created" datetime, "updated" datetime) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "tindex_aregistrations_on_guest_id" ON "aregistrations" ("guest_id")[0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "tindex_aregistrations_on_event_id" ON "aregistrations" ("event_id")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "registrations"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "registrations"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "registrations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "event_id" integer, "guest_id" integer, "invited_guests" integer, "updated" datetime) [0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aregistrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aregistrations_on_event_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aregistrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aregistrations_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_registrations_on_event_id" ON "registrations" ("event_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_registrations_on_guest_id" ON "registrations" ("guest_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aregistrations"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aregistrations"
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150329155209"]]
+  [1m[35m (109.2ms)[0m  commit transaction
+Migrating to RemoveCreatedFromEvents (20150329155225)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "title" varchar, "location" varchar, "description" varchar, "start" datetime, "meetup_id" varchar, "duration" integer, "created" datetime, "updated" datetime, "url" varchar, "how_to_find_us" varchar, "status" varchar) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "events"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "events"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "title" varchar, "location" varchar, "description" varchar, "start" datetime, "meetup_id" varchar, "duration" integer, "updated" datetime, "url" varchar, "how_to_find_us" varchar, "status" varchar) [0m
+  [1m[35m (0.9ms)[0m  SELECT * FROM "aevents"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "aevents"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150329155225"]]
+  [1m[36m (113.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddAttributesTouser (20150331055835)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD "expires_at" varchar[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "refresh_token" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150331055835"]]
+  [1m[35m (127.4ms)[0m  commit transaction
+Migrating to ChangeExpiresFromUser (20150331062530)
+  [1m[36m (1.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  CREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar, "uid" varchar, "token" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "expires_at" varchar, "refresh_token" varchar) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider" varchar, "uid" varchar, "token" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "expires_at" integer, "refresh_token" varchar) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ausers"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "ausers"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150331062530"]]
+  [1m[36m (120.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddVenueColumnsToEvents (20150401000647)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "events" ADD "address_1" varchar[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "city" varchar
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "events" ADD "zip" varchar[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "state" varchar
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "events" ADD "country" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150401000647"]]
+  [1m[36m (125.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddPaperclipToEvent (20150402064812)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "events" ADD "image_file_name" varchar[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "image_content_type" varchar
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "events" ADD "image_file_size" integer[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "events" ADD "image_updated_at" datetime
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150402064812"]]
+  [1m[35m (126.1ms)[0m  commit transaction
+Migrating to ChangeTitleToNameInEvents (20150402194548)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "location" varchar, "description" varchar, "start" datetime, "meetup_id" varchar, "duration" integer, "updated" datetime, "url" varchar, "how_to_find_us" varchar, "status" varchar, "address_1" varchar, "city" varchar, "zip" varchar, "state" varchar, "country" varchar, "image_file_name" varchar, "image_content_type" varchar, "image_file_size" integer, "image_updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "events"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "events"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "organization" varchar, "name" varchar, "location" varchar, "description" varchar, "start" datetime, "meetup_id" varchar, "duration" integer, "updated" datetime, "url" varchar, "how_to_find_us" varchar, "status" varchar, "address_1" varchar, "city" varchar, "zip" varchar, "state" varchar, "country" varchar, "image_file_name" varchar, "image_content_type" varchar, "image_file_size" integer, "image_updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "aevents"
+  [1m[36m (0.1ms)[0m  [1mDROP TABLE "aevents"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150402194548"]]
+  [1m[36m (121.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "events" ("name", "location", "organization", "start", "description") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Gardening"], ["location", "San Francisco"], ["organization", "Nature in the City"], ["start", "2012-01-01 00:00:00.000000"], ["description", "Gardening at San Francisco"]]
+  [1m[35m (94.6ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("name", "location", "organization", "start", "description") VALUES (?, ?, ?, ?, ?)  [["name", "Green Bean Mixer"], ["location", "Los Angeles"], ["organization", "Green Thumb"], ["start", "2016-03-03 00:00:00.000000"], ["description", "Talk about nature."]]
+  [1m[36m (119.4ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-04-15 23:29:13 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/calendar" for 127.0.0.1 at 2015-04-15 23:29:14 -0700
+Processing by CalendarsController#show as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytgbxb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytgbxb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "14th Avenue and Noriega Street, San Francisco, , CA, us"], ["start", "2015-04-18 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:05:09.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/221461110/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "14th Avenue and Noriega Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (108.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytgbzb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytgbzb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-04-19 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/214161012/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "221198835"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "221198835"], ["name", "Nature in the City’s McCoppin Hub Plaza Earth Day"], ["description", "<p><b>Nature in the City’s McCoppin Hub Plaza Earth Day</b></p> <p>Presented by People in Plazas</p> <p>Sponsored by the Mayor’s Office of Economic and Workforce Development</p> <p>Join us for a fete for local nature, and learn how to preserve, protect, and enhance the natural jewels of San Francisco. </p> <p><b>Wednesday, April 22nd from 12 p.m. to 5 p.m. </b></p> <p><b>Valencia at McCoppin Street (one block south of Market)</b></p> <p>Join us for a simple day of nature. Plant the park, have a bite to eat, and slow down for a minute to observe. This will also be a fun, musical, hands-on, journalistic, adventurous day, when nature experts will share their knowledge and inspire us to discover local nature. </p> <p>Partners include: San Francisco Department of Environment's Biodiversity Program and SF Plantfinder Database, Weaving Earth, Children in Nature Collaborative, and Children’s Day School with a special guest appearance by the resident Guadalupe Island Palms and their new neighboring plants: San Francisco native ceanothus, toyon, coast buckwheat, and ferns – who knew! </p>"], ["organization", "Nature in the City"], ["location", "McCoppin and Valencia, San Francisco, 94103, CA, us"], ["start", "2015-04-22 12:00:00.000000"], ["duration", 5], ["updated", "2015-04-14 14:11:04.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/221198835/"], ["status", "upcoming"], ["address_1", "McCoppin and Valencia"], ["city", "San Francisco"], ["zip", "94103"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (120.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "219647661"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "219647661"], ["name", "Walk Bike a Green Connection with Ivan Samuels "], ["description", "<p>Let's meet and think about the potential of habitat connections along the sidewalks of urban streets. Green Connections is a City of San Francisco plan to create pedestrian, bicyclist, and wildlife friendly connections between our parks and open spaces. Join birder since birth, Ivan Samuels and Nature in the City for this observant and thoughtful nature adventure!</p>"], ["organization", "Nature in the City"], ["start", "2015-05-02 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-06 12:51:51.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/219647661/"], ["status", "upcoming"]]
+  [1m[36m (129.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220197569"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "status", "address_1", "city", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "220197569"], ["name", "Explore the Habits of Breeding Birds at Buena Vista Park"], ["description", "<p>Join us for a fascinating peek into the world of breeding birds with Kimberly Jannarone's in her favorite backyard birding spot, Buena Vista Park. </p> <p>\n\nWe'll hike through this intricate park's redwoods, oak woodlands, and boardwalks in search of breeding birds.  Last year the park hosted over a dozen species of nesting birds, including Nuttall's Woodpeckers, Chickadees, Bushtits, Brown Creepers, and Ravens.  Amazing views of the city throughout.</p> <p>Social destination post hike: Duboce Park, after getting sandwiches and fresh juice at Courtney's.</p> <p>Please wear comfortable hiking shoes, and dress in layers just in case.  Bring binoculars if you have them (leader will bring an extra pair, too).</p> <p>\n\nWalks are $10 to $20 suggested donation for non-members and free for Nature in the City members. We offer an exclusive member perk for those who join us on the spot! </p>"], ["organization", "Nature in the City"], ["location", "Buena Vista Ave E & Duboce St, San Francisco, , , US"], ["start", "2015-05-03 08:00:00.000000"], ["duration", 3], ["updated", "2015-02-02 16:10:44.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/220197569/"], ["status", "upcoming"], ["address_1", "Buena Vista Ave E & Duboce St"], ["city", "San Francisco"], ["country", "US"]]
+  [1m[36m (111.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "nzbgflythbmb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "nzbgflythbmb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p><br/>Please sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p><br/>Volunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2015-05-09 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 12:41:02.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/220168923/"], ["status", "upcoming"]]
+  [1m[36m (111.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgythbvb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgythbvb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-05-16 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgythbvb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgythbwb"]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgythbwb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-05-17 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgythbwb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytjbbc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytjbbc"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-06-20 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytjbbc/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytjbcc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytjbcc"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-06-21 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytjbcc/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytkbxb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytkbxb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-07-18 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytkbxb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (128.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytkbzb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytkbzb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-07-19 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytkbzb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytlblb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "kccgflytlblb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p><br/>Please sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2015-08-08 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 12:41:48.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/kccgflytlblb/"], ["status", "upcoming"]]
+  [1m[36m (120.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytlblb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "jlcgflytlblb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of a quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p>\n\n\nPlease sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\n\n\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2015-08-08 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 13:14:12.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/jlcgflytlblb/"], ["status", "upcoming"]]
+  [1m[36m (120.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytlbtb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytlbtb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-08-15 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytlbtb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (121.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytlbvb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytlbvb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-08-16 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytlbvb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytmbzb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytmbzb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-09-19 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytmbzb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytmbbc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytmbbc"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-09-20 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytmbbc/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (120.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytnbwb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytnbwb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-10-17 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytnbwb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytnbxb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytnbxb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-10-18 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytnbxb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "220423545"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "220423545"], ["name", "Explore McLaren Park's Green Connectors – Pollinators, Oaks, Lizards & more"], ["description", "<p>The Green Connections Plan was completed in 2013 and includes 24 routes that connect the natural jewels of San Francisco. Join Walk San Francisco and Nature in the City on a walk to discover five of these connections (named for Red-winged Blackbirds, Western Fence Lizards, California Buckeye trees, Pollinators, Coyotes, and more). All of these routes are connected to McLaren Park, the second largest, and most wild park in San Francisco.</p>"], ["organization", "Nature in the City"], ["location", "215 John F Shelley Drive, San Francisco, 94134, CA, us"], ["start", "2015-11-07 10:00:00.000000"], ["duration", 3], ["updated", "2015-02-09 16:30:15.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/220423545/"], ["status", "upcoming"], ["address_1", "215 John F Shelley Drive"], ["city", "San Francisco"], ["zip", "94134"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (120.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflytpbsb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "kccgflytpbsb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p><br/>Please sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2015-11-14 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 11:41:48.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/kccgflytpbsb/"], ["status", "upcoming"]]
+  [1m[36m (112.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflytpbsb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "jlcgflytpbsb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of a quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p>\n\n\nPlease sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\n\n\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2015-11-14 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 12:14:12.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/221468737/"], ["status", "upcoming"]]
+  [1m[36m (112.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytpbtb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytpbtb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-11-15 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 13:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytpbtb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (262.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytpbcc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytpbcc"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-11-21 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 13:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytpbcc/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (111.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgytqbzb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgytqbzb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2015-12-19 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 13:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgytqbzb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (120.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgytqbbc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgytqbbc"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2015-12-20 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 13:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgytqbbc/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (125.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvcbvb"]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgyvcbvb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2016-01-16 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 13:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgyvcbvb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (119.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvcbwb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgyvcbwb"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2016-01-17 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 13:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgyvcbwb/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (113.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "jlcgflyvdbrb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "jlcgflyvdbrb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of a quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p>\n\n\nPlease sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\n\n\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2016-02-13 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 12:14:12.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/jlcgflyvdbrb/"], ["status", "upcoming"]]
+  [1m[36m (103.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "kccgflyvdbrb"]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "start", "duration", "updated", "url", "status") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "kccgflyvdbrb"], ["name", "Family Friendly Nursery Day"], ["description", "<p>Join Nature in the City's <i>Backyard Native Plant Nursery Network</i> and help us grow wildlife-attracting plants for our habitat restoration projects. This is apart of quarterly event that helps us sort seeds, clean and package seeds, blend soil, sow seeds, and transplant seedlings. Your efforts will help us have thousands of healthy plants to create public habitat projects! These plants bring in pollinators, feed butterflies, and provide nesting locations for birds.</p> <p><br/>Please sign-up <a href=\"http://www.handsonbayarea.org/HOC__Volunteer_Opportunity_Details_Page?id=a0a6000000CFyQlAAL&amp;wrs=HOC0074-003-c9003947-b219-4f90-928c-363df114cd34\">here</a> for details.</p> <p>\n\n\nVolunteers should be prepared for mindful, delicate work. Please dress in clothes you don't mind getting dirty and bring water and snacks.</p>"], ["organization", "Nature in the City"], ["start", "2016-02-13 10:00:00.000000"], ["duration", 3], ["updated", "2015-01-29 11:41:48.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/kccgflyvdbrb/"], ["status", "upcoming"]]
+  [1m[36m (111.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvdbbc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgyvdbbc"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2016-02-20 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 13:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgyvdbbc/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (110.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvdbcc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgyvdbcc"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2016-02-21 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 13:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgyvdbcc/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (125.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.2ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvfbzb"]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgyvfbzb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2016-03-19 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgyvfbzb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (143.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "dmlzzgyvfbbc"]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "dmlzzgyvfbbc"], ["name", "Volunteer at Adah's Stairway"], ["description", "<p><b>Adah's Stairway</b> is a new community partnership: a public stairway and park located in the Buena Vista Park and Haight Ashbury neighborhoods. Nature in the City is working with local residents to enhance the wildlife potential for this park – a forgotten place, which had become blighted by illegal dumping and graffiti. </p> <p>We are helping to organize the community and facilitate monthly volunteer workdays to transform this area into a tribute to local walking guru Adah Bakalinsky, author of the 'Stairway Walks in San Francisco'. What's more is that our work here will create a bird sanctuary for resident and migrating birds designed with the Cedar Waxwing (<i>Bombycilla cedrorum</i>) in mind. Cedar Waxwings are gorgeous birds that pass through San Francisco during spring and fall feeding on berries and fruits along the Pacific Flyway migration route. </p>"], ["organization", "Nature in the City"], ["location", "Broderick Street and Waller Street, San Francisco, , CA, us"], ["start", "2016-03-20 10:00:00.000000"], ["duration", 2], ["updated", "2015-04-14 14:23:24.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/dmlzzgyvfbbc/"], ["how_to_find_us", "This public park was once a cobblestone street where Waller Street continued up the hill from Broderick Street connect into Buena Vista Avenue East. You'll find us working here in the park, come say hello!"], ["status", "upcoming"], ["address_1", "Broderick Street and Waller Street"], ["city", "San Francisco"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (116.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mEvent Load (0.3ms)[0m  SELECT  "events".* FROM "events" WHERE "events"."meetup_id" = ? LIMIT 1  [["meetup_id", "qdwhxgyvgbvb"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "events" ("meetup_id", "name", "description", "organization", "location", "start", "duration", "updated", "url", "how_to_find_us", "status", "address_1", "city", "zip", "state", "country") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["meetup_id", "qdwhxgyvgbvb"], ["name", "Volunteer in the Green Hairstreak Wildlife Habitat Corridor!"], ["description", "<p>Learn about the Green Hairstreak butterfly, bees, beetles, western fence lizards and more. 237 unique species can be found in this urban wildlife corridor. Help us create habitat for more!</p>"], ["organization", "Nature in the City"], ["location", "16th Ave & Moraga St, San Francisco, 94122, CA, us"], ["start", "2016-04-16 10:00:00.000000"], ["duration", 2], ["updated", "2015-01-06 14:46:29.000000"], ["url", "http://www.meetup.com/Nature-in-the-City/events/qdwhxgyvgbvb/"], ["how_to_find_us", "Every month we meet in a new location. To find us please call 415-564-4107."], ["status", "upcoming"], ["address_1", "16th Ave & Moraga St"], ["city", "San Francisco"], ["zip", "94122"], ["state", "CA"], ["country", "us"]]
+  [1m[36m (110.5ms)[0m  [1mcommit transaction[0m
+  Rendered calendars/show.html.haml within layouts/application (12.1ms)
+Completed 200 OK in 6563ms (Views: 576.0ms | ActiveRecord: 4394.1ms)
+
+
+Started GET "/assets/guests-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/sessions-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/guests-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/jquery.min-a119098e449afb841aa9bf1b263116f3.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/jquery-ui.custom.min-4fd01ed69cc6fad9c82538cf228035b0.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/moment.min-e41ca2b07a0362b8bfae0cc36b078432.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/assets/sessions-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for 127.0.0.1 at 2015-04-15 23:29:20 -0700
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-15 23:29:21 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.9ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 51ms (Views: 49.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-15 23:29:21 -0700
+Processing by EventsController#index as JSON
+  [1m[36mEvent Load (0.5ms)[0m  [1mSELECT "events".* FROM "events"[0m
+Completed 200 OK in 63ms (Views: 62.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/events.json" for 127.0.0.1 at 2015-04-15 23:29:21 -0700
+Processing by EventsController#index as JSON
+  [1m[35mEvent Load (0.5ms)[0m  SELECT "events".* FROM "events"
+Completed 200 OK in 43ms (Views: 41.5ms | ActiveRecord: 0.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDeviseToUsers (20150416063402)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150416063402"]]
+  [1m[35m (141.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_guest_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_registrations_on_event_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m

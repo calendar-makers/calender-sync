@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resource :calendar, :only => [:show]
   resources :events do
     collection do
