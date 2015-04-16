@@ -11,9 +11,11 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
+    = raw @head1
 
   %body{:style => "width:75%; margin-left:12.5%;"}
-    %h1.title Nature in the City [header placeholder]
+    //= raw @page.css("header")
+    = raw @header
     %main
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
