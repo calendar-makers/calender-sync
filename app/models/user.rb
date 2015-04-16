@@ -1,12 +1,20 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, 
+         :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:meetup]
+
+  # This method creates a "dummy" user used for meetup logins
+  # If a user is created this way, you can only login with Meetup for this user
+  # Note that this means the password is not recoverable
   def self.create_with_omniauth(auth)
     ret = create do |user|
       user.provider = auth["provider"]
-      user.uid = auth["uid"]
+      user.uid = auth["uid"]        # Should be unique to each account
+      user.email = "fake@fake.com"  # Fake email is fake, and does not exist
+                                    # meetup email not found in auth
+      user.password = Devise.friendly_token[0,20]  # literally a random string
       user.token = auth["credentials"]["token"]
       user.expires_at = auth["credentials"]["expires_at"]
       user.refresh_token = auth["credentials"]["refresh_token"]

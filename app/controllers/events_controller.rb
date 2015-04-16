@@ -1,4 +1,6 @@
 class EventsController < ActionController::Base
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy] 
+  
   def index
     @events = Event.all
     @message = flash[:notice]
