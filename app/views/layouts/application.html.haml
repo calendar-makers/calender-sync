@@ -12,11 +12,13 @@
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
     = raw @head1
-
-  %body{:style => "width:75%; margin-left:12.5%;"}
-    //= raw @page.css("header")
     = raw @header
-    %main
+    %hr
+
+  %body
+    //= raw @page.css("header")
+    
+    %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
       - elsif flash[:warning]
@@ -26,4 +28,6 @@
       = javascript_include_tag 'my_calendar'
     
     </br></br></br></br></br>
-    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"} [footer placeholder]
+    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+    = raw @section 
+    = raw @footer

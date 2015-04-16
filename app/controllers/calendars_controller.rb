@@ -1,28 +1,30 @@
 class CalendarsController < ApplicationController
-  def printer(arg)
-    puts "**********************"
-    puts "=> " + arg.inspect
-    puts "**********************"
-  end
 
   def show
     # For the moment keep running this task at every page view.
     # But later I should switch to a scheduler (the link is on the browser)
     @page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
 
-    @page.css("form").each do |tag|
-      if tag["href"] != nil and tag["href"][0] =='/'
+    @page.css("li").each do |tag|
+      if tag["class"] != nil and tag["class"] =="item-144"
+        tag["class"] = "item-144 current"
+      end
+    end
+    @page.css("a,form").each do |tag|
+      if tag["href"] !=nil and tag["href"][0] =='/'
         tag.set_attribute('href', "http://www.natureinthecity.org" + tag["href"])
       end
     end
-
-    @page.css("a").each do |tag|
-      if tag["href"][0] =='/'
-        tag.set_attribute('href', "http://www.natureinthecity.org" + tag["href"])
+    @section =""
+    @page.css("section").each do |elem|
+      if elem["id"] == "gk-bottom"
+        @section = elem
       end
     end
     @head1 = @page.at_css "head"
     @header = @page.at_css "header"
+    @footer = @page.at_css "footer"
+    
 
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)

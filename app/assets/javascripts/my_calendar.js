@@ -20,11 +20,11 @@ $(document).ready(function() {
   });
 
   // go_to_date(date);
-
-  console.log("hello world");
+  console.log("You come here often? We love people who love the console so why don't you send us an email and we will send you a job! jobs@fasterfood.io");
+  //console.log("hello world");
   $.getJSON('events.json', function(data){
-    console.log("I'm in the json call");
-    console.log(data);
+    //console.log("I'm in the json call");
+    //console.log(data);
   });
 
 });
