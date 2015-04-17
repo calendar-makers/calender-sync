@@ -4,74 +4,10 @@ var displayEventPanel = function() {
     <div>
       <div id="image">
         <i>image resizing has to be done, maybe to resize along with page size?</i>
-        // image here
+        {/* image here */}
       </div>
       <br/>
-      <div id="name">
-        <div className="left">
-          <p>What</p>
-        </div>
-        <div className="right">
-          <p>
-            {this.props.name}
-          </p>
-        </div>
-        <div style={{clear: 'both'}}></div>
-      </div>
-      <div id="date_time">
-        <div className="left">
-          <p>When</p>
-        </div>
-        <div className="right">
-          <p>
-            {this.props.timePeriod}
-          </p>
-        </div>
-        <div style={{clear: 'both'}}></div>
-      </div>
-      <div id="location">
-        <div className="left">
-          <p>Where</p>
-        </div>
-        <div className="right" style={{whiteSpace: 'pre-wrap'}}>
-          <p>
-            {this.props.location}
-          </p>
-          <p>
-            <i>map may be coming soon!</i>
-          </p>
-        </div>
-        <div style={{clear: 'both'}}></div>
-      </div>
-      <br/>
-      <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
-      <br/>
-      <br/>
-      <div id="rsvp">
-        <i>rsvp under construction</i>
-        // maybe we should put a link to an rsvp form page or popup...
-      </div>
-      <br/>
-      <br/>
-      <div>
-        <button type='button' id='editEvent' className='button'>edit</button>
-        {' '}
-        <button type='button' id='deleteEvent' className='button'>delete</button>
-      </div>
-      <div id="editEvent"></div>
-      /* if @current user, then show edit and delete button */
-    </div>
-  );
-}
 
-var displayEditEventPanel = function() {
-  return (
-    <div>
-      <div id="image">
-        <i>image resizing has to be done, maybe to resize along with page size?</i>
-        // image here
-      </div>
-      <br/>
       <div id="name">
         <div className="left">
           <p>What</p>
@@ -83,6 +19,7 @@ var displayEditEventPanel = function() {
         </div>
         <div style={{clear: 'both'}}></div>
       </div>
+
       <div id="date_time">
         <div className="left">
           <p>When</p>
@@ -94,6 +31,7 @@ var displayEditEventPanel = function() {
         </div>
         <div style={{clear: 'both'}}></div>
       </div>
+
       <div id="location">
         <div className="left">
           <p>Where</p>
@@ -109,22 +47,24 @@ var displayEditEventPanel = function() {
         <div style={{clear: 'both'}}></div>
       </div>
       <br/>
+
       <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
       <br/>
       <br/>
       <div id="rsvp">
         <i>rsvp under construction</i>
-        // maybe we should put a link to an rsvp form page or popup...
+        {/* maybe we should put a link to an rsvp form page or popup... */}
       </div>
       <br/>
       <br/>
+
+      <i>these buttons will only be visible to admin</i>
+      {/* if admin, then show edit and delete button */}
       <div>
         <button type='button' id='editEvent' className='button'>edit</button>
         {' '}
         <button type='button' id='deleteEvent' className='button'>delete</button>
       </div>
-      <div id="editEvent"></div>
-      /* if @current user, then show edit and delete button */
     </div>
   );
 }
@@ -161,5 +101,5 @@ var Event = React.createClass({
     });
   },
 
-  render: displayEditEventPanel
+  render: displayEventPanel
 });

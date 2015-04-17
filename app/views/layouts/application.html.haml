@@ -2,8 +2,6 @@
 %html
   %head
     %title Calendar
-    :javascript
-      var date = "#{@date}"
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
@@ -12,7 +10,7 @@
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
 
-  %body{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width: 50em;"}
+  %body{:style => "width:75%; padding-left:12.5%; padding-right:12.5%; min-width: 50em;"}
     %h1.title Nature in the City [header placeholder]
     %main
       - if flash[:notice]
