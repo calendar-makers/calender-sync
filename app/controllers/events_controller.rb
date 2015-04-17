@@ -159,7 +159,7 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :address_1,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image_file_name)
+                                  :description, :how_to_find_us, :image)
   end
 
   def form_validation_msg

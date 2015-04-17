@@ -20,6 +20,8 @@
       - elsif flash[:warning]
         %h3#warning.message= flash[:warning]
 
+      page = Nokogiri::HTML(open(http://www.natureinthecity.org/index.php))
+
       = yield
       = javascript_include_tag 'mycalendar'
 
