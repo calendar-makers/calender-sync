@@ -108,7 +108,7 @@ class EventsController < ActionController::Base
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
 
     else
-     flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
+     flash[:notice] = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
     end
 
       redirect_to calendar_path
@@ -143,8 +143,16 @@ class EventsController < ActionController::Base
 
   def destroy
     @event = Event.find params[:id]
-    @event.destroy
-    flash[:notice] = "'#{@event.name}' was successfully removed."
+
+    meetup = Meetup.new
+    if meetup.delete_event(@event.meetup_id)
+      @event.destroy
+      flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
+    else
+      flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
+    end
+
+
     redirect_to calendar_path
   end
 

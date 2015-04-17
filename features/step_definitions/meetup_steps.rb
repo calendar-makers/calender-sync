@@ -179,8 +179,14 @@ And /the "(.*)" event should exist on "(both|neither)" platforms/ do |event_name
   end
 end
 
-And /the following events exist on Meetup and on the Calendar/ do |data|
+And /the following event(?:s)? exist(?:s)? on Meetup and on the Calendar/ do |data|
   step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
+end
+
+Given /the event "(.*)" is deleted on Meetup/ do |event_name|
+  #meetup = Meetup.new
+  #meetup.delete_event(Event.find_by_name(event_name).meetup_id)
+  # no-op
 end
 
 

@@ -83,7 +83,6 @@ class Event < ActiveRecord::Base
     candidate_events
   end
 
-
   def self.make_events_local(events)
     if !events.blank?
       events_bin = []
@@ -100,8 +99,17 @@ class Event < ActiveRecord::Base
         events_bin << event
       end
 
+      Event.make_remote_deletions_local(events)
       events_bin
     end
+  end
+
+  def self.make_remote_deletions_local(remote_events)
+    local_event_ids = Event.pluck(:meetup_id)
+    remote_event_ids = []
+    remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
+    remotely_deleted_ids = local_event_ids - remote_event_ids
+    remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
   end
 
   def apply_update(new_event)

@@ -220,4 +220,34 @@ RSpec.describe Event, type: :model do
       expect(event.location).to eq(location.join(', '))
     end
   end
+
+  describe '#make_remote_deletions_local' do
+    before(:each) do
+      @event_1 = Event.create!(meetup_id: '12345')
+      @event_2 = Event.create!(meetup_id: '678910')
+      @local_events = [@event_1, @event_2]
+    end
+
+    context 'with no remote deletions' do
+      let(:remote_events) {@local_events}
+
+      it 'does nothing' do
+        Event.make_remote_deletions_local(remote_events)
+        expect(Event.all.size).to eq(@local_events.size)
+      end
+    end
+
+    context 'with one remote deletion' do
+      let(:remote_events) {[@event_1]}
+
+      it 'deletes the local event' do
+        Event.make_remote_deletions_local(remote_events)
+        expect(@event_2).to receive(:delete)
+      end
+    end
+  end
+
+
+
 end
+
