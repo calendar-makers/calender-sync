@@ -7,6 +7,13 @@ SimpleCov.start 'rails'
 # files.
 
 require 'cucumber/rails'
+require 'fakeweb'
+
+Before do
+  file = File.join(Rails.root, 'features', 'support', 'backup.html')
+  fake_response = File.read(file)
+  FakeWeb.register_uri(:get, "http://www.natureinthecity.org/", :body => fake_response, :status => ["200", "Okay"])
+end
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

@@ -11,13 +11,11 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
-    -if !@neededRescue
-      = raw @head1
-      = raw @header
+    = raw @head1
     %hr
 
   %body
-    //= raw @page.css("header")
+    = raw @header
     
     %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
@@ -25,13 +23,10 @@
       - elsif flash[:warning]
         %h3#warning.message= flash[:warning]
 
-      page = Nokogiri::HTML(open(http://www.natureinthecity.org/index.php))
-
       = yield
       = javascript_include_tag 'mycalendar'
 
     </br></br></br></br></br>
     %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
-    -if !@neededRescue
-      = raw @section 
-      = raw @footer
+    = raw @section 
+    = raw @footer

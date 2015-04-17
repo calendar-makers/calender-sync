@@ -25,19 +25,20 @@ class CalendarsController < ApplicationController
     @footer = @page.at_css "footer"
   end
 
+  def preprocess_for_bad_request
+    file = File.join(Rails.root, 'features', 'support', 'backup.html')
+    @page = Nokogiri::HTML(File.read(file))
+  end
+
   def show
     # For the moment keep running this task at every page view.
     # But later I should switch to a scheduler (the link is on the browser)
     begin
       @page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
-      @neededRescue = false
     rescue SocketError
-      puts "***************************************"
-      @neededRescue = true
+      preprocess_for_bad_request
     end
-    if !@neededRescue
-      preprocess_header_footer
-    end
+    preprocess_header_footer
     if flash[:notice].nil? # For the moment prevent all of this if a message came in
       events = Event.make_events_local(Event.get_remote_events)
 
