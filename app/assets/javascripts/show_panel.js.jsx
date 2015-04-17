@@ -59,12 +59,6 @@ var Event = React.createClass({
         </div>
         <br/>
         <br/>
-<<<<<<< HEAD
-=======
-
-        <i>these buttons will only be visible to admin</i>
-        {/* if admin, then show edit and delete button */}
->>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
       </div>
     );
   }
@@ -124,29 +118,17 @@ var AdminButtons = React.createClass({
 
   render: function() {
     return (
-      <table>
-        <tr>
-          <td>
-<<<<<<< HEAD
-            <form id='eventEdit' onSubmit={this.handleUpdate}>
-              <input type='submit' value='Edit' className="button"/>
-=======
-            <form id='eventEditLink' onSubmit={this.handleUpdateLink}>
-              <input className='button' type='submit' value='Edit'/>
->>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
-            </form>
-          </td>
-          <td>
-            <form id='eventDelete' onSubmit={this.handleDelete}>
-<<<<<<< HEAD
-              <input type='submit' value='Delete' className="button"/>
-=======
-              <input className='button' type='submit' value='Delete'/>
->>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
-            </form>
-          </td>
-        </tr>
-      </table>
+      <div>
+        <i>these buttons will only be visible to admin</i>
+        <div>
+          <form id='eventEditLink' onSubmit={this.handleUpdateLink}>
+            <input className='button' style={{float: 'left'}} type='submit' value='Edit'/>
+          </form>
+          <form id='eventDelete' onSubmit={this.handleDelete}>
+            <input className='button' style={{float: 'right'}} type='submit' value='Delete'/>
+          </form>
+        </div>
+      </div>
     );
   }
 });

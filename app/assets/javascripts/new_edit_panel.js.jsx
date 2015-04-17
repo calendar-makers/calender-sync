@@ -3,12 +3,12 @@ var form = function() {
       <div>
         <div id="invalid_form_warnings">
           {/* gotta somehow put flash messages here...? */}
-          <p><i>invalid submission errors will go here</i></p>
+          <p><i>invalid submission errors will appear here</i></p>
         </div>
 
         <div id="e_name">
           <label htmlFor="event_name">Name</label><br/>
-          <input type="text" defaultValue={this.props.title} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field"/>
+          <input type="text" defaultValue={this.props.name} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field"/>
         </div>
 
         <div id="e_start_date">
