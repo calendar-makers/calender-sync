@@ -11,10 +11,15 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
+    -if !@neededRescue
+      = raw @head1
+      = raw @header
+    %hr
 
-  %body{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width: 50em;"}
-    %h1.title Nature in the City [header placeholder]
-    %main
+  %body
+    //= raw @page.css("header")
+    
+    %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
       - elsif flash[:warning]
@@ -26,4 +31,7 @@
       = javascript_include_tag 'mycalendar'
 
     </br></br></br></br></br>
-    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"} [footer placeholder]
+    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+    -if !@neededRescue
+      = raw @section 
+      = raw @footer
