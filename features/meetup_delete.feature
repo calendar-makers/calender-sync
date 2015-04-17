@@ -10,6 +10,7 @@ Feature: Enforce event lists consistency by deleting events locally and remotely
     And the following event exists on Meetup and on the Calendar
       |    name      |    organization    |   event_id   |
       | Nature Walk  | Nature in the city | 221850455    |
+      | Nerds Safari | Nature in the city | 220706208    |
 
   @calendar_successful_deletion
   Scenario: deletion initiated on Calendar

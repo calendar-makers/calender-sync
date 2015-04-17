@@ -136,8 +136,15 @@ class EventsController < ActionController::Base
       redirect_to edit_event_path(@event)
       return
     end
-    @event.update_attributes!(event_params)
-    flash[:notice] = "\"#{@event.name}\" was successfully updated."
+
+    meetup = Meetup.new
+    if meetup.edit_event(updated_fields: event_params, id: params[:id])
+      @event.update_attributes!(event_params)
+      flash[:notice] = "'#{@event.name}' was successfully updated."
+    else
+      flash[:notice] = "Could not update '#{@event.name}'."
+    end
+
     redirect_to calendar_path
   end
 

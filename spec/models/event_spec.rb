@@ -237,12 +237,12 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    context 'with one remote deletion' do
+    context 'with one remote deletion (@event_2)' do
       let(:remote_events) {[@event_1]}
 
-      it 'deletes the local event' do
+      it 'deletes the local copy of @event_2' do
         Event.make_remote_deletions_local(remote_events)
-        expect(@event_2).to receive(:delete)
+        expect(Event.find_by_meetup_id('678910')).to be_nil
       end
     end
   end
