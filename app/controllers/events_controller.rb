@@ -111,10 +111,7 @@ class EventsController < ActionController::Base
     # flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
     #end
 
-    respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :json => @event }
-    end
+    render :nothing => true
   end
 
   def edit
@@ -141,10 +138,7 @@ class EventsController < ActionController::Base
     end
     @event.update_attributes!(event_params)
     flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :json => @event }
-    end
+    render :nothing => true
   end
 
   def destroy
