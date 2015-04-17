@@ -32,7 +32,10 @@ $(document).ready(function() {
       }
 
       React.render(
-        <Event name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>,
+        <div>
+          <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
+          <AdminButtons eventID={calEvent.id} title={calEvent.title}/>
+        </div>,
         document.getElementById('panel')
       );
     },
