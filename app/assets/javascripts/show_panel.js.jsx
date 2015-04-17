@@ -15,7 +15,7 @@ var Event = React.createClass({
           </div>
           <div className="right">
             <p>
-              {this.props.name}
+              {this.props.title}
             </p>
           </div>
           <div style={{clear: 'both'}}></div>
@@ -37,28 +37,22 @@ var Event = React.createClass({
           <div className="left">
             <p>Where</p>
           </div>
-          <div id="location">
-            <div className="left">
-              <p>Where</p>
-            </div>
-            <div className="right" style={{whiteSpace: 'pre-wrap'}}>
-              <p>
-                {this.props.location}
-              </p>
-              <p>
-                <i>map may be coming soon!</i>
-              </p>
-            </div>
-            <div style={{clear: 'both'}}></div>
+          <div className="right" style={{whiteSpace: 'pre-wrap'}}>
+            <p>
+              {this.props.location}
+            </p>
+            <p>
+              <i>map may be coming soon!</i>
+            </p>
           </div>
-          <br/>
-          <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
+          <div style={{clear: 'both'}}></div>
         </div>
         <br/>
 
         <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
         <br/>
         <br/>
+
         <div id="rsvp">
           <i>rsvp under construction</i>
           {/* maybe we should put a link to an rsvp form page or popup... */}

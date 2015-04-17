@@ -70,7 +70,8 @@ h2 {
     text-align:center;
 }
 #panel {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x:hidden;
     padding: 0.3em;
     border: 1px solid #ccc;
 }
@@ -116,7 +117,7 @@ h2 {
 }
 #edit_description {
     max-height: 9em;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .edit_text_field:focus, .drop_down:focus {
     background: #FFF0E6;
