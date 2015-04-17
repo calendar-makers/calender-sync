@@ -11,8 +11,9 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
-    = raw @head1
-    = raw @header
+    -if !@neededRescue
+      = raw @head1
+      = raw @header
     %hr
 
   %body
@@ -29,5 +30,6 @@
     
     </br></br></br></br></br>
     %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
-    = raw @section 
-    = raw @footer
+    -if !@neededRescue
+      = raw @section 
+      = raw @footer
