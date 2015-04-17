@@ -60,7 +60,7 @@ var AdminButtons = React.createClass({
     return false;
   },
 
-  handleUpdate: function() {
+  handleUpdateLink: function() {
     React.Render(
       <form eventID={this.props.eventID}/>,
       document.getElementById('panel')
@@ -73,7 +73,7 @@ var AdminButtons = React.createClass({
       <table>
         <tr>
           <td>
-            <form id='eventEdit' onSubmit={this.handleUpdate}>
+            <form id='eventEditLink' onSubmit={this.handleUpdateLink}>
               <input type='submit' value='Edit'/>
             </form>
           </td>
