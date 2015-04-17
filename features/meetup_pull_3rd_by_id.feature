@@ -7,6 +7,7 @@ Feature: pull 3rd-party events created on Meetup by event ID and display them on
 
   Background: 3rd-party Events have already been created on Meetup
 
+    Given I am logged in as the admin
     And the following events exist on Meetup:
       |                 name       |    organization          |   event_id   |
       | Walk the Moon              | Live Music San Francisco | 220680184    |

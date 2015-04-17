@@ -83,5 +83,6 @@
 
   %p= submit_tag "Submit"
 
-= button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
+- if user_signed_in?
+  = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
 = link_to 'Back to calendar', calendar_path

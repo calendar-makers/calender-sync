@@ -23,4 +23,5 @@
         %td= event.start
         %td= event.description
 
-= link_to 'Add new event', new_event_path
+- if user_signed_in?
+  = link_to 'Add new event', new_event_path

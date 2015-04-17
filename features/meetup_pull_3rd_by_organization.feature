@@ -7,7 +7,8 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
 
   Background: No 3rd-party events have ever been pulled on the calendar before
 
-    Given the following events exist on Meetup:
+    Given I am logged in as the admin
+    And the following events exist on Meetup:
       |                          name                                   |    organization          |   group_urlname   |   event_id  |
       |                       Walk the Moon                             | Live Music San Francisco | LiveMusicSF       |  220680184  |
       | Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha!  | Live Music San Francisco | LiveMusicSF       |  220804867  |
