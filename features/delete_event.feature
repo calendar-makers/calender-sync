@@ -6,7 +6,7 @@ Feature: delete an event and have it removed from the calendar
 Background: Events have already been added to the database
 
   #Authentication not yet implemented
-  #Given that I am logged in as "admin"
+  Given I am logged in as the admin
   And the following events exist:
   | name             | organization       | description                               | start               | location                   |
   | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015 16:30 | The old Town Hall          |

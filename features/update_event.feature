@@ -6,7 +6,8 @@ Feature: update information of an event
 
 Background: Event has already been added to the database
 
-  Given the following events exist:
+  Given I am logged in as the admin
+  And the following events exist:
   | name             | organization       | description                               | start                | location                   |
   | Nature Walk      | Nature in the City | A walk through the city                   | March 19 2015, 16:30 | The Old Town Hall          |
   | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | March 12 2015, 00:00 | San Francisco City Library |
