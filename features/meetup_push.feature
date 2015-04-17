@@ -6,7 +6,8 @@ Feature: push new calendar events to meetup
     I want to have events I create on the calendar automatically push to Meetup
 
   Background: create a new event
-    Given I am an authorized organizer of the group
+    Given I am logged in as the admin
+    And I am an authorized organizer of the group
     And I am on the "Create" page
     And I fill in the "Event Name" field with "Nature Walk"
     And I fill in the "Venue Name" field with "Steps"

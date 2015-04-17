@@ -6,7 +6,9 @@ Feature: Enforce event lists consistency by deleting events locally and remotely
   I want to have automatic deletions between the Calendar events and the Meetup events
 
   Background: The Calendar and Meetup are currently synched
-    Given I am an authorized organizer of the group
+
+    Given I am logged in as the admin
+    And I am an authorized organizer of the group
     And the following event exists on Meetup and on the Calendar
       |    name      |    organization    |   event_id   |
       | Nature Walk  | Nature in the city | 221850455    |
