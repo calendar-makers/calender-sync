@@ -35,7 +35,7 @@ $(document).ready(function() {
       React.render(
         <div>
           <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
-          <AdminButtons eventID={calEvent.id} title={calEvent.title}/>
+          <AdminButtons calEvent={calEvent}/>
         </div>,
         document.getElementById('panel')
       );

@@ -1,0 +1,35 @@
+  handleCreate: function() {
+    $.ajax({
+      url: '/events/' + this.props.eventID,
+      type: 'DELETE',
+      success: function(data) {
+        React.render(
+          <p id='deleteMsg'>{this.props.title} was successfully removed.</p>,
+          document.getElementById('panel')
+        );
+        $('#calendar').fullCalendar('removeEvents', this.props.eventID);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/events/' + this.props.eventID, status, err.toString());
+      }.bind(this)
+    });
+    return false;
+  },
+
+  handleUpdate: function() {
+    $.ajax({
+      url: '/events/' + this.props.eventID,
+      type: 'DELETE',
+      success: function(data) {
+        React.render(
+          <p id='deleteMsg'>{this.props.title} was successfully removed.</p>,
+          document.getElementById('panel')
+        );
+        $('#calendar').fullCalendar('removeEvents', this.props.eventID);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/events/' + this.props.eventID, status, err.toString());
+      }.bind(this)
+    });
+    return false;
+  },

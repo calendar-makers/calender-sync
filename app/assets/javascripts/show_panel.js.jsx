@@ -59,6 +59,12 @@ var Event = React.createClass({
         </div>
         <br/>
         <br/>
+<<<<<<< HEAD
+=======
+
+        <i>these buttons will only be visible to admin</i>
+        {/* if admin, then show edit and delete button */}
+>>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
       </div>
     );
   }
@@ -67,51 +73,51 @@ var Event = React.createClass({
 var AdminButtons = React.createClass({
   handleDelete: function() {
     $.ajax({
-      url: '/events/' + this.props.eventID,
+      url: '/events/' + this.props.calEvent.id,
       type: 'DELETE',
       success: function(data) {
         React.render(
-          <p id='deleteMsg'>{this.props.title} was successfully removed.</p>,
+          <p id='deleteMsg'>{this.props.calEvent.title} was successfully removed.</p>,
           document.getElementById('panel')
         );
         $('#calendar').fullCalendar('removeEvents', this.props.eventID);
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error('/events/' + this.props.eventID, status, err.toString());
+        console.error('/events/' + this.props.calEvent.id, status, err.toString());
       }.bind(this)
     });
     return false;
   },
 
-  handleUpdate: function() {
+  handleUpdateLink: function() {
+    var calEvent = this.props.calEvent;
     var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
-      var calEvent = $('#calendar').fullCalendar('clientEvents', this.props.eventID)[0];
-      var start_month  = calEvent.start.format('MMMM');
-      var start_day    = calEvent.start.format('D');
-      var start_year   = calEvent.start.format('YYYY');
-      var start_hour   = calEvent.start.format('h');
-      var start_minute = calEvent.start.format('mm');
-      var start_ampm   = calEvent.start.format('a');
-      var endTime;
-      var eventEnd = calEvent.end;
-      if (eventEnd == null) {
-        endTime = null;
-      } else {
-        var end_month  = calEvent.end.format('MMMM');
-        var end_day    = calEvent.end.format('D');
-        var end_year   = calEvent.end.format('YYYY');
-        var end_hour   = calEvent.end.format('h');
-        var end_minute = calEvent.end.format('mm');
-        var end_ampm   = calEvent.end.format('a');
-      }
-      var locationDetails = calEvent.location.split("\n");
-      var location_street = locationDetails[0];
-      var location_city   = locationDetails[1].split(", ")[0];
-      var location_state  = locationDetails[1].split(", ")[1];
+    var start_month  = calEvent.start.format('MMMM');
+    var start_day    = calEvent.start.format('D');
+    var start_year   = calEvent.start.format('YYYY');
+    var start_hour   = calEvent.start.format('h');
+    var start_minute = calEvent.start.format('mm');
+    var start_ampm   = calEvent.start.format('a');
+    var endTime;
+    var eventEnd = calEvent.end;
+    if (eventEnd == null) {
+      endTime = null;
+    } else {
+      var end_month  = calEvent.end.format('MMMM');
+      var end_day    = calEvent.end.format('D');
+      var end_year   = calEvent.end.format('YYYY');
+      var end_hour   = calEvent.end.format('h');
+      var end_minute = calEvent.end.format('mm');
+      var end_ampm   = calEvent.end.format('a');
+    }
+    var locationDetails = calEvent.location.split("\n");
+    var location_street = locationDetails[0];
+    var location_city   = locationDetails[1].split(", ")[0];
+    var location_state  = locationDetails[1].split(", ")[1];
 
-      React.render(
-        <EditEvent event_id={calEvent.id} name={calEvent.title} start_month={start_month} start_day={start_day} start_year={start_year} start_hour={start_hour} start_minute={start_minute} start_ampm={start_ampm} end_month={end_month} end_day={end_day} end_year={end_year} end_hour={end_hour} end_minute={end_minute} end_ampm={end_ampm} location_street={location_street} location_city={location_city} location_state={location_state} description={calEvent.description}/>,
-        document.getElementById('panel')
+    React.render(
+      <EditEvent event_id={calEvent.id} name={calEvent.title} start_month={start_month} start_day={start_day} start_year={start_year} start_hour={start_hour} start_minute={start_minute} start_ampm={start_ampm} end_month={end_month} end_day={end_day} end_year={end_year} end_hour={end_hour} end_minute={end_minute} end_ampm={end_ampm} location_street={location_street} location_city={location_city} location_state={location_state} description={calEvent.description}/>,
+      document.getElementById('panel')
     );
     return false;
   },
@@ -121,13 +127,22 @@ var AdminButtons = React.createClass({
       <table>
         <tr>
           <td>
+<<<<<<< HEAD
             <form id='eventEdit' onSubmit={this.handleUpdate}>
               <input type='submit' value='Edit' className="button"/>
+=======
+            <form id='eventEditLink' onSubmit={this.handleUpdateLink}>
+              <input className='button' type='submit' value='Edit'/>
+>>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
             </form>
           </td>
           <td>
             <form id='eventDelete' onSubmit={this.handleDelete}>
+<<<<<<< HEAD
               <input type='submit' value='Delete' className="button"/>
+=======
+              <input className='button' type='submit' value='Delete'/>
+>>>>>>> 9a271b1b1ba5ed790b58ffe2cb41e7f5aa57d03e
             </form>
           </td>
         </tr>
