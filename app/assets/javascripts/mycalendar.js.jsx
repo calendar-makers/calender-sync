@@ -33,8 +33,8 @@ $(document).ready(function() {
 
       React.render(
         <div>
-          <Event event_id={calEvent.id} name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
-          <AdminButtons/>
+          <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
+          <AdminButtons eventID={calEvent.id} title={calEvent.title}/>
         </div>,
         document.getElementById('panel')
       );
