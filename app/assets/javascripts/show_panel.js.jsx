@@ -3,12 +3,24 @@ var Event = React.createClass({
   render: function() {
     return (
       <div>
-        <h2 style={{fontWeight: 200}}>{this.props.title}</h2>
         <div id="image">
           <i>image resizing has to be done, maybe to resize along with page size?</i>
-          // image here
+          {/* image here */}
         </div>
         <br/>
+
+        <div id="name">
+          <div className="left">
+            <p>What</p>
+          </div>
+          <div className="right">
+            <p>
+              {this.props.title}
+            </p>
+          </div>
+          <div style={{clear: 'both'}}></div>
+        </div>
+
         <div id="date_time">
           <div className="left">
             <p>When</p>
@@ -20,6 +32,7 @@ var Event = React.createClass({
           </div>
           <div style={{clear: 'both'}}></div>
         </div>
+
         <div id="location">
           <div className="left">
             <p>Where</p>
@@ -35,7 +48,25 @@ var Event = React.createClass({
           <div style={{clear: 'both'}}></div>
         </div>
         <br/>
+
         <div id="description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
+        <br/>
+        <br/>
+
+        <div id="rsvp">
+          <i>rsvp under construction</i>
+          {/* maybe we should put a link to an rsvp form page or popup... */}
+        </div>
+        <br/>
+        <br/>
+
+        <i>these buttons will only be visible to admin</i>
+        {/* if admin, then show edit and delete button */}
+        <div>
+          <button type='button' id='editEvent' className='button'>edit</button>
+          {' '}
+          <button type='button' id='deleteEvent' className='button'>delete</button>
+        </div>
       </div>
     );
   }
