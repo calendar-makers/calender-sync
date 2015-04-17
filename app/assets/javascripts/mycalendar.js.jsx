@@ -10,7 +10,8 @@ $(document).ready(function() {
       });
     },
 
-    eventColor: '#62C400',
+    eventColor: '#A6C55F',
+    // eventColor: '#FFA721',
 
     eventClick: function(calEvent, jsEvent, view) {
       var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');

@@ -59,14 +59,6 @@ var Event = React.createClass({
         </div>
         <br/>
         <br/>
-
-        <i>these buttons will only be visible to admin</i>
-        {/* if admin, then show edit and delete button */}
-        <div>
-          <button type='button' id='editEvent' className='button'>edit</button>
-          {' '}
-          <button type='button' id='deleteEvent' className='button'>delete</button>
-        </div>
       </div>
     );
   }
@@ -92,9 +84,34 @@ var AdminButtons = React.createClass({
   },
 
   handleUpdate: function() {
-    React.Render(
-      <form eventID={this.props.eventID}/>,
-      document.getElementById('panel')
+    var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
+      var calEvent = $('#calendar').fullCalendar('clientEvents', this.props.eventID)[0];
+      var start_month  = calEvent.start.format('MMMM');
+      var start_day    = calEvent.start.format('D');
+      var start_year   = calEvent.start.format('YYYY');
+      var start_hour   = calEvent.start.format('h');
+      var start_minute = calEvent.start.format('mm');
+      var start_ampm   = calEvent.start.format('a');
+      var endTime;
+      var eventEnd = calEvent.end;
+      if (eventEnd == null) {
+        endTime = null;
+      } else {
+        var end_month  = calEvent.end.format('MMMM');
+        var end_day    = calEvent.end.format('D');
+        var end_year   = calEvent.end.format('YYYY');
+        var end_hour   = calEvent.end.format('h');
+        var end_minute = calEvent.end.format('mm');
+        var end_ampm   = calEvent.end.format('a');
+      }
+      var locationDetails = calEvent.location.split("\n");
+      var location_street = locationDetails[0];
+      var location_city   = locationDetails[1].split(", ")[0];
+      var location_state  = locationDetails[1].split(", ")[1];
+
+      React.render(
+        <EditEvent event_id={calEvent.id} name={calEvent.title} start_month={start_month} start_day={start_day} start_year={start_year} start_hour={start_hour} start_minute={start_minute} start_ampm={start_ampm} end_month={end_month} end_day={end_day} end_year={end_year} end_hour={end_hour} end_minute={end_minute} end_ampm={end_ampm} location_street={location_street} location_city={location_city} location_state={location_state} description={calEvent.description}/>,
+        document.getElementById('panel')
     );
     return false;
   },
@@ -105,12 +122,12 @@ var AdminButtons = React.createClass({
         <tr>
           <td>
             <form id='eventEdit' onSubmit={this.handleUpdate}>
-              <input type='submit' value='Edit'/>
+              <input type='submit' value='Edit' className="button"/>
             </form>
           </td>
           <td>
             <form id='eventDelete' onSubmit={this.handleDelete}>
-              <input type='submit' value='Delete'/>
+              <input type='submit' value='Delete' className="button"/>
             </form>
           </td>
         </tr>

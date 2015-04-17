@@ -43,7 +43,7 @@ h1.title {
     margin: 0 0 1em;
     padding: 10px;
     color: #9f9f9f;
-    border-bottom: 4px solid #ff9900;
+    border-bottom: 4px solid #FFA721;
     font-size: 2em;
     font-style: normal;
     font-weight: 500;
@@ -120,7 +120,7 @@ h2 {
     overflow-y: scroll;
 }
 .edit_text_field:focus, .drop_down:focus {
-    background: #FFF0E6;
+    background: #FFEDD2;
     outline-color: none;
 }
 #invalid_form_warnings {

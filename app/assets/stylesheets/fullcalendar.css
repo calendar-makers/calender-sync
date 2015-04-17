@@ -30,7 +30,7 @@ body .fc { /* extra precedence to overcome jqui */
 .fc-unthemed .fc-row,
 .fc-unthemed .fc-popover {
 	border-color: #ccc;
-	font-weight: 200;
+	font-weight: 300;
 }
 
 .fc-unthemed .fc-popover {
@@ -47,7 +47,7 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-unthemed .fc-today {
-	background: #FFF0E6;
+	background: #FFEDD2;
 }
 
 .fc-highlight { /* when user is selecting cells */

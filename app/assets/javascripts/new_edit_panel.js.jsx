@@ -8,7 +8,7 @@ var form = function() {
 
         <div id="e_name">
           <label htmlFor="event_name">Name</label><br/>
-          <input type="text" defaultValue={this.props.name} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field"/>
+          <input type="text" defaultValue={this.props.title} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field"/>
         </div>
 
         <div id="e_start_date">
