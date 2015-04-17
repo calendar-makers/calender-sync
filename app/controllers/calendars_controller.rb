@@ -35,7 +35,7 @@ class CalendarsController < ApplicationController
     # But later I should switch to a scheduler (the link is on the browser)
     begin
       @page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
-    rescue SocketError
+    rescue Exception
       preprocess_for_bad_request
     end
     preprocess_header_footer

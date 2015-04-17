@@ -12,10 +12,10 @@
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
     = raw @head1
-    %hr
 
   %body
     = raw @header
+    %hr
     
     %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
