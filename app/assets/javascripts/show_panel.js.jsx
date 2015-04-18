@@ -74,7 +74,7 @@ var AdminButtons = React.createClass({
           <p id='deleteMsg'>{this.props.calEvent.title} was successfully removed.</p>,
           document.getElementById('panel')
         );
-        $('#calendar').fullCalendar('removeEvents', this.props.eventID);
+        $('#calendar').fullCalendar('removeEvents', this.props.calEvent.id);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('/events/' + this.props.calEvent.id, status, err.toString());
@@ -121,11 +121,11 @@ var AdminButtons = React.createClass({
       <div>
         <i>these buttons will only be visible to admin</i>
         <div>
-          <form id='eventEditLink' onSubmit={this.handleUpdateLink}>
-            <input className='button' style={{float: 'left'}} type='submit' value='Edit'/>
+          <form onSubmit={this.handleUpdateLink}>
+            <input id='eventEditLink' className='button' style={{float: 'left'}} type='submit' value='Edit'/>
           </form>
-          <form id='eventDelete' onSubmit={this.handleDelete}>
-            <input className='button' style={{float: 'right'}} type='submit' value='Delete'/>
+          <form onSubmit={this.handleDelete}>
+            <input id='eventDelete' className='button' style={{float: 'right'}} type='submit' value='Delete'/>
           </form>
         </div>
       </div>
