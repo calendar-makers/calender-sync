@@ -17,8 +17,11 @@
     #panel_header
       %h2{:style => "font-weight:200;"} Event Details
     #panel
-      - unless @event
-        %p Click an event!
+      %p Click an event!
+      #new.crud
+      #edit.crud
+      #delete.crud
+      %div{:style => "clear:both;"}
     %div{:style => "clear:both;"}
 
   %div{:style => "clear:both;"}

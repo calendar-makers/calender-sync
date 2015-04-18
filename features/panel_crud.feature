@@ -14,19 +14,21 @@ Background: Events have already been added to the database
 
   And I am on the calendar page
 
-Scenario: Show the new event panel to create events
-  When I click on the "new event" link
-  Then I should see the "Create Event" panel
-  When I create an event called "Gardening" that starts at "April 10 08:00"
-  Then I should see "Gardening" on "April 10" on the calendar
+Scenario: show the new event panel
+  When I click on the new event button
+  Then I should see the new form in the panel
 
 Scenario: Show the event editing panel
-  When I choose to edit the event "Nature Walk"
-  Then I should see the "Edit Event" panel
-  When I change the start time of "Nature Walk" to "April 16 00:00"
-  Then I should see "Nature Walk" on "April 16" on the calendar
-  But I should not see "Nature Walk" on "March 19" on the calendar
+  Given the month is March 2015
+  When I click on "Nature Walk" in the calendar
+  When I click on the edit event button
+  Then I should see the edit form in the panel
+  When I change the start time to "April 16 12:00 am"
+  And save the event
+  Then I should see "Nature Walk" on "April 16" in the calendar
 
 Scenario: Delete an event
-  When I delete the event "Green Bean Mixer"
-  Then "Green Bean Mixer" should not be on the calendar
+  Given the month is April 2015
+  When I click on "Green Bean Mixer" in the calendar
+  When I click on the delete event button
+  Then "Green Bean Mixer" should not be in the calendar

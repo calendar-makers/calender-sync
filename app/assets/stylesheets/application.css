@@ -80,6 +80,12 @@ h2 {
 /*    border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;*/
 }
+.crud {
+    position: relative;
+    float: left;
+    min-height: 0.2em;
+    min-width: 0.2em;
+}
 .right {
     position: relative;
     float: right;
@@ -91,7 +97,6 @@ h2 {
     width: 3.2em;
     padding: 0.2em;
     float: left;
-    text-align: right;
     position: relative;
 }
 .left p, .right p {
@@ -162,10 +167,6 @@ h2 {
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     color: #333;
 }
-/*#edit_button {
-    float: left;
-    position: relative;
-}*/
 #notice #warning {
     background: rosybrown;
     margin: 1em 0;

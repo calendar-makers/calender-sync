@@ -56,6 +56,7 @@ group :development, :test do
 
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
+  # gem 'selenium-webdriver'
   gem 'capybara-webkit' #i(rachel) did 'brew install qt' on mac [or 'apt-get install libqtwebkit-dev' on linux] to get this gem working for headless javascript tests in cucumber
   gem 'headless'
   gem 'rspec-rails', '~>3.2.1'
