@@ -13,6 +13,7 @@ Background: Events have already been added to the database
     | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | San Francisco City Library | 45 Seneca st   | Phoenix  | 91210 | April 20 2015, 8:30  | April 21 2015, 8:30  | Second door on left|
 
   And I am on the calendar page
+  And I am logged in as the admin
 
 Scenario: show the new event panel
   When I click on the new event button

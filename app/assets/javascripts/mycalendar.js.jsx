@@ -13,7 +13,6 @@ $(document).ready(function() {
     eventColor: '#A6C55F',
 
     eventClick: function(calEvent, jsEvent, view) {
-      console.log(calEvent);
       var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
       var endTime;
       var eventEnd = calEvent.end;
@@ -39,7 +38,6 @@ $(document).ready(function() {
         </div>,
         document.getElementById('panel')
       );
-      window.alert('HI');
 
     },
 
