@@ -40,6 +40,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   Paperclip.options[:command_path] = "usr/bin"
 
+  Rails.application.configure do
+    config.react.variant = :development
+  end
 
   config.action_controller.include_all_helpers = true
 end

@@ -26,13 +26,14 @@ gem 'omniauth'
 gem 'omniauth-meetup'
 gem 'httparty'
 
+# integrate with react.js
+gem 'react-rails', '~> 1.0'
 
 # countries and states gems
 gem 'country_select', github: 'stefanpenner/country_select'
 
 # authentication
 gem 'devise'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -78,3 +79,4 @@ end
 gem 'haml-rails'
 gem 'rubocop', :require => false
 gem 'paperclip'
+gem 'rails-html-sanitizer'

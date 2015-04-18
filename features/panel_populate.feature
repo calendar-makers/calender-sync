@@ -12,15 +12,17 @@ Background: events have already been added to the database
 
   Given I am on the calendar page
 
-Scenario: see the event "what"
+Scenario: see the event heading
   Given the month is April 2015
   When I click on "Green Bean Mixer" in the calendar
-  Then the panel should display "Green Bean Mixer" in its "What" field
+  Then the panel should display "Green Bean Mixer" as the heading
 
 Scenario: see the event "when"
   Given the month is April 2015
+  When I click on "Nature Walk" in the calendar
+  Then the panel should display "Apr 19th 2015, 4:30 pm to 6:30 pm" in its "When" field
   When I click on "Green Bean Mixer" in the calendar
-  Then the panel should display "Apr 19, 2015 at 4:30 pm to Apr 19, 2015 at 6:30 pm" in its "When" field
+  Then the panel should display "Apr 12th 2015, 12:00 am to Apr 13th 2015, 12:00 am" in its "When" field
 
 Scenario: see the event "where"
   Given the month is April 2015
@@ -30,6 +32,6 @@ Scenario: see the event "where"
 Scenario: see all event details in panel, including image and description
   Given the month is April 2015
   When I click on "Green Bean Mixer" in the calendar
-  Then the panel should display its details
+  Then the panel should display the description for "Green Bean Mixer"
   And when I click "Nature Walk" in the calendar
-  Then the panel should display its details
+  Then the panel should display the description for "Green Bean Mixer"
