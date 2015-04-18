@@ -4,6 +4,11 @@ class CalendarsController < ApplicationController
     @page.css("base").each do |tag|
       tag.remove()
     end
+    @page.css("img").each do |tag|
+      if tag["src"]!=nil and tag["src"][0]=='/'
+        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
+      end
+    end
     @page.css("li").each do |tag|
       if tag["class"] != nil and tag["class"] =="item-144"
         tag["class"] = "item-144 current"
