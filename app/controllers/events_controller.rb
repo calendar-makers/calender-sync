@@ -130,6 +130,9 @@ class EventsController < ActionController::Base
 
   def update
     @event = Event.find params[:id]
+    puts '*****'
+    puts @event.attributes
+    puts '*****'
     result = Event.check_if_fields_valid(event_params)
     if !result[:value]
       flash[:notice] = result[:message]
@@ -152,7 +155,7 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :address_1,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image_file_name)
+                                  :description, :how_to_find_us) # , :image_file_name)
   end
 
   def form_validation_msg

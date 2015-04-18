@@ -1,4 +1,4 @@
-var form = function() {
+var eventForm = function() {
     return (
       <div>
         <div id="invalid_form_warnings">
@@ -6,18 +6,19 @@ var form = function() {
           <p><i>invalid submission errors will appear here</i></p>
         </div>
 
+        <form onSubmit={this.handleSubmit}>
         <div id="e_name">
           <label htmlFor="event_name">Name</label><br/>
-          <input type="text" defaultValue={this.props.name} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field"/>
+          <input type="text" defaultValue={this.props.name} placeholder="Name" name="event[name]" id="edit_name" className="edit_text_field" ref='name'/>
         </div>
 
         <div id="e_start_date">
           <label htmlFor="event_start_date">Start Date</label><br/>
-          <input type="text" defaultValue={this.props.start_month} placeholder="Month" name="event[start(month)]" id="edit_start_month" className="edit_text_field" style={{width: '37%'}}/>
+          <input type="text" defaultValue={this.props.start_month} placeholder="Month" name="event[start(month)]" id="edit_start_month" className="edit_text_field" style={{width: '37%'}} ref='month'/>
           {' '}
-          <input type="text" defaultValue={this.props.start_day} placeholder="Day" name="event[start(day)]" id="edit_start_day" className="edit_text_field" style={{width: '2em'}}/>
+          <input type="text" defaultValue={this.props.start_day} placeholder="Day" name="event[start(day)]" id="edit_start_day" className="edit_text_field" style={{width: '2em'}} ref='start_day'/>
           {', '}
-          <input type="text" defaultValue={this.props.start_year} placeholder="Year" name="event[start(year)]" id="edit_start_year" className="edit_text_field" style={{width: '3em'}}/>
+          <input type="text" defaultValue={this.props.start_year} placeholder="Year" name="event[start(year)]" id="edit_start_year" className="edit_text_field" style={{width: '3em'}} ref='start_year'/>
 {/*          <select id="event_start_month" name="event[start(month)]" defaultValue={this.props.start_month} className="drop_down"/>
           {' '}
           <select id="event_start_day" name="event[start(day)]" defaultValue={this.props.start_day} className="drop_down"/>
@@ -90,6 +91,37 @@ var form = function() {
           <div id="edit_description" dangerouslySetInnerHTML={{__html: this.props.description}} contentEditable="true" className="edit_text_field"/>
         </div>
 
+        <div style={{float: 'right'}}>
+          <input type="submit" className="button" value="save" />
+        </div>
+        </form>
+      </div>
+    )
+}
+
+var EditEvent = React.createClass({
+  handleSubmit: function() {
+    $.ajax({
+      url: '/events/' + this.props.calEvent.id,
+      type: 'PUT',
+      success: function(data) {
+        React.render(
+          <p id='updateMsg'>{this.props.calEvent.title} was successfully updated.</p>,
+          document.getElementById('panel')
+        );
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/events/' + this.props.calEvent.id, status, err.toString());
+      }.bind(this)
+    });
+    return false;
+  },
+
+  render: eventForm
+});
+
+/* Image form code
+
         <div id="e_image">
           <label htmlFor="edit_image">Image</label><br/>
           <p><i>should display image file name here if one has already been uploaded</i></p><br/>
@@ -102,14 +134,4 @@ var form = function() {
           </form>
         </div>
         <br/><br/>
-
-        <div style={{float: 'right'}}>
-          <input type="submit" name="commit" className="button" value="save" />
-        </div>
-      </div>
-    );
-}
-
-var EditEvent = React.createClass({
-  render: form
-});
+*/
