@@ -101,12 +101,11 @@ class EventsController < ActionController::Base
 
     @event = Event.new(event_params)
     meetup = Meetup.new
-    if remote_event == meetup.push_event(@event)
+    if remote_event = meetup.push_event(@event)
       @event.update_meetup_fields(remote_event)
       @event.save!
       params[:event] = @event
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
-
     else
       flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
     end
@@ -136,15 +135,36 @@ class EventsController < ActionController::Base
       redirect_to edit_event_path(@event)
       return
     end
-    @event.update_attributes!(event_params)
-    flash[:notice] = "\"#{@event.name}\" was successfully updated."
-    render :nothing => true
+
+    meetup = Meetup.new
+    if meetup.edit_event(updated_fields: event_params, id: params[:id])
+      @event.update_attributes!(event_params)
+      flash[:notice] = "'#{@event.name}' was successfully updated."
+    else
+      flash[:notice] = "Could not update '#{@event.name}'."
+    end
+
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
+    end
   end
 
   def destroy
     @event = Event.find params[:id]
-    @event.destroy
-    render :nothing => true
+
+    meetup = Meetup.new
+    if meetup.delete_event(@event.meetup_id)
+      @event.destroy
+      flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
+    else
+      flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
+    end
+
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
+    end
   end
 
   private
@@ -152,7 +172,7 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :address_1,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us) # , :image_file_name)
+                                  :description, :how_to_find_us, :image)
   end
 
   def form_validation_msg
