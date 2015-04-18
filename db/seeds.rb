@@ -6,11 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-events = [{ name: 'Gardening', location: 'San Francisco', organization: 'Nature in the City',
-            start: '1-Jan-2012', description: 'Gardening at San Francisco' },
-          { name: 'Green Bean Mixer', location: 'Los Angeles', organization: 'Green Thumb',
-            start: '3-Mar-2016', description: 'Talk about nature.'},
-         ]
+events = [{ name: 'Gardening', organization: 'Nature in the City',
+            start: 'March 19 2015, 16:30', end: 'March 19 2015, 20:30',  description: 'Gardening at San Francisco',
+            how_to_find_us: 'first door to the left', venue_name: 'The Old Town Hall', address_1: '145 Jackson st',
+            city: 'Glendale', zip: '90210'},
+
+          { name: 'Green Bean Mixer',  organization: 'Green Thumb',
+            start: 'April 20 2015, 8:30', end: 'April 21 2015, 8:30', description: 'Talk about nature.',
+            how_to_find_us: 'first door to the right', venue_name: 'San Francisco Library', address_1: '35 Seneca st',
+            city: 'New York', zip: '91211'}]
+
+
+
 
 events.each do |event|
   Event.create!(event)

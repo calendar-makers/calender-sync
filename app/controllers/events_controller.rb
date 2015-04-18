@@ -101,10 +101,19 @@ class EventsController < ActionController::Base
       return
     end
 
-    @event = Event.create!(event_params)
-    params[:event] = @event
-    flash[:notice] = "\"#{@event.name}\" was successfully added."
-    redirect_to calendar_path
+    @event = Event.new(event_params)
+    meetup = Meetup.new
+    if remote_event = meetup.push_event(@event)
+      @event.update_meetup_fields(remote_event)
+      @event.save!
+      params[:event] = @event
+      flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
+
+    else
+     flash[:notice] = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
+    end
+
+      redirect_to calendar_path
   end
 
   def edit
@@ -129,24 +138,39 @@ class EventsController < ActionController::Base
       redirect_to edit_event_path(@event)
       return
     end
-    @event.update_attributes!(event_params)
-    flash[:notice] = "\"#{@event.name}\" was successfully updated."
+
+    meetup = Meetup.new
+    if meetup.edit_event(updated_fields: event_params, id: params[:id])
+      @event.update_attributes!(event_params)
+      flash[:notice] = "'#{@event.name}' was successfully updated."
+    else
+      flash[:notice] = "Could not update '#{@event.name}'."
+    end
+
     redirect_to calendar_path
   end
 
   def destroy
     @event = Event.find params[:id]
-    @event.destroy
-    flash[:notice] = "\"#{@event.name}\" was successfully removed."
+
+    meetup = Meetup.new
+    if meetup.delete_event(@event.meetup_id)
+      @event.destroy
+      flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
+    else
+      flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
+    end
+
+
     redirect_to calendar_path
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:name, :organization,
-                                  :start, :location,
-                                  :description, :image)
+    params.require(:event).permit(:name, :organization, :venue_name, :address_1,
+                                  :city, :zip, :state, :country, :start, :end,
+                                  :description, :how_to_find_us, :image_file_name)
   end
 
   def form_validation_msg

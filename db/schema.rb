@@ -16,11 +16,9 @@ ActiveRecord::Schema.define(version: 20150416063402) do
   create_table "events", force: :cascade do |t|
     t.string   "organization"
     t.string   "name"
-    t.string   "location"
     t.string   "description"
     t.datetime "start"
     t.string   "meetup_id"
-    t.integer  "duration"
     t.datetime "updated"
     t.string   "url"
     t.string   "how_to_find_us"
@@ -34,6 +32,8 @@ ActiveRecord::Schema.define(version: 20150416063402) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "venue_name"
+    t.datetime "end"
   end
 
   create_table "guests", force: :cascade do |t|

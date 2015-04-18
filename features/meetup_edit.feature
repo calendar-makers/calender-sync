@@ -1,3 +1,4 @@
+@meetup_edit
 Feature: Enforce event lists consistency by updating events locally and remotely as required
 
   As an admin of the website
@@ -6,34 +7,35 @@ Feature: Enforce event lists consistency by updating events locally and remotely
 
   Background: The Calendar and Meetup are currently synched
 
-    Given I have logged in as an admin on Meetup
-    And the following events exist on Meetup and on the Calendar
-      |                 name                    |    organization    |   event_id   |
-      | Market Street Prototyping Festival      | Nature in the city | 219648262    |
-      | Nerds on Safari: Market Street          | Nature in the city | 220706208    |
-      | Volunteer at the Adah Bakalinsky Steps! | Nature in the city | 214161012    |
+    Given I am logged in as the admin
+    And I am an authorized organizer of the group
+    And the following event exists on Meetup and on the Calendar
+      |    name      |    organization    |   event_id   |
+      | Nature Walk  | Nature in the city | 221850455    |
 
-
+  @calendar_successful_edit
   Scenario: update initiated on Calendar
-    Given I am on the "details" page for "Market Street Prototyping Festival"
-    And I click on the "Edit" button
-    And I should be on the "Edit" page for "Market Street Prototyping Festival"
+    Given I am on the "details" page for "Nature Walk"
+    And I click on the "Edit" link
+    And I should be on the "Edit" page for "Nature Walk"
     And I fill in the "Event Name" field with "Festival"
     And I click on the "Update Event Info" button
-    Then the event "Market Street Prototyping Festival" should be renamed to "Festival" on "both" platforms
-    And I should see the message "Market Street Prototyping Festival was successfully updated."
+    Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms
+    And I should see the message "'Festival' was successfully updated."
 
+  @calendar_failed_edit
   Scenario: failed update initiated on Calendar
-    Given I am on the "details" page for "Market Street Prototyping Festival"
-    And I click on the "Edit" button
-    And I should be on the "Edit" page for "Market Street Prototyping Festival"
+    Given I am on the "details" page for "Nature Walk"
+    And I click on the "Edit" link
+    And I should be on the "Edit" page for "Nature Walk"
     And I fill in the "Event Name" field with "Festival"
     And I click on the "Update Event Info" button
-    Then the event "Market Street Prototyping Festival" should be renamed to "Festival" on "neither" platforms
-    And I should see the message "Could not update Market Street Prototyping Festival."
+    Then the event "Nature Walk" should be renamed to "Festival" on "neither" platforms
+    And I should see the message "Could not update 'Nature Walk'."
 
+  @meetup_successful_edit
   Scenario: update initiated on Meetup
-    Given the event "Market Street Prototyping Festival" is renamed on Meetup to "Festival"
+    Given the event "Nature Walk" is renamed on Meetup to "Festival"
     And I am on the "Calendar" page
-    Then the event "Market Street Prototyping Festival" should be renamed to "Festival" on "both" platforms
-    And I should see the message "Successfully pulled events: Festival from Meetup."
+    Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms
+    And I should see the message "Successfully pulled events: Festival from Meetup"

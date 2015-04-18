@@ -60,7 +60,7 @@ class Event < ActiveRecord::Base
   end
 
   def generate_participants_message
-    "The total number of participants, including invited guests, so far is:" +
+    'The total number of participants, including invited guests, so far is:' \
       " #{self.count_event_participants}"
   end
 
@@ -69,10 +69,10 @@ class Event < ActiveRecord::Base
     # We can also pass any options for the query
     # If so put them in the options hash, and pass it to the constructor
     #options = {access_token: token}
-    meetup = Meetup.new(options)
+    meetup = Meetup.new
 
     candidate_events = []
-    meetup_events = meetup.pull_events
+    meetup_events = meetup.pull_events(options)
     if meetup_events
       meetup_events.each do |event|
         return nil unless true   # ANY VALIDATION???? Check meetup.rb for details
@@ -82,7 +82,6 @@ class Event < ActiveRecord::Base
 
     candidate_events
   end
-
 
   def self.make_events_local(events)
     if !events.blank?
@@ -100,8 +99,17 @@ class Event < ActiveRecord::Base
         events_bin << event
       end
 
+      Event.make_remote_deletions_local(events)
       events_bin
     end
+  end
+
+  def self.make_remote_deletions_local(remote_events)
+    local_event_ids = Event.pluck(:meetup_id)
+    remote_event_ids = []
+    remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
+    remotely_deleted_ids = local_event_ids - remote_event_ids
+    remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
   end
 
   def apply_update(new_event)
@@ -145,9 +153,27 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def format_start_date
+    start.strftime('%m/%d/%Y at %I:%M%p') if start
+  end
 
-  def format_date
-    start.strftime("%m/%d/%Y at %I:%M%p") if start
+  def format_end_date
+    self.end.strftime('%m/%d/%Y at %I:%M%p') if self.end
+  end
+
+  def location
+    location = []
+    location << self['address_1']
+    location << self['city']
+    location << self['zip']
+    location << self['state']
+    location << self['country']
+    location.join(', ')
+  end
+
+  def update_meetup_fields(event)
+    keys = [:meetup_id, :updated, :url, :status]
+    keys.each {|k| self[k] = event[k]}
   end
 
 end

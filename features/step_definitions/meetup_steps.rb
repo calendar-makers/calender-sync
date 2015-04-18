@@ -1,6 +1,21 @@
 require 'httparty'
 require 'cucumber/rspec/doubles'
 
+Given /I am an authorized organizer of the group/ do
+  # Here I'm using credentials to access the sandbox at Meetup
+  tester = Meetup.new(group_id: '1556336', group_urlname: 'Meetup-API-Testing')
+  allow(Meetup).to receive(:new).and_return(tester)
+end
+
+And /^I select "(.*)" as the "(start|end)" date and time$/ do |value, selector|
+  dt  = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
+  select dt.year, :from => "event_#{selector}_1i"
+  select dt.strftime("%B"), :from => "event_#{selector}_2i"
+  select dt.day, :from => "event_#{selector}_3i"
+  select dt.hour, :from => "event_#{selector}_4i"
+  select dt.min, :from => "event_#{selector}_5i"
+end
+
 # NOTE if names contain commas the I separated them with single quotation marks
 And /^the Meetup events? "(.*)" should (not )?exist$/ do |event_names, negative|
   # NOTE this madness with quotation and commas is because a test name has valid commas
@@ -15,10 +30,6 @@ And /^the Meetup events? "(.*)" should (not )?exist$/ do |event_names, negative|
       expect(Event.find_by_name(name)).not_to be_nil
     end
   end
-end
-
-Then /^the "(.*?)" events? "(.*?)" should (not )?exist$/ do |platform, names, negative|
-  pending # express the regexp above with the code you wish you had
 end
 
 # NOTE This works but I'm currently using the fakeweb array of responses
@@ -144,3 +155,59 @@ Given /I already pulled by group_urlname: "(.*)"/ do |urlname|
   step %Q{I am on the "third_party" page}
 end
 
+And /"(.*)" should (not )?exist on "(.*)"/ do |event_name, negative, platform|
+  platform = platform.downcase
+  if platform == 'calendar'
+    event = Event.find_by_name(event_name)
+    negative ? (expect(event).to be_nil) : (expect(event).not_to be_nil)
+  elsif platform == 'meetup'
+    meetup = Meetup.new
+    event_id = 221850455
+    negative ? (expect(meetup.pull_event(event_id)).to be_nil) : (expect(meetup.pull_event(event_id)).not_to be_nil)
+  else
+    raise Error.new
+  end
+end
+
+And /the "(.*)" event should exist on "(both|neither)" platforms/ do |event_name, option|
+  if option == 'neither'
+    step %Q{"#{event_name}" should not exist on "Calendar"}
+    step %Q{"#{event_name}" should not exist on "Meetup"}
+  else
+    step %Q{"#{event_name}" should exist on "Calendar"}
+    step %Q{"#{event_name}" should exist on "Meetup"}
+  end
+end
+
+And /the following event(?:s)? exist(?:s)? on Meetup and on the Calendar/ do |data|
+  step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
+end
+
+Given /the event "(.*)" is deleted on Meetup/ do |event_name|
+  #meetup = Meetup.new
+  #meetup.delete_event(Event.find_by_name(event_name).meetup_id)
+  # no-op
+end
+
+Then /the event "(.*)" should be renamed to "(.*)" on "(.*)" platforms/ do |old_event_name, new_event_name, option|
+  if option == 'both'
+    step %Q{the "calendar" event "#{old_event_name}" should be renamed to "#{new_event_name}"}
+    step %Q{the "meetup" event "#{old_event_name}" should be renamed to "#{new_event_name}"}
+  elsif option == 'neither'
+    step %Q{the "calendar" event "#{old_event_name}" should not be renamed to "#{new_event_name}"}
+    step %Q{the "meetup" event "#{old_event_name}" should not be renamed to "#{new_event_name}"}
+  end
+end
+
+Then /the "(.*)" event "(.*)" should (not )?be renamed to "(.*)"/ do |platform, old_event_name, negative, new_event_name|
+  id = '221850455'
+  if platform == 'calendar'
+    expect(Event.find_by_meetup_id(id).name).to eq(negative ? old_event_name : new_event_name)
+  elsif platform == 'meetup'
+    expect(Meetup.new.pull_event(id)[:name]).to eq(negative ? old_event_name : new_event_name)
+  end
+end
+
+Given /the event "(.*?)" is renamed on Meetup to "(.*?)"$/ do |arg1, arg2|
+
+end

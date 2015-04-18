@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     options[:body] = {client_id: ENV["MEETUP_KEY"], client_secret: ENV["MEETUP_SECRET"], grant_type: "refresh_token", refresh_token: self.refresh_token}
     data = HTTParty.post("https://secure.meetup.com/oauth2/access", options)
-    if data.code == 200      
+    if data.code == 200
       self.token = data["access_token"]
       self.refresh_token = data["refresh_token"]
       self.expires_at = Time.now.to_i + data["expires_in"]
