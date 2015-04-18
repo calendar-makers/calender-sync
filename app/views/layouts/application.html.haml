@@ -2,6 +2,8 @@
 %html
   %head
     %title Calendar
+    :javascript
+      var date = "#{@date}"
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
@@ -9,10 +11,13 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
+    = raw @head1
 
-  %body{:style => "width:75%; padding-left:12.5%; padding-right:12.5%; min-width: 50em;"}
-    %h1.title Nature in the City [header placeholder]
-    %main
+  %body
+    = raw @header
+    %hr
+
+    %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
       - elsif flash[:warning]
@@ -22,4 +27,6 @@
       = javascript_include_tag 'mycalendar'
 
     </br></br></br></br></br>
-    %h1.title{:style => "border-top: 4px solid #FFA721; border-bottom: 0;"} [footer placeholder]
+    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+    = raw @section
+    = raw @footer

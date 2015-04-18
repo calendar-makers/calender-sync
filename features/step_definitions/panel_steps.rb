@@ -13,7 +13,7 @@ When(/^I click on "(.*)" in the calendar$/) do |name|
   #set @event for the other steps
 end
 
-Then(/^the panel should display "(.*)" as the heading$/)
+Then(/^the panel should display "(.*)" as the heading$/) do
   pending
 end
 
