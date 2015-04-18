@@ -100,15 +100,15 @@ class EventsController < ActionController::Base
     end
 
     @event = Event.new(event_params)
-    #meetup = Meetup.new
-    #if remote_event = meetup.push_event(@event)
-      #@event.update_meetup_fields(remote_event)
+    meetup = Meetup.new
+    if remote_event = meetup.push_event(@event)
+      @event.update_meetup_fields(remote_event)
       @event.save!
       params[:event] = @event
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
-    #else
-    #  flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
-    #end
+    else
+      flash[:notice] = 'Failed to push event to Meetup. Creation aborted.'
+    end
 
     redirect_to calendar_path
   end
@@ -153,18 +153,15 @@ class EventsController < ActionController::Base
   def destroy
     @event = Event.find params[:id]
 
-    #meetup = Meetup.new
-    #if meetup.delete_event(@event.meetup_id)
-    #  @event.destroy
-    #  flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
-    #else
-    #  flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
-    #end
-
-    respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
+    meetup = Meetup.new
+    if meetup.delete_event(@event.meetup_id)
+      @event.destroy
+      flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
+    else
+      flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
     end
+
+    redirect_to calendar_path
   end
 
   private
