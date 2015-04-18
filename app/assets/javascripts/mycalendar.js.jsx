@@ -38,6 +38,7 @@ $(document).ready(function() {
         </div>,
         document.getElementById('panel')
       );
+
     },
 
     header: {

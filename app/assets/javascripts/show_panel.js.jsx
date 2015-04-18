@@ -69,6 +69,7 @@ var AdminButtons = React.createClass({
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       type: 'DELETE',
+      dataType: 'json',
       success: function(data) {
         React.render(
           <p id='deleteMsg'>{this.props.calEvent.title} was successfully removed.</p>,
