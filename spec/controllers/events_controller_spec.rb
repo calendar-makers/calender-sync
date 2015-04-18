@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe EventsController do
+  before :each do
+    @user = User.create(:provider => "Meetup", :uid => "12345",
+                        :email => "example@example.com",
+                        :password => "changeme", :token => "abc",
+                        :expires_at => 0, :refresh_token => "def")
+    sign_in @user
+  end
+  
   describe 'Checking Show' do
     it "should render 'show' page" do
       event = Event.create(name: 'coyote appreciation',
