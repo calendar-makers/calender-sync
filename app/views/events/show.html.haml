@@ -34,7 +34,8 @@
 
 %p#how_to_find_us= @event.how_to_find_us
 
-%div= link_to 'Edit', edit_event_path(@event)
+- if user_signed_in?
+  %div= link_to 'Edit', edit_event_path(@event)
 
 %h2 Here's what's happening!
 = image_tag @event.image.url(:medium)
