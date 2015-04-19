@@ -83,7 +83,7 @@ describe EventsController do
 
     before(:each) do
       allow(Event).to receive(:find).and_return(event)
-      allow_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id).and_return(rsvp)
+      allow_any_instance_of(Meetup).to receive(:pull_rsvps).with(event_id: meetup_event_id).and_return(rsvp)
     end
 
     context 'for existing meetup event' do
@@ -99,7 +99,7 @@ describe EventsController do
       end
 
       it 'should indirectly call pull_rsvps with valid event_id' do
-        expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(meetup_event_id)
+        expect_any_instance_of(Meetup).to receive(:pull_rsvps).with(event_id: meetup_event_id)
         get :show, id: event.id
       end
 

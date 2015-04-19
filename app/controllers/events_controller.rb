@@ -14,11 +14,11 @@ class EventsController < ActionController::Base
     @event = Event.find params[:id]
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+    display_synchronization_result(new_guests)
+  end
 
+  def display_synchronization_result(new_guests)
     if new_guests.nil?
-      # NOTE ANY LOCAL ONLY EVENT WILL SHOW WITH THIS MESSAGE.
-      # That is OK, given that is happens only during testing
-      # because in production, no event will be only local
       flash.now.notice = 'Could not merge the RSVP list for this event.'
     elsif new_guests.empty?
       flash.now.notice = "The RSVP list is synched with Meetup. #{@event.generate_participants_message}."
@@ -95,23 +95,22 @@ class EventsController < ActionController::Base
     result = Event.check_if_fields_valid(event_params)
     if !result[:value]
       flash[:notice] = result[:message]
-      redirect_to new_event_path
-      return
+      return redirect_to new_event_path
     end
+    perform_create_transaction
+    redirect_to calendar_path
+  end
 
+  def perform_create_transaction
     @event = Event.new(event_params)
-    meetup = Meetup.new
-    if remote_event = meetup.push_event(@event)
+    if remote_event = Meetup.new.push_event(@event)
       @event.update_meetup_fields(remote_event)
       @event.save!
       params[:event] = @event
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
-
     else
-     flash[:notice] = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
+      flash[:notice] = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
     end
-
-      redirect_to calendar_path
   end
 
   def edit
@@ -133,34 +132,36 @@ class EventsController < ActionController::Base
     result = Event.check_if_fields_valid(event_params)
     if !result[:value]
       flash[:notice] = result[:message]
-      redirect_to edit_event_path(@event)
-      return
+      return redirect_to edit_event_path(@event)
     end
 
-    meetup = Meetup.new
-    if meetup.edit_event(updated_fields: event_params, id: params[:id])
+    perform_update_transaction
+
+    redirect_to calendar_path
+  end
+
+  def perform_update_transaction
+    if Meetup.new.edit_event(updated_fields: event_params, id: params[:id])
       @event.update_attributes!(event_params)
       flash[:notice] = "'#{@event.name}' was successfully updated."
     else
       flash[:notice] = "Could not update '#{@event.name}'."
     end
-
-    redirect_to calendar_path
   end
 
   def destroy
     @event = Event.find params[:id]
-
-    meetup = Meetup.new
-    if meetup.delete_event(@event.meetup_id)
-      @event.destroy
-      flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
-    else
-      flash[:notice] = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
-    end
-
-
+    perform_destroy_transaction(@event)
     redirect_to calendar_path
+  end
+
+  def perform_destroy_transaction(event)
+    if Meetup.new.delete_event(event.meetup_id)
+      event.destroy
+      flash[:notice] = "'#{event.name}' was successfully removed from the Calendar and from Meetup."
+    else
+      flash[:notice] = "Failed to delete event '#{event.name}' from Meetup. Deletion aborted."
+    end
   end
 
   private

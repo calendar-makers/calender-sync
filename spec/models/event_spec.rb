@@ -76,7 +76,7 @@ RSpec.describe Event, type: :model do
     context "with updated event" do
       it "returns true" do
         event = Event.new(updated: Time.now)
-        result = event.is_updated?(Time.now + 3600)
+        result = event.needs_updating?(Time.now + 3600)
         expect(result).to be_truthy
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe Event, type: :model do
     context "with no event update" do
       it "returns false" do
         event = Event.new(updated: Time.now)
-        result = event.is_updated?(Time.now)
+        result = event.needs_updating?(Time.now)
         expect(result).to be_truthy
       end
     end
@@ -209,7 +209,7 @@ RSpec.describe Event, type: :model do
     end
 
   end
-
+=begin
   describe '#location' do
     let(:location_data) {{'address_1' => '145 peep st', 'city' => 'New York',
                           'zip' => '90210', 'state' => 'NY', 'country' => 'US'}}
@@ -219,6 +219,27 @@ RSpec.describe Event, type: :model do
       location_data.each {|k, v| location << v}
       expect(event.location).to eq(location.join(', '))
     end
+  end
+=end
+
+  describe '#location' do
+    let(:location) {[]}
+
+    it 'returns a complete location string' do
+      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+                            'zip' => '90210', 'state' => 'NY', 'country' => 'US'}
+      event = Event.new(location_data)
+      location_data.each {|k, v| location << v}
+      expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
+    end
+
+    it 'handles nil state fields' do
+      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+                       'zip' => '90210', 'state' => nil, 'country' => 'US'}
+      event = Event.new(location_data)
+      expect(event.location).to eq("145 peep st\nNew York 90210\nUS")
+    end
+
   end
 
   describe '#make_remote_deletions_local' do
