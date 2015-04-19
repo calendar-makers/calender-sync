@@ -217,7 +217,7 @@ RSpec.describe Event, type: :model do
     let(:location) {[]}
     it 'returns a complete location string' do
       location_data.each {|k, v| location << v}
-      expect(event.location).to eq(location.join(', '))
+      expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
     end
   end
 =end

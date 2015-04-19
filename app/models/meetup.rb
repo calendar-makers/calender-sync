@@ -209,3 +209,4 @@ class Meetup
   end
 
 end
+

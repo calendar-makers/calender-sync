@@ -134,10 +134,11 @@ class EventsController < ActionController::Base
       flash[:notice] = result[:message]
       return redirect_to edit_event_path(@event)
     end
-
     perform_update_transaction
-
-    redirect_to calendar_path
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
+    end
   end
 
   def perform_update_transaction
@@ -169,7 +170,7 @@ class EventsController < ActionController::Base
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :address_1,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image_file_name)
+                                  :description, :how_to_find_us, :image)
   end
 
   def form_validation_msg

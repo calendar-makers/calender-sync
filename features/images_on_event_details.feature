@@ -15,4 +15,3 @@ Background:
   When I upload an image
   And I am on the "details" page for "Nature Walk"
   Then I should see the picture "nature1.jpg" for "Nature Walk"
-  And I should not see any pictures for "Green Bean Mixer"

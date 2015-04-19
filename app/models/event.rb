@@ -16,12 +16,15 @@ class Event < ActiveRecord::Base
   # }
 
   def as_json(options = {})
-  {
-    :id => self.id,
-    :title => self.name,
-    :start => start.iso8601,
-    :url => Rails.application.routes.url_helpers.event_path(id)
-  }
+    {
+      :id => self.id,
+      :title => self.name,
+      :start => self.start.iso8601,
+      :end => (self.end ? self.end.iso8601 : nil),
+      :location => self.location,
+      :description => self.description,
+      :temp => Rails.application.routes.url_helpers.event_path(id)
+    }
   end
 
   # def self.scoped(options=nil)

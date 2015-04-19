@@ -6,23 +6,24 @@ Feature: authentication for our application
 
 Scenario: Guests should not see admin actions
   Given I am not logged in as the admin
-  And   I am on the "Calendar" page
   Then  I should not see the admin actions
 
-# Design decision, access "Login" page via URL, not button on calendar
 Scenario: Admins should be able to login with proper credentials
   Given I am not logged in as the admin
-  And   I am on the "Login" page
-  When  I fill in the login information
+  When  I sign in with valid credentials
   Then  I should be on the "Calendar" page
-  And   I should see "Logged in"
+  And   I should see the "Sign Out" link
+
+Scenario: Admins should not be able to login with improper credentials
+  Given I am not logged in as the admin
+  When  I sign in with the wrong password
+  Then  I should be on the "Sign In" page
 
 Scenario: Admins should be able to logout
   Given I am logged in as the admin
-  And   I am on the "Calendar" page
-  When  I click on the "Log out" button
+  When  I click on the "Sign Out" link
   Then  I should be on the "Calendar" page
-  And   I should see "Logged out"
+  And   I should see the "Login" link
 
 Scenario: Admins should see admin actions
   Given I am logged in as the admin

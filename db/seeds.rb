@@ -16,9 +16,6 @@ events = [{ name: 'Gardening', organization: 'Nature in the City',
             how_to_find_us: 'first door to the right', venue_name: 'San Francisco Library', address_1: '35 Seneca st',
             city: 'New York', zip: '91211'}]
 
-
-
-
 events.each do |event|
   Event.create!(event)
 end

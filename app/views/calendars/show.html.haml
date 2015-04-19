@@ -1,51 +1,27 @@
-= link_to "new event", new_event_path
-</br>
-- if current_user
-  = link_to "Sign Out", "/signout", id: "signout"
+- if user_signed_in?
+  = link_to "Create new event", new_event_path
+  </br>
+  = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
+  </br>
+  = link_to "Sign Out", destroy_user_session_path, :method => :delete 
 - else
-  = link_to "login to Meetup", "/auth/meetup", id: "login"
+  = link_to "Login", new_user_session_path, :method => :get
 </br>
-= link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
-</br></br>
 
 %h1 Events Calendar
 </br>
 
 #wrap
   #calendar
-  #div{:style => "width=2%;"}
-  #panel
-    %h2{:style => "font-weight:200;"} Event Details
-    - unless @event
-      %p Click an event! <i>(not yet functional)</i>
-    - else
-      #name
-        What: 
-        = @event.name
-      #image
-        <i>image resizing has to be done, maybe to resize along with page size?</i>
-        = # image_tag @event.image.url(:small)
-      </br>
-      #date_time
-        When:
-        = @when
-      </br>
-      #location
-        Where: 
-        = @event.location
-        </br><i>map may be coming soon!</i>
-      </br>
-      #description
-        = @event.description
-      </br>
-      </br>
-      #rsvp
-        <i>rsvp under construction</i>
-        = # maybe we should put a link to an rsvp form page or popup...
-      </br>
-      </br>
-      - if current_user
-        = button_to 'Edit', event_path(@event), :method => :edit
-        = button_to 'Delete', event_path(@event), :method => :delete, :confirm => 'Are you sure?'
+  #panel_wrapper
+    #panel_header
+      %h2{:style => "font-weight:200;"} Event Details
+    #panel
+      %p Click an event!
+      #new.crud
+      #edit.crud
+      #delete.crud
+      %div{:style => "clear:both;"}
+    %div{:style => "clear:both;"}
 
   %div{:style => "clear:both;"}

@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe EventsController do
+  before :each do
+    @user = User.create(:provider => "Meetup", :uid => "12345",
+                        :email => "example@example.com",
+                        :password => "changeme", :token => "abc",
+                        :expires_at => 0, :refresh_token => "def")
+    sign_in @user
+  end
+  
   let(:event) {Event.create(name: 'coyote appreciation',
                                     organization: 'nature loving',
                                     start: '8-mar-2016',

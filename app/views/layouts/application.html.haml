@@ -11,17 +11,22 @@
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
     = csrf_meta_tags
+    = raw @head1
 
-  %body{:style => "width:75%; margin-left:12.5%;"}
-    %h1.title Nature in the City [header placeholder]
-    %main
+  %body
+    = raw @header
+    %hr
+
+    %main{:style => "width:75%; margin-left:12.5%;"}
       - if flash[:notice]
         %h3#notice.message= flash[:notice]
       - elsif flash[:warning]
         %h3#warning.message= flash[:warning]
 
       = yield
-      = javascript_include_tag 'my_calendar'
-    
+      = javascript_include_tag 'mycalendar'
+
     </br></br></br></br></br>
-    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"} [footer placeholder]
+    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+    = raw @section
+    = raw @footer
