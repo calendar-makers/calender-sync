@@ -242,7 +242,7 @@ RSpec.describe Event, type: :model do
 
   end
 
-  describe '#make_remote_deletions_local' do
+  describe '#remove_remotely_deleted_events' do
     before(:each) do
       @event_1 = Event.create!(meetup_id: '12345')
       @event_2 = Event.create!(meetup_id: '678910')
@@ -253,7 +253,7 @@ RSpec.describe Event, type: :model do
       let(:remote_events) {@local_events}
 
       it 'does nothing' do
-        Event.make_remote_deletions_local(remote_events)
+        Event.remove_remotely_deleted_events(remote_events)
         expect(Event.all.size).to eq(@local_events.size)
       end
     end
@@ -262,7 +262,7 @@ RSpec.describe Event, type: :model do
       let(:remote_events) {[@event_1]}
 
       it 'deletes the local copy of @event_2' do
-        Event.make_remote_deletions_local(remote_events)
+        Event.remove_remotely_deleted_events(remote_events)
         expect(Event.find_by_meetup_id('678910')).to be_nil
       end
     end

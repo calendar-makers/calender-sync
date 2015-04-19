@@ -9,8 +9,8 @@ class Meetup
   UTC_OFFSET = 14400000
 
   # NATURE IN THE CITY DATA
-  GROUP_ID = '8870202'
-  GROUP_URLNAME = 'Nature-in-the-City'
+  GROUP_ID = '1556336'#'8870202'
+  GROUP_URLNAME = 'Meetup-API-Testing'#'Nature-in-the-City'
 
   def default_group_urlname=(urlname='')
     @default_group_urlname = urlname.blank? ? GROUP_URLNAME : urlname
@@ -137,10 +137,17 @@ class Meetup
     data[:description] = event[:description]
     data[:venue_id] = get_meetup_venue_id(event)
     start = event[:start]
-    data[:time] = Meetup.get_milliseconds(start) + UTC_OFFSET
+    data[:time] = set_time(start)
     data[:duration] = Meetup.get_milliseconds((event[:end] - start))
     data[:how_to_find_us] = event[:how_to_find_us]
     data
+  end
+
+  def set_time(date)
+    Meetup.get_milliseconds(date) + UTC_OFFSET
+    #local_offset = DateTime.now.offset
+    #date.to_datetime.new_offset(local_offset).to_i * 1000
+    #date.to_datetime.change(offset: local_offset).to_i * 1000
   end
 
   def get_meetup_venue_id(event)
@@ -176,7 +183,7 @@ class Meetup
 
   def self.build_date(time, utc_offset)
     if time
-      (time = time - utc_offset) if utc_offset
+      (time = time + utc_offset) if utc_offset
       millis_per_second = 1000
       Time.at(time / millis_per_second).to_datetime
     end

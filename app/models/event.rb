@@ -70,32 +70,33 @@ class Event < ActiveRecord::Base
   end
 
   def self.make_events_local(events)
-    if !events.blank?
-      events_bin = []
-      events.each do |event|
-        stored_event = Event.find_by_meetup_id(event[:meetup_id])
-        if stored_event.nil?
-          event.save!
-        elsif stored_event.needs_updating?(event[:updated])
-          stored_event.apply_update(event)
-        else # already stored and unchanged since
-          next
-        end
+    return if events.blank?
+    events_bin = []
+    events.each do |event|
+      events_bin << event if Event.process_event(event)
+    end
+    Event.remove_remotely_deleted_events(events)
+    events_bin
+  end
 
-        events_bin << event
-      end
-
-      Event.make_remote_deletions_local(events)
-      events_bin
+  def self.process_event(event)
+    stored_event = Event.find_by_meetup_id(event[:meetup_id])
+    if stored_event.nil?
+      event.save!
+    elsif stored_event.needs_updating?(event[:updated])
+      stored_event.apply_update(event)
+    else # already stored and unchanged since
+      false
     end
   end
 
-  def self.make_remote_deletions_local(remote_events)
+  def self.remove_remotely_deleted_events(remote_events)
     local_event_ids = Event.pluck(:meetup_id)
     remote_event_ids = []
     remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
     remotely_deleted_ids = local_event_ids - remote_event_ids
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
+    p = ""
   end
 
   def apply_update(new_event)
@@ -110,28 +111,28 @@ class Event < ActiveRecord::Base
 
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
-    if !rsvps.blank?
-      new_guest_names = []
-      rsvps.each do |rsvp|
-
-        guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
-
-        registration = Registration.find_by({event_id: id, guest_id: guest.id})
-        if registration.nil?
-          Registration.create!(event_id: id, guest_id: guest.id,
-                               invited_guests: rsvp[:invited_guests],
-                               updated: rsvp[:updated])
-        elsif registration.needs_updating?(rsvp[:updated])
-          registration.update_attributes!(invited_guests: rsvp[:invited_guests],
-                                          updated: rsvp[:updated])
-        else # neither new nor updated
-          next
-        end
-
+    return if rsvps.blank?
+    new_guest_names = []
+    rsvps.each do |rsvp|
+      guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
+      if process_rsvp(rsvp, guest.id)
         new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
       end
+    end
+    new_guest_names
+  end
 
-      new_guest_names
+  def process_rsvp(rsvp, guest_id)
+    registration = Registration.find_by({event_id: id, guest_id: guest_id})
+    if registration.nil?
+      Registration.create!(event_id: id, guest_id: guest_id,
+                           invited_guests: rsvp[:invited_guests],
+                           updated: rsvp[:updated])
+    elsif registration.needs_updating?(rsvp[:updated])
+      registration.update_attributes!(invited_guests: rsvp[:invited_guests],
+                                      updated: rsvp[:updated])
+    else # neither new nor updated
+      false
     end
   end
 

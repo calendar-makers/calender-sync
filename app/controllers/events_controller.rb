@@ -141,7 +141,7 @@ class EventsController < ActionController::Base
   end
 
   def perform_update_transaction
-    if Meetup.new.edit_event(updated_fields: event_params, id: params[:id])
+    if Meetup.new.edit_event(updated_fields: event_params, id: @event.meetup_id)
       @event.update_attributes!(event_params)
       flash[:notice] = "'#{@event.name}' was successfully updated."
     else
