@@ -10,11 +10,15 @@
     = javascript_include_tag 'jquery.min'
     = javascript_include_tag 'moment.min'
     = javascript_include_tag 'fullcalendar'
+    = javascript_include_tag 'mycalendar'
     = csrf_meta_tags
+    //************START*************************
     = raw @head1
-
+    //*************END************************
   %body
+    //*************START**********************
     = raw @header
+    //**************END***********************
     %hr
 
     %main{:style => "width:75%; margin-left:12.5%;"}
@@ -24,7 +28,7 @@
         %h3#warning.message= flash[:warning]
 
       = yield
-      = javascript_include_tag 'mycalendar'
+      
 
     </br></br></br></br></br>
     %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
