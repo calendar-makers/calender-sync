@@ -1,5 +1,5 @@
 class CallbacksController < Devise:: OmniauthCallbacksController
-  force_ssl if Rails.env.production?
+  # force_ssl if Rails.env.production?
   
   def meetup
     auth = request.env["omniauth.auth"]

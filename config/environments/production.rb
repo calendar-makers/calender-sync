@@ -82,4 +82,10 @@ Rails.application.configure do
   end
 
   config.action_controller.include_all_helpers = true
+
+  # Devise stuff
+  config.to_prepare {Devise::SessionsController.force_ssl}
+  config.to_prepare {Devise::RegistrationsController.force_ssl}
+  config.to_prepare {Devise::PasswordsController.force_ssl}
+  config.to_prepare {Devise::OmniauthCallbacksController.force_ssl}
 end
