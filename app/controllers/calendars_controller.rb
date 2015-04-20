@@ -1,4 +1,10 @@
 class CalendarsController < ApplicationController
+  before_filter do
+    if request.ssl? && Rails.env.production?
+      redirect_to :protocol => 'http://', :status => :moved_permanently
+    end
+  end
+  
   def preprocess_header_footer
     @page.css("base").each do |tag|
       tag.remove()
