@@ -41,7 +41,6 @@ describe Meetup do
 
     before(:each) do
       allow(Meetup).to receive(:build_date).and_return(time)
-      allow(Meetup).to receive(:build_duration).and_return(time)
       allow(Meetup).to receive(:parse_venue).and_return(venue)
     end
 
@@ -68,15 +67,6 @@ describe Meetup do
 
     it 'gets a hash with info and returns an rsvp hash' do
       expect(Meetup.parse_rsvp(data)).to eq(rsvp)
-    end
-  end
-
-  describe '#build_duration' do
-    let(:data) {{'duration' => 3600000}}
-    let(:duration) {1}
-
-    it 'gets a hash with time in milliseconds and returns integer hours' do
-      expect(Meetup.build_duration(data)).to eq(duration)
     end
   end
 
@@ -276,6 +266,7 @@ describe Meetup do
 
     before(:each) do
       allow(data).to receive(:parsed_response).and_return(results)
+      allow(results).to receive(:[]).with('results').and_return(nil)
       allow(Meetup).to receive(:parse_event).with(results).and_return(event)
       allow(event).to receive(:[]).with(:meetup_id).and_return(valid_event_id)
       allow(HTTParty).to receive(:get).with(any_args).and_return(data)
@@ -385,7 +376,7 @@ describe Meetup do
         end
 
         it 'returns a possible collection of rsvps' do
-          data = good_user.pull_rsvps(valid_event_id)
+          data = good_user.pull_rsvps(event_id: valid_event_id)
           expect(data[0][:event_id]).to eq(valid_event_id)
         end
       end
@@ -398,7 +389,7 @@ describe Meetup do
         end
 
         it 'returns nil' do
-          data = good_user.pull_rsvps(invalid_event_id)
+          data = good_user.pull_rsvps(event_id: invalid_event_id)
           expect(data).to be_nil
         end
       end
@@ -413,7 +404,7 @@ describe Meetup do
       end
 
       it 'returns nil' do
-        data = bad_user.pull_rsvps(valid_event_id)
+        data = bad_user.pull_rsvps(event_id: valid_event_id)
         expect(data).to be_nil
       end
     end
@@ -439,6 +430,7 @@ describe Meetup do
           allow(HTTParty).to receive(:post).and_return(data)
           allow(data).to receive(:code).and_return(201)
           allow(data).to receive(:parsed_response).and_return(data)
+          allow(data).to receive(:[]).with('results').and_return(nil)
           allow(Meetup).to receive(:parse_event).with(data).and_return(Hash.new)
           result = good_user.push_event(event)
           expect(result).to be_instance_of(Hash)

@@ -76,7 +76,7 @@ RSpec.describe Event, type: :model do
     context "with updated event" do
       it "returns true" do
         event = Event.new(updated: Time.now)
-        result = event.is_updated?(Time.now + 3600)
+        result = event.needs_updating?(Time.now + 3600)
         expect(result).to be_truthy
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe Event, type: :model do
     context "with no event update" do
       it "returns false" do
         event = Event.new(updated: Time.now)
-        result = event.is_updated?(Time.now)
+        result = event.needs_updating?(Time.now)
         expect(result).to be_truthy
       end
     end
@@ -209,7 +209,7 @@ RSpec.describe Event, type: :model do
     end
 
   end
-
+=begin
   describe '#location' do
     let(:location_data) {{'address_1' => '145 peep st', 'city' => 'New York',
                           'zip' => '90210', 'state' => 'NY', 'country' => 'US'}}
@@ -220,8 +220,29 @@ RSpec.describe Event, type: :model do
       expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
     end
   end
+=end
 
-  describe '#make_remote_deletions_local' do
+  describe '#location' do
+    let(:location) {[]}
+
+    it 'returns a complete location string' do
+      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+                            'zip' => '90210', 'state' => 'NY', 'country' => 'US'}
+      event = Event.new(location_data)
+      location_data.each {|k, v| location << v}
+      expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
+    end
+
+    it 'handles nil state fields' do
+      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+                       'zip' => '90210', 'state' => nil, 'country' => 'US'}
+      event = Event.new(location_data)
+      expect(event.location).to eq("145 peep st\nNew York 90210\nUS")
+    end
+
+  end
+
+  describe '#remove_remotely_deleted_events' do
     before(:each) do
       @event_1 = Event.create!(meetup_id: '12345')
       @event_2 = Event.create!(meetup_id: '678910')
@@ -232,7 +253,7 @@ RSpec.describe Event, type: :model do
       let(:remote_events) {@local_events}
 
       it 'does nothing' do
-        Event.make_remote_deletions_local(remote_events)
+        Event.remove_remotely_deleted_events(remote_events)
         expect(Event.all.size).to eq(@local_events.size)
       end
     end
@@ -241,7 +262,7 @@ RSpec.describe Event, type: :model do
       let(:remote_events) {[@event_1]}
 
       it 'deletes the local copy of @event_2' do
-        Event.make_remote_deletions_local(remote_events)
+        Event.remove_remotely_deleted_events(remote_events)
         expect(Event.find_by_meetup_id('678910')).to be_nil
       end
     end

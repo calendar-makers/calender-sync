@@ -45,21 +45,18 @@ class Event < ActiveRecord::Base
   end
 
   def is_new?
-    Event.find_by_meetup_id(meetup_id).nil?
+    self.class.find_by_meetup_id(meetup_id).nil?
   end
 
-  def is_updated?(latest_update)
+  def needs_updating?(latest_update)
     updated < latest_update
   end
 
   def count_event_participants
-    regis = self.registrations
-    sum = 0
-    regis.each do |reg|
-      guest_count = reg.invited_guests
-      sum += 1 + (guest_count ? guest_count : 0 )
+    registrations.inject(0) do |sum, regis|
+      guest_count = regis.invited_guests
+      sum + 1 + (guest_count ? guest_count : 0 )
     end
-    sum
   end
 
   def generate_participants_message
@@ -68,51 +65,41 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remote_events(options={})
-    # Here we can pass the token to the API call if needed.
-    # We can also pass any options for the query
-    # If so put them in the options hash, and pass it to the constructor
-    #options = {access_token: token}
-    meetup = Meetup.new
-
-    candidate_events = []
-    meetup_events = meetup.pull_events(options)
-    if meetup_events
-      meetup_events.each do |event|
-        return nil unless true   # ANY VALIDATION???? Check meetup.rb for details
-        candidate_events << Event.new(event)
-      end
+    # Here we can pass the token to the API call if needed. Like so: {access_token: token}
+    meetup_events = Meetup.new.pull_events(options)
+    if meetup_events.respond_to?(:each)
+      meetup_events.each_with_object([]) {|event, candidate_events| candidate_events << Event.new(event)}
     end
-
-    candidate_events
   end
 
   def self.make_events_local(events)
-    if !events.blank?
-      events_bin = []
-      events.each do |event|
-        stored_event = Event.find_by_meetup_id(event[:meetup_id])
-        if stored_event.nil?
-          event.save!
-        elsif stored_event.is_updated?(event[:updated])
-          stored_event.apply_update(event)
-        else # already stored and unchanged since
-          next
-        end
+    return if events.blank?
+    events_bin = []
+    events.each do |event|
+      events_bin << event if Event.process_event(event)
+    end
+    Event.remove_remotely_deleted_events(events)
+    events_bin
+  end
 
-        events_bin << event
-      end
-
-      Event.make_remote_deletions_local(events)
-      events_bin
+  def self.process_event(event)
+    stored_event = Event.find_by_meetup_id(event[:meetup_id])
+    if stored_event.nil?
+      event.save!
+    elsif stored_event.needs_updating?(event[:updated])
+      stored_event.apply_update(event)
+    else # already stored and unchanged since
+      false
     end
   end
 
-  def self.make_remote_deletions_local(remote_events)
+  def self.remove_remotely_deleted_events(remote_events)
     local_event_ids = Event.pluck(:meetup_id)
     remote_event_ids = []
     remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
     remotely_deleted_ids = local_event_ids - remote_event_ids
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
+    p = ""
   end
 
   def apply_update(new_event)
@@ -121,58 +108,53 @@ class Event < ActiveRecord::Base
     update_attributes(modified_pairs)
   end
 
-  # Gets meetup rsvps corresponding to a given event id
-  # Non-nil returned output is always valid
   def get_remote_rsvps
-    # Could pass arguments to constructor to refine search
-    meetup = Meetup.new
-    meetup.pull_rsvps(meetup_id)
+    Meetup.new.pull_rsvps(event_id: meetup_id)
   end
 
   def merge_meetup_rsvps
     rsvps = get_remote_rsvps
-    if !rsvps.blank?
-      new_guest_names = []
-      rsvps.each do |rsvp|
-
-        guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
-
-        registration = Registration.find_by({event_id: id, guest_id: guest.id})
-        if registration.nil?
-          Registration.create!(event_id: id, guest_id: guest.id,
-                               invited_guests: rsvp[:invited_guests],
-                               updated: rsvp[:updated])
-        elsif registration.is_updated?(rsvp[:updated])
-          registration.update_attributes!(invited_guests: rsvp[:invited_guests],
-                                          updated: rsvp[:updated])
-        else # neither new nor updated
-          next
-        end
-
+    return if rsvps.blank?
+    new_guest_names = []
+    rsvps.each do |rsvp|
+      guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
+      if process_rsvp(rsvp, guest.id)
         new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
       end
+    end
+    new_guest_names
+  end
 
-      new_guest_names
+  def process_rsvp(rsvp, guest_id)
+    registration = Registration.find_by({event_id: id, guest_id: guest_id})
+    if registration.nil?
+      Registration.create!(event_id: id, guest_id: guest_id,
+                           invited_guests: rsvp[:invited_guests],
+                           updated: rsvp[:updated])
+    elsif registration.needs_updating?(rsvp[:updated])
+      registration.update_attributes!(invited_guests: rsvp[:invited_guests],
+                                      updated: rsvp[:updated])
+    else # neither new nor updated
+      false
     end
   end
 
   def format_start_date
-    start.strftime('%m/%d/%Y at %I:%M%p') if start
-  end
+    Event.format_date(start)  end
 
   def format_end_date
-    self.end.strftime('%m/%d/%Y at %I:%M%p') if self.end
+    Event.format_date(self.end)
+  end
+
+  def self.format_date(date)
+    date.strftime('%m/%d/%Y at %I:%M%p') if date
   end
 
   def location
     location = []
-    location << self.address_1
-    if self.state != nil
-      location << self.city.to_s + ', ' + self.state.to_s + ' ' + self.zip.to_s
-    else
-      location << self.city.to_s + self.zip.to_s
-    end
-    location << self.country
+    location << address_1
+    location << city.to_s + (state ? (', ' + state + ' ') : ' ') + zip.to_s
+    location << country
     location.join("\n")
   end
 

@@ -55,19 +55,25 @@ class CalendarsController < ApplicationController
     end
   end
 
+
   def display_synchronization_result(events)
     if events.nil?
       flash.now.notice = "Could not pull events from Meetup"
     elsif events.empty?
       flash.now.notice = "The Calendar and Meetup are synched"
     else
-      flash.now.notice = 'Successfully pulled events: ' + self.class.get_event_info(events) + ' from Meetup'
+      flash.now.notice = 'Successfully pulled events: ' + CalendarsController.get_event_info(events) + ' from Meetup'
     end
   end
 
   def self.get_event_info(events)
     info = []
-    events.each {|event| info << event[:name]}
+    if events.size < 30
+      events.each {|event| info << event[:name]}
+    else
+      events[0..30].each {|event| info << event[:name]}
+      info << 'and more'
+    end
     info.join(', ')
   end
 end
