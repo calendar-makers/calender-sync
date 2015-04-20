@@ -66,7 +66,7 @@ class Meetup
       options.merge!(group_id: default_group_id) # if user gave no options, then pull by default group id
     end
     options.merge!(default_auth)
-    options.merge!(status: 'past,upcoming')
+    #options.merge!(status: 'past,upcoming')
     data = HTTParty.get("#{BASE_URL}/2/events?#{Meetup.options_string(options)}")
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
   end
