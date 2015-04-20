@@ -1,5 +1,4 @@
 class CalendarsController < ApplicationController
-
   def preprocess_header_footer
     @page.css("base").each do |tag|
       tag.remove()
@@ -9,12 +8,17 @@ class CalendarsController < ApplicationController
         tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
       end
     end
+    @page.css("script").each do |tag|
+      if tag["src"]!=nil and tag["src"].match('/media')
+        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
+      end
+    end
     @page.css("li").each do |tag|
       if tag["class"] != nil and tag["class"] =="item-144"
         tag["class"] = "item-144 current"
       end
     end
-    @page.css("a,form").each do |tag|
+    @page.css("a,form,link").each do |tag|
       if tag["href"] !=nil and tag["href"][0] =='/'
         tag.set_attribute('href', "http://www.natureinthecity.org" + tag["href"])
       end
@@ -25,9 +29,11 @@ class CalendarsController < ApplicationController
         @section = elem
       end
     end
-    @head1 = @page.at_css "head"
+    @head1 = (@page.at_css "head").inner_html
     @header = @page.at_css "header"
     @footer = @page.at_css "footer"
+    #@text = @head1.inner_html
+    #@head1 = @text
   end
 
   def preprocess_for_bad_request
