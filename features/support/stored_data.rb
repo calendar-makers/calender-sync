@@ -730,6 +730,8 @@ end
 Before('@meetup_successful_edit') do
   FakeWeb.clean_registry
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{:body => pushed_event_for_pull, :content_type => 'application/json'},
+                                                                         {:body => pushed_event_for_pull, :content_type => 'application/json'},
+                                                                         {:body => edited_pushed_event_for_pull, :content_type => 'application/json'},
                                                                            {:body => edited_pushed_event_for_pull, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
 end
@@ -834,7 +836,9 @@ end
 Before('@repeated_changed_pull_meetup') do
   FakeWeb.clean_registry
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'},
-                                                                                           {:body => modified_events, :content_type => 'application/json'}])
+                                                                                    {:body => events, :content_type => 'application/json'},
+                                                                                    {:body => modified_events, :content_type => 'application/json'},
+                                                                                    {:body => modified_events, :content_type => 'application/json'}])
 end
 ########################################
 

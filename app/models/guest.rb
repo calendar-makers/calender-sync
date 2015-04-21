@@ -10,7 +10,7 @@ class Guest < ActiveRecord::Base
   def all_anon
     Guest.where(is_anon: true)
   end
-  
+
   def self.fields_valid?(fields)
     fields.each do |k, v|
       if v == nil || v == ''
@@ -23,10 +23,10 @@ class Guest < ActiveRecord::Base
   # Best effort. Meetup names have no specific format
   def self.parse_meetup_name(name)
     name.strip!
-    if name.include?(" ")
-      return name.split(" ")
+    if name.include?(' ')
+      return name.split(' ')
     else
-      return name, ""
+      return name, ''
     end
   end
 

@@ -99,7 +99,13 @@ class Event < ActiveRecord::Base
     remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
     remotely_deleted_ids = local_event_ids - remote_event_ids
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
-    p = ""
+  end
+
+  def self.pull_all_events
+    past_events = Event.get_remote_events({status: 'past'})
+    upcoming_events = Event.get_remote_events({status: 'upcoming'})
+    remote_events = past_events + upcoming_events if upcoming_events && past_events
+    events = Event.make_events_local(remote_events)
   end
 
   def apply_update(new_event)
