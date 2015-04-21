@@ -1,4 +1,10 @@
 class CalendarsController < ApplicationController
+  before_filter do
+    if request.ssl? && Rails.env.production?
+      redirect_to :protocol => 'http://', :status => :moved_permanently
+    end
+  end
+
   def preprocess_header_footer
     @page.css("base").each do |tag|
       tag.remove()
@@ -51,11 +57,10 @@ class CalendarsController < ApplicationController
     preprocess_header_footer
 
     if flash[:notice].nil? # Prevent Meetup synchronization if have incoming message
-      events = Event.make_events_local(Event.get_remote_events)
+      events = Event.pull_all_events
       display_synchronization_result(events)
     end
   end
-
 
   def display_synchronization_result(events)
     if events.nil?

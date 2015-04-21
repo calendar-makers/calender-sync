@@ -1,4 +1,6 @@
 class CallbacksController < Devise:: OmniauthCallbacksController
+  # force_ssl if Rails.env.production?
+  
   def meetup
     auth = request.env["omniauth.auth"]
     @user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 

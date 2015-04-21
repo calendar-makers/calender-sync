@@ -4,5 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # force SSL so meetup redirect_url works
-  force_ssl if Rails.env.production?
+  # moved to call back controller
+  # force_ssl if Rails.env.production?
 end

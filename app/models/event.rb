@@ -31,11 +31,11 @@ class Event < ActiveRecord::Base
   #   options ? where(nil).apply_finder_options(options, true) : where(nil)
   # end
 
-  def self.check_if_fields_valid(arg1)
+  def self.check_if_fields_valid(arg)
     result = {}
     result[:message] = []
     result[:value] = true
-    arg1.each do |k, v|
+    arg.each do |k, v|
       if v == nil || v == ''
         result[:value] = false
         result[:message].append k.to_s
@@ -99,7 +99,13 @@ class Event < ActiveRecord::Base
     remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
     remotely_deleted_ids = local_event_ids - remote_event_ids
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
-    p = ""
+  end
+
+  def self.pull_all_events
+    past_events = Event.get_remote_events({status: 'past'})
+    upcoming_events = Event.get_remote_events({status: 'upcoming'})
+    remote_events = past_events + upcoming_events if upcoming_events && past_events
+    events = Event.make_events_local(remote_events)
   end
 
   def apply_update(new_event)
@@ -139,8 +145,28 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def self.get_requested_ids(data)
+    data.keys.select {|k| k =~ /^event.+$/} if data.respond_to? :keys
+  end
+
+  def self.cleanup_ids(ids)
+    clean_ids = []
+    ids.each {|id| clean_ids << id.gsub("event", "")} if ids.respond_to? :each
+    clean_ids
+  end
+
+  def self.get_event_ids(args)
+    Event.cleanup_ids(Event.get_requested_ids(args))
+  end
+
+  def self.store_third_party_events(ids)
+    options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
+    Event.make_events_local(Event.get_remote_events(options))
+  end
+
   def format_start_date
-    Event.format_date(start)  end
+    Event.format_date(start)
+  end
 
   def format_end_date
     Event.format_date(self.end)
@@ -161,6 +187,18 @@ class Event < ActiveRecord::Base
   def update_meetup_fields(event)
     keys = [:meetup_id, :updated, :url, :status]
     keys.each {|k| self[k] = event[k]}
+  end
+
+  def self.display_message(events)
+    if events.nil?
+      "Could not add event. Please retry."
+    elsif events.empty?
+      "These events are already in the Calendar, and are up to date."
+    elsif events.size > 0
+      names = []
+      events.each {|event| names << event[:name]}
+      "Successfully added: #{names.join(', ')}."
+    end
   end
 
 end
