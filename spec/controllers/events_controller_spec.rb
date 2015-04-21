@@ -8,7 +8,7 @@ describe EventsController do
                         :expires_at => 0, :refresh_token => "def")
     sign_in @user
   end
-  
+
   let(:event) {Event.create(name: 'coyote appreciation',
                                     organization: 'nature loving',
                                     start: '8-mar-2016',
@@ -140,23 +140,7 @@ describe EventsController do
     end
   end
 
-  describe "::get_requested_ids" do
-    let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
-    it "Selects only ids which match /^event.*/" do
-      result = EventsController.get_requested_ids(data)
-      expect(result).to eq([:event123, :event12abc])
-    end
-  end
 
-  describe "::cleanup_ids" do
-    let(:dirty_ids) {['event123', 'event1456', 'eventABC']}
-    let(:clean_ids) {['123', '1456', 'ABC']}
-
-    it 'should return only pure ids' do
-      result = EventsController.cleanup_ids(dirty_ids)
-      expect(result).to eq(clean_ids)
-    end
-  end
 
   describe "pulls 3rd party events" do
     let(:ids) {['event123', 'event1456', 'eventABC']}
@@ -169,12 +153,12 @@ describe EventsController do
 
     context 'for some requested ids' do
       before(:each) do
-        allow(EventsController).to receive(:get_requested_ids).and_return(ids)
+        allow(Event).to receive(:get_requested_ids).and_return(ids)
       end
 
       it "should return a message with the added events" do
         get :pull_third_party
-        expect(flash[:notice]).to eq(EventsController.display_message(events))
+        expect(flash[:notice]).to eq(Event.display_message(events))
       end
 
       it "should redirect to the calendar" do
@@ -185,7 +169,7 @@ describe EventsController do
 
     context 'no requested ids' do
       before(:each) do
-        allow(EventsController).to receive(:get_requested_ids).and_return([])
+        allow(Event).to receive(:get_requested_ids).and_return([])
       end
 
       it "should redirect back to third party" do
@@ -237,32 +221,5 @@ describe EventsController do
     end
   end
 
-  describe "::display_message" do
 
-    context "with at least one event" do
-      let(:events) {[Event.new(name: 'gardening'), Event.new(name: 'swimming')]}
-
-      it "returns a message with the added event names" do
-        result = EventsController.display_message(events)
-        expect(result).to eq("Successfully added: gardening, swimming.")
-      end
-    end
-
-    context "with zero events" do
-      let(:events) {[]}
-
-      it "returns a message stating that the RSVP for the event is up to date with Meetup" do
-        result = EventsController.display_message(events)
-        expect(result).to eq("These events are already in the Calendar, and are up to date.")
-      end
-    end
-
-    context "with nil" do
-      let(:events) {}
-      it "returns a failure message" do
-        result = EventsController.display_message(events)
-        expect(result).to eq("Could not add event. Please retry.")
-      end
-    end
-  end
 end

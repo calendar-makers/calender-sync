@@ -268,7 +268,51 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe "::get_requested_ids" do
+    let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
+    it "Selects only ids which match /^event.*/" do
+      result = Event.get_requested_ids(data)
+      expect(result).to eq([:event123, :event12abc])
+    end
+  end
 
+  describe "::cleanup_ids" do
+    let(:dirty_ids) {['event123', 'event1456', 'eventABC']}
+    let(:clean_ids) {['123', '1456', 'ABC']}
 
+    it 'should return only pure ids' do
+      result = Event.cleanup_ids(dirty_ids)
+      expect(result).to eq(clean_ids)
+    end
+  end
+
+  describe "::display_message" do
+
+    context "with at least one event" do
+      let(:events) {[Event.new(name: 'gardening'), Event.new(name: 'swimming')]}
+
+      it "returns a message with the added event names" do
+        result = Event.display_message(events)
+        expect(result).to eq("Successfully added: gardening, swimming.")
+      end
+    end
+
+    context "with zero events" do
+      let(:events) {[]}
+
+      it "returns a message stating that the RSVP for the event is up to date with Meetup" do
+        result = Event.display_message(events)
+        expect(result).to eq("These events are already in the Calendar, and are up to date.")
+      end
+    end
+
+    context "with nil" do
+      let(:events) {}
+      it "returns a failure message" do
+        result = Event.display_message(events)
+        expect(result).to eq("Could not add event. Please retry.")
+      end
+    end
+  end
 end
 
