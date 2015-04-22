@@ -105,9 +105,36 @@ class Event < ActiveRecord::Base
   end
 
   def self.pull_all_events
+    default_group_events = Event.get_all_group_events
+    third_party_events = Event.get_all_third_party_events
+    default_group_events + third_party_events if default_group_events && third_party_events
+  end
+
+  def self.get_all_group_events
     past_events = Event.get_remote_events({status: 'past'})
     upcoming_events = Event.get_remote_events({status: 'upcoming'})
-    past_events + upcoming_events if upcoming_events && past_events
+    (upcoming_events && past_events) ? (past_events + upcoming_events) : nil
+  end
+
+  def self.get_all_third_party_events
+    options = {event_id: Event.get_stored_third_party_ids.join(',')}
+    if options.size > 0
+      past_events = Event.get_remote_events({status: 'past'}.merge options)
+      upcoming_events = Event.get_remote_events({status: 'upcoming'}.merge options)
+      (upcoming_events && past_events) ? (past_events + upcoming_events) : nil
+    else
+      []
+    end
+  end
+
+  def self.get_default_group_name
+    Meetup::GROUP_NAME
+  end
+
+  def self.get_stored_third_party_ids
+    default_group_name = Event.get_default_group_name
+    third_party_events = Event.all.select {|event| event.organization != default_group_name}
+    third_party_events.inject([]) {|array, event| array << event[:meetup_id]}
   end
 
   def apply_update(new_event)
@@ -161,7 +188,7 @@ class Event < ActiveRecord::Base
     Event.cleanup_ids(Event.get_requested_ids(args))
   end
 
-  def self.synchronize_third_party_events(ids)
+  def self.store_third_party_events(ids)
     options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
     Event.make_events_local(Event.get_remote_events(options))
   end
