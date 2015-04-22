@@ -242,7 +242,7 @@ RSpec.describe Event, type: :model do
 
   end
 
-  describe '#remove_remotely_deleted_events' do
+  describe '::remove_remotely_deleted_events' do
     before(:each) do
       @event_1 = Event.create!(meetup_id: '12345')
       @event_2 = Event.create!(meetup_id: '678910')
@@ -266,7 +266,87 @@ RSpec.describe Event, type: :model do
         expect(Event.find_by_meetup_id('678910')).to be_nil
       end
     end
+
+    context 'with one remote addition' do
+      let(:new_event) {Event.create!(meetup_id: '55555555')}
+      let(:remote_events) {[@event_1, new_event]}
+
+      it 'does nothing' do
+        Event.remove_remotely_deleted_events(remote_events)
+        expect(Event.all.size).to eq(@local_events.size)
+      end
+    end
+
+    context 'with one remote addition' do
+      let(:new_event) {Event.create!(meetup_id: '55555555')}
+      let(:remote_events) {[@event_1, new_event]}
+
+      it 'does nothing' do
+        Event.remove_remotely_deleted_events(remote_events)
+        expect(Event.all.size).to eq(@local_events.size)
+      end
+    end
   end
+
+  describe '::get_remotely_deleted_ids' do
+    before(:each) do
+      @event_1 = Event.create!(meetup_id: '12345')
+      @event_2 = Event.create!(meetup_id: '678910')
+      @local_events = [@event_1, @event_2]
+    end
+
+    context 'with no remote deletions' do
+      let(:remote_events) {@local_events}
+
+      it 'returns empty id list' do
+        ids = Event.get_remotely_deleted_ids(remote_events)
+        expect(ids).to eq([])
+      end
+    end
+
+    context 'with one remote deletion (@event_2)' do
+      let(:remote_events) {[@event_1]}
+
+      it 'returns the id of @event_2' do
+        ids = Event.get_remotely_deleted_ids(remote_events)
+        expect(ids).to eq(['678910'])
+      end
+    end
+
+    context 'with equal events but one remote addition' do
+      let(:new_event) {Event.create!(meetup_id: '55555555')}
+      let(:remote_events) {@local_events.concat [new_event]}
+
+      it 'returns empty id list' do
+        ids = Event.get_remotely_deleted_ids(remote_events)
+        expect(ids).to eq([])
+      end
+    end
+
+    context 'with all remote events deleted' do
+      let(:remote_events) {[]}
+
+      it 'returns full local id list' do
+        ids = Event.get_remotely_deleted_ids(remote_events)
+        expect(ids).to eq(["12345", "678910"])
+      end
+    end
+
+    context 'with no local events' do
+      let(:remote_events) {@local_events}
+
+      before(:each) do
+        @local_events.each {|event| event.destroy!}
+      end
+
+      it 'return empty id list' do
+        ids = Event.get_remotely_deleted_ids(remote_events)
+        expect(ids).to eq([])
+      end
+    end
+  end
+
+
 
   describe "::get_requested_ids" do
     let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
@@ -311,6 +391,59 @@ RSpec.describe Event, type: :model do
       it "returns a failure message" do
         result = Event.display_message(events)
         expect(result).to eq("Could not add event. Please retry.")
+      end
+    end
+  end
+
+  describe '::pull_all_events' do
+    let(:upcoming_events) {[double]}
+    let(:past_events) {[double, double]}
+
+    context 'with both past and upcoming events' do
+      before(:each) do
+        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(past_events)
+        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(upcoming_events)
+      end
+
+      it 'returns sum of events' do
+        result = Event.pull_all_events
+        expect(result).to eq(past_events + upcoming_events)
+      end
+    end
+
+    context 'with only past events' do
+      before(:each) do
+        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(past_events)
+        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(nil)
+      end
+
+      it 'returns nothing' do
+        result = Event.pull_all_events
+        expect(result).to be_nil
+      end
+    end
+
+    context 'with only upcoming events' do
+      before(:each) do
+        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(nil)
+        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(upcoming_events)
+      end
+
+      it 'returns sum of events' do
+        result = Event.pull_all_events
+        expect(result).to be_nil
+      end
+    end
+
+    context 'with no events at all' do
+      before(:each) do
+        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(nil)
+        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(nil)
+      end
+
+      it 'returns sum of events' do
+        result = Event.pull_all_events
+        expect(result).to be_nil
       end
     end
   end
