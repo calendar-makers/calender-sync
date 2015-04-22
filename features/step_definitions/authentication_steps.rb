@@ -42,7 +42,7 @@ def sign_in_with_meetup
 end
 
 def sign_out
-  delete 'users/sign_out'
+  get 'users/sign_out'
 end
 
 Given /^I am( not | )logged in as the admin$/ do |negative|

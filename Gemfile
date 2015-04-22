@@ -81,3 +81,4 @@ gem 'haml-rails'
 gem 'rubocop', :require => false
 gem 'paperclip'
 gem 'rails-html-sanitizer'
+gem 'rails_12factor'
