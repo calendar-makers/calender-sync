@@ -1,3 +1,4 @@
+@javascript
 Feature: See images for a particular event
 
   As a user
@@ -13,5 +14,5 @@ Background:
   
   Scenario: User should see all pictures related to the event
   Given I am on the "Calendar" page
-  And I click on "Nature Walk" in the calendar
-  Then I should see the picture "nature1.jpg" for "Nature Walk"
+  When I click on "Nature Walk" in the calendar
+  Then I should see the picture "nature1.jpg" for "Nature Walk" in the panel
