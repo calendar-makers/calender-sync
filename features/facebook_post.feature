@@ -18,21 +18,21 @@ Feature: push new calendar events to Facebook
     And I fill in the "Description" field with "Join us for a nature walk through old town Los Angeles!"
     And I fill in the "How to find us" field with "Turn right at Sunset and Vine"
 
-  @successful_post
+  
   Scenario: successfully post the newly created event on Facebook
     Given I click on the "Create Event" button
     Then I should be on the "Calendar" page
     And I should see the message "'Nature Walk' was successfully added and pushed to Meetup and Facebook."
     And the "Nature Walk" event should be posted on "Nature in the City" facebook page
 
-  @failed_push
+  
   Scenario: failed push of newly created event to Meetup (implemented as a transaction)
     Given I click on the "Create Event" button
     Then I should be on the "Calendar" page
     And I should see the message "Failed to push event 'Nature Walk' to Meetup. Creation aborted."
     And the "Nature Walk" event should not be posted on "Nature in the City" facebook page
 
-  @failed_post
+  
   Scenario: failed push of newly created event on Facebook (not implemented as a transaction)
     Given I click on the "Create Event" button
     Then I should be on the "Calendar" page
