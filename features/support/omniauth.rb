@@ -8,6 +8,6 @@ Before('@omniauth_test') do
   }
 end
                                 
-  After('@omniauth_test') do
-    OmniAuth.config.test_mode = false
-  end
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end

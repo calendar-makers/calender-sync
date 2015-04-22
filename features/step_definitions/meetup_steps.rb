@@ -179,12 +179,35 @@ And /the "(.*)" event should exist on "(both|neither)" platforms/ do |event_name
   end
 end
 
-And /the following events exist on Meetup and on the Calendar/ do |data|
+And /the following event(?:s)? exist(?:s)? on Meetup and on the Calendar/ do |data|
   step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
 end
 
+Given /the event "(.*)" is deleted on Meetup/ do |event_name|
+  #meetup = Meetup.new
+  #meetup.delete_event(Event.find_by_name(event_name).meetup_id)
+  # no-op
+end
 
-## BUNDLE TOGETHER UNDER  "Then the event "Market Street Prototyping Festival" should be renamed to "Festival" on "both" platforms
-#Then the "Calendar" event "Market Street Prototyping Festival" should be renamed to "Festival"
-#And the "Meetup" event "Market Street Prototyping Festival" should be renamed to "Festival"
+Then /the event "(.*)" should be renamed to "(.*)" on "(.*)" platforms/ do |old_event_name, new_event_name, option|
+  if option == 'both'
+    step %Q{the "calendar" event "#{old_event_name}" should be renamed to "#{new_event_name}"}
+    step %Q{the "meetup" event "#{old_event_name}" should be renamed to "#{new_event_name}"}
+  elsif option == 'neither'
+    step %Q{the "calendar" event "#{old_event_name}" should not be renamed to "#{new_event_name}"}
+    step %Q{the "meetup" event "#{old_event_name}" should not be renamed to "#{new_event_name}"}
+  end
+end
 
+Then /the "(.*)" event "(.*)" should (not )?be renamed to "(.*)"/ do |platform, old_event_name, negative, new_event_name|
+  id = '221850455'
+  if platform == 'calendar'
+    expect(Event.find_by_meetup_id(id).name).to eq(negative ? old_event_name : new_event_name)
+  elsif platform == 'meetup'
+    expect(Meetup.new.pull_event(id)[:name]).to eq(negative ? old_event_name : new_event_name)
+  end
+end
+
+Given /the event "(.*?)" is renamed on Meetup to "(.*?)"$/ do |arg1, arg2|
+
+end

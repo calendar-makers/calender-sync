@@ -10,7 +10,7 @@ $(document).ready(function() {
       });
     },
 
-    eventColor: '#62C400',
+    eventColor: '#A6C55F',
 
     eventClick: function(calEvent, jsEvent, view) {
       var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
@@ -32,9 +32,13 @@ $(document).ready(function() {
       }
 
       React.render(
-        <Event event_id={calEvent.id} name={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>,
+        <div>
+          <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
+          <AdminButtons calEvent={calEvent}/>
+        </div>,
         document.getElementById('panel')
       );
+
     },
 
     header: {
@@ -51,14 +55,14 @@ $(document).ready(function() {
     console.log(data);
   });
 
-  $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
+  $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header h2').outerHeight(true));
 
   var timer,
     $win = $(window);
   $win.on('resize', function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-      $('#panel').outerHeight($('#calendar').outerHeight() - $('#panel_header').outerHeight());
+      $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header h2').outerHeight(true));
     }, 250);
   });
 

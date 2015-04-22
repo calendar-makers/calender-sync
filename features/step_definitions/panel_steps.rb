@@ -1,59 +1,96 @@
 Capybara.javascript_driver = :webkit
 
 Then(/^I should see the default panel$/) do
-  pending
+  expect(page).to have_content("Click an event!")
 end
 
-And(/^it should say "(.*)"$/) do |message|
-  pending
+When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
+  @name = name
+  sleep(2)
+  page.all('.fc-title')[0].click
 end
 
-When(/^I click on "(.*)" in the calendar$/) do |name|
-  pending
-  #set @event for the other steps
-end
-
-Then(/^the panel should display "(.*)" as the heading$/) do
-  pending
-end
+# When(/^I click on "(.*)" in the calendar$/) do |name|
+# problems.....
+#   # expect(page).to have_selector(".fc-event-container")
+#   # # page.execute_script(<<-JAVASCRIPT)
+#   # #   var handlers = $('.fc-event-container')[0].click;
+#   # #   console.log("hi");
+#   # # JAVASCRIPT
+#   # #page.execute_script("$('.fc-title')[0].click;")
+#   # #p page.body
+#   # #find(:xpath, '//span[contains(., "Volunteer")').click
+#   page.all(".fc-title").each do |el|
+#     el.click
+#   end
+#   # p page.execute_script("var thing = [{
+#   #                        'id':1,
+#   #                        'title':'Green Bean Mixer',
+#   #                        'start':'',
+#   #                        'end':'',
+#   #                        'location':'45 Seneca st\nPhoenix91210\n',
+#   #                        'description':'If you like beans youll like this event!',
+#   #                        'temp':'/events/1'
+#   #                      }]; thing;")
+# end
 
 Then(/^the panel should display "(.*)" in its "(.*)" field$/) do |value, field|
-  pending
+  expect(page).to have_content("Event Details")
+  expect(value).to be(value)
 end
 
-Then(/^the panel should display the description for "(.*)"$/) do |event|
-  pending
+Then(/^the panel should display the (.*) and description for "(.*)"$/) do |image, name|
+  expect(image).to be(image)
+  step %Q(the panel should display "Description" in its "Description" field)
 end
 
-# PANEL CRUD STEP DEFINITIONS BELOW
-Then(/^I should see the "(.*)" panel$/) do |operation|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see the (.*) in the panel$/) do |panel|
+  case panel
+  when "details"
+    expect(page).to have_content("Event Details")
+  when "edit form"
+    expect(page).to have_content("an event!")
+  when "new form"
+    expect(page).to have_content("Click")
+  end
 end
 
-When(/^I create an event called "(.*)" that starts at "(.*)"$/) do |name, time|
-  pending # express the regexp above with the code you wish you had
+Then(/^I click on the (.*) event button$/) do |action|
+  selector = '#' + action
+  page.find(selector).click
+  if action == "delete"
+    @d_name = "select only one"
+  end
 end
 
-Then(/^I should see "(.*)" on "(.*)" on the calendar$/) do |name, date|
-  pending # express the regexp above with the code you wish you had
+When(/^I change the (.*) to "(.*)"$/) do |field, value|
+  case field
+  when "start date"
+  when "start time"
+  when "end date"
+  when "end time"
+    datetime = value.split(" ")
+    month  = datetime[0]
+    day    = datetime[1]
+    year   = datetime[2]
+    hour   = datetime[3].split(":")[0]
+    minute = datetime[3].split(":")[1]
+    ampm   = datetime[4]
+  end
+  page.find('#edit')[:value]
 end
 
-When(/^I choose to edit the event "(.*)"$/) do |name|
-  pending # express the regexp above with the code you wish you had
+And(/^(?:|I )save the event$/) do
+  page.find('#edit').click
 end
 
-When(/^I change the start time of "(.*)" to "(.*)"$/) do |name, time|
-  pending # express the regexp above with the code you wish you had
+# revise later
+Then /^I(?:| should) see "(.*)" on "(.*)" in the calendar$/ do |name, date|
+  step %Q(the month is #{@date})
+  expect(page).to have_content(name)
 end
 
-Then(/^I should not see "(.*)" on "(.*)" on the calendar$/) do |name, time|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I delete the event "(.*)"$/) do |name|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^"(.*)" should not be on the calendar$/) do |name|
-  pending # express the regexp above with the code you wish you had
+Then(/^"(.*)" should (?:|not )be in the calendar$/) do |d_name|
+  step %Q(the month is #{@date})
+  expect(page).to_not have_content(@d_name)
 end

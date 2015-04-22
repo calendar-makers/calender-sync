@@ -6,19 +6,22 @@ Feature: create an event and have it displayed on the calendar
 
 Scenario: redirect to create page when create new event button pushed
   Given I am on the calendar page
-  And I click on the "new event" link
+  And I am logged in as the admin
+  And I click on the "Create new event" link
   Then I should be on the "Create" page
   And I should see the following fields: "Organization Name, Event Name, Venue Name, Address, City, Zip, State, Country, Description, Start Time, End Time, How to find us"
   And I should see the "Create Event" button
 
 Scenario: Require all fields to be filled during event creation
-  Given I am on the "Create" page
+  Given I am logged in as the admin
+  And I am on the "Create" page
   And I click on the "Create Event" button
   Then I should be on the "Create" page
   And I should see "Please fill in the following fields" on the page
 
 Scenario: store information when all the fields are filled out
-  Given I am on the "Create" page
+  Given I am logged in as the admin
+  And I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
   And I fill in the "Venue Name" field with "Steps"
   And I fill in the "Address" field with "145 Jackson st"

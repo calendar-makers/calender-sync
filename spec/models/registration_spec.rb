@@ -6,7 +6,7 @@ describe Registration do
     context "with updated rsvp" do
       it "returns true" do
         rsvp = Registration.new(updated: Time.now)
-        result = rsvp.is_updated?(Time.now + 3600)
+        result = rsvp.needs_updating?(Time.now + 3600)
         expect(result).to be_truthy
       end
     end
@@ -14,7 +14,7 @@ describe Registration do
     context "with no rsvp update" do
       it "returns false" do
         rsvp = Registration.new(updated: Time.now)
-        result = rsvp.is_updated?(Time.now)
+        result = rsvp.needs_updating?(Time.now)
         expect(result).to be_truthy
       end
     end

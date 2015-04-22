@@ -2,7 +2,7 @@ events = <<-JSON
 {
   "results":[ {
         "utc_offset":-25200000,
-        "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
+        "venue":{"zip":"94117","country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
         "headcount":0,
         "visibility":"public",
         "waitlist_count":0,
@@ -20,7 +20,7 @@ events = <<-JSON
         "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"},
         {"utc_offset":-25200000,
-        "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
+        "venue":{"zip":"94117","country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
         "headcount":0,
         "visibility":"public",
         "waitlist_count":0,
@@ -59,6 +59,23 @@ events = <<-JSON
         "total_count":3,
         "link":"https://api.meetup.com/2/events",
         "count":3,
+        "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+        "lon":"",
+        "title":"Meetup Events v2",
+        "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220706208%2C219648262%2C214161012&page=200&fields=&key=2921522134e105851666a55e6d2616&order=time&desc=false&status=upcoming",
+        "id":"",
+        "updated":1428000888000,
+        "lat":""}}
+JSON
+
+no_events = <<-JSON
+{
+  "results":[ ],
+"meta":{"next":"",
+        "method":"Events",
+        "total_count":0,
+        "link":"https://api.meetup.com/2/events",
+        "count":0,
         "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
         "lon":"",
         "title":"Meetup Events v2",
@@ -463,18 +480,123 @@ pushed_event_for_pull = <<-JSON
         "time":1439929800000,
         "updated":1429058763478,
         "group":{"join_mode":"open","created":1258123610000,"name":"Meetup API Testing Sandbox","group_lon":-73.98999786376953,"id":1556336,"urlname":"Meetup-API-Testing","group_lat":40.70000076293945,"who":"Developers"},
+        "status":"upcoming"},
+         {"utc_offset":-25200000,
+        "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
+        "headcount":0,
+        "visibility":"public",
+        "waitlist_count":0,
+        "created":1424706451000,
+        "maybe_rsvp_count":0,
+        "description":"<p>Join us in San Francisco's downtown during the Market Street Prototyping Festival, for a grassroots, smartphone-powered bioblitz to catalogue every living species we can identify from from the Embarcadero to Civic Center and all parks and plazas in between!</p> <p>We will be blitzing from the wee hours until after dark. Meet us at 10:00 AM for the public portion of the bioblitz.</p> <p><br/><b>The public bioblitz:</b></p> <p>Meet at Sidewalk Prototype in front of The Hall at 1028 Market Street, San Francisco, at <b>10 AM sharp</b> to begin the daytime portion of the blitz. Meet again at <b>1 PM sharp</b> to share our discoveries. </p> <p>Bring your smartphone and/or a camera, your curiosity, and tons of enthusiasm. We’ll rally some experts and folks who specialize in deep urban ecology. Together we’ll make some great discoveries, have fun, and get to know these places and each other better.</p> <p>A bioblitz is an intensive one-day study of biodiversity in a specific location, bringing scientists and volunteer citizen-scientists together. Together we’ll look for sidewalk weeds, snails, flies, birds, mammals, butterflies and moths, other insects, spiders, trees, worms, flowers, and everything else we can find.</p> <p>People of all ages and skill levels are welcome! Bring your smart phone for sure. Bonus: camera, binoculars, and magnifying glasses. We’ll enter observations in iNaturalist and join together at the end to find out how many observations we made and how many species we found. Past blitzes in Oakland, San Francisco, and San Mateo have averaged 1000 observations and 200+ species each.</p> <p>Don't have an iNaturalist account yet? No problem! Download the iNaturalist app on iPhone, Android, sign up for an account, then make a few practice observations.</p> <p>Brought to you by Nature in the City, Studio for Urban Projects, Nerds for Nature, and iNaturalist.</p> <p>Registration:</p>",
+        "event_url":"http://www.meetup.com/Nature-in-the-City/events/220706208/",
+        "yes_rsvp_count":4,
+        "duration":86400000,
+        "name":"Nerds on Safari: Market Street",
+        "id":"220706208",
+        "time":1428735600000,
+        "updated":1426276899000,
+        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"}],
 "meta":{"next":"",
         "method":"Events",
-        "total_count":1,
+        "total_count":2,
         "link":"https://api.meetup.com/2/events",
-        "count":1,
+        "count":2,
         "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
         "lon":"",
         "title":"Meetup Events v2",
         "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220706208%2C219648262%2C214161012&page=200&fields=&key=2921522134e105851666a55e6d2616&order=time&desc=false&status=upcoming",
         "id":"",
         "updated":1428000888000,
+        "lat":""}}
+JSON
+
+pushed_event_for_pull_after_one_deletion = <<-JSON
+{
+  "results":[
+
+         {"utc_offset":-25200000,
+        "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
+        "headcount":0,
+        "visibility":"public",
+        "waitlist_count":0,
+        "created":1424706451000,
+        "maybe_rsvp_count":0,
+        "description":"<p>Join us in San Francisco's downtown during the Market Street Prototyping Festival, for a grassroots, smartphone-powered bioblitz to catalogue every living species we can identify from from the Embarcadero to Civic Center and all parks and plazas in between!</p> <p>We will be blitzing from the wee hours until after dark. Meet us at 10:00 AM for the public portion of the bioblitz.</p> <p><br/><b>The public bioblitz:</b></p> <p>Meet at Sidewalk Prototype in front of The Hall at 1028 Market Street, San Francisco, at <b>10 AM sharp</b> to begin the daytime portion of the blitz. Meet again at <b>1 PM sharp</b> to share our discoveries. </p> <p>Bring your smartphone and/or a camera, your curiosity, and tons of enthusiasm. We’ll rally some experts and folks who specialize in deep urban ecology. Together we’ll make some great discoveries, have fun, and get to know these places and each other better.</p> <p>A bioblitz is an intensive one-day study of biodiversity in a specific location, bringing scientists and volunteer citizen-scientists together. Together we’ll look for sidewalk weeds, snails, flies, birds, mammals, butterflies and moths, other insects, spiders, trees, worms, flowers, and everything else we can find.</p> <p>People of all ages and skill levels are welcome! Bring your smart phone for sure. Bonus: camera, binoculars, and magnifying glasses. We’ll enter observations in iNaturalist and join together at the end to find out how many observations we made and how many species we found. Past blitzes in Oakland, San Francisco, and San Mateo have averaged 1000 observations and 200+ species each.</p> <p>Don't have an iNaturalist account yet? No problem! Download the iNaturalist app on iPhone, Android, sign up for an account, then make a few practice observations.</p> <p>Brought to you by Nature in the City, Studio for Urban Projects, Nerds for Nature, and iNaturalist.</p> <p>Registration:</p>",
+        "event_url":"http://www.meetup.com/Nature-in-the-City/events/220706208/",
+        "yes_rsvp_count":4,
+        "duration":86400000,
+        "name":"Nerds on Safari: Market Street",
+        "id":"220706208",
+        "time":1428735600000,
+        "updated":1426276899000,
+        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "status":"upcoming"}],
+"meta":{"next":"",
+        "method":"Events",
+        "total_count":2,
+        "link":"https://api.meetup.com/2/events",
+        "count":2,
+        "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+        "lon":"",
+        "title":"Meetup Events v2",
+        "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220706208%2C219648262%2C214161012&page=200&fields=&key=2921522134e105851666a55e6d2616&order=time&desc=false&status=upcoming",
+        "id":"",
+        "updated":1428000888000,
+        "lat":""}}
+JSON
+
+edited_pushed_event_for_pull = <<-JSON
+{
+  "results":[
+        {"utc_offset":-14400000,
+        "venue":{"zip":"91206","country":"us","city":"Glendale","address_1":"145 Jackson st.","name":"Moraga Steps","lon":-118.25037,"id":23761664,"state":"CA","lat":34.147987,"repinned":false},
+        "headcount":0,
+        "visibility":"public_limited",
+        "waitlist_count":0,
+        "created":1429058763478,
+        "maybe_rsvp_count":0,
+        "description":"<p>Join us for a nature walk through old town Los Angeles!</p>",
+        "how_to_find_us":"Turn right at Sunset and Vine",
+        "event_url":"http://www.meetup.com/Meetup-API-Testing/events/221850455/",
+        "yes_rsvp_count":1,
+        "duration":345600000,
+        "announced":false,
+        "name":"Festival",
+        "id":"221850455",
+        "time":1439929800000,
+        "updated":1439058763478,
+        "group":{"join_mode":"open","created":1258123610000,"name":"Meetup API Testing Sandbox","group_lon":-73.98999786376953,"id":1556336,"urlname":"Meetup-API-Testing","group_lat":40.70000076293945,"who":"Developers"},
+        "status":"upcoming"},
+         {"utc_offset":-25200000,
+        "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
+        "headcount":0,
+        "visibility":"public",
+        "waitlist_count":0,
+        "created":1424706451000,
+        "maybe_rsvp_count":0,
+        "description":"<p>Join us in San Francisco's downtown during the Market Street Prototyping Festival, for a grassroots, smartphone-powered bioblitz to catalogue every living species we can identify from from the Embarcadero to Civic Center and all parks and plazas in between!</p> <p>We will be blitzing from the wee hours until after dark. Meet us at 10:00 AM for the public portion of the bioblitz.</p> <p><br/><b>The public bioblitz:</b></p> <p>Meet at Sidewalk Prototype in front of The Hall at 1028 Market Street, San Francisco, at <b>10 AM sharp</b> to begin the daytime portion of the blitz. Meet again at <b>1 PM sharp</b> to share our discoveries. </p> <p>Bring your smartphone and/or a camera, your curiosity, and tons of enthusiasm. We’ll rally some experts and folks who specialize in deep urban ecology. Together we’ll make some great discoveries, have fun, and get to know these places and each other better.</p> <p>A bioblitz is an intensive one-day study of biodiversity in a specific location, bringing scientists and volunteer citizen-scientists together. Together we’ll look for sidewalk weeds, snails, flies, birds, mammals, butterflies and moths, other insects, spiders, trees, worms, flowers, and everything else we can find.</p> <p>People of all ages and skill levels are welcome! Bring your smart phone for sure. Bonus: camera, binoculars, and magnifying glasses. We’ll enter observations in iNaturalist and join together at the end to find out how many observations we made and how many species we found. Past blitzes in Oakland, San Francisco, and San Mateo have averaged 1000 observations and 200+ species each.</p> <p>Don't have an iNaturalist account yet? No problem! Download the iNaturalist app on iPhone, Android, sign up for an account, then make a few practice observations.</p> <p>Brought to you by Nature in the City, Studio for Urban Projects, Nerds for Nature, and iNaturalist.</p> <p>Registration:</p>",
+        "event_url":"http://www.meetup.com/Nature-in-the-City/events/220706208/",
+        "yes_rsvp_count":4,
+        "duration":86400000,
+        "name":"Nerds on Safari: Market Street",
+        "id":"220706208",
+        "time":1428735600000,
+        "updated":1426276899000,
+        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "status":"upcoming"}],
+"meta":{"next":"",
+        "method":"Events",
+        "total_count":2,
+        "link":"https://api.meetup.com/2/events",
+        "count":2,
+        "description":"Access Meetup events using a group, member, or event id. Events in private groups are available only to authenticated members of those groups. To search events by topic or location, see [Open Events](/meetup_api/docs/2/open_events).",
+        "lon":"",
+        "title":"Meetup Events v2",
+        "url":"https://api.meetup.com/2/events?offset=0&format=json&limited_events=False&event_id=220706208%2C219648262%2C214161012&page=200&fields=&key=2921522134e105851666a55e6d2616&order=time&desc=false&status=upcoming",
+        "id":"",
+        "updated":1439058763478,
         "lat":""}}
 JSON
 
@@ -537,13 +659,14 @@ JSON
 # DEFAULT FOR ALL CODE
 #########################################
 FakeWeb.allow_net_connect = false
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
 FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
 FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
 FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
 FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 ########################################
 
@@ -571,13 +694,59 @@ end
 # Set defaults
 After('@meetup_push') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+end
+#########################################
+
+
+# meetup_edit.feature
+#########################################
+Before('@meetup_edit') do
+  FakeWeb.clean_registry
+  FakeWeb.allow_net_connect = false
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
+end
+
+Before('@calendar_successful_edit') do
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
+end
+
+Before('@calendar_failed_edit') do
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+end
+
+Before('@meetup_successful_edit') do
+  FakeWeb.clean_registry
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{:body => pushed_event_for_pull, :content_type => 'application/json'},
+                                                                         {:body => pushed_event_for_pull, :content_type => 'application/json'},
+                                                                         {:body => edited_pushed_event_for_pull, :content_type => 'application/json'},
+                                                                           {:body => edited_pushed_event_for_pull, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
+end
+
+# Set defaults
+After('@meetup_delete') do
+  FakeWeb.clean_registry
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 #########################################
@@ -591,38 +760,36 @@ Before('@meetup_delete') do
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
 end
 
-# REMEMBER THAT YOU NEED TO SET A DEFAULT FOR DELETION
 Before('@calendar_successful_deletion') do
-  #FakeWeb.clean_registry
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
 end
 
 Before('@calendar_failed_deletion') do
-  #FakeWeb.clean_registry
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
 end
 
 Before('@meetup_successful_deletion') do
- # FakeWeb.clean_registry
+  FakeWeb.clean_registry
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  #FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
-  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, {:body => pushed_event_for_pull_after_one_deletion, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
 end
 
 # Set defaults
 After('@meetup_delete') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 #########################################
@@ -638,37 +805,40 @@ end
 # Set defaults
 After('@meetup_pull') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 Before('@successful_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
 end
 
 Before('@failed_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]}])
 
 end
 
 Before('@repeated_unchanged_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'},
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'},
                                                                                            {:body => events, :content_type => 'application/json'}])
 end
 
 Before('@repeated_changed_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'},
-                                                                                           {:body => modified_events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'},
+                                                                                    {:body => events, :content_type => 'application/json'},
+                                                                                    {:body => modified_events, :content_type => 'application/json'},
+                                                                                    {:body => modified_events, :content_type => 'application/json'}])
 end
 ########################################
 
@@ -683,46 +853,47 @@ end
 # Set defaults
 After('@meetup_pull_3rd_by_organization') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 Before('@search_events_by_group') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
 end
 
 Before('@successful_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
 end
 
 Before('@failed_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
 end
 
 Before('@repeated_changed_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, [{:body => third_party_events, :content_type => 'application/json'},
                                                                                          {:body => modified_third_party_events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, [{:body => third_party_events, :content_type => 'application/json'},
@@ -740,48 +911,49 @@ end
 # Set defaults
 After('@meetup_pull_3rd_by_id') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 Before('@search_event_by_id') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
 end
 
 Before('@successful_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
   #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
 end
 
 Before('@failed_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, [{:body => third_party_event, :content_type => 'application/json'},
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, [{:body => third_party_event, :content_type => 'application/json'},
                                                                                         {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]}])
   #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
   #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
 end
 
 Before('@repeated_changed_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, [{:body => third_party_event, :content_type => 'application/json'},
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=|, [{:body => third_party_event, :content_type => 'application/json'},
                                                                                         {:body => third_party_event, :content_type => 'application/json'},
                                                                                         {:body => modified_third_party_event, :content_type => 'application/json'},
                                                                                         {:body => modified_third_party_event, :content_type => 'application/json'}])
@@ -799,43 +971,44 @@ end
 # Set defaults
 After('@meetup_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 Before('@successful_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
 end
 
 Before('@successful_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
 end
 
 Before('@failed_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'},
                                                                       {:body => rsvp, :content_type => 'application/json'}])
 end
 
 Before('@repeated_changed_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=8870202.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'},
                                                                       {:body => modified_rsvp, :content_type => 'application/json'}])
 end

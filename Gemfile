@@ -32,6 +32,9 @@ gem 'react-rails', '~> 1.0'
 # countries and states gems
 gem 'country_select', github: 'stefanpenner/country_select'
 
+# authentication
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -56,6 +59,7 @@ group :development, :test do
 
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
+  # gem 'selenium-webdriver'
   gem 'capybara-webkit' #i(rachel) did 'brew install qt' on mac [or 'apt-get install libqtwebkit-dev' on linux] to get this gem working for headless javascript tests in cucumber
   gem 'headless'
   gem 'rspec-rails', '~>3.2.1'
@@ -77,3 +81,4 @@ gem 'haml-rails'
 gem 'rubocop', :require => false
 gem 'paperclip'
 gem 'rails-html-sanitizer'
+gem 'rails_12factor'
