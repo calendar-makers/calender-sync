@@ -46,7 +46,7 @@ class EventsController < ApplicationController
       flash[:notice] = 'You must select at least one event. Please retry.'
       return redirect_to third_party_events_path
     end
-    events = Event.store_third_party_events(ids)
+    events = Event.synchronize_third_party_events(ids)
     redirect_to calendar_path, notice: Event.display_message(events)
   end
 

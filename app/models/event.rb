@@ -78,7 +78,6 @@ class Event < ActiveRecord::Base
     events.each do |event|
       events_bin << event if Event.process_event(event)
     end
-    Event.remove_remotely_deleted_events(events)
     events_bin
   end
 
@@ -94,18 +93,21 @@ class Event < ActiveRecord::Base
   end
 
   def self.remove_remotely_deleted_events(remote_events)
-    local_event_ids = Event.pluck(:meetup_id)
-    remote_event_ids = []
-    remote_events.each_with_object(remote_event_ids) {|event, array| array << event.meetup_id}
-    remotely_deleted_ids = local_event_ids - remote_event_ids
+    return if remote_events.nil?
+    remotely_deleted_ids = Event.get_remotely_deleted_ids(remote_events)
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
+  end
+
+  def self.get_remotely_deleted_ids(remote_events)
+    local_event_ids = Event.pluck(:meetup_id)
+    remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
+    local_event_ids - remote_event_ids
   end
 
   def self.pull_all_events
     past_events = Event.get_remote_events({status: 'past'})
     upcoming_events = Event.get_remote_events({status: 'upcoming'})
-    remote_events = past_events + upcoming_events if upcoming_events && past_events
-    events = Event.make_events_local(remote_events)
+    past_events + upcoming_events if upcoming_events && past_events
   end
 
   def apply_update(new_event)
@@ -159,9 +161,15 @@ class Event < ActiveRecord::Base
     Event.cleanup_ids(Event.get_requested_ids(args))
   end
 
-  def self.store_third_party_events(ids)
+  def self.synchronize_third_party_events(ids)
     options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
     Event.make_events_local(Event.get_remote_events(options))
+  end
+
+  def self.synchronize_events
+    remote_events = Event.pull_all_events
+    Event.remove_remotely_deleted_events(remote_events)
+    make_events_local(remote_events)
   end
 
   def format_start_date
