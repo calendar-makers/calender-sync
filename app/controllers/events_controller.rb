@@ -1,4 +1,4 @@
-class EventsController < ActionController::Base
+class EventsController < ApplicationController
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -101,7 +101,7 @@ class EventsController < ActionController::Base
   def destroy
     @event = Event.find params[:id]
     perform_destroy_transaction
-    redirect_to calendar_path
+    render :nothing => true
   end
 
   def perform_destroy_transaction

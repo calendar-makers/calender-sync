@@ -26,6 +26,9 @@ gem 'omniauth'
 gem 'omniauth-meetup'
 gem 'httparty'
 
+# integrate with Moment.js
+gem 'momentjs-rails'
+
 # integrate with react.js
 gem 'react-rails', '~> 1.0'
 
