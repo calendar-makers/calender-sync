@@ -1,9 +1,17 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
-         :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:meetup]
+  devise :database_authenticatable, :recoverable, :rememberable,
+         :lockable, :validatable, :timeoutable 
+         #:omniauthable, :omniauth_providers => [:meetup]
+  def root?
+    return self.level == 0
+  end
+
+  # The following methods are NOT USED and are deprecated. 
+  # They were used for Oauth2, but have been disabled
+  
+=begin
 
   # This method creates a "dummy" user used for meetup logins
   # If a user is created this way, you can only login with Meetup for this user
@@ -47,5 +55,7 @@ class User < ActiveRecord::Base
       raise 'Unexpected error during refresh'
     end
   end
+
+=end
 
 end

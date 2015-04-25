@@ -3,9 +3,13 @@
   </br>
   = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
   </br>
-  = link_to "Sign Out", destroy_user_session_path, :method => :get 
+  = link_to "Sign Out", destroy_user_session_path, :method => :get
 - else
   = link_to "Login", new_user_session_path, :method => :get
+
+- if user_signed_in? and current_user.root?
+  </br>
+  = link_to "Create new user", '/'
 </br>
 
 %h1 Events Calendar
