@@ -72,7 +72,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.make_events_local(events)
+  def self.process_remote_events(events)
     return if events.blank?
     events_bin = []
     events.each do |event|
@@ -99,32 +99,70 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remotely_deleted_ids(remote_events)
-    local_event_ids = Event.pluck(:meetup_id)
+    upcoming_events = Event.where("start >= #{DateTime.now - 1}")
+    local_event_ids = upcoming_events.inject([]) {|array, event| array << event.meetup_id}
     remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
     local_event_ids - remote_event_ids
   end
 
-  def self.pull_all_events
-    default_group_events = Event.get_all_group_events
-    third_party_events = Event.get_all_third_party_events
-    default_group_events + third_party_events if default_group_events && third_party_events
+  def self.get_upcoming_events
+    Event.get_remote_events({status: 'upcoming'})
   end
 
-  def self.get_all_group_events
-    past_events = Event.get_remote_events({status: 'past'})
-    upcoming_events = Event.get_remote_events({status: 'upcoming'})
-    (upcoming_events && past_events) ? (past_events + upcoming_events) : nil
+  def self.get_past_events(from=nil, to=nil)
+    Event.get_remote_events({status: 'past'}.merge Event.date_range(from, to))
   end
 
-  def self.get_all_third_party_events
-    options = {event_id: Event.get_stored_third_party_ids.join(',')}
-    if options.size > 0
-      past_events = Event.get_remote_events({status: 'past'}.merge options)
-      upcoming_events = Event.get_remote_events({status: 'upcoming'}.merge options)
-      (upcoming_events && past_events) ? (past_events + upcoming_events) : nil
-    else
-      []
+  def self.get_upcoming_third_party_events
+    ids = Event.get_stored_third_party_ids
+    if ids.size > 0
+      options = {event_id: ids.join(',')}
+      events = Event.get_remote_events({status: 'upcoming'}.merge options)
+      return events if events
     end
+    []
+  end
+
+  def self.get_past_third_party_events(from=nil, to=nil)
+    ids = Event.get_stored_third_party_ids
+    if ids.size > 0
+      options = {event_id: ids.join(',')}
+      range = Event.date_range(from, to)
+      events = Event.get_remote_events(({status: 'past'}.merge options).merge range)
+      return events if events
+    end
+    []
+  end
+
+  def self.date_range(from=nil, to=nil)
+    (from || to) ? {time: "#{from},#{to}"} : {}
+  end
+
+  def self.store_third_party_events(ids)
+    options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
+    Event.process_remote_events(Event.get_remote_events(options))
+  end
+
+  def self.initialize_calendar_db
+    upcoming_events = Event.get_upcoming_events
+    past_events = Event.get_past_events
+    remote_events = upcoming_events && past_events ? upcoming_events + past_events : nil
+    process_remote_events(remote_events)
+  end
+
+  def self.synchronize_past_events
+    group_events = Event.get_past_events('-1d', '')
+    third_party_events = Event.get_past_third_party_events('-1d', '')
+    remote_events = group_events ? group_events + third_party_events : nil
+    process_remote_events(remote_events)
+  end
+
+  def self.synchronize_upcoming_events
+    group_events = Event.get_upcoming_events
+    third_party_events = Event.get_upcoming_third_party_events
+    remote_events = group_events ? group_events + third_party_events : nil
+    Event.remove_remotely_deleted_events(remote_events)
+    process_remote_events(remote_events)
   end
 
   def self.get_default_group_name
@@ -186,17 +224,6 @@ class Event < ActiveRecord::Base
 
   def self.get_event_ids(args)
     Event.cleanup_ids(Event.get_requested_ids(args))
-  end
-
-  def self.store_third_party_events(ids)
-    options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
-    Event.make_events_local(Event.get_remote_events(options))
-  end
-
-  def self.synchronize_events
-    remote_events = Event.pull_all_events
-    Event.remove_remotely_deleted_events(remote_events)
-    make_events_local(remote_events)
   end
 
   def format_start_date

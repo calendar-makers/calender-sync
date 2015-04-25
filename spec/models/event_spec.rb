@@ -112,13 +112,13 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "::make_events_local" do
+  describe "::process_remote_events" do
     let(:event) {[Event.new]}
 
     context "with new events" do
       it "saves the event in the db" do
         expect_any_instance_of(Event).to receive(:save!)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
 
@@ -130,7 +130,7 @@ RSpec.describe Event, type: :model do
 
         allow(Event).to receive(:find_by_meetup_id).with('123').and_return(old_event)
         expect(old_event).to receive(:apply_update)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
 
@@ -142,7 +142,7 @@ RSpec.describe Event, type: :model do
 
         allow(Event).to receive(:find_by_meetup_id).with('123').and_return(stored_event)
         expect(stored_event).not_to receive(:apply_update)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
   end
