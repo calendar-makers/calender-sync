@@ -2,8 +2,17 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable,
-         :lockable, :validatable, :timeoutable 
+         :lockable, :validatable, :timeoutable,
+         :registerable 
          #:omniauthable, :omniauth_providers => [:meetup]
+  
+  def self.create_non_root(params)
+    create do |user|
+      user.email = params["user"]["email"]
+      user.password = params["user"]["password"]
+    end
+  end
+  
   def root?
     return self.level == 0
   end

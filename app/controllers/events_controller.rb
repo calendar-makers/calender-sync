@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
+   
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -11,7 +13,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    byebug
     @message = flash[:notice]
     @event = Event.find params[:id]
     new_guests = @event.merge_meetup_rsvps

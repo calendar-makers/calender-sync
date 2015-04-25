@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     end
   end
   resources :guests
+  resources :accounts
   get '/', to: redirect('/calendar')
 end
