@@ -2,14 +2,18 @@ class AccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_root, only: [:new, :create]
 
-  # GET /accounts/new
   def new
     form_validation_msg
   end
 
   def create
-    User.create_non_root(params)
-    redirect_to '/'
+    @user = User.new email: params[:user][:email], password: params[:user][:password]
+    if @user.save
+      redirect_to calendar_path
+    else
+      flash[:notice] = @user.errors.full_messages.join("</br>").html_safe 
+      render :new
+    end
   end
 
   def edit
@@ -20,7 +24,10 @@ class AccountsController < ApplicationController
 
   private
   def is_root
-    redirect '/' if not current_user.root?
+    if not current_user.root?
+      flash[:notice] = "You must be root admin to access this action"
+      redirect_to calendar_path
+    end
   end
 
   def form_validation_msg
