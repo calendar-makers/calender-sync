@@ -15,19 +15,27 @@ describe CalendarsController do
   end
 
 
-  describe 'pulling in #show' do
+  describe 'synchronizing in #show' do
     context 'multiple events' do
+      let(:events) {[Event.new, Event.new, Event.new]}
 
-      it 'should get remote meetup events' do
-        allow(Event).to receive(:get_remote_events).and_return([])
+      it 'should call synchronize_events' do
+        allow(Event).to receive(:synchronize_events).and_return(events)
+        expect(Event).to receive(:synchronize_events)
+        get :show
+      end
+
+    end
+
+=begin
+      it 'should indirectly get remote meetup events' do
+        allow(Event).to receive(:get_remote_events).and_return(events)
         expect(Event).to receive(:get_remote_events)
         get :show
       end
 
-      it 'should make remote meetup events local' do
-        events = double()
+      it 'should indirectly make remote meetup events local' do
         allow(Event).to receive(:get_remote_events).and_return(events)
-        allow(events).to receive(:+).and_return(events)
         expect(Event).to receive(:make_events_local).with(events)
         get :show
       end
@@ -35,7 +43,6 @@ describe CalendarsController do
 
     end
 
-=begin
       it 'should display the newly added event names in a message' do
         events = [Event.new(name: 'chester'), Event.new(name: 'copperpot')]
         allow(Event).to receive(:make_events_local).and_return(events)

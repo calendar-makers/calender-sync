@@ -1,4 +1,4 @@
-class EventsController < ActionController::Base
+class EventsController < ApplicationController
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -48,7 +48,7 @@ class EventsController < ActionController::Base
       flash[:notice] = 'You must select at least one event. Please retry.'
       return redirect_to third_party_events_path
     end
-    events = Event.store_third_party_events(ids)
+    events = Event.synchronize_third_party_events(ids)
     redirect_to calendar_path, notice: Event.display_message(events)
   end
 
@@ -103,7 +103,7 @@ class EventsController < ActionController::Base
   def destroy
     @event = Event.find params[:id]
     perform_destroy_transaction
-    redirect_to calendar_path
+    render :nothing => true
   end
 
   def perform_destroy_transaction

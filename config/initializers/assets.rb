@@ -9,13 +9,10 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( fullcalendar.css )
-Rails.application.config.assets.precompile += %w( jquery.min.js )
-Rails.application.config.assets.precompile += %w( jquery-ui.custom.min.js )
-Rails.application.config.assets.precompile += %w( moment.min.js )
-Rails.application.config.assets.precompile += %w( fullcalendar.js )
 Rails.application.config.assets.precompile += %w( application.css )
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( mycalendar.js )
-Rails.application.config.assets.precompile += %w( show_panel.js )
-Rails.application.config.assets.precompile += %w( new_edit_panel.js )
+Rails.application.config.assets.precompile += %w( fullcalendar.css )
+Rails.application.config.assets.precompile += %w( calendar/fullcalendar.js )
+Rails.application.config.assets.precompile += %w( calendar/mycalendar.js )
+Rails.application.config.assets.precompile += %w( calendar/show_panel.js )
+Rails.application.config.assets.precompile += %w( calendar/new_edit_panel.js )
