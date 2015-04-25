@@ -11,11 +11,13 @@ class EventsController < ActionController::Base
   end
 
   def show
+    byebug
     @message = flash[:notice]
     @event = Event.find params[:id]
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
+    byebug
   end
 
   def display_synchronization_result(new_guests)
