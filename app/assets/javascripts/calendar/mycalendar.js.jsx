@@ -31,6 +31,10 @@ $(document).ready(function() {
         timePeriod = startTime + ' to ' + endTime;
       }
 
+      if (calEvent.description == null) {
+        calEvent.description = '';
+      }
+
       React.render(
         <div>
           <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
