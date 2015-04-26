@@ -133,6 +133,8 @@ var eventForm = React.createClass ({
 
 var EditEvent = React.createClass ({
   handleEventSubmit: function(event) {
+    e.preventDefault();
+    e.stopPropagation();
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       dataType: 'json',
@@ -155,14 +157,9 @@ var EditEvent = React.createClass ({
     });
   },
 
-  handleSubmit: function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-  },
-
   render: function() {
     return (
-      <eventForm onEventSubmit={this.handleSubmit}>
+      <eventForm onEventSubmit={this.handleEventSubmit}/>
     );
   }
 });
