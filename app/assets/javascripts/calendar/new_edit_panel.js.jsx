@@ -1,4 +1,35 @@
-var eventForm = function() {
+var fullLocation = function(address, city, state, zip) {
+  return address + '\n' + city + ', ' + state + ' ' + zip;
+};
+
+var eventForm = React.createClass ({
+  handleSubmit: function() {
+
+    /* this.refs.x.getDOMNode().value.trim() extracts the value of x from a form */
+    var name = this.refs.name.getDOMNode().value.trim();
+
+    /* Start and End times will be more complicated - just a placeholder */
+    var startTime = this.refs.startTime.getDOMNode().value.trim();
+    var endTime = this.refs.endTime.getDOMNode().value.trim();
+
+    var venueName = this.refs.organization.getDOMNode().value.trim();
+
+    var address = this.refs.address.getDOMNode().value.trim();
+    var city = this.refs.address.getDOMNode().value.trim();
+    var state = this.refs.state.getDOMNode().value.trim();
+    var zip = this.refs.zip.getDOMNode().value.trim();
+
+    var description = this.refs.description.getDOMNode().value.trim();
+    var howToFindUs = this.refs.howToFindUs.getDOMNode().value.trim();
+
+    /* Refer to schema.rb for keys. Values are the variables set above. */
+    this.props.onEventSubmit({name: name, start: startTime, end: endTime,
+      venue_name: venueName, address_1: address, city: city,
+      state: state, zip: zip, description: description,
+      how_to_find_us: howToFindUs});
+  },
+
+  render: function() {
     return (
       <div>
         <div id="invalid_form_warnings">
@@ -97,19 +128,24 @@ var eventForm = function() {
         </form>
       </div>
     )
-}
+  }
+});
 
-var EditEvent = React.createClass({
-  handleSubmit: function(e) {
-    debugger
-    e.preventDefault();
-    e.stopPropagation();
+var EditEvent = React.createClass ({
+  handleEventSubmit: function(event) {
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
+      dataType: 'json',
       type: 'PUT',
+      data: {'event': event},
       success: function(data) {
+        var timePeriod = timePeriod(moment(event.start), moment(event.end));
+        var loc = fullLocation(event.address_1, event.city, event.state, event.zip);
         React.render(
-          <p id='updateMsg'>{this.props.calEvent.title} was successfully updated.</p>,
+          <div>
+            <Event title={event.name} timePeriod={timePeriod} location={loc} description={event.description}/>
+            <AdminButtons calEvent={calEvent}/>
+          </div>,
           document.getElementById('panel')
         );
       }.bind(this),
@@ -119,7 +155,16 @@ var EditEvent = React.createClass({
     });
   },
 
-  render: eventForm
+  handleSubmit: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  },
+
+  render: function() {
+    return (
+      <eventForm onEventSubmit={this.handleSubmit}>
+    );
+  }
 });
 
 /* Image form code
