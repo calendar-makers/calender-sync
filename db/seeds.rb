@@ -19,3 +19,7 @@ events = [{ name: 'Gardening', organization: 'Nature in the City',
 events.each do |event|
   Event.create!(event)
 end
+
+#Is this safe?
+User.create!(email: "amber@natureinthecity.org", password: "password", level: 0)
+User.create!(email: "admin@admin.com", password: "password", level: 0)

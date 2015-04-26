@@ -14,7 +14,6 @@ Background: Events have already been added to the database
 
 
   And I am logged in as the admin
-  And I am on the calendar page
 
 Scenario: show the new event panel
   When I click on the new event button

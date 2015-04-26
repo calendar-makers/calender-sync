@@ -53,7 +53,6 @@ $(document).ready(function() {
 
   });
 
-  console.log("hello world");
   $.getJSON('events.json', function(data){
     console.log("I'm in the json call");
     console.log(data);

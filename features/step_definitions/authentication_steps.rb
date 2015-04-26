@@ -20,7 +20,9 @@ end
 def sign_in
   create_user
   sign_out
+  byebug
   visit '/users/sign_in'
+  byebug
   find_field("user_email").set @user[:email]
   find_field("user_password").set "changeme"
   click_button "Log in"

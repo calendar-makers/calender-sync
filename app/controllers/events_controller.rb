@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
+   
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -16,6 +18,7 @@ class EventsController < ApplicationController
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
+    byebug
   end
 
   def display_synchronization_result(new_guests)
