@@ -4,6 +4,7 @@ When(/^I upload an image$/) do
 end
 
 Then(/^I should see the picture "(.*)" for "(.*)"$/) do |image_name, event_name|
+  pending
   id_num = Event.find_by_name(event_name).id
   expect(page).to have_xpath("//img[starts-with(@src, '/assets/#{id_num}/medium/#{image_name}')]")
 end

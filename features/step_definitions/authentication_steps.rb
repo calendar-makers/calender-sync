@@ -1,19 +1,17 @@
 # Utility methods based on https://github.com/RailsApps/rails3-devise-rspec-cucumber/blob/master/features/step_definitions/user_steps.rb
 
 def find_user
-  @user ||= User.where(:uid => "12345").first
+  @user ||= User.where(email: "example@example.com").first
 end
 
 def create_user
   delete_user
-  @user = User.create(:provider => "Meetup", :uid => "12345",
-                      :email => "example@example.com", 
-                      :password => "changeme", :token => "abc", 
-                      :expires_at => 0, :refresh_token => "def")
+  @user = User.create(email: "example@example.com", 
+                      password: "changeme")
 end
 
 def delete_user
-  @user ||= User.where(:uid => "12345").first
+  @user ||= User.where(email: "example@example.com").first
   @user.destroy unless @user.nil?
 end
 
@@ -33,12 +31,6 @@ def invalid_sign_in
   find_field("user_email").set "example@example.com"
   find_field("user_password").set "incorrect password"
   click_button "Log in"
-end
-
-def sign_in_with_meetup
-  sign_out
-  visit new_user_session_path
-  click_link 'Sign in with Meetup'
 end
 
 def sign_out
@@ -61,7 +53,6 @@ When /^I sign in with the wrong password$/ do
   invalid_sign_in
 end
 
-# Test is all false positives for some reason
 Then /^I should( not | )see the admin actions$/ do |negative|
   if negative == ' not '
     expect(page).to_not have_link('Create new event')

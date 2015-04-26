@@ -1,4 +1,6 @@
-class EventsController < ActionController::Base
+class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
+   
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -56,7 +58,7 @@ class EventsController < ActionController::Base
 
   def create
     result = Event.check_if_fields_valid(event_params)
-    return redirect_to new_event_path, notice: result[:message] if not result[:value]
+    return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
     redirect_to calendar_path
   end
@@ -101,7 +103,7 @@ class EventsController < ActionController::Base
   def destroy
     @event = Event.find params[:id]
     perform_destroy_transaction
-    redirect_to calendar_path
+    render :nothing => true
   end
 
   def perform_destroy_transaction

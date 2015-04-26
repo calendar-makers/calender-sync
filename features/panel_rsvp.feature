@@ -51,9 +51,3 @@ Scenario: Attempt submission of incomplete RSVP form
   Then I should see a failure message
   And I should not see my first name in the panel
   And I should not receive a confirmation email
-
-Scenario: Fail submission if email already exists
-  When I click on "Nature Walk" in the calendar
-  And I complete the RSVP form with email "jsmith@site.com"
-  Then I should see a message saying that "jsmith@site.com" already registered
-  And "jsmith@site.com" should not receive a confirmation email
