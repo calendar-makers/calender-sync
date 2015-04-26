@@ -58,7 +58,7 @@ class EventsController < ApplicationController
 
   def create
     result = Event.check_if_fields_valid(event_params)
-    return redirect_to new_event_path, notice: result[:message] if not result[:value]
+    return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
     redirect_to calendar_path
   end
