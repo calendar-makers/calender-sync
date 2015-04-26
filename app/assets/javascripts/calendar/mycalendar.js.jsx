@@ -6,7 +6,7 @@ $(document).ready(function() {
     var eventEnd = end;
     if (eventEnd == null) {
       endTime = null;
-    } else if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
+    } else if (eventEnd.diff(start, 'hours') >= 24) {
       endTime = end.format('MMMM Do YYYY, h:mm a');
     } else {
       endTime = end.format('h:mm a');

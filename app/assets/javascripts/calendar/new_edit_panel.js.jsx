@@ -2,8 +2,10 @@ var fullLocation = function(address, city, state, zip) {
   return address + '\n' + city + ', ' + state + ' ' + zip;
 };
 
-var eventForm = React.createClass ({
-  handleSubmit: function() {
+var EventForm = React.createClass ({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
 
     /* this.refs.x.getDOMNode().value.trim() extracts the value of x from a form */
     var name = this.refs.name.getDOMNode().value.trim();
@@ -133,8 +135,6 @@ var eventForm = React.createClass ({
 
 var EditEvent = React.createClass ({
   handleEventSubmit: function(event) {
-    e.preventDefault();
-    e.stopPropagation();
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       dataType: 'json',
@@ -159,7 +159,7 @@ var EditEvent = React.createClass ({
 
   render: function() {
     return (
-      <eventForm onEventSubmit={this.handleEventSubmit}/>
+      <EventForm onEventSubmit={this.handleEventSubmit}/>
     );
   }
 });
