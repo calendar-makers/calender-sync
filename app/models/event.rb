@@ -65,7 +65,6 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remote_events(options={})
-    # Here we can pass the token to the API call if needed. Like so: {access_token: token}
     meetup_events = Meetup.new.pull_events(options)
     if meetup_events.respond_to?(:each)
       meetup_events.each_with_object([]) {|event, candidate_events| candidate_events << Event.new(event)}
@@ -99,7 +98,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remotely_deleted_ids(remote_events)
-    upcoming_events = Event.where("start >= #{DateTime.now - 1}")
+    upcoming_events = Event.where("start >= '#{DateTime.now - 1}'")
     local_event_ids = upcoming_events.inject([]) {|array, event| array << event.meetup_id}
     remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
     local_event_ids - remote_event_ids
@@ -153,14 +152,14 @@ class Event < ActiveRecord::Base
   def self.synchronize_past_events
     group_events = Event.get_past_events('-1d', '')
     third_party_events = Event.get_past_third_party_events('-1d', '')
-    remote_events = group_events ? group_events + third_party_events : nil
+    remote_events = group_events && third_party_events ? group_events + third_party_events : nil
     process_remote_events(remote_events)
   end
 
   def self.synchronize_upcoming_events
     group_events = Event.get_upcoming_events
     third_party_events = Event.get_upcoming_third_party_events
-    remote_events = group_events ? group_events + third_party_events : nil
+    remote_events = group_events && third_party_events ? group_events + third_party_events : nil
     Event.remove_remotely_deleted_events(remote_events)
     process_remote_events(remote_events)
   end

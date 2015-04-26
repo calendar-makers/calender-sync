@@ -9,7 +9,11 @@ scheduler.every '1m', first: :now do |job|
 end
 
 
-scheduler.every '1h', first: Time.now + 5 * 60  do |job|
-  Event.synchronize_past_events
-  puts 'Past Events Synchronized.'
+scheduler.every '5m', first: Time.now + 2 * 60  do |job|
+  if Time.now.min == 30
+    Event.synchronize_past_events
+    puts 'Past Events Synchronized.'
+  end
+  Event.synchronize_upcoming_events
+  puts 'Upcoming Events Synchronized.'
 end
