@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 $(document).ready(function() {
   var timePeriod = function(start, end) {
-    var startTime = start.format('MMMM Do YYYY, h:mm a');
+    var startTime = start.format('MMMM D, YYYY, h:mm a');
     var endTime;
     var eventEnd = end;
     if (eventEnd == null) {
       endTime = null;
     } else if (eventEnd.diff(start, 'hours') >= 24) {
-      endTime = end.format('MMMM Do YYYY, h:mm a');
+      endTime = end.format('MMMM D, YYYY, h:mm a');
     } else {
       endTime = end.format('h:mm a');
     }
