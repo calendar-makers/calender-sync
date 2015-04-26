@@ -65,7 +65,9 @@ var Event = React.createClass({
 });
 
 var AdminButtons = React.createClass({
-  handleDelete: function() {
+  handleDelete: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       type: 'DELETE',
@@ -80,10 +82,11 @@ var AdminButtons = React.createClass({
         console.error('/events/' + this.props.calEvent.id, status, err.toString());
       }.bind(this)
     });
-    return false;
   },
 
-  handleUpdateLink: function() {
+  handleUpdateLink: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
     var calEvent = this.props.calEvent;
     var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
     var start_month  = calEvent.start.format('MMMM');
@@ -113,7 +116,6 @@ var AdminButtons = React.createClass({
       <EditEvent event_id={calEvent.id} name={calEvent.title} start_month={start_month} start_day={start_day} start_year={start_year} start_hour={start_hour} start_minute={start_minute} start_ampm={start_ampm} end_month={end_month} end_day={end_day} end_year={end_year} end_hour={end_hour} end_minute={end_minute} end_ampm={end_ampm} location_street={location_street} location_city={location_city} location_state={location_state} description={calEvent.description}/>,
       document.getElementById('panel')
     );
-    return false;
   },
 
   render: function() {

@@ -100,7 +100,10 @@ var eventForm = function() {
 }
 
 var EditEvent = React.createClass({
-  handleSubmit: function() {
+  handleSubmit: function(e) {
+    debugger
+    e.preventDefault();
+    e.stopPropagation();
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       type: 'PUT',
@@ -114,7 +117,6 @@ var EditEvent = React.createClass({
         console.error('/events/' + this.props.calEvent.id, status, err.toString());
       }.bind(this)
     });
-    return false;
   },
 
   render: eventForm
