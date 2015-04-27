@@ -1,9 +1,29 @@
 /** @jsx React.DOM */
 $(document).ready(function() {
-  $('#calendar').fullCalendar({
+  var timePeriod = function(start, end) {
+    var startTime = start.format('MMMM D, YYYY, h:mm a');
+    var endTime;
+    var eventEnd = end;
+    if (eventEnd == null) {
+      endTime = null;
+    } else if (eventEnd.diff(start, 'hours') >= 24) {
+      endTime = end.format('MMMM D, YYYY, h:mm a');
+    } else {
+      endTime = end.format('h:mm a');
+    }
 
-    events: function(start, end, timezone, callback){
-      $.getJSON('events.json', function(data){
+    var timePeriod;
+    if (endTime == null) {
+      timePeriod = startTime;
+    } else {
+      timePeriod = startTime + ' to ' + endTime;
+    }
+    return timePeriod;
+  }
+
+  $('#calendar').fullCalendar({
+    events: function(start, end, timezone, callback) {
+      $.getJSON('events.json', function(data) {
         console.log("I'm in the events function");
         console.log(data);
         callback(data);
@@ -13,36 +33,17 @@ $(document).ready(function() {
     eventColor: '#A6C55F',
 
     eventClick: function(calEvent, jsEvent, view) {
-      var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
-      var endTime;
-      var eventEnd = calEvent.end;
-      if (eventEnd == null) {
-        endTime = null;
-      } else if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
-        endTime = calEvent.end.format('MMMM Do YYYY, h:mm a');
-      } else {
-        endTime = calEvent.end.format('h:mm a');
-      }
-
-      var timePeriod;
-      if (endTime == null) {
-        timePeriod = startTime;
-      } else {
-        timePeriod = startTime + ' to ' + endTime;
-      }
-
+      var timePer = timePeriod(calEvent.start, calEvent.end);
       if (calEvent.description == null) {
         calEvent.description = '';
       }
-
       React.render(
         <div>
-          <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
+          <Event title={calEvent.title} timePeriod={timePer} location={calEvent.location} description={calEvent.description}/>
           <AdminButtons calEvent={calEvent}/>
         </div>,
         document.getElementById('panel')
       );
-
     },
 
     header: {
