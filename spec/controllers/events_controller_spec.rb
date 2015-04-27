@@ -148,7 +148,7 @@ describe EventsController do
 
     before(:each) do
       allow(Event).to receive(:get_remote_events).and_return(nil)
-      allow(Event).to receive(:make_events_local).and_return(events)
+      allow(Event).to receive(:process_remote_events).and_return(events)
     end
 
     context 'for some requested ids' do

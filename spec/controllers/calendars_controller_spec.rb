@@ -20,8 +20,8 @@ describe CalendarsController do
       let(:events) {[Event.new, Event.new, Event.new]}
 
       it 'should call synchronize_events' do
-        allow(Event).to receive(:synchronize_events).and_return(events)
-        expect(Event).to receive(:synchronize_events)
+        allow(Event).to receive(:synchronize_upcoming_events).and_return(events)
+        expect(Event).to receive(:synchronize_upcoming_events)
         get :show
       end
 
@@ -36,7 +36,7 @@ describe CalendarsController do
 
       it 'should indirectly make remote meetup events local' do
         allow(Event).to receive(:get_remote_events).and_return(events)
-        expect(Event).to receive(:make_events_local).with(events)
+        expect(Event).to receive(:process_remote_events).with(events)
         get :show
       end
 
@@ -45,7 +45,7 @@ describe CalendarsController do
 
       it 'should display the newly added event names in a message' do
         events = [Event.new(name: 'chester'), Event.new(name: 'copperpot')]
-        allow(Event).to receive(:make_events_local).and_return(events)
+        allow(Event).to receive(:process_remote_events).and_return(events)
         get :show
         expect(flash[:notice]).to eq("Successfully pulled events: #{events[0][:name]}, #{events[1][:name]} from Meetup")
       end
@@ -56,7 +56,7 @@ describe CalendarsController do
       let(:event_names) {nil}
 
       it "should display a failure message" do
-        allow(Event).to receive(:make_events_local).and_return(event_names)
+        allow(Event).to receive(:process_remote_events).and_return(event_names)
         get :show
         expect(flash[:notice]).to eq("Could not pull events from Meetup")
       end
@@ -66,7 +66,7 @@ describe CalendarsController do
       let(:event_names) {[]}
 
       it "should display a failure message" do
-        allow(Event).to receive(:make_events_local).and_return(event_names)
+        allow(Event).to receive(:process_remote_events).and_return(event_names)
         get :show
         expect(flash[:notice]).to eq("The Calendar and Meetup are synched")
       end
@@ -81,7 +81,7 @@ describe CalendarsController do
       end
 
       it "should display a failure message" do
-        allow(Event).to receive(:make_events_local).and_return(event_names)
+        allow(Event).to receive(:process_remote_events).and_return(event_names)
         get :show
         expect(flash[:notice]).to eq("Could not pull events from Meetup")
       end
@@ -91,7 +91,7 @@ describe CalendarsController do
       let(:event_names) {[]}
 
       it "should display a failure message" do
-        allow(Event).to receive(:make_events_local).and_return(event_names)
+        allow(Event).to receive(:process_remote_events).and_return(event_names)
         get :show
         expect(flash[:notice]).to eq("The Calendar and Meetup are synched")
       end

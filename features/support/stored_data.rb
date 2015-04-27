@@ -17,7 +17,7 @@ events = <<-JSON
         "id":"219648262",
         "time":1428602400000,
         "updated":1428000888000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name": "Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"},
         {"utc_offset":-25200000,
         "venue":{"zip":"94117","country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
@@ -34,7 +34,7 @@ events = <<-JSON
         "id":"220706208",
         "time":1428735600000,
         "updated":1426276899000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name":"Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"},
         {"utc_offset":-25200000,
         "venue":{"zip":"94117","country":"us","city":"San Francisco","address_1":"Waller St. & Buena Vista Ave. East, San Francisco, CA","name":"Adah Bakalinsky Steps","lon":-122.439178,"id":16380832,"state":"CA","lat":37.769981,"repinned":false},
@@ -52,7 +52,7 @@ events = <<-JSON
         "id":"dmlzzgytgbzb",
         "time":1429462800000,
         "updated":1407183333000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name":"Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"}],
 "meta":{"next":"",
         "method":"Events",
@@ -104,7 +104,7 @@ modified_events = <<-JSON
         "id":"219648262",
         "time":1428602400000,
         "updated":1528000888000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name":"Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"},
         {"utc_offset":-25200000,
         "venue":{"country":"us","city":"San Francisco","address_1":"1028 Market Street","name":"Sidewalk Prototype in front of The Hall","lon":-122.411324,"id":23697843,"state":"CA","lat":37.781876,"repinned":false},
@@ -121,7 +121,7 @@ modified_events = <<-JSON
         "id":"220706208",
         "time":1428735600000,
         "updated":1426276899000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name":"Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"},
         {"utc_offset":-25200000,
         "venue":{"zip":"94117","country":"us","city":"San Francisco","address_1":"Waller St. & Buena Vista Ave. East, San Francisco, CA","name":"Adah Bakalinsky Steps","lon":-122.439178,"id":16380832,"state":"CA","lat":37.769981,"repinned":false},
@@ -139,7 +139,7 @@ modified_events = <<-JSON
         "id":"dmlzzgytgbzb",
         "time":1429462800000,
         "updated":1407183333000,
-        "group":{"join_mode":"open","created":1370892745000,"name":"Nature in the City","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
+        "group":{"join_mode":"open","created":1370892745000,"name":"Meetup API Testing Sandbox","group_lon":-122.44000244140625,"id":8870202,"urlname":"Nature-in-the-City","group_lat":37.7400016784668,"who":"Urban Naturalists"},
         "status":"upcoming"}],
 "meta":{"next":"",
         "method":"Events",
@@ -656,19 +656,23 @@ not_found = <<-JSON
 JSON
 
 
-# DEFAULT FOR ALL CODE
-#########################################
-FakeWeb.allow_net_connect = false
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
-########################################
+default = lambda do
+  FakeWeb.clean_registry
+  FakeWeb.allow_net_connect = false
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+end
+
+default.call
+
+
 
 # meetup_push.feature
 #########################################
@@ -693,16 +697,7 @@ end
 
 # Set defaults
 After('@meetup_push') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 #########################################
 
@@ -738,16 +733,7 @@ end
 
 # Set defaults
 After('@meetup_delete') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 #########################################
 
@@ -781,16 +767,7 @@ end
 
 # Set defaults
 After('@meetup_delete') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 #########################################
 
@@ -804,16 +781,7 @@ end
 
 # Set defaults
 After('@meetup_pull') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 
 Before('@successful_pull_meetup') do
@@ -835,10 +803,8 @@ end
 
 Before('@repeated_changed_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'},
-                                                                                    {:body => events, :content_type => 'application/json'},
-                                                                                    {:body => modified_events, :content_type => 'application/json'},
-                                                                                    {:body => modified_events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{:body => events, :content_type => 'application/json'},
+                                                                        {:body => modified_events, :content_type => 'application/json'}])
 end
 ########################################
 
@@ -852,16 +818,7 @@ end
 
 # Set defaults
 After('@meetup_pull_3rd_by_organization') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 
 Before('@search_events_by_group') do
@@ -910,16 +867,7 @@ end
 
 # Set defaults
 After('@meetup_pull_3rd_by_id') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 
 Before('@search_event_by_id') do
@@ -970,16 +918,7 @@ end
 
 # Set defaults
 After('@meetup_pull_rsvp') do
-  FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  default.call
 end
 
 Before('@successful_pull_meetup') do
