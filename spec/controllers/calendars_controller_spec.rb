@@ -20,8 +20,8 @@ describe CalendarsController do
       let(:events) {[Event.new, Event.new, Event.new]}
 
       it 'should call synchronize_events' do
-        allow(Event).to receive(:synchronize_events).and_return(events)
-        expect(Event).to receive(:synchronize_events)
+        allow(Event).to receive(:synchronize_upcoming_events).and_return(events)
+        expect(Event).to receive(:synchronize_upcoming_events)
         get :show
       end
 

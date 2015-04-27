@@ -43,7 +43,6 @@ class Meetup
     options[:body] = args[:updated_fields].merge(default_auth)
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event/#{args[:id]}", options)
-    byebug
     Meetup.process_result(data, nil, 200)
   end
 
@@ -73,7 +72,6 @@ class Meetup
       options.merge!(group_id: default_group_id) # if user gave no options, then pull by default group id
     end
     options.merge!(default_auth)
-    #options.merge!(status: 'past,upcoming')
     data = HTTParty.get("#{BASE_URL}/2/events?#{Meetup.options_string(options)}")
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
   end

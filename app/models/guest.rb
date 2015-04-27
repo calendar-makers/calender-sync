@@ -30,7 +30,7 @@ class Guest < ActiveRecord::Base
     end
   end
 
-  def self.find_guest_by_meetup_rsvp(rsvp)
+  def self.find_by_meetup_rsvp(rsvp)
     Guest.find_by_meetup_id(rsvp[:meetup_id])
   end
 

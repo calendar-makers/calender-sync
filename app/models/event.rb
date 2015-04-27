@@ -35,10 +35,10 @@ class Event < ActiveRecord::Base
     result = {}
     result[:message] = []
     result[:value] = true
-    arg.each do |k, v|
-      if v == nil || v == ''
+    arg.each do |key, value|
+      if value.blank?
         result[:value] = false
-        result[:message].append k.to_s
+        result[:message].append key.to_s
       end
     end
     result
@@ -98,8 +98,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remotely_deleted_ids(remote_events)
-    upcoming_events = Event.where("start >= '#{DateTime.now - 1}'")
-    local_event_ids = upcoming_events.inject([]) {|array, event| array << event.meetup_id}
+    target_events = Event.where("start >= '#{DateTime.now - 1}'")
+    local_event_ids = target_events.inject([]) {|array, event| array << event.meetup_id}
     remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
     local_event_ids - remote_event_ids
   end
@@ -169,9 +169,13 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_stored_third_party_ids
+    Event.all.each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
+  end
+
+  def is_third_party?
     default_group_name = Event.get_default_group_name
-    third_party_events = Event.all.select {|event| event.organization != default_group_name}
-    third_party_events.inject([]) {|array, event| array << event[:meetup_id]}
+    group_name = organization
+    group_name && group_name != default_group_name
   end
 
   def apply_update(new_event)
@@ -189,7 +193,7 @@ class Event < ActiveRecord::Base
     return if rsvps.blank?
     new_guest_names = []
     rsvps.each do |rsvp|
-      guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
+      guest = Guest.find_by_meetup_rsvp(rsvp) || Guest.create_guest_by_meetup_rsvp(rsvp)
       if process_rsvp(rsvp, guest.id)
         new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
       end
@@ -212,7 +216,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_requested_ids(data)
-    data.keys.select {|k| k =~ /^event.+$/} if data.respond_to? :keys
+    data.keys.select {|key| key =~ /^event.+$/} if data.respond_to? :keys
   end
 
   def self.cleanup_ids(ids)
@@ -247,7 +251,7 @@ class Event < ActiveRecord::Base
 
   def update_meetup_fields(event)
     keys = [:meetup_id, :updated, :url, :status]
-    keys.each {|k| self[k] = event[k]}
+    keys.each {|key| self[key] = event[key]}
   end
 
   def self.display_message(events)
