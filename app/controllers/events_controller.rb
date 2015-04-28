@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
-   
+
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -103,7 +103,8 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find params[:id]
     perform_destroy_transaction
-    render :nothing => true
+    redirect_to calendar_path
+    #render :nothing => true
   end
 
   def perform_destroy_transaction
