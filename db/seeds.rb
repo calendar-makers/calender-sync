@@ -23,3 +23,4 @@ end
 #Is this safe?
 User.create!(email: "amber@natureinthecity.org", password: "password", level: 0)
 User.create!(email: "admin@admin.com", password: "password", level: 0)
+User.create!(email: "vincehayashi@berkeley.edu", password: "password", level: 0)
