@@ -1,6 +1,51 @@
 require 'rails_helper'
 
 describe User do
+  describe '#create_non_root' do
+    before :each do
+      @valid_params = {
+        "user" => {
+          "email" => "example@example.com",
+          "password" => "password"
+        }
+      }
+      @empty_params = {
+        "user" => {
+          "email" => "",
+          "password" => ""
+        }
+      }
+    end
+    it 'creates a non root user' do
+      @user = User.create_non_root(@valid_params)
+      expect(@user.save).to be_truthy
+    end
+    it 'does not save if invalid inputs' do
+      @user = User.create_non_root(@empty_params)
+      expect(@user.save).to be_falsey
+    end
+    it 'does not save if duplicate emails' do
+      @first = User.create_non_root(@valid_params)
+      @first.save
+      @second = User.create_non_root(@valid_params)
+      expect(@second.save).to be_falsey
+    end
+  end
+  describe '#root?' do
+    before :each do
+      @root = User.create!(email: "root@root.com", password: "password", level: 0)
+      @non_root = User.create!(email: "user@user.com", password: "password")
+    end
+    it 'returns true if root' do
+      expect(@root.root?).to be_truthy
+    end
+    it 'returns false if not root' do
+      expect(@non_root.root?).to be_falsey
+    end
+  end
+
+# refresh logic deprecated
+=begin
   describe '#refresh' do 
     before :each do
       auth_hash = {
@@ -44,5 +89,5 @@ describe User do
       expect{@user.get_token}.to raise_error("Unexpected error during refresh")
     end
   end
-
+=end
 end

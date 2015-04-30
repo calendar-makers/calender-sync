@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe EventsController do
   before :each do
-    @user = User.create(:provider => "Meetup", :uid => "12345",
-                        :email => "example@example.com",
-                        :password => "changeme", :token => "abc",
-                        :expires_at => 0, :refresh_token => "def")
+    @user = User.create(:email => "example@example.com",
+                        :password => "changeme")
     sign_in @user
   end
 
@@ -148,7 +146,7 @@ describe EventsController do
 
     before(:each) do
       allow(Event).to receive(:get_remote_events).and_return(nil)
-      allow(Event).to receive(:make_events_local).and_return(events)
+      allow(Event).to receive(:process_remote_events).and_return(events)
     end
 
     context 'for some requested ids' do
