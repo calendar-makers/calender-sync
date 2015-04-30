@@ -65,7 +65,9 @@ var Event = React.createClass({
 });
 
 var AdminButtons = React.createClass({
-  handleDelete: function() {
+  handleDelete: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       type: 'DELETE',
@@ -80,40 +82,6 @@ var AdminButtons = React.createClass({
         console.error('/events/' + this.props.calEvent.id, status, err.toString());
       }.bind(this)
     });
-    return false;
-  },
-
-  handleUpdateLink: function() {
-    var calEvent = this.props.calEvent;
-    var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
-    var start_month  = calEvent.start.format('MMMM');
-    var start_day    = calEvent.start.format('D');
-    var start_year   = calEvent.start.format('YYYY');
-    var start_hour   = calEvent.start.format('h');
-    var start_minute = calEvent.start.format('mm');
-    var start_ampm   = calEvent.start.format('a');
-    var endTime;
-    var eventEnd = calEvent.end;
-    if (eventEnd == null) {
-      endTime = null;
-    } else {
-      var end_month  = calEvent.end.format('MMMM');
-      var end_day    = calEvent.end.format('D');
-      var end_year   = calEvent.end.format('YYYY');
-      var end_hour   = calEvent.end.format('h');
-      var end_minute = calEvent.end.format('mm');
-      var end_ampm   = calEvent.end.format('a');
-    }
-    var locationDetails = calEvent.location.split("\n");
-    var location_street = locationDetails[0];
-    var location_city   = locationDetails[1].split(", ")[0];
-    var location_state  = locationDetails[1].split(", ")[1];
-
-    React.render(
-      <EditEvent event_id={calEvent.id} name={calEvent.title} start_month={start_month} start_day={start_day} start_year={start_year} start_hour={start_hour} start_minute={start_minute} start_ampm={start_ampm} end_month={end_month} end_day={end_day} end_year={end_year} end_hour={end_hour} end_minute={end_minute} end_ampm={end_ampm} location_street={location_street} location_city={location_city} location_state={location_state} description={calEvent.description}/>,
-      document.getElementById('panel')
-    );
-    return false;
   },
 
   render: function() {
@@ -121,11 +89,9 @@ var AdminButtons = React.createClass({
       <div>
         <i>these buttons will only be visible to admin</i>
         <div>
-          <form onSubmit={this.handleUpdateLink}>
-            <input id='eventEditLink' className='button' style={{float: 'left'}} type='submit' value='Edit'/>
-          </form>
+          <button id='edit_event' className='button' style={{float:'left'}} value='edit'/>
           <form onSubmit={this.handleDelete}>
-            <input id='eventDelete' className='button' style={{float: 'right'}} type='submit' value='Delete'/>
+            <input id='delete_event' className='button' style={{float: 'right'}} type='submit' value='Delete'/>
           </form>
         </div>
       </div>
