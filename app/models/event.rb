@@ -35,10 +35,10 @@ class Event < ActiveRecord::Base
     result = {}
     result[:message] = []
     result[:value] = true
-    arg.each do |k, v|
-      if v == nil || v == ''
+    arg.each do |key, value|
+      if value.blank?
         result[:value] = false
-        result[:message].append k.to_s
+        result[:message].append key.to_s
       end
     end
     result
@@ -65,14 +65,13 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remote_events(options={})
-    # Here we can pass the token to the API call if needed. Like so: {access_token: token}
     meetup_events = Meetup.new.pull_events(options)
     if meetup_events.respond_to?(:each)
       meetup_events.each_with_object([]) {|event, candidate_events| candidate_events << Event.new(event)}
     end
   end
 
-  def self.make_events_local(events)
+  def self.process_remote_events(events)
     return if events.blank?
     events_bin = []
     events.each do |event|
@@ -99,15 +98,84 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_remotely_deleted_ids(remote_events)
-    local_event_ids = Event.pluck(:meetup_id)
+    target_events = Event.where("start >= '#{DateTime.now - 1}'")
+    local_event_ids = target_events.inject([]) {|array, event| array << event.meetup_id}
     remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
     local_event_ids - remote_event_ids
   end
 
-  def self.pull_all_events
-    past_events = Event.get_remote_events({status: 'past'})
-    upcoming_events = Event.get_remote_events({status: 'upcoming'})
-    past_events + upcoming_events if upcoming_events && past_events
+  def self.get_upcoming_events
+    Event.get_remote_events({status: 'upcoming'})
+  end
+
+  def self.get_past_events(from=nil, to=nil)
+    Event.get_remote_events({status: 'past'}.merge Event.date_range(from, to))
+  end
+
+  def self.get_upcoming_third_party_events
+    ids = Event.get_stored_third_party_ids
+    if ids.size > 0
+      options = {event_id: ids.join(',')}
+      events = Event.get_remote_events({status: 'upcoming'}.merge options)
+      return events if events
+    end
+    []
+  end
+
+  def self.get_past_third_party_events(from=nil, to=nil)
+    ids = Event.get_stored_third_party_ids
+    if ids.size > 0
+      options = {event_id: ids.join(',')}
+      range = Event.date_range(from, to)
+      events = Event.get_remote_events(({status: 'past'}.merge options).merge range)
+      return events if events
+    end
+    []
+  end
+
+  def self.date_range(from=nil, to=nil)
+    (from || to) ? {time: "#{from},#{to}"} : {}
+  end
+
+  def self.store_third_party_events(ids)
+    options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
+    Event.process_remote_events(Event.get_remote_events(options))
+  end
+
+  def self.initialize_calendar_db
+    upcoming_events = Event.get_upcoming_events
+    past_events = Event.get_past_events
+    remote_events = upcoming_events && past_events ? upcoming_events + past_events : nil
+    process_remote_events(remote_events)
+  end
+
+  def self.synchronize_past_events
+    group_events = Event.get_past_events('-1d', '')
+    third_party_events = Event.get_past_third_party_events('-1d', '')
+    remote_events = group_events && third_party_events ? group_events + third_party_events : nil
+    process_remote_events(remote_events)
+  end
+
+  def self.synchronize_upcoming_events
+    group_events = Event.get_upcoming_events
+    third_party_events = Event.get_upcoming_third_party_events
+    remote_events = group_events && third_party_events ? group_events + third_party_events : nil
+    Event.remove_remotely_deleted_events(remote_events)
+    process_remote_events(remote_events)
+  end
+
+  def self.get_default_group_name
+    Meetup::GROUP_NAME
+  end
+
+  def self.get_stored_third_party_ids
+    Event.all.each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
+  end
+
+  def is_third_party?
+    default_group_name = Event.get_default_group_name
+    group_name = organization
+    group_name && group_name != default_group_name
   end
 
   def apply_update(new_event)
@@ -125,7 +193,7 @@ class Event < ActiveRecord::Base
     return if rsvps.blank?
     new_guest_names = []
     rsvps.each do |rsvp|
-      guest = Guest::find_guest_by_meetup_rsvp(rsvp) || Guest::create_guest_by_meetup_rsvp(rsvp)
+      guest = Guest.find_by_meetup_rsvp(rsvp) || Guest.create_guest_by_meetup_rsvp(rsvp)
       if process_rsvp(rsvp, guest.id)
         new_guest_names << guest.first_name + (' ' if guest.last_name) + guest.last_name
       end
@@ -148,7 +216,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_requested_ids(data)
-    data.keys.select {|k| k =~ /^event.+$/} if data.respond_to? :keys
+    data.keys.select {|key| key =~ /^event.+$/} if data.respond_to? :keys
   end
 
   def self.cleanup_ids(ids)
@@ -159,17 +227,6 @@ class Event < ActiveRecord::Base
 
   def self.get_event_ids(args)
     Event.cleanup_ids(Event.get_requested_ids(args))
-  end
-
-  def self.synchronize_third_party_events(ids)
-    options = ids.respond_to?(:join) ? {event_id: ids.join(',')} : {}
-    Event.make_events_local(Event.get_remote_events(options))
-  end
-
-  def self.synchronize_events
-    remote_events = Event.pull_all_events
-    Event.remove_remotely_deleted_events(remote_events)
-    make_events_local(remote_events)
   end
 
   def format_start_date
@@ -194,7 +251,7 @@ class Event < ActiveRecord::Base
 
   def update_meetup_fields(event)
     keys = [:meetup_id, :updated, :url, :status]
-    keys.each {|k| self[k] = event[k]}
+    keys.each {|key| self[key] = event[key]}
   end
 
   def self.display_message(events)

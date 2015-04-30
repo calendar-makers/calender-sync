@@ -112,13 +112,13 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "::make_events_local" do
+  describe "::process_remote_events" do
     let(:event) {[Event.new]}
 
     context "with new events" do
       it "saves the event in the db" do
         expect_any_instance_of(Event).to receive(:save!)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
 
@@ -130,7 +130,7 @@ RSpec.describe Event, type: :model do
 
         allow(Event).to receive(:find_by_meetup_id).with('123').and_return(old_event)
         expect(old_event).to receive(:apply_update)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
 
@@ -142,7 +142,7 @@ RSpec.describe Event, type: :model do
 
         allow(Event).to receive(:find_by_meetup_id).with('123').and_return(stored_event)
         expect(stored_event).not_to receive(:apply_update)
-        Event.make_events_local(event)
+        Event.process_remote_events(event)
       end
     end
   end
@@ -156,7 +156,7 @@ RSpec.describe Event, type: :model do
 
       before(:each) do
         allow_any_instance_of(Event).to receive(:get_remote_rsvps).and_return(rsvp)
-        allow(Guest).to receive(:find_guest_by_meetup_rsvp).and_return(guest)
+        allow(Guest).to receive(:find_by_meetup_rsvp).and_return(guest)
       end
 
     context "with new events" do
@@ -244,8 +244,8 @@ RSpec.describe Event, type: :model do
 
   describe '::remove_remotely_deleted_events' do
     before(:each) do
-      @event_1 = Event.create!(meetup_id: '12345')
-      @event_2 = Event.create!(meetup_id: '678910')
+      @event_1 = Event.create!(meetup_id: '12345', start: DateTime.now)
+      @event_2 = Event.create!(meetup_id: '678910', start: DateTime.now)
       @local_events = [@event_1, @event_2]
     end
 
@@ -290,8 +290,8 @@ RSpec.describe Event, type: :model do
 
   describe '::get_remotely_deleted_ids' do
     before(:each) do
-      @event_1 = Event.create!(meetup_id: '12345')
-      @event_2 = Event.create!(meetup_id: '678910')
+      @event_1 = Event.create!(meetup_id: '12345', start: DateTime.now)
+      @event_2 = Event.create!(meetup_id: '678910', start: DateTime.now)
       @local_events = [@event_1, @event_2]
     end
 
@@ -395,57 +395,131 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '::pull_all_events' do
-    let(:upcoming_events) {[double]}
-    let(:past_events) {[double, double]}
+  describe '.initialize_calendar_db' do
+    let(:event1) {Event.new(meetup_id: '123565')}
+    let(:event2) {Event.new(meetup_id: '653434')}
+    let(:event3) {Event.new(meetup_id: '5654334')}
+    let(:upcoming_events) {[event1]}
+    let(:past_events) {[event2, event3]}
+
 
     context 'with both past and upcoming events' do
       before(:each) do
-        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(past_events)
-        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(upcoming_events)
+        allow(Event).to receive(:get_past_events).and_return(past_events)
+        allow(Event).to receive(:get_upcoming_events).and_return(upcoming_events)
       end
 
       it 'returns sum of events' do
-        result = Event.pull_all_events
-        expect(result).to eq(past_events + upcoming_events)
+        result = Event.initialize_calendar_db
+        expect(result).to eq(upcoming_events + past_events)
       end
     end
 
     context 'with only past events' do
       before(:each) do
-        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(past_events)
-        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(nil)
+        allow(Event).to receive(:get_past_events).and_return(past_events)
+        allow(Event).to receive(:get_upcoming_events).and_return(nil)
       end
 
       it 'returns nothing' do
-        result = Event.pull_all_events
+        result = Event.initialize_calendar_db
         expect(result).to be_nil
       end
     end
 
     context 'with only upcoming events' do
       before(:each) do
-        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(nil)
-        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(upcoming_events)
+        allow(Event).to receive(:get_past_events).and_return(nil)
+        allow(Event).to receive(:get_upcoming_events).and_return(upcoming_events)
       end
 
       it 'returns sum of events' do
-        result = Event.pull_all_events
+        result = Event.initialize_calendar_db
         expect(result).to be_nil
       end
     end
 
     context 'with no events at all' do
       before(:each) do
-        allow(Event).to receive(:get_remote_events).with({status: 'past'}).and_return(nil)
-        allow(Event).to receive(:get_remote_events).with({status: 'upcoming'}).and_return(nil)
+        allow(Event).to receive(:get_past_events).and_return(nil)
+        allow(Event).to receive(:get_upcoming_events).and_return(nil)
       end
 
       it 'returns sum of events' do
-        result = Event.pull_all_events
+        result = Event.initialize_calendar_db
         expect(result).to be_nil
       end
     end
   end
+
+  describe '.get_past_events' do
+    let(:events) {[double, double]}
+    before(:each) do
+      allow(Event).to receive(:get_remote_events).and_return(events)
+    end
+
+    it 'calls get_remote_events with the right params' do
+      expect(Event).to receive(:get_remote_events).with({status: 'past', time: '-1,'})
+      Event.get_past_events(-1)
+    end
+  end
+
+  describe '.synchronize_past_events' do
+    let(:event1) {Event.new(meetup_id: '123565', organization: 'Nature in the City')}
+    let(:third1) {Event.new(meetup_id: '653434', organization: 'Nature')}
+    let(:third2) {Event.new(meetup_id: '5654334', organization: 'Flower')}
+    let(:past_events) {[event1]}
+    let(:third_events) {[third1, third2]}
+
+
+    context 'with both past and upcoming events' do
+      before(:each) do
+        allow(Event).to receive(:get_past_events).and_return(past_events)
+        allow(Event).to receive(:get_past_third_party_events).and_return(third_events)
+      end
+
+      it 'returns sum of events' do
+        result = Event.synchronize_past_events
+        expect(result).to eq(past_events + third_events)
+      end
+    end
+
+    context 'with only past events' do
+      before(:each) do
+        allow(Event).to receive(:get_past_events).and_return(past_events)
+        allow(Event).to receive(:get_past_third_party_events).and_return(nil)
+      end
+
+      it 'returns nothing' do
+        result = Event.synchronize_past_events
+        expect(result).to be_nil
+      end
+    end
+
+    context 'with only third party events' do
+      before(:each) do
+        allow(Event).to receive(:get_past_events).and_return(nil)
+        allow(Event).to receive(:get_past_third_party_events).and_return(third_events)
+      end
+
+      it 'returns nothing' do
+        result = Event.synchronize_past_events
+        expect(result).to be_nil
+      end
+    end
+
+    context 'with no events at all' do
+      before(:each) do
+        allow(Event).to receive(:get_past_events).and_return(nil)
+        allow(Event).to receive(:get_past_third_party_events).and_return(nil)
+      end
+
+      it 'returns sum of events' do
+        result = Event.synchronize_past_events
+        expect(result).to be_nil
+      end
+    end
+  end
+
 end
 

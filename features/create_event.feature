@@ -1,3 +1,4 @@
+# Deprecated feature, we should be creating events in the panel
 Feature: create an event and have it displayed on the calendar
 
   As an admin
