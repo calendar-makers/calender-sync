@@ -2,7 +2,7 @@ class Meetup
 
   include HTTParty
 
-  attr_reader :default_group_id, :default_group_urlname, :default_auth
+  attr_reader :default_group_id, :default_group_urlname, :default_auth, :default_group_name
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
@@ -11,6 +11,11 @@ class Meetup
   # NATURE IN THE CITY DATA
   GROUP_ID = '1556336'#'8870202'
   GROUP_URLNAME = 'Meetup-API-Testing'#'Nature-in-the-City'
+  GROUP_NAME = 'Meetup API Testing Sandbox'#'Nature in the City'
+
+  def default_group_name=(name='')
+    @default_group_name = name.blank? ? GROUP_NAME : name
+  end
 
   def default_group_urlname=(urlname='')
     @default_group_urlname = urlname.blank? ? GROUP_URLNAME : urlname
@@ -29,6 +34,7 @@ class Meetup
     # Needs either a key, or a token.
     self.default_auth = options[:access_token], options[:key]
     self.default_group_urlname = options[:group_urlname]
+    self.default_group_name = options[:organization]
     self.default_group_id = options[:group_id]
   end
 
@@ -66,7 +72,6 @@ class Meetup
       options.merge!(group_id: default_group_id) # if user gave no options, then pull by default group id
     end
     options.merge!(default_auth)
-    #options.merge!(status: 'past,upcoming')
     data = HTTParty.get("#{BASE_URL}/2/events?#{Meetup.options_string(options)}")
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
   end
@@ -148,6 +153,7 @@ class Meetup
     #local_offset = DateTime.now.offset
     #date.to_datetime.new_offset(local_offset).to_i * 1000
     #date.to_datetime.change(offset: local_offset).to_i * 1000
+    #1430434800000
   end
 
   def get_meetup_venue_id(event)
@@ -207,6 +213,5 @@ class Meetup
   def self.get_milliseconds(date)
     date.to_i * 1000
   end
-
 end
 

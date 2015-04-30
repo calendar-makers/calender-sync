@@ -57,7 +57,7 @@ class CalendarsController < ApplicationController
     preprocess_header_footer
 
     if flash[:notice].nil? # Prevent Meetup synchronization if have incoming message
-      events = Event.synchronize_events
+      events = Event.synchronize_upcoming_events
       display_synchronization_result(events)
     end
   end
