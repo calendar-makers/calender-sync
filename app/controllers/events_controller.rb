@@ -15,9 +15,23 @@ class EventsController < ApplicationController
   def show
     @message = flash[:notice]
     @event = Event.find params[:id]
+
+    startTime = @event.start.strftime('%b %e, %Y at %l:%M %P')
+    endTime = ""
+    if @event.end
+      if (@event.end - @event.start) >= 1
+        endTime = @event.end.strftime('%b %e, %Y at %l:%M %P')
+      else
+        endTime = @event.end.strftime('%l:%M %P')
+      end
+    end
+    @timePeriod = startTime
+    @timePeriod = startTime + ' to ' + endTime unless endTime == ""
+
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
+
   end
 
   def display_synchronization_result(new_guests)
