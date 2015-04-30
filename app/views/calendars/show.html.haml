@@ -1,32 +1,45 @@
-- if user_signed_in?
-  = link_to "Create new event", new_event_path
-  </br>
-  = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
-  </br>
-  = link_to "Sign Out", destroy_user_session_path, :method => :get
-- else
-  = link_to "Login", new_user_session_path, :method => :get
+= raw @header
+%hr
 
-- if user_signed_in? and current_user.root?
+%main{:style => "width:75%; margin-left:12.5%;"}
+  - if user_signed_in?
+    = link_to "Create new event", new_event_path
+    </br>
+    = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
+    </br>
+    = link_to "Sign Out", destroy_user_session_path, :method => :get
+  - else
+    = link_to "Login", new_user_session_path, :method => :get
+
+  - if user_signed_in? and current_user.root?
+    </br>
+    = link_to "Create new account", new_account_path, :method => :get
   </br>
-  = link_to "Create new account", new_account_path, :method => :get
-</br>
 
-%h1 Events Calendar
-= javascript_include_tag 'calendar/application'
-</br>
+  :javascript
+    $(document).ready(function() {
+      $(document).on('click', '#edit_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'edit_panel')}') } );
+    });
+  %h1 Events Calendar
+  = javascript_include_tag 'calendar/application'
+  </br>
 
-#wrap
-  #calendar
-  #panel_wrapper
-    #panel_header
-      %h2{:style => "font-weight:200;"} Event Details
-    #panel
-      %p Click an event!
-      #new.crud
-      #edit.crud
-      #delete.crud
+  #wrap
+    #calendar
+    #panel_wrapper
+      #panel_header
+        %h2{:style => "font-weight:200;"} Event Details
+      #panel
+        %p Click an event!
+        #new.crud
+        #edit.crud
+        #delete.crud
+        %div{:style => "clear:both;"}
       %div{:style => "clear:both;"}
+
     %div{:style => "clear:both;"}
 
-  %div{:style => "clear:both;"}
+</br></br></br></br></br>
+%h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+= raw @section
+= raw @footer

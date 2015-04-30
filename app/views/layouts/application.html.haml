@@ -5,27 +5,7 @@
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
-    :javascript
-      $(document).ready(function() {
-       // $('#new_event').on('click', $('#panel').html("#{j render :partial => 'create_edit_panel'}") );
-        $('body').on('click', '#edit_event', $('#panel').html("#{j render :partial => 'create_edit_panel'}") );
-        //$('body').on('click', '#delete_event', function(){ $('#panel').html("#{j render :partial => 'default_panel'}") } );
-      });
     = csrf_meta_tags
     = raw @head1
   %body
-    = raw @header
-    %hr
-
-    %main{:style => "width:75%; margin-left:12.5%;"}
-      - if flash[:notice]
-        %h3#notice.message= flash[:notice]
-      - elsif flash[:warning]
-        %h3#warning.message= flash[:warning]
-
-      = yield
-
-    </br></br></br></br></br>
-    %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
-    = raw @section
-    = raw @footer
+    = yield

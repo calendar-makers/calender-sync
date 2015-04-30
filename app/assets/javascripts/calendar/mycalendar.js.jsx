@@ -33,17 +33,9 @@ $(document).ready(function() {
     eventColor: '#A6C55F',
 
     eventClick: function(calEvent, jsEvent, view) {
-      var timePer = timePeriod(calEvent.start, calEvent.end);
-      if (calEvent.description == null) {
-        calEvent.description = '';
-      }
-      React.render(
-        <div>
-          <Event title={calEvent.title} timePeriod={timePer} location={calEvent.location} description={calEvent.description}/>
-          <AdminButtons calEvent={calEvent}/>
-        </div>,
-        document.getElementById('panel')
-      );
+      jsEvent.stopPropagation();
+      jsEvent.preventDefault();
+      $('#panel').load(calEvent.url);
     },
 
     header: {
