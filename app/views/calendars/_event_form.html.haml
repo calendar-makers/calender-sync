@@ -1,0 +1,47 @@
+%div#e_name
+  = label :event, :name, 'Event Name'
+  = text_field :event, 'name'
+
+%div#e_start_time
+  = label :event, :start, 'Start Time'
+  = datetime_select :event, :start
+
+%div#e_end_time
+  = label :event, :end, 'End Time'
+  = datetime_select :event, :end
+
+%div#e_organization
+  = label :event, :organization, 'Organization Name'
+  = text_field :event, :organization, value: 'Nature in the City'
+
+%div#e_venue_name
+  = label :event, :venue_name, "Venue Name"
+  = text_field :event, 'venue_name'
+
+%div#e_address_1
+  = label :event, :address_1, 'Address'
+  = text_field :event, 'address_1'
+
+%div#e_city
+  = label :event, :city, 'City'
+  = text_field :event, 'city'
+
+%div#e_state
+  = label :event, :state, 'State'
+  = select :event, 'state', options_for_select(us_states, 'CA')
+
+%div#e_zip
+  = label :event, :zip, 'Zip'
+  = text_field :event, 'zip', size: '6'
+
+%div#e_country
+  = label :event, :country, 'Country'
+  = country_select :event, 'country', {selected: "US"}, {style: 'width: 150px'}
+
+%div#e_description
+  = label :event, :description, 'Description'
+  = text_area :event, 'description', :cols =>'40', :rows => '10'
+
+%div#e_how_to_find_us
+  = label :event, :how_to_find_us, 'How to find us'
+  = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '8'

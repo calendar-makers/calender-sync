@@ -1,37 +1,10 @@
-%div#e_name
-  = label :event, :name, 'Event Name'
-  = text_field :event, 'name', { id: 'edit_name', class: 'edit_text_field' }
+-# edit.html.haml using partial
 
-%div#e_start_date
-  = label :event, :start, 'Start Time'
-  = datetime_select :event, :start
+%h1 Edit Event
+%h3= @message
 
-%div= label :event, :end, 'End Time'
-%div= datetime_select :event, :end
+= form_tag event_path(@event), :method => :put do
+  = render :partial => 'event_form'
+  = submit_tag 'Update Event Info'
 
-%div= label :event, :organization, 'Organization Name'
-%div= text_field :event, :organization, value: 'Nature in the City'
-
-%div= label :event, :venue_name, "Venue Name"
-%div= text_field :event, 'venue_name'
-
-%div= label :event, :address_1, 'Address'
-%div= text_field :event, 'address_1'
-
-%div= label :event, :city, 'City'
-%div= text_field :event, 'city'
-
-%div= label :event, :zip, 'Zip'
-%div= text_field :event, 'zip', size: '6'
-
-%div= label :event, :state, 'State'
-%div= select :event, 'state', options_for_select(us_states, 'CA')
-
-%div= label :event, :country, 'Country'
-%div= country_select :event, 'country', {selected: "US"}, {style: 'width: 150px'}
-
-%div= label :event, :description, 'Description'
-%div= text_area :event, 'description', :cols =>'40', :rows => '10'
-
-%div= label :event, :how_to_find_us, 'How to find us'
-%div= text_area :event, 'how_to_find_us', :cols =>'40', :rows => '8'
+= render :partial => 'image_form'
