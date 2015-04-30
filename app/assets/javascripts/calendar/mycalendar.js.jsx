@@ -13,36 +13,9 @@ $(document).ready(function() {
     eventColor: '#A6C55F',
 
     eventClick: function(calEvent, jsEvent, view) {
-      var startTime = calEvent.start.format('MMMM Do YYYY, h:mm a');
-      var endTime;
-      var eventEnd = calEvent.end;
-      if (eventEnd == null) {
-        endTime = null;
-      } else if (eventEnd.diff(calEvent.start, 'hours') >= 24) {
-        endTime = calEvent.end.format('MMMM Do YYYY, h:mm a');
-      } else {
-        endTime = calEvent.end.format('h:mm a');
-      }
-
-      var timePeriod;
-      if (endTime == null) {
-        timePeriod = startTime;
-      } else {
-        timePeriod = startTime + ' to ' + endTime;
-      }
-
-      if (calEvent.description == null) {
-        calEvent.description = '';
-      }
-
-      React.render(
-        <div>
-          <Event title={calEvent.title} timePeriod={timePeriod} location={calEvent.location} description={calEvent.description}/>
-          <AdminButtons calEvent={calEvent}/>
-        </div>,
-        document.getElementById('panel')
-      );
-
+      jsEvent.stopPropagation();
+      jsEvent.preventDefault();
+      $('#panel').load(calEvent.url);
     },
 
     header: {
