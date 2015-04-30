@@ -5,12 +5,6 @@
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'fullcalendar'
     = javascript_include_tag 'application'
-    :javascript
-      $(document).ready(function() {
-       // $('#new_event').on('click', $('#panel').html("#{j render :partial => 'create_edit_panel'}") );
-        $('body').on('click', '#edit_event', $('#panel').html("#{j render :partial => 'create_edit_panel'}") );
-        //$('body').on('click', '#delete_event', function(){ $('#panel').html("#{j render :partial => 'default_panel'}") } );
-      });
     = csrf_meta_tags
     = raw @head1
   %body
