@@ -66,13 +66,8 @@ var Event = React.createClass({
 
 var AdminButtons = React.createClass({
   handleDelete: function(e) {
-<<<<<<< HEAD
-    e.preventDefault();
-    e.stopPropagation();
-=======
     e.stopPropagation();
     e.preventDefault();
->>>>>>> e03d79783ab4b82067ce356a1c972ab695b08d12
     $.ajax({
       url: '/events/' + this.props.calEvent.id,
       type: 'DELETE',
@@ -94,7 +89,7 @@ var AdminButtons = React.createClass({
       <div>
         <i>these buttons will only be visible to admin</i>
         <div>
-          <button id='edit_event' className='button' style={{float:'left'}} value='edit'/>
+          <button onClick='alert "Hi"' id='edit_event' className='button' style={{float:'left'}} value='Edit'/>
           <form onSubmit={this.handleDelete}>
             <input id='delete_event' className='button' style={{float: 'right'}} type='submit' value='Delete'/>
           </form>
