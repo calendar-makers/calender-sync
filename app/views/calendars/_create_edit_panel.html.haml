@@ -1,8 +1,10 @@
-%div= label :event, :name, 'Event Name'
-%div= text_field :event, 'name'
+%div#e_name
+  = label :event, :name, 'Event Name'
+  = text_field :event, 'name', { id: 'edit_name', class: 'edit_text_field' }
 
-%div= label :event, :start, 'Start Time'
-%div= datetime_select :event, :start
+%div#e_start_date
+  = label :event, :start, 'Start Time'
+  = datetime_select :event, :start
 
 %div= label :event, :end, 'End Time'
 %div= datetime_select :event, :end
