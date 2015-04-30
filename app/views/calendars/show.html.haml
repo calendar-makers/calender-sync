@@ -16,6 +16,10 @@
     = link_to "Create new account", new_account_path, :method => :get
   </br>
 
+  :javascript
+    $(document).ready(function() {
+      $(document).on('click', '#edit_event', function(){ $('#panel').html('#{escape_javascript(render :partial=>'edit_panel')}') } );
+    });
   %h1 Events Calendar
   = javascript_include_tag 'calendar/application'
   </br>
