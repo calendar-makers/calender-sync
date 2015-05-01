@@ -82,4 +82,13 @@ class CalendarsController < ApplicationController
     end
     info.join(', ')
   end
+
+  def render_partial
+    render :json => {
+      :html => render_to_string({
+        :partial => "mypartial",
+        :locals => {:v => v}
+      })
+    }
+  end
 end

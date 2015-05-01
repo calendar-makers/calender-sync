@@ -90,8 +90,8 @@
 - if user_signed_in?
   %div
     %div{:style=>"float:left;"}
-      <input type="button" id="edit_event" value="Edit" class="button"/>
+      %input{type: 'button', id: 'edit_event', value: 'Edit', class: 'button'}
     %div{:style=>"float:right;"}
-      <input type="button" id="delete_event" value="Delete" class="button"/>
+      %input{type: 'button', id: 'delete_event', value: 'Delete', class: 'button'}
       =# button_to 'Delete', event_path(@event), :class => 'button', :method => :delete, :confirm => 'Are you sure?'
     %div{:style=>"clear:both;"}

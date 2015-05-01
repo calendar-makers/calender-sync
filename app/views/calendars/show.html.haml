@@ -1,7 +1,7 @@
 = raw @header
 %hr
 
-%main{:style => "width:75%; margin-left:12.5%;"}
+%main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
   - if user_signed_in?
     = link_to "Create new event", new_event_path
     </br>
@@ -18,9 +18,36 @@
 
   :javascript
     $(document).ready(function() {
-      $(document).on('click', '#edit_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'edit_panel')}') } );
+      $(document).on('click', '#new_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'new_panel')}') } );
+      $(document).on('submit', '#create_event', function(e){ 
+        e.stopPropagation(); 
+        e.preventDefault(); 
+        //$('#calendar').fullCalendar('addEventSource', json});
+        $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
+      });
+      //$(document).on('click', '#edit_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'edit_panel')}') } );
+      $(document).on('submit', '#update_event', function(e){ 
+        e.stopPropagation(); 
+        e.preventDefault(); 
+        //var event = $('#calendar').fullCalendar('clientEvents', e.data.id);
+        //event.title = e.data.name; event.start = ....etc.etc.
+        //$('#calendar').fullCalendar('updateEvent', event);
+        $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
+      });
+      $(document).on('click', '#delete_event', function(e){ 
+        e.stopPropagation(); 
+        e.preventDefault(); 
+        //$('#calendar').fullCalendar('removeEvents', e.data.id);
+        $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
+      });
     });
-  %h1 Events Calendar
+
+  %div
+    %div{:style=>"float:left;"}
+      %h1 Events Calendar
+    %div{:style=>"float:right;"}
+      %input{type: 'button', id: 'new_event', value: '+', class: 'button'}
+    %div{:style=>"clear:both;"}
   = javascript_include_tag 'calendar/application'
   </br>
 
