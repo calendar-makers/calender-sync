@@ -19,24 +19,21 @@
   %div{:style=>"clear:both;"}
 
 #location
-  .left
-    %p Location
-  .right
-    %p
-      = @event.location
+  %p{style: 'font-weight:600;'} Location
+  %p
+    = @event.location
+  <br/>
+  %p
+    <i>map coming soon!</i>
     <br/>
-    %p
-      <i>map coming soon!</i>
-  %div{:style=>"clear:both;"}
-<br/>
 
 #description
+  %p{style: 'font-weight:600;'} About
   %p 
     != @event.description
-<br/>
 
 #find_us
-  %p How to find us: 
+  %p{style: 'font-weight:600;'} How to find us: 
   %p 
     != @event.how_to_find_us
 <br/>
@@ -54,23 +51,23 @@
           %td= guest.first_name
   <br/>
   %p RSVP Now!
-  = form_tag guests_path, id: 'rsvp' do
+  = form_tag guests_path do
     = hidden_field_tag :event_id, @event.id
 
-    %div= label :guest, :first_name, 'First Name'
-    #first_name.edit_text_field= text_field :guest, :first_name
+    = label :guest, :first_name, 'First Name'
+    = text_field :guest, :first_name, class: 'edit_text_field'
 
-    %div= label :guest, :last_name, 'Last Name'
-    #last_name.edit_text_field= text_field :guest, :last_name
+    = label :guest, :last_name, 'Last Name'
+    = text_field :guest, :last_name, class: 'edit_text_field'
 
-    %div= label :guest, :phone, 'Phone'
-    #phone.edit_text_field= text_field :guest, :phone
+    = label :guest, :phone, 'Phone'
+    = text_field :guest, :phone, class: 'edit_text_field'
 
-    %div= label :guest, :email, 'Email'
-    #email.edit_text_field= text_field :guest, :email
+    = label :guest, :email, 'Email'
+    = text_field :guest, :email, class: 'edit_text_field'
 
-    %div= label :guest, :address, 'Address'
-    #address.edit_text_field= text_area :guest, :address, :cols =>'20', :rows => '10'
+    = label :guest, :address, 'Address'
+    = text_area :guest, :address, :cols =>'20', :rows => '10', class: 'edit_text_field'
 
     %p Do you want to remain anonymous?
     %div
@@ -82,12 +79,13 @@
         = label :guest, :is_anon, 'No'
         = radio_button :guest, :is_anon, false
       %div{:style=>"clear:both;"}
-
-    %p= submit_tag "Submit", :class=>'button'
-<br/>
-<br/>
+    <br/>
+    %p= submit_tag "Submit", :class=>'button', style: 'float:right;'
+    <br/>
 
 - if user_signed_in?
+  <br/>
+  <br/>
   %div
     %div{:style=>"float:left;"}
       %input{type: 'button', id: 'edit_event', value: 'Edit', class: 'button'}

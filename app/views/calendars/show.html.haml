@@ -3,10 +3,6 @@
 
 %main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
   - if user_signed_in?
-    = link_to "Create new event", new_event_path
-    </br>
-    = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
-    </br>
     = link_to "Sign Out", destroy_user_session_path, :method => :get
   - else
     = link_to "Login", new_user_session_path, :method => :get
@@ -19,9 +15,9 @@
   :javascript
     $(document).ready(function() {
       $(document).on('click', '#new_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'new_panel')}') } );
-      $(document).on('submit', '#create_event', function(e){ 
-        e.stopPropagation(); 
-        e.preventDefault(); 
+      $(document).on('ajax:success', '#create_event', function(e){ 
+        // e.stopPropagation(); 
+        // e.preventDefault(); 
         //$('#calendar').fullCalendar('addEventSource', json});
         $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
       });
@@ -45,8 +41,11 @@
   %div
     %div{:style=>"float:left;"}
       %h1 Events Calendar
-    %div{:style=>"float:right;"}
-      %input{type: 'button', id: 'new_event', value: '+', class: 'button'}
+    %div{:style=>"float:right; width:9em; padding:0 0.3em 0 0;"}
+      - if user_signed_in?
+        %input{type: 'button', id: 'new_event', value: '+', class: 'button', style: 'float:right;'}
+        %div{style: 'position:relative;width:2em;'} 
+        = button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: 'button', style: 'float:left;'
     %div{:style=>"clear:both;"}
   = javascript_include_tag 'calendar/application'
   </br>
