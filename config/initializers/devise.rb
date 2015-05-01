@@ -179,7 +179,7 @@ Devise.setup do |config|
   config.unlock_in = 1.minutes
 
   # Warn on the last attempt before the account is locked.
-  # config.last_attempt_warning = true
+  config.last_attempt_warning = true
 
   # ==> Configuration for :recoverable
   #
