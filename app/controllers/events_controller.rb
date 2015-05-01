@@ -120,8 +120,9 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find params[:id]
     name = @event.name
+    @id = @event.id
     perform_destroy_transaction
-    @msg = name + " event succesfully deleted!"
+    @msg = name + " event successfully deleted!"
     respond_to do |format|
       format.js #runs app/views/events/destroy.js.haml
     end
