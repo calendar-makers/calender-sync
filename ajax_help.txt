@@ -36,19 +36,19 @@ click edit button:
     form_tag show_edit_calendar_path (post)
   controllers/calendars_controller.rb
     def show_edit
-  views/calendar/show_edit.js.haml
+  views/calendars/show_edit.js.haml
     render partial w/
       @event
-  views/calendar/_edit_panel.html.haml
+  views/calendars/_edit_panel.html.haml
 click submit update event:
-  views/calendar/_edit_panel.html.haml
+  views/calendars/_edit_panel.html.haml
     form_tag event_path(@event) (post)
   controllers/events_controller.rb
     def update
   views/events/update.js.haml
     render partial w/
       @msg
-  views/calendar/_default_panel.html.haml
+  views/calendars/_default_panel.html.haml
 
 DELETE:
 click delete button:
@@ -59,4 +59,4 @@ click delete button:
   views/events/destroy.js.haml
     render partial w/
       @msg
-  views/calendar/_default_panel.html.haml
+  views/calendars/_default_panel.html.haml
