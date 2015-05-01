@@ -52,6 +52,7 @@
   <br/>
   %p RSVP Now!
   = form_tag create_guest_calendar_path, id: 'rsvp_guest', remote: true, format: :js do
+    -# this path does an ajax post to the calendar controller action create_guest
     = hidden_field_tag :event_id, @event.id
 
     = text_field :guest, :first_name, class: 'edit_text_field', placeholder: 'First Name', label: 'first_name'
@@ -83,10 +84,12 @@
   %div
     %div{:style=>"float:left;"}
       = form_tag show_edit_calendar_path, id: 'edit_event', format: :js, remote: true do
+        -# this path does an ajax post to the calendar controller action show_edit
         = hidden_field_tag :event_id, @event.id
         %p= submit_tag 'Edit', class: 'button'
     %div{:style=>"float:right;"}
       =form_tag event_path(@event), id: 'delete_event', format: :js, remote: true, method: 'delete' do
+        -# this path does an ajax delete to the events controller action destroy
         = hidden_field_tag :event_id, @event.id
         %p= submit_tag 'Delete', class: 'button', confirm: 'Are you sure?'
     %div{:style=>"clear:both;"}
