@@ -74,7 +74,10 @@ class EventsController < ApplicationController
     result = Event.check_if_fields_valid(event_params)
     return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
-    redirect_to calendar_path
+    respond_to do |format|
+      format.html
+      format.json { render :json => @event }
+    end
   end
 
   def perform_create_transaction
