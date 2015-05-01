@@ -2,9 +2,9 @@
 %html
   %head
     %title Calendar
-    = stylesheet_link_tag 'application'
-    = stylesheet_link_tag 'fullcalendar'
-    = javascript_include_tag 'application'
+    = stylesheet_link_tag 'application', 'fullcalendar'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'calendar/application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = raw @head1
   %body

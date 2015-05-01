@@ -82,4 +82,50 @@ class CalendarsController < ApplicationController
     end
     info.join(', ')
   end
+
+  def show_event
+    @event = Event.find params[:id]
+
+    startTime = @event.start.strftime('%b %e, %Y at %l:%M %P')
+    endTime = ""
+    if @event.end
+      if (@event.end - @event.start) >= 1
+        endTime = @event.end.strftime('%b %e, %Y at %l:%M %P')
+      else
+        endTime = @event.end.strftime('%l:%M %P')
+      end
+    end
+    @timePeriod = startTime
+    @timePeriod = startTime + ' to ' + endTime unless endTime == ""
+
+    new_guests = @event.merge_meetup_rsvps
+    @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_guest
+    @event = Event.find(params[:event_id])
+    if !Guest.fields_valid?(guest_params)
+      return redirect_to event_path(@event.id), notice: 'Please fill out all fields to RSVP.'
+    end
+    handle_guest_registration
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def handle_guest_registration
+    @guest = Guest.find_by_email(guest_params[:email]) || Guest.create!(guest_params)
+    @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
+    @guest.save
+  end
+
+  private
+
+  def guest_params
+    params.require(:guest).permit(:first_name, :last_name, :phone, :email, :address, :is_anon)
+  end
 end

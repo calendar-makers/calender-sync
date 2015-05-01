@@ -74,7 +74,7 @@
       %div{:style=>"clear:both;"}
     %div{style: 'float:left; position:relative; left:50%;'}
       %div{style: 'float:left; position:relative; left:-50%;'}
-        %p= submit_tag "Submit", :class=>'button', remote: 'true'
+        %p= submit_tag "Submit", :class=>'button'
     <br/>
 
 - if user_signed_in?
@@ -84,6 +84,6 @@
     %div{:style=>"float:left;"}
       %input{type: 'button', id: 'edit_event', value: 'Edit', class: 'button', remote: 'true'}
     %div{:style=>"float:right;"}
-      %input{type: 'button', id: 'delete_event', value: 'Delete', class: 'button', remote: 'true'}
+      %input{type: 'button', id: 'delete_event', value: 'Delete', class: 'button', remote: 'true', confirm: 'Are you sure?'}
       =# button_to 'Delete', event_path(@event), :class => 'button', :method => :delete, :confirm => 'Are you sure?'
     %div{:style=>"clear:both;"}
