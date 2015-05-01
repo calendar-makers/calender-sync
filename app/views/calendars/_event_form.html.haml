@@ -1,14 +1,14 @@
 %div#e_name
-  = label :event, :name, 'Event Name'
-  = text_field :event, 'name'
+  = label :event, :name, 'Name'
+  = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
 %div#e_start_time
   = label :event, :start, 'Start Time'
-  = datetime_select :event, :start
+  = datetime_select :event, :start, class: 'edit_text_field'
 
 %div#e_end_time
   = label :event, :end, 'End Time'
-  = datetime_select :event, :end
+  = datetime_select :event, :end, class: 'edit_text_field'
 
 %div#e_organization
   = label :event, :organization, 'Organization Name'
