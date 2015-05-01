@@ -71,10 +71,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    result = Event.check_if_fields_valid(event_params)
-    return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
+    #result = Event.check_if_fields_valid(event_params)
+    #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
-    @msg = "Successfully added new event!"
+    @msg = "Successfully added #{@event.name}!"
     respond_to do |format|
       format.js #runs app/views/events/create.js.haml
     end
