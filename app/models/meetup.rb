@@ -59,6 +59,9 @@ class Meetup
     #options[:body].merge!(announce:'true')
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", options)
+    puts "#######################"
+    puts data.inspect
+    puts "#######################"
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 201)
   end
 

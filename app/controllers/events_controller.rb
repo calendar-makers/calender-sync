@@ -75,9 +75,11 @@ class EventsController < ApplicationController
     return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
     @msg = "Successfully added new event!"
-    respond_to do |format|
-      format.js
-    end
+    
+    #respond_to do |format|
+    #  format.js
+    #end
+
   end
 
   def perform_create_transaction

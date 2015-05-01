@@ -1,5 +1,23 @@
 /** @jsx React.DOM */
 $(document).ready(function() {
+
+  $(document).on('submit', '#create_event', function(e, data){
+    //alert("form clicked");
+    //console.log(e);
+    //console.log(data);
+    //console.log(this);
+    var data = $(this).serialize();
+    //console.log($(this).serialize());
+    e.stopPropagation();
+    e.preventDefault();
+
+    $.post('/events', data, function(){
+      console.log("completed");
+      $('#calendar').fullCalendar('refetchEvents');
+    })
+  });
+
+
   $('#calendar').fullCalendar({
 
     events: function(start, end, timezone, callback){
@@ -34,7 +52,11 @@ $(document).ready(function() {
     }
 
   });
-
+/*
+  $(document).on('click','.button',function(){
+    $('#calendar').fullCalendar('refetchEvents');
+  });
+*/
   $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header h2').outerHeight(true));
 
   var timer,
