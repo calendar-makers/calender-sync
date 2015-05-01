@@ -86,7 +86,6 @@ GEM
     concord (0.1.5)
       adamantium (~> 0.2.0)
       equalizer (~> 0.0.9)
-    connection_pool (2.2.0)
     countries (0.11.3)
       currencies (~> 0.4.2)
       i18n_data (~> 0.6.0)
@@ -243,13 +242,6 @@ GEM
     rainbow (2.0.0)
     rake (10.4.2)
     rdoc (4.2.0)
-    react-rails (1.0.0)
-      coffee-script-source (~> 1.8)
-      connection_pool
-      execjs
-      rails (>= 3.1)
-      react-source (~> 0.13)
-    react-source (0.13.1)
     reek (2.0.2)
       parser (~> 2.2)
       rainbow (~> 2.0)
@@ -377,7 +369,6 @@ DEPENDENCIES
   rails-html-sanitizer
   rails_12factor
   rake
-  react-rails (~> 1.0)
   reek
   rspec-rails (~> 3.2.1)
   rubocop
