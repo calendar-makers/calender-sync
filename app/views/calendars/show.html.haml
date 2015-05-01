@@ -11,7 +11,9 @@
 
 - if user_signed_in? and current_user.root?
   </br>
-  = link_to "Create new account", new_account_path, :method => :get
+  = link_to "Create new account", new_account_path, :method => :get 
+  </br>
+  = link_to "Delete existing accounts", edit_account_path("root"), :method => :get
 </br>
 
 %h1 Events Calendar

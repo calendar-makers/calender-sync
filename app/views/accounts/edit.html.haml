@@ -1,0 +1,13 @@
+%table#users
+  %thead
+    %tr
+      %th User
+      %th Destroy?
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= link_to "Delete Account", "/accounts/#{user.id}", :method => :delete, data: {:confirm => "Are you sure? Accounts are deleted permanently"}
+
+</br>
+= link_to 'Back to calendar', calendar_path

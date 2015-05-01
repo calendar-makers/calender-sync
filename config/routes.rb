@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
     put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'            
-end
+  end
   resource :calendar, :only => [:show]
   resources :events do
     collection do

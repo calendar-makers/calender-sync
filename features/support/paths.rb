@@ -19,6 +19,7 @@ module NavigationHelpers
     when /^third_party$/ then third_party_events_path
     when /^Sign In$/ then new_user_session_path
     when /^Account Creation$/ then new_account_path
+    when /^Account Deletion$/ then '/accounts/root/edit'
 
     when /^RSVP$/ then pending # Vincent and Mike need to replace 'pending'
 

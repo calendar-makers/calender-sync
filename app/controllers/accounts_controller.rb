@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_root, only: [:new, :create]
+  before_action :is_root
 
   def create
     @user = User.new email: params[:user][:email], password: params[:user][:password]
@@ -14,9 +14,18 @@ class AccountsController < ApplicationController
   end
 
   def edit
+    @users = User.where(level: 1)
+    if @users.length == 0
+      flash.now[:notice] = "No existing accounts to destroy"
+    end
   end
 
-  def update
+  def destroy
+    user = User.find_by_id(params[:id])
+    email = user.email
+    user.destroy!
+    flash[:notice] = "#{email} deleted"
+    redirect_to calendar_path
   end
 
   private
