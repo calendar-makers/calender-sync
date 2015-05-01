@@ -4,18 +4,27 @@ $(document).ready(function() {
 
     events: function(start, end, timezone, callback){
       $.getJSON('events.json', function(data){
-        console.log("I'm in the events function");
-        console.log(data);
         callback(data);
       });
     },
 
     eventColor: '#A6C55F',
 
+    eventLimit: 'true',
+
     eventClick: function(calEvent, jsEvent, view) {
       jsEvent.stopPropagation();
       jsEvent.preventDefault();
-      $('#panel').load(calEvent.url);
+      $.ajax({
+        type: 'GET',
+        url: 'calendar/show_event',
+        data: {
+          id: calEvent.id,
+          //could pass all the other fields here to avoid a database lookup...
+        },
+        dataType: 'script'
+      });
+      return false;
     },
 
     header: {
@@ -24,11 +33,6 @@ $(document).ready(function() {
       right:  'prev,next'
     }
 
-  });
-
-  $.getJSON('events.json', function(data){
-    console.log("I'm in the json call");
-    console.log(data);
   });
 
   $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header h2').outerHeight(true));

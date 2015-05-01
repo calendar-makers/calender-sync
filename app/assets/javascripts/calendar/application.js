@@ -12,5 +12,4 @@
 //
 //= require_directory ../
 //= require moment
-//= require react
 //= require_tree .

@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  resource :calendar, :only => [:show]
+  resource :calendar, :only => [:show] do
+    collection do
+      get 'show_event'
+      post 'create_guest'
+      post 'show_edit'
+      post 'show_new'
+    end
+  end
   resources :events do
     collection do
       get 'third_party'
@@ -8,7 +15,7 @@ Rails.application.routes.draw do
       post 'pull_third_party'
     end
   end
-  resources :guests
+  resource :guests, :only => [:create]
   resources :accounts
   get '/', to: redirect('/calendar')
 end

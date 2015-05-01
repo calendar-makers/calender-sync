@@ -22,8 +22,7 @@ class Event < ActiveRecord::Base
       :start => self.start.iso8601,
       :end => (self.end ? self.end.iso8601 : nil),
       :location => self.location,
-      :description => self.description,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      :description => self.description
     }
   end
 
