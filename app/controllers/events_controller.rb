@@ -100,11 +100,10 @@ class EventsController < ApplicationController
   def update
     @event = Event.find params[:id]
     result = Event.check_if_fields_valid(event_params)
-    return redirect_to edit_event_path(@event), notice: result[:message] if not result[:value]
+    #return redirect_to edit_event_path(@event), notice: result[:message] if not result[:value]
     perform_update_transaction
-    @msg = @event.name + "successfully updated!"
+    @msg = @event.name + " successfully updated!"
     respond_to do |format|
-      format.html { redirect_to calendar_path }
       format.js  #runs app/views/events/update.js.haml
     end
   end
@@ -120,8 +119,9 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find params[:id]
+    name = @event.name
     perform_destroy_transaction
-    @msg = "Event succesfully deleted!"
+    @msg = name + " event succesfully deleted!"
     respond_to do |format|
       format.js #runs app/views/events/destroy.js.haml
     end

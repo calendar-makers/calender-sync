@@ -1,4 +1,4 @@
-= form_tag event_path(@event), id: 'update_event', format: :js, method: 'put',  remote: true do
+= form_tag event_path(@event), id: 'update_event', format: :js,  remote: true do
   -# this path does an ajax get to the event controller action update
   = render partial: 'event_form', locals: {event: @event}
   = submit_tag "Save Event", class:'button'

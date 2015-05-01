@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post 'pull_third_party'
     end
   end
+  post '/events/:id', to: 'events#update'
   resource :guests, :only => [:create]
   resources :accounts
   get '/', to: redirect('/calendar')
