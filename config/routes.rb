@@ -5,9 +5,7 @@ Rails.application.routes.draw do
       get 'show_event'
       post 'create_guest'
       post 'show_edit'
-      post 'update_event'
-      post 'show_create'
-      post 'create_event'
+      post 'show_new'
     end
   end
   resources :events do

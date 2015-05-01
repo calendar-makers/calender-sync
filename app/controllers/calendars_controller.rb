@@ -100,7 +100,20 @@ class CalendarsController < ApplicationController
 
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
-    
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show_edit
+    @event = Event.find params[:event_id]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def show_new
     respond_to do |format|
       format.js
     end

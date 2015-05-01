@@ -18,7 +18,10 @@ $(document).ready(function() {
       $.ajax({
         type: 'GET',
         url: 'calendar/show_event',
-        data: {id: calEvent.id},
+        data: {
+          id: calEvent.id,
+          //could pass all the other fields here to avoid a database lookup...
+        },
         dataType: 'script'
       });
       return false;
