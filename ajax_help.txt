@@ -1,0 +1,62 @@
+SHOW: 
+in calendar, click to show event:
+  assets/javascripts/calendar/mycalendar.js
+    eventClick......$.ajax.....'calendar/show_event'
+  controllers/calendars_controller.rb
+    def show_event
+  views/calendars/show_event.js.haml
+    render partial w/
+      @event
+      @timePeriod
+      @non_anon_guests_by_first_name
+  views/calendars/_show_panel.html.haml
+
+CREATE:
+click show new form:
+  views/show.html.haml
+    form_tag show_new_calendar_path (ajax post)
+  controllers/calendars_controller.rb
+    def show_new
+  views/calendars/show_new.js.haml
+    render partial
+  views/calendars/_new_panel.html.haml
+click submit create new event:
+  views/calendars/_new_panel.html.haml
+    form_tag events_path (post)
+  controllers/events_controller.rb
+    def create
+  views/events/create.js.haml
+    render partial w/
+      @msg
+  views/calendars/_default_panel.html.haml
+
+EDIT: 
+click edit button:
+  views/calendars/_show_panel.html.haml
+    form_tag show_edit_calendar_path (post)
+  controllers/calendars_controller.rb
+    def show_edit
+  views/calendar/show_edit.js.haml
+    render partial w/
+      @event
+  views/calendar/_edit_panel.html.haml
+click submit update event:
+  views/calendar/_edit_panel.html.haml
+    form_tag event_path(@event) (post)
+  controllers/events_controller.rb
+    def update
+  views/events/update.js.haml
+    render partial w/
+      @msg
+  views/calendar/_default_panel.html.haml
+
+DELETE:
+click delete button:
+  views/calendars/_show_panel.html.haml
+    form_tag event_path(@event) (delete)
+  controllers/events_controller.rb
+    def destroy
+  views/events/destroy.js.haml
+    render partial w/
+      @msg
+  views/calendar/_default_panel.html.haml

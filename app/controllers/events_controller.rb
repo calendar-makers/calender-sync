@@ -123,7 +123,7 @@ class EventsController < ApplicationController
     perform_destroy_transaction
     @msg = "Event succesfully deleted!"
     respond_to do |format|
-      format.js #runs app/views/calendar/destroy.js.haml
+      format.js #runs app/views/events/destroy.js.haml
     end
   end
 
