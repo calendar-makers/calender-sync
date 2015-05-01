@@ -61,9 +61,11 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = {:host => 'cal-sync.herokuapp.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -84,6 +86,4 @@ Rails.application.configure do
   config.to_prepare {Devise::SessionsController.force_ssl}
   config.to_prepare {Devise::RegistrationsController.force_ssl}
   config.to_prepare {Devise::PasswordsController.force_ssl}
-
-  config.action_mailer.default_url_options = { :host => 'cal-sync.herokuapp.com' }
 end
