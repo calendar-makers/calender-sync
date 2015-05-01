@@ -41,7 +41,8 @@
         $('#panel').html('#{j(render :partial => 'default_panel')}');
       });
     });
-
+  :javascript
+    var refresh = #{@refresh};
   %div
     %div{:style=>"float:left;"}
       %h1 Events Calendar

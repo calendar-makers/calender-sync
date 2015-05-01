@@ -26,6 +26,12 @@ $(document).ready(function() {
 
   });
 
+  $('#create_event').submit(function(){
+    console.log("I'm here I'm here I'm here!");
+    //$('#calendar').fullCalendar('refetchEvents');
+    //$('#refresh active').attr("id", "refresh");
+  });
+
   $.getJSON('events.json', function(data){
     console.log("I'm in the json call");
     console.log(data);

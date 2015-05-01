@@ -50,7 +50,11 @@ class Meetup
     data = HTTParty.delete("#{BASE_URL}/2/event/#{id}?#{Meetup.options_string(default_auth)}")
     Meetup.process_result(data, nil, 200)
   end
-
+  def printer tag = "N/A", arg1 
+    puts "********** "+tag+" ***********"
+    puts "=> " + arg1.inspect
+    puts "********** END ****************"
+  end
   # ASK ABOUT ANNOUNCING EVENTS... If necessary it can be done here automatically...or with edit_event
   def push_event(event)
     options = {}
@@ -59,6 +63,7 @@ class Meetup
     #options[:body].merge!(announce:'true')
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", options)
+    printer "push_event data", data
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 201)
   end
 
@@ -85,8 +90,17 @@ class Meetup
 
   def self.process_result(result, handler, success_code)
     success = result.code == success_code
+    puts "######################"
+    puts "process_result function"
+    puts "=>" + success.inspect
+    puts "############End#######"
     return success if handler.nil?
     if success
+      puts "#########inside#########"
+      puts "process_result function"
+      puts "=>" + parse_data(result,handler).inspect
+      puts "############End#######"
+      #printer "process_result parse handler", parse_data(result,handler)
       parse_data(result, handler)
     end
   end

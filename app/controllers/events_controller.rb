@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
-
+  def printer tag = "N/A", arg1 
+    puts "********** "+tag+" ***********"
+    puts "=> " + arg1.inspect
+    puts "********** END ****************"
+  end
   def index
     @message = flash[:notice]
     start_date = params[:start]
@@ -31,6 +35,8 @@ class EventsController < ApplicationController
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
+    @refresh = 1
+
 
   end
 
@@ -67,13 +73,18 @@ class EventsController < ApplicationController
   end
 
   def new
+    @refresh = 0
     form_validation_msg
   end
 
   def create
+    @refresh = 0
+    tag = "create"
+    printer tag, "start"
     result = Event.check_if_fields_valid(event_params)
     return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
+    printer tag, "after preform create transaction"
     respond_to do |format|
       format.html { render :nothing => true }
       format.json { render :nothing => true }
@@ -81,13 +92,26 @@ class EventsController < ApplicationController
   end
 
   def perform_create_transaction
+    tag = "perform_create_transaction"
+    printer tag, "start"
     @event = Event.new(event_params)
     remote_event = Meetup.new.push_event(@event)
+    printer tag, "after Meetup push"
+    printer tag+" remote_event", remote_event 
     if remote_event
+      printer tag, "if"
       @event.update_meetup_fields(remote_event)
       @event.save!
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
+      #$('#refresh').attr("id", "refresh active")
+      #@refresh = 1
+      #render js: "console.log('Im here Im here Im here!');"
+      #respond_to do |format|
+      #  format.js
+      #end
+
     else
+      printer tag, "else"
       flash[:notice] = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
     end
   end

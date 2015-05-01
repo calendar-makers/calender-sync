@@ -49,8 +49,8 @@ class CalendarsController < ApplicationController
 
   def show
     begin
-      #@page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
-      preprocess_for_bad_request
+      @page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
+      #preprocess_for_bad_request
     rescue Exception
       preprocess_for_bad_request
     end
