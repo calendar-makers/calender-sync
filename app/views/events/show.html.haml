@@ -33,7 +33,7 @@
     != @event.description
 
 #find_us
-  %p{style: 'font-weight:600;'} How to find us: 
+  %p{style: 'font-weight:600;'} How to find us
   %p 
     != @event.how_to_find_us
 <br/>
@@ -54,20 +54,11 @@
   = form_tag guests_path do
     = hidden_field_tag :event_id, @event.id
 
-    = label :guest, :first_name, 'First Name'
-    = text_field :guest, :first_name, class: 'edit_text_field'
-
-    = label :guest, :last_name, 'Last Name'
-    = text_field :guest, :last_name, class: 'edit_text_field'
-
-    = label :guest, :phone, 'Phone'
-    = text_field :guest, :phone, class: 'edit_text_field'
-
-    = label :guest, :email, 'Email'
-    = text_field :guest, :email, class: 'edit_text_field'
-
-    = label :guest, :address, 'Address'
-    = text_area :guest, :address, :cols =>'20', :rows => '10', class: 'edit_text_field'
+    = text_field :guest, :first_name, class: 'edit_text_field', placeholder: 'First Name', label: 'first_name'
+    = text_field :guest, :last_name, class: 'edit_text_field', placeholder: 'Last Name', label: 'last_name'
+    = text_field :guest, :phone, class: 'edit_text_field', placeholder: 'Phone Number', label: 'phone'
+    = text_field :guest, :email, class: 'edit_text_field', placeholder: 'Email', label: 'email'
+    = text_area :guest, :address, :cols =>'20', :rows => '10', class: 'edit_text_field', placeholder: 'Address', label: 'address'
 
     %p Do you want to remain anonymous?
     %div
@@ -80,7 +71,7 @@
         = radio_button :guest, :is_anon, false
       %div{:style=>"clear:both;"}
     <br/>
-    %p= submit_tag "Submit", :class=>'button', style: 'float:right;'
+    %p= submit_tag "Submit", :class=>'button', style: 'float:right;', id: 'add_rsvp', remote: true
     <br/>
 
 - if user_signed_in?

@@ -36,6 +36,10 @@
         //$('#calendar').fullCalendar('removeEvents', e.data.id);
         $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
       });
+      $(document).on('submit', '#add_rsvp', function(e){
+        e.stopPropagation();
+        $('#panel').html('#{j(render :partial => 'default_panel')}');
+      });
     });
 
   %div
