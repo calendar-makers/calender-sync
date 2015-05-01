@@ -102,20 +102,20 @@ class CalendarsController < ApplicationController
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
 
     respond_to do |format|
-      format.js
+      format.js  #runs app/views/calendar/show_event.js.haml
     end
   end
 
   def show_edit
     @event = Event.find params[:event_id]
     respond_to do |format|
-      format.js
+      format.js #runs app/views/calendar/show_edit.js.haml
     end
   end
 
   def show_new
     respond_to do |format|
-      format.js
+      format.js #runs app/views/calendar/show_new.js.haml
     end
   end
 
@@ -126,7 +126,7 @@ class CalendarsController < ApplicationController
     end
     handle_guest_registration
     respond_to do |format|
-      format.js
+      format.js #runs app/views/calendar/create_guest.js.haml
     end
   end
 
