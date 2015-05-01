@@ -16,8 +16,8 @@
     $(document).ready(function() {
       $(document).on('click', '#new_event', function(){ $('#panel').html('#{escape_javascript(render :partial => 'new_panel')}') } );
       $(document).on('ajax:success', '#create_event', function(e){ 
-        e.stopPropagation(); 
-        e.preventDefault(); 
+        //e.stopPropagation();
+        //e.preventDefault();
         //$('#calendar').fullCalendar('addEventSource', json});
         $('#panel').html('#{escape_javascript(render :partial => 'default_panel')}');
       });

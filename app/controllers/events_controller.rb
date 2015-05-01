@@ -75,8 +75,8 @@ class EventsController < ApplicationController
     return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
     respond_to do |format|
-      format.html
-      format.json { render :json => @event }
+      format.html { render :nothing => true }
+      format.json { render :nothing => true }
     end
   end
 
