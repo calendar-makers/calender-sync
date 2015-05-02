@@ -5,7 +5,7 @@ describe AccountsController do
     @root = User.create(email: "root@root.com",
                         password: "password",
                         level: 0)
-    @admin = User.create(email: "admin@admin.com",
+    @admin = User.create(email: "example@example.com",
                          password: "password")
   end
   after(:each) do

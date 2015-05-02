@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-
   describe "Invalid field checking" do
     it "should return hash with :value => true if all keys are mapped to something" do
       event_hash = { name: 'coyote appreciation',
