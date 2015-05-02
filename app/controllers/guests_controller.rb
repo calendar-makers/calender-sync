@@ -14,6 +14,7 @@ class GuestsController < ActionController::Base
     else
       @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
       @guest.save
+      GuestMailer.rsvp_email(@guest, @event).deliver
       redirect_to event_path(@event.id), notice: "You successfully registered for this event!"
     end
   end
