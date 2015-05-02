@@ -29,12 +29,12 @@
 
 #description
   %p{style: 'font-weight:600;'} About
-  %p 
+  %p
     != @event.description
 
 #find_us
   %p{style: 'font-weight:600;'} How to find us
-  %p 
+  %p
     != @event.how_to_find_us
 <br/>
 
@@ -84,6 +84,5 @@
     %div{:style=>"float:left;"}
       %input{type: 'button', id: 'edit_event', value: 'Edit', class: 'button', remote: 'true'}
     %div{:style=>"float:right;"}
-      %input{type: 'button', id: 'delete_event', value: 'Delete', class: 'button', remote: 'true'}
-      =# button_to 'Delete', event_path(@event), :class => 'button', :method => :delete, :confirm => 'Are you sure?'
+      =  button_to 'Delete', event_path(@event), :class => 'button', :method => :delete, :confirm => 'Are you sure?'
     %div{:style=>"clear:both;"}

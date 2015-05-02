@@ -7,7 +7,7 @@ end
 When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
   @name = name
   sleep(2)
-  page.all('.fc-title')[0].click
+  page.all('.fc-title')[0]
 end
 
 # When(/^I click on "(.*)" in the calendar$/) do |name|

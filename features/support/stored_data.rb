@@ -743,6 +743,7 @@ end
 Before('@meetup_delete') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
 end
 

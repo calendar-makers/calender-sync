@@ -19,7 +19,6 @@ Then /I should see(?:| the) "(.*)" on the page$/ do |content|
 end
 
 And /^I fill in the "(.*)" field with "(.*)"$/ do |field, value|
-  byebug
   field = find_field(field)
   field.set value
 end

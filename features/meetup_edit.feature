@@ -16,9 +16,8 @@ Feature: Enforce event lists consistency by updating events locally and remotely
   @calendar_successful_edit
   Scenario: update initiated on Calendar
     Given I am on the "details" page for "Nature Walk"
-    And I click on the "Edit" link
-    And I should be on the "Edit" page for "Nature Walk"
-    And I fill in the "Event Name" field with "Festival"
+    And I click on the "Edit" button
+    And I fill in the "Title" field with "Festival"
     And I click on the "Update Event Info" button
     Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms
     And I should see the message "'Festival' was successfully updated."
@@ -26,9 +25,8 @@ Feature: Enforce event lists consistency by updating events locally and remotely
   @calendar_failed_edit
   Scenario: failed update initiated on Calendar
     Given I am on the "details" page for "Nature Walk"
-    And I click on the "Edit" link
-    And I should be on the "Edit" page for "Nature Walk"
-    And I fill in the "Event Name" field with "Festival"
+    And I click on the "Edit" button
+    And I fill in the "Title" field with "Festival"
     And I click on the "Update Event Info" button
     Then the event "Nature Walk" should be renamed to "Festival" on "neither" platforms
     And I should see the message "Could not update 'Nature Walk'."
