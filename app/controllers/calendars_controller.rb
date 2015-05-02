@@ -114,6 +114,7 @@ class CalendarsController < ApplicationController
   end
 
   def show_new
+    @event = Event.new
     respond_to do |format|
       format.js #runs app/views/calendar/show_new.js.haml
     end
