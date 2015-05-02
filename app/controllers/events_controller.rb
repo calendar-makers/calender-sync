@@ -15,23 +15,9 @@ class EventsController < ApplicationController
   def show
     @message = flash[:notice]
     @event = Event.find params[:id]
-
-    startTime = @event.start.strftime('%b %e, %Y at %l:%M %P')
-    endTime = ""
-    if @event.end
-      if (@event.end - @event.start) >= 1
-        endTime = @event.end.strftime('%b %e, %Y at %l:%M %P')
-      else
-        endTime = @event.end.strftime('%l:%M %P')
-      end
-    end
-    @timePeriod = startTime
-    @timePeriod = startTime + ' to ' + endTime unless endTime == ""
-
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
-
   end
 
   def display_synchronization_result(new_guests)
@@ -75,8 +61,11 @@ class EventsController < ApplicationController
     #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
     #@msg = "Successfully added #{@event.name}!"
+    respond_do
+  end
+
+  def respond_do
     respond_to do |format|
-      #format.js #runs app/views/events/create.js.haml
       format.html { redirect_to calendar_path }
       format.json { render :nothing => true }
     end
@@ -105,11 +94,7 @@ class EventsController < ApplicationController
     #return redirect_to edit_event_path(@event), notice: result[:message] if not result[:value]
     perform_update_transaction
     @msg = @event.name + " successfully updated!"
-    respond_to do |format|
-      #format.js  #runs app/views/events/update.js.haml
-      format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
-    end
+    respond_do
   end
 
   def perform_update_transaction
@@ -128,11 +113,7 @@ class EventsController < ApplicationController
     @id = @event.id
     perform_destroy_transaction
     @msg = name + " event successfully deleted!"
-    respond_to do |format|
-      #format.js #runs app/views/events/destroy.js.haml
-      format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
-    end
+    respond_do
   end
 
   def perform_destroy_transaction
