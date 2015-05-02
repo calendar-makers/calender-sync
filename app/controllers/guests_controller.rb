@@ -12,8 +12,14 @@ class GuestsController < ActionController::Base
 
   def handle_guest_registration
     @guest = Guest.find_by_email(guest_params[:email]) || Guest.create!(guest_params)
-    @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
-    @guest.save
+    if @guest.events.include?(@event)
+      redirect_to event_path(@event.id), notice: "#{@guest.email} is already registered for this event!"
+    else
+      @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
+      @guest.save
+      GuestMailer.rsvp_email(@guest, @event).deliver
+      redirect_to event_path(@event.id), notice: "You successfully registered for this event!"
+    end
   end
 
   private

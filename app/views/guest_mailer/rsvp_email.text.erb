@@ -1,0 +1,8 @@
+Hello <%= @guest.first_name%> <%= @guest.last_name%>,
+
+You have RSVPed for <%= @event.name%>. Thanks for joining!
+The event will be from <%= @event.start.strftime("%B %d, %Y at %l:%M%P")%> to <%= @event.end.strftime("%B %d, %Y at %l:%M%P")%>.
+It will be at <%= @event.venue_name%>, located at <%=@event.location.gsub("\n", ' ')%>.
+
+See you soon,
+Nature in the City
