@@ -76,7 +76,9 @@ class EventsController < ApplicationController
     perform_create_transaction
     #@msg = "Successfully added #{@event.name}!"
     respond_to do |format|
-      format.js #runs app/views/events/create.js.haml
+      #format.js #runs app/views/events/create.js.haml
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
     end
   end
 
@@ -104,7 +106,9 @@ class EventsController < ApplicationController
     perform_update_transaction
     @msg = @event.name + " successfully updated!"
     respond_to do |format|
-      format.js  #runs app/views/events/update.js.haml
+      #format.js  #runs app/views/events/update.js.haml
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
     end
   end
 
@@ -125,7 +129,9 @@ class EventsController < ApplicationController
     perform_destroy_transaction
     @msg = name + " event successfully deleted!"
     respond_to do |format|
-      format.js #runs app/views/events/destroy.js.haml
+      #format.js #runs app/views/events/destroy.js.haml
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
     end
   end
 
