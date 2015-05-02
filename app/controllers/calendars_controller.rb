@@ -128,6 +128,7 @@ class CalendarsController < ApplicationController
     respond_to do |format|
       format.js #runs app/views/calendar/create_guest.js.haml
     end
+    GuestMailer.rsvp_email(@guest, @event).deliver
   end
 
   def handle_guest_registration
