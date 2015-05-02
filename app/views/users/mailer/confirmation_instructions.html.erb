@@ -1,5 +1,24 @@
-<p>Welcome <%= @email %>!</p>
+<br/>
+<br/>
+<br/>
+<div id='main' style="width:50%; margin-left:25%; margin-right:25%; min-width:30em;">
+  <h1 class='title' style="border-bottom: 4px solid #A6C55F; border-top: 0px;"></h1>
+  <div style='padding: 1em;'>
 
-<p>You can confirm your account email through the link below:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+    <p>Welcome <%= @email %>!</p>
+
+    <p>You can confirm your account email through the link below:</p>
+
+    <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+  <h1 class="title" style= "border-top: 4px solid #A6C55F; border-bottom: 0px;"></h1>
+</div>

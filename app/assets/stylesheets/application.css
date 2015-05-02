@@ -98,9 +98,9 @@ h2 {
     float:right;
 }
 #panel_header {
-    padding: 0.8em 0 0.8em 0;
+    padding: 0 0 1.6em 0;
 }
-#panel_header h3 {
+#panel_header h2 {
     text-align: center;
     margin: 0;
     font-weight: 200;
@@ -134,19 +134,22 @@ h2 {
 .left p, .right p {
     margin:0;
 }
-#name, #date_time, #location, #description, #find_us, #rsvp, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image {
+.field {
+    font-weight: 600;
+}
+#name, #date_time, #location, #description, #find_us, #rsvp, #e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name, #e_how_to_find_us {
     border-top: 1px solid #ccc;
 }
-#e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image {
+#e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_how_to_find_us, #e_organization, #e_venue_name {
     padding: 0.5em 0 0.7em 0;
 }
-#date_time, #description, #rsvp, #e_start_date, #e_end_date, #e_location, #e_image {
+#date_time, #description, #rsvp, #e_start_time, #e_end_date, #e_location, #e_image, #e_organization, #e_location, #e_how_to_find_us {
     background: #f9f9f9;
 }
 #description, #find_us, #rsvp {
     padding: 0.2em;
 }
-#rsvp, #e_image {
+#rsvp, #e_how_to_find_us {
     border-bottom: 1px solid #ccc;
 }
 .edit_text_field {

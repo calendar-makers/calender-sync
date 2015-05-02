@@ -1,59 +1,59 @@
 #e_name
-  = label :event, :name, 'Name'
+  = label :event, :name, 'Name', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
 #e_start_time
-  = label :event, :start, 'Start Time'
+  = label :event, :start, 'Start Time', class: 'field'
   = datetime_select :event, :start, class: 'edit_text_field'
 
 #e_end_time
-  = label :event, :end, 'End Time'
+  = label :event, :end, 'End Time', class: 'field'
   = datetime_select :event, :end, class: 'edit_text_field'
 
 #e_organization
-  = label :event, :organization, 'Organization Name'
+  = label :event, :organization, 'Organization Name', class: 'field'
   = text_field :event, :organization, value: 'Nature in the City', class: 'edit_text_field'
 
 #e_venue_name
-  = label :event, :venue_name, "Venue Name"
+  = label :event, :venue_name, "Venue Name", class: 'field'
   = text_field :event, 'venue_name', class: 'edit_text_field'
 
 #e_address_1
 
-<br>
-%div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
+#e_location
+  .field= label_tag 'Location', 'Location'
+  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
 
-%div= label_tag 'Street Address'
-%div
-  = text_field :event, 'st_number', disabled: true, size: '6'
-  = text_field :event, 'st_name', disabled: true
+  .field= label_tag 'Street Address', 'Street Address'
+  %div
+    = text_field :event, 'st_number', disabled: true
+    = text_field :event, 'st_name', disabled: true
 
-#e_city
-  = label :event, :city, 'City'
-  = text_field :event, 'city', class: 'edit_text_field', disabled: true
+  #e_city
+    = label :event, :city, 'City', class: 'field'
+    = text_field :event, 'city', class: 'edit_text_field', disabled: true
 
-#e_state
-  = label :event, :state, 'State'
-  = text_field :event, 'state', size: '6', disabled: true
+  #e_state
+    = label :event, :state, 'State', class: 'field'
+    = text_field :event, 'state', disabled: true
 
-#e_zip
-  = label :event, :zip, 'Zip'
-  = text_field :event, 'zip', size: '6', class: 'edit_text_field', disabled: true
+  #e_zip
+    = label :event, :zip, 'Zip', class: 'field'
+    = text_field :event, 'zip', size: '6', class: 'edit_text_field', disabled: true
 
-#e_country
-  = label :event, :country, 'Country'
-  = text_field :event, 'country', class: 'edit_text_field', disabled: true
+  #e_country
+    = label :event, :country, 'Country', class: 'field'
+    = text_field :event, 'country', class: 'edit_text_field', disabled: true
 
-<br>
+  <br>
 
-#map
-
-<br>
+  #map
+  <br>
 
 #e_description
-  = label :event, :description, 'Description'
+  = label :event, :description, 'Description', class: 'field'
   = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field'
 
 #e_how_to_find_us
-  = label :event, :how_to_find_us, 'How to find us'
+  = label :event, :how_to_find_us, 'How to find us', class: 'field'
   = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '8', class: 'edit_text_field'

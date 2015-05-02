@@ -1,11 +1,31 @@
-%h1 Create new Admin
+<br/>
+<br/>
+<br/>
+%main{:style => "width:50%; margin-left:25%; margin-right:25%; min-width:30em;"}
+  %h1{class: 'title', style: "border-bottom: 4px solid #A6C55F; border-top: 0px;"}
+  %div{style:'padding: 1em;'}
 
-- flash.each do |name, msg|
-  = msg
 
-= form_tag accounts_path do
-  = render :partial => 'account_form'
-  = submit_tag "Create Admin"
 
-</br>
-= link_to 'Back to calendar', calendar_path
+    %h1{style: 'font-weight:200;'} Create new Admin
+
+    - flash.each do |name, msg|
+      = msg
+
+    = form_tag accounts_path do
+      = render :partial => 'account_form'
+      <br/>
+      = submit_tag "Create Admin", class: 'button'
+
+    </br>
+    </br>
+    = link_to 'Back to calendar', calendar_path, style: 'font-weight:200;'
+
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+  %h1{class: 'title', style: "border-bottom: 4px solid #A6C55F; border-top: 0px;"}
