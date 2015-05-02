@@ -1,22 +1,42 @@
-<h2>Change your password</h2>
+<br/>
+<br/>
+<br/>
+<div id='main' style="width:50%; margin-left:25%; margin-right:25%; min-width:30em;">
+  <h1 class='title' style="border-bottom: 4px solid #A6C55F; border-top: 0px;"></h1>
+  <div style='padding: 1em;'>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+
+
+    <h2 style="font-weight:200;">Change your password</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field">
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'edit_text_field', placeholder: 'New Password', label: 'password', style: 'width:20em;' %>
+      </div>
+      <br/>
+
+      <div class="field">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'edit_text_field', placeholder: 'Confirm New Pasword', label: 'password_confirmation', style: 'width:20em;' %>
+      </div>
+      <br/>
+
+      <div class="actions">
+        <%= f.submit "Change my password", class: 'button' %>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <h1 class="title" style= "border-top: 4px solid #A6C55F; border-bottom: 0px;"></h1>
+</div>
