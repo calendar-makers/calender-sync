@@ -5,7 +5,6 @@ Given /^(?:|I )am on the calendar page$/ do
 end
 
 And /^the month is ([A-Za-z]*) (\d+)$/ do |month, year|
-  byebug
   @date = month + " " + year
   page.execute_script("$('#calendar').fullCalendar('gotoDate', new Date(2015, #{to_num(month)}))")
 end
