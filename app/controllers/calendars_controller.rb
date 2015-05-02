@@ -6,41 +6,66 @@ class CalendarsController < ApplicationController
   end
 
   def preprocess_header_footer
-    @page.css("base").each do |tag|
-      tag.remove()
-    end
-    @page.css("img").each do |tag|
-      if tag["src"]!=nil and tag["src"][0]=='/'
-        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
-      end
-    end
-    @page.css("script").each do |tag|
-      if tag["src"]!=nil and tag["src"].match('/media')
-        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
-      end
-    end
-    @page.css("li").each do |tag|
-      if tag["class"] != nil and tag["class"] =="item-144"
-        tag["class"] = "item-144 current"
-      end
-    end
-    @page.css("a,form,link").each do |tag|
-      if tag["href"] !=nil and tag["href"][0] =='/'
-        tag.set_attribute('href', "http://www.natureinthecity.org" + tag["href"])
-      end
-    end
-    @section =""
-    @page.css("section").each do |elem|
-      if elem["id"] == "gk-bottom"
-        @section = elem
-      end
-    end
+    css_base
+    css_image
+    css_script
+    css_li
+    css_a_form_link
+    css_section
     @head1 = (@page.at_css "head").inner_html
     @header = @page.at_css "header"
     @footer = @page.at_css "footer"
     #@text = @head1.inner_html
     #@head1 = @text
   end
+
+  def css_base
+    @page.css("base").each do |tag|
+      tag.remove()
+    end
+  end
+
+  def css_image
+    @page.css("img").each do |tag|
+      if tag["src"]!=nil and tag["src"][0]=='/'
+        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
+      end
+    end
+  end
+
+  def css_script
+    @page.css("script").each do |tag|
+      if tag["src"]!=nil and tag["src"].match('/media')
+        tag.set_attribute('src', 'http://www.natureinthecity.org' + tag["src"])
+      end
+    end
+  end
+
+  def css_li
+     @page.css("li").each do |tag|
+      if tag["class"] != nil and tag["class"] =="item-144"
+        tag["class"] = "item-144 current"
+      end
+    end
+  end
+
+  def css_a_form_link
+    @page.css("a,form,link").each do |tag|
+      if tag["href"] !=nil and tag["href"][0] =='/'
+        tag.set_attribute('href', "http://www.natureinthecity.org" + tag["href"])
+      end
+    end
+  end
+
+  def css_section
+    @section =""
+    @page.css("section").each do |elem|
+      if elem["id"] == "gk-bottom"
+        @section = elem
+      end
+    end
+  end
+
 
   def preprocess_for_bad_request
     file = File.join(Rails.root, 'features', 'support', 'backup.html')
@@ -83,17 +108,23 @@ class CalendarsController < ApplicationController
     info.join(', ')
   end
 
+
+
+
+
+
+  def respond_js
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def show_event
     @event = Event.find params[:id]
-
     formatTime(@event)
-
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
-
-    respond_to do |format|
-      format.js  #runs app/views/calendar/show_event.js.haml
-    end
+    respond_js
   end
 
   def formatTime(event)
@@ -112,16 +143,12 @@ class CalendarsController < ApplicationController
 
   def show_edit
     @event = Event.find params[:event_id]
-    respond_to do |format|
-      format.js #runs app/views/calendar/show_edit.js.haml
-    end
+    respond_js
   end
 
   def show_new
     @event = Event.new
-    respond_to do |format|
-      format.js #runs app/views/calendar/show_new.js.haml
-    end
+    respond_js
   end
 
   def create_guest
@@ -130,10 +157,8 @@ class CalendarsController < ApplicationController
       return redirect_to event_path(@event.id), notice: 'Please fill out all fields to RSVP.'
     end
     handle_guest_registration
-    respond_to do |format|
-      format.js #runs app/views/calendar/create_guest.js.haml
-    end
     GuestMailer.rsvp_email(@guest, @event).deliver
+    respond_js
   end
 
   def handle_guest_registration

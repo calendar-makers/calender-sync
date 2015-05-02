@@ -56,19 +56,21 @@ class EventsController < ApplicationController
     form_validation_msg
   end
 
-  def create
-    #result = Event.check_if_fields_valid(event_params)
-    #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
-    perform_create_transaction
-    #@msg = "Successfully added #{@event.name}!"
-    respond_do
-  end
-
   def respond_do
     respond_to do |format|
       format.html { redirect_to calendar_path }
       format.json { render :nothing => true }
+      format.js
     end
+  end
+
+  # handles panel add new event
+  def create
+    #result = Event.check_if_fields_valid(event_params)
+    #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
+    perform_create_transaction
+    @msg = "Successfully added #{@event.name}!"
+    respond_do
   end
 
   def perform_create_transaction
@@ -88,6 +90,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
   end
 
+  # does panel update event
   def update
     @event = Event.find params[:id]
     result = Event.check_if_fields_valid(event_params)
@@ -107,6 +110,7 @@ class EventsController < ApplicationController
     end
   end
 
+  # handles panel event delete
   def destroy
     @event = Event.find params[:id]
     name = @event.name
