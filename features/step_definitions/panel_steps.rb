@@ -49,14 +49,14 @@ Then(/^I should see the (.*) in the panel$/) do |panel|
   when "details"
     expect(page).to have_content("Event Details")
   when "edit form"
-    expect(page).to have_content("an event!")
+    expect(page).to have_content("Edit Event")
   when "new form"
     expect(page).to have_content("Click")
   end
 end
 
 Then(/^I click on the (.*) event button$/) do |action|
-  selector = '#' + action
+  selector = '#' + action + '_event'
   page.find(selector).click
   if action == "delete"
     @d_name = "select only one"
@@ -77,15 +77,15 @@ When(/^I change the (.*) to "(.*)"$/) do |field, value|
     minute = datetime[3].split(":")[1]
     ampm   = datetime[4]
   end
-  page.find('#edit')[:value]
+  page.find('#update_event')[:value]
 end
 
 And(/^(?:|I )save the event$/) do
-  page.find('#edit').click
+  page.find('#update_event').click
 end
 
 # revise later
-Then /^I(?:| should) see "(.*)" on "(.*)" in the calendar$/ do |name, date|
+Then(/^I(?:| should) see "(.*)" on "(.*)" in the calendar$/) do |name, date|
   step %Q(the month is #{@date})
   expect(page).to have_content(name)
 end

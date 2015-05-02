@@ -1,6 +1,7 @@
 #image
-  = image_tag @event.image.url(:medium)
-<br/>
+  - if @event.image.file?
+    = image_tag @event.image.url(:original)
+    <br/>
 
 #name
   .left
