@@ -1,7 +1,7 @@
 %h4{style: 'text-align:center; font-weight:200'} Edit Event
 = form_for @event, :url => event_path(@event), id: 'update_event', format: :js,  remote: true, :multipart => true, authenticity_token: true do |f|
   -# this path does an ajax get to the event controller action update
-  = "Image Upload"
+  = f.label(:image, 'Upload Photo')
   = f.file_field :image, :id => "image"
   = render partial: 'event_form', locals: {event: @event}
   = submit_tag "Save Event", class:'button'
