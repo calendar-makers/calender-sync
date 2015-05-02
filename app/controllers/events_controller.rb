@@ -84,7 +84,6 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     remote_event = Meetup.new.push_event(@event)
     if remote_event
-      @msg = "inside if"
       @event.update_meetup_fields(remote_event)
       @event.save!
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
