@@ -117,8 +117,6 @@ end
 Then /^I should( not | )see the( default | | root )admin actions$/ do |negative, root|
   if negative == ' not '
     if root != ' root '
-      expect(page).to_not have_link('Create new event')
-      expect(page).to_not have_link('Add 3rd Party Events')
       expect(page).to_not have_link('Change your password')
       expect(page).to_not have_link('Sign Out')
     else
@@ -127,8 +125,6 @@ Then /^I should( not | )see the( default | | root )admin actions$/ do |negative,
     end
   else
     if root != ' root '
-      expect(page).to have_link('Create new event')
-      expect(page).to have_link('Add 3rd Party Events')
       expect(page).to have_link('Change your password')
       expect(page).to have_link('Sign Out')
     else
