@@ -189,9 +189,10 @@ class Meetup
   end
 
   def self.get_event_venue_data(event)
+    return {} if event.nil?
     keys = [:city, :state, :zip, :country]
     venue = {}
-    keys.each_index {|index| venue[keys[index]] = event[keys[index].to_s]} if event
+    keys.each_index {|index| venue[keys[index]] = event[keys[index].to_s]}
     venue[:address_1] = "#{event['st_number']} #{event['st_name']}"
     venue[:name] = event['venue_name']
     venue.compact

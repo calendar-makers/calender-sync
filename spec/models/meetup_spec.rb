@@ -412,7 +412,7 @@ describe Meetup do
 
 
   describe '#push_event' do
-    let(:event) {Event.new(name: 'Testello', description: 'event o mine', venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+    let(:event) {Event.new(name: 'Testello', description: 'event o mine', venue_name: 'Moraga Steps', st_number: '', st_name: '16th Ave & Moraga St',
                            city: 'San Francisco', zip: '94111', state: 'ca', country: 'us',
                            start: DateTime.new(2015,5,10),  how_to_find_us: 'Follow the line')}
     let(:data) {double}
@@ -455,9 +455,9 @@ describe Meetup do
   end
 
 
-  describe "::get_event_venue_data" do
+  describe ".get_event_venue_data" do
     context "from a valid event" do
-      let(:event) {Event.new(venue_name: 'Playa', address_1: '145 Peeep st.',
+      let(:event) {Event.new(venue_name: 'Playa', st_number: '145', st_name: 'Peeep st.',
                                 city: 'Gendale', zip: '6789',
                                 state: 'CA', country: 'USA')}
       it "returns a hash of venue fields" do
@@ -486,7 +486,7 @@ describe Meetup do
 
       it "returns a hash of venue fields" do
         result = Meetup.parse_venue(data)
-        expect(result).to eq({venue_name: 'Plaza', address_1: '145 Peeep st.',
+        expect(result).to eq({venue_name: 'Plaza',  st_number: '145', st_name: 'Peeep st.',
                               city: 'Gendale', zip: '6789',
                               state: 'CA', country: 'USA'})
       end
@@ -503,9 +503,9 @@ describe Meetup do
   describe "#get_event_data" do
     let(:meetup) {Meetup.new}
     let(:id) {123}
-    let(:event) {{name: 'Nature', description: 'Nice one',
-                  start: Time.now, duration: '2', how_to_find_us: 'do not',
-                  end: Time.now + 1000000}}
+    let(:event) {{'name' => 'Nature', 'description' => 'Nice one',
+                  'start' => Time.now, 'duration' => '2', 'how_to_find_us' => 'do not',
+                  'end' => Time.now + 1000000}}
 
     it "returns a hash of venue fields" do
       allow_any_instance_of(Meetup).to receive(:get_meetup_venue_id).and_return(id)
@@ -517,13 +517,13 @@ describe Meetup do
   end
 
   describe "#create_venue" do
-    let(:new_event) {Event.new(venue_name: 'Pepperpot', address_1: '145 Jackson st',
+    let(:new_event) {Event.new(venue_name: 'Pepperpot', st_number: '145', st_name: 'Peeep st.',
                            city: 'Moon', zip: '94111',
                            state: 'CA', country: 'us')}
-    let(:old_event) {Event.new(venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+    let(:old_event) {Event.new(venue_name: 'Moraga Steps', st_number: '', st_name: '16th Ave & Moraga St',
                                city: 'San Francisco', zip: '94111',
                                state: 'CA', country: 'us')}
-    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', address_1: '',
+    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', st_number: '', st_name: '',
                                city: 'Sa', zip: '94111',
                                state: 'CA', country: 'us')}
 
@@ -571,13 +571,13 @@ describe Meetup do
   end
 
   describe "#get_meetup_venue_id" do
-    let(:new_event) {Event.new(venue_name: 'Pepperpot', address_1: '145 Jackson st',
+    let(:new_event) {Event.new(venue_name: 'Pepperpot', st_number: '145', st_name: 'Peeep st.',
                                city: 'Moon', zip: '94111',
                                state: 'CA', country: 'us')}
-    let(:old_event) {Event.new(venue_name: 'Moraga Steps', address_1: '16th Ave & Moraga St',
+    let(:old_event) {Event.new(venue_name: 'Moraga Steps', st_number: '', st_name: '16th Ave & Moraga St',
                                city: 'San Francisco', zip: '94111',
                                state: 'CA', country: 'us')}
-    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', address_1: '',
+    let(:invalid_event) {Event.new(venue_name: 'Moraga Steps', st_number: '', st_name: '',
                                    city: 'Sa', zip: '94111',
                                    state: 'CA', country: 'us')}
     let(:id) {'1234'}
@@ -609,7 +609,7 @@ describe Meetup do
       it "gets a response from meetup with failure" do
         allow(data).to receive(:code).and_return(400)
         response = good_user.get_meetup_venue_id(invalid_event)
-        expect(response).to eq('')
+        expect(response).to eq(nil)
       end
     end
 
@@ -622,7 +622,7 @@ describe Meetup do
 
       it "gets a not authorized error response from meetup" do
         response = bad_user.get_meetup_venue_id(new_event)
-        expect(response).to eq('')
+        expect(response).to eq(nil)
       end
     end
   end

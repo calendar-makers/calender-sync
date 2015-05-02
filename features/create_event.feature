@@ -25,7 +25,8 @@ Scenario: store information when all the fields are filled out
   And I am on the "Create" page
   And I fill in the "Event Name" field with "Nature Walk"
   And I fill in the "Venue Name" field with "Steps"
-  And I fill in the "Address" field with "145 Jackson st"
+  And I fill in the "event_st_number" field with "145"
+  And I fill in the "event_st_name" field with "Jackson st"
   And I fill in the "City" field with "Glendale"
   And I fill in the "Zip" field with "90210"
   And I select "8/18/2015, 4:30pm" as the "start" date and time
