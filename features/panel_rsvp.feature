@@ -28,8 +28,8 @@ Background:
   | 2        | 4        |
   | 2        | 5        |
 
-  And I am on the "details" page for "Nature Walk"
-  Then I should see the RSVP form
+  When the month is March 2015
+  And I click on "Nature Walk" in the calendar
 
 Scenario: RSVP form, completed and submitted non-anonymously
   When I fill out and submit the RSVP form non-anonymously
