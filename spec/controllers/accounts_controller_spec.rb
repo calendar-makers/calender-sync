@@ -29,4 +29,20 @@ describe AccountsController do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+  describe '#edit' do
+    it 'can be accessed by root' do
+      sign_in @root
+      get :edit, id: 'root'
+      expect(response).to render_template(:edit)
+    end
+    it 'cannot be accessed by non-root admin' do
+      sign_in @admin
+      get :edit, id: 'root'
+      expect(response).to redirect_to(calendar_path)
+    end
+    it 'cannot be accessed by guest' do
+      get :edit, id: 'root'
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end
