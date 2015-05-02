@@ -5,9 +5,7 @@ Then(/^I should see the default panel$/) do
 end
 
 When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
-  @name = name
-  sleep(2)
-  page.all('.fc-title')[0].click
+  all('.fc-title', :text => name)[0].click
 end
 
 # When(/^I click on "(.*)" in the calendar$/) do |name|
