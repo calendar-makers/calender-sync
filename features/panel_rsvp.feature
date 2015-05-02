@@ -1,3 +1,4 @@
+@javascript
 Feature: User can RSVP for event through event details page
 
   As a vistor of the website

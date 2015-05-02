@@ -4,4 +4,4 @@
   = "Image Upload"
   = f.file_field :image, :id => "image"
   = render partial: 'event_form', locals: {event: @event}
-  = submit_tag "Save Event", class:'button'
+  = submit_tag "Save Event", class:'button', id: 'update'
