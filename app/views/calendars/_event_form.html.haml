@@ -19,24 +19,36 @@
   = text_field :event, 'venue_name', class: 'edit_text_field'
 
 #e_address_1
-  = label :event, :address_1, 'Address'
-  = text_field :event, 'address_1', class: 'edit_text_field'
+
+<br>
+%div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
+
+%div= label_tag 'Street Address'
+%div
+  = text_field :event, 'st_number', disabled: true, size: '6'
+  = text_field :event, 'st_name', disabled: true
 
 #e_city
   = label :event, :city, 'City'
-  = text_field :event, 'city', class: 'edit_text_field'
+  = text_field :event, 'city', class: 'edit_text_field', disabled: true
 
 #e_state
   = label :event, :state, 'State'
-  = select :event, 'state', options_for_select(us_states, 'CA')
+  = text_field :event, 'state', size: '6', disabled: true
 
 #e_zip
   = label :event, :zip, 'Zip'
-  = text_field :event, 'zip', size: '6', class: 'edit_text_field'
+  = text_field :event, 'zip', size: '6', class: 'edit_text_field', disabled: true
 
 #e_country
   = label :event, :country, 'Country'
-  = country_select :event, 'country', {selected: "US"}, class: 'edit_text_field'
+  = text_field :event, 'country', class: 'edit_text_field', disabled: true
+
+<br>
+
+#map
+
+<br>
 
 #e_description
   = label :event, :description, 'Description'
