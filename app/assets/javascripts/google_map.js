@@ -24,6 +24,7 @@ var idMap = {
     country: 'event_country'};
 
 function initialize() {
+    console.log("I'm here in initialize");
     autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
                                                         { types: ['geocode'] });
     // When the user selects an address from the dropdown,
@@ -64,13 +65,41 @@ function format_address_string() {
        fullAddress['locality'].replace(' ', '+'), fullAddress['administrative_area_level_1'].replace(' ', '+'),
        fullAddress['country'].replace(' ', '+'), fullAddress['postal_code']].join(',').replace(' ', '+');
 }
-
+/*
+function format_my_address_string(address) {
+    console.log("I'm formating");
+     int i = 0;
+     while(i<address.length  && address[i]==' '){
+        i++;
+     }
+     address = address.slice(i);
+     console.log ("I'm returning");
+     return address.replace(' ', '+');
+}
+*/
 function get_interactive_map() {
+    console.log("drawing map");
+    console.log($('#map'));
     var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
     read_full_address();
     var address = format_address_string();
-    var map = $(['<iframe width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
-    $('#map').html(map).show();
+    console.log(address);
+    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
+    $('#map').append(map);
+}
+
+function get_my_interactive_map(address) {
+    console.log("drawing my map");
+    console.log($('#map'));
+    var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
+    //read_full_address();
+    //var address = format_address_string();
+    
+    console.log(address);
+    //address = format_my_address_string(address);
+    console.log(address);
+    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
+    $('#map').append(map);
 }
 
 function geolocate() {
