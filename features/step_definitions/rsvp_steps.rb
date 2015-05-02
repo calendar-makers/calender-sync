@@ -99,7 +99,3 @@ Then(/^the page should( not)? have the text "(.*)"$/) do |should_not, text|
     expect(page).to have_content(text)
   end
 end
-
-Then(/^I should see a message saying that the email "(.*)" is already registered$/) do |email|
-  step %{the page should have the text "#{email} is already registered for this event!"}
-end
