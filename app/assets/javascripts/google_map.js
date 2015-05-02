@@ -4,7 +4,7 @@ var componentForm = {
     route: 'long_name',
     locality: 'long_name',
     administrative_area_level_1: 'short_name',
-    country: 'long_name',
+    country: 'short_name',
     postal_code: 'short_name'
 };
 var fullAddress = {
@@ -15,13 +15,17 @@ var fullAddress = {
     country: '',
     postal_code: ''
 };
+var idMap = {
+    street_number: 'event_st_number',
+    route: 'event_st_name',
+    locality: 'event_city',
+    postal_code: 'event_zip',
+    administrative_area_level_1: 'event_state',
+    country: 'event_country'};
 
 function initialize() {
-    // Create the autocomplete object, restricting the search
-    // to geographical location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
-        { types: ['geocode'] });
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+                                                        { types: ['geocode'] });
     // When the user selects an address from the dropdown,
     // populate the address fields in the form.
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
@@ -29,37 +33,46 @@ function initialize() {
     });
 }
 
-// [START region_fillform]
+
 function fillInAddress() {
-    // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
     for (var component in componentForm) {
-        document.getElementById(component).value = '';
-        document.getElementById(component).disabled = false;
+        document.getElementById(idMap[component]).value = '';
+        document.getElementById(idMap[component]).disabled = false;
     }
 
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
-            var val = fullAddress[addressType] = place.address_components[i][componentForm[addressType]];
-            document.getElementById(addressType).value = val;
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(idMap[addressType]).value = val;
         }
     }
 
+    get_interactive_map();
+}
+
+function read_full_address() {
+    for (var component in componentForm) {
+        fullAddress[component] = document.getElementById(idMap[component]).value;
+    }
+}
+
+function format_address_string() {
+     return [(fullAddress['street_number'] + ' ' + fullAddress['route']).replace(' ', '+'),
+       fullAddress['locality'].replace(' ', '+'), fullAddress['administrative_area_level_1'].replace(' ', '+'),
+       fullAddress['country'].replace(' ', '+'), fullAddress['postal_code']].join(',').replace(' ', '+');
+}
+
+function get_interactive_map() {
     var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
-    var address = '864+Stanford+ave,Oakland,CA,94608';
-    //var address = [fullAddress[street_number], fullAddress[route],fullAddress[locality], fullAddress[administrative_area_level_1], fullAddress[country], fullAddress[postal_code]].join(',');
+    read_full_address();
+    var address = format_address_string();
     var map = $(['<iframe width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
     $('#map').html(map).show();
 }
-// [END region_fillform]
 
-// [START region_geolocation]
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
     initialize();
     if (navigator.geolocation) {
@@ -74,4 +87,6 @@ function geolocate() {
         });
     }
 }
-// [END region_geolocation]
+
+
+// JUST CALL get_interactive_map() TO OPEN THE MAP.  BUT MAKE SURE THAT THE LOCATION FIELDS ARE POPULATED FIRST

@@ -40,7 +40,7 @@ class Meetup
 
   def edit_event(args)
     options = {}
-    options[:body] = args[:updated_fields].merge(default_auth)
+    options[:body] = get_event_data(args[:updated_fields]).merge(default_auth)
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event/#{args[:id]}", options)
     Meetup.process_result(data, nil, 200)
@@ -125,27 +125,38 @@ class Meetup
 
   def self.parse_venue(data)
     if data && data = data['venue']
-      {venue_name: data['name'],
-        address_1: data['address_1'],
-        city: data['city'],
-        zip: data['zip'],
-        state: data['state'],
-        country: data['country']}
+      venue = {}
+      venue[:venue_name] = data['name']
+      venue[:st_number], venue[:st_name] = Meetup.parse_address(data['address_1'])
+      venue[:city] = data['city']
+      venue[:zip] = data['zip']
+      venue[:state] = data['state']
+      venue[:country] = data['country']
+      venue
     else
       {}
     end
   end
 
+  def self.parse_address(data)
+    data =~ /^(\d+)\b/
+    num = $1
+    (name = data[num.size..data.size].strip) if num
+    [num, name]
+  end
+
   def get_event_data(event)
     data = {}
-    data[:name] = event[:name]
-    data[:description] = event[:description]
+    data[:name] = event['name']
+    data[:description] = event['description']
     data[:venue_id] = get_meetup_venue_id(event)
-    start = event[:start]
+    start = event['start']
+    stop = event['end']
     data[:time] = set_time(start)
-    data[:duration] = Meetup.get_milliseconds((event[:end] - start))
-    data[:how_to_find_us] = event[:how_to_find_us]
-    data
+    duration = (stop && start) ? stop - start : 0
+    data[:duration] = Meetup.get_milliseconds(duration)
+    data[:how_to_find_us] = event['how_to_find_us']
+    data.compact
   end
 
   def set_time(date)
@@ -163,8 +174,6 @@ class Meetup
       data.parsed_response['id']
     elsif code == 409 # Match was found. Meetup refused to create a new venue
       Meetup.get_matched_venue_id(data)
-    else
-      ''
     end
   end
 
@@ -180,11 +189,12 @@ class Meetup
   end
 
   def self.get_event_venue_data(event)
-    meetup_keys = [:name, :address_1, :city, :state, :zip, :country]
-    db_keys= [:venue_name, :address_1, :city, :state, :zip, :country]
+    keys = [:city, :state, :zip, :country]
     venue = {}
-    db_keys.each_index {|index| venue[meetup_keys[index]] = event[db_keys[index]]} if event
-    venue
+    keys.each_index {|index| venue[keys[index]] = event[keys[index].to_s]} if event
+    venue[:address_1] = "#{event['st_number']} #{event['st_name']}"
+    venue[:name] = event['venue_name']
+    venue.compact
   end
 
   def self.build_date(time, utc_offset)

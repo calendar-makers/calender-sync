@@ -10,23 +10,23 @@
 <br>
 %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
 
-
 %div= label_tag 'Street Address'
 %div
-  = text_field_tag :street_number, nil, {disabled: true, size: '6'}
-  = text_field_tag :route, nil, disabled: true
+  = text_field :event, 'st_number', disabled: true, size: '6'
+  = text_field :event, 'st_name', disabled: true
 
-%div= label_tag 'City'
-%div= text_field_tag :locality, nil, disabled: true
+%div= label :event, :city, 'City'
+%div= text_field :event, 'city', disabled: true
 
-%div= label_tag 'Zip'
-%div=text_field_tag :postal_code, nil, {size: '6', disabled: true}
+%div= label :event, :zip, 'Zip'
+%div= text_field :event, 'zip', size: '6', disabled: true
 
-%div= label_tag 'State'
-%div= text_field_tag :administrative_area_level_1, nil,  {size: '6', disabled: true}
+%div= label :event, :state, 'State'
+%div= text_field :event, 'state', size: '6', disabled: true
 
-%div= label_tag 'Country'
-%div= text_field_tag :country, nil, {size: '20', disabled: true}
+%div= label :event, :country, 'Country'
+%div= text_field :event, 'country', size: '20', disabled: true
+<br>
 
 #map
 

@@ -229,6 +229,10 @@ class Event < ActiveRecord::Base
     Event.cleanup_ids(Event.get_requested_ids(args))
   end
 
+  def updated_fields
+    attributes.compact
+  end
+
   def format_start_date
     Event.format_date(start)
   end
@@ -243,7 +247,7 @@ class Event < ActiveRecord::Base
 
   def location
     location = []
-    location << address_1
+    location << "#{st_number} #{st_name}"
     location << city.to_s + (state ? (', ' + state + ' ') : ' ') + zip.to_s
     location << country
     location.join("\n")

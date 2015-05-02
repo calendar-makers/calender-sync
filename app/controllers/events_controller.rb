@@ -92,8 +92,9 @@ class EventsController < ApplicationController
   end
 
   def perform_update_transaction
-    if Meetup.new.edit_event(updated_fields: event_params, id: @event.meetup_id)
-      @event.update_attributes(event_params)
+    updated_fields = Event.new(event_params).updated_fields
+    if Meetup.new.edit_event(updated_fields: updated_fields, id: @event.meetup_id)
+      @event.update_attributes(updated_fields)
       flash[:notice] = "'#{@event.name}' was successfully updated."
     else
       flash[:notice] = "Could not update '#{@event.name}'."
@@ -108,7 +109,7 @@ class EventsController < ApplicationController
   end
 
   def perform_destroy_transaction
-    if Meetup.new.delete_event(@event.meetup_id)
+    if @event.is_third_party? || Meetup.new.delete_event(@event.meetup_id)
       @event.destroy
       flash[:notice] = "'#{@event.name}' was successfully removed from the Calendar and from Meetup."
     else
@@ -119,9 +120,9 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :organization, :venue_name, :address_1,
+    params.require(:event).permit(:name, :organization, :venue_name, :st_number, :st_name,
                                   :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image)
+                                  :description, :how_to_find_us, :image, :street_number, :route, :locality)
   end
 
   def form_validation_msg
