@@ -29,9 +29,6 @@ gem 'httparty'
 # integrate with Moment.js
 gem 'momentjs-rails'
 
-# integrate with react.js
-gem 'react-rails', '~> 1.0'
-
 # countries and states gems
 gem 'country_select', github: 'stefanpenner/country_select'
 

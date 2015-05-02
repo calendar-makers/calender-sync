@@ -1,32 +1,46 @@
-- if user_signed_in?
-  = link_to "Create new event", new_event_path
-  </br>
-  = link_to "Add 3rd Party Events", third_party_events_path, id: "third_party"
-  </br>
-  = link_to "Sign Out", destroy_user_session_path, :method => :get
-- else
-  = link_to "Login", new_user_session_path, :method => :get
+= raw @header
+%hr
 
-- if user_signed_in? and current_user.root?
+%main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
+  - if user_signed_in?
+    = link_to "Change your password", edit_user_registration_path
+    </br>
+    = link_to "Sign Out", destroy_user_session_path, :method => :get
+  - else
+    = link_to "Login", new_user_session_path, :method => :get
+
+  - if user_signed_in? and current_user.root?
+    </br>
+    = link_to "Create new account", new_account_path, :method => :get
+    </br>
+    = link_to "Delete existing accounts", edit_account_path("root"), :method => :get
   </br>
-  = link_to "Create new account", new_account_path, :method => :get
-</br>
 
-%h1 Events Calendar
-= javascript_include_tag 'calendar/application'
-</br>
+  %div
+    %div{:style=>"float:left;"}
+      %h1{style: 'color: #9f9f9f; font-weight:300'} Events Calendar
+    %div{:style=>"float:right; width:9em; padding:0 0.3em 0 0;"}
+      - if user_signed_in?
+        = form_tag show_new_calendar_path, id: 'new_event', format: :js, remote: true, style: 'float:right;' do
+          -# this path does an ajax post to the calendar controller action show_new
+          %p= submit_tag '+', class: 'button'
+        %div{style: 'position:relative;width:2em;'} 
+        = button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: 'button', style: 'float:left;'
+    %div{:style=>"clear:both;"}
+  </br>
 
-#wrap
-  #calendar
-  #panel_wrapper
-    #panel_header
-      %h2{:style => "font-weight:200;"} Event Details
-    #panel
-      %p Click an event!
-      #new.crud
-      #edit.crud
-      #delete.crud
+  #wrap
+    #calendar
+    #panel_wrapper
+      #panel_header
+        %h3{:style => "font-weight:200; text-align:center"} Event Details
+      #panel
+        %p Click an event!
       %div{:style => "clear:both;"}
+
     %div{:style => "clear:both;"}
 
-  %div{:style => "clear:both;"}
+</br></br></br></br></br>
+%h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+= raw @section
+= raw @footer
