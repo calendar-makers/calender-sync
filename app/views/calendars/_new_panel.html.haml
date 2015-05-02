@@ -1,0 +1,5 @@
+%h4{style: 'text-align:center; font-weight:200'} New Event
+= form_tag events_path, id: 'create_event', remote: true do
+  -# this path does an ajax post to the event controller action create
+  = render :partial => 'event_form'
+  = submit_tag "Create Event", class:'button'

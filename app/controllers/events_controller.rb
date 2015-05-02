@@ -15,9 +15,23 @@ class EventsController < ApplicationController
   def show
     @message = flash[:notice]
     @event = Event.find params[:id]
+
+    startTime = @event.start.strftime('%b %e, %Y at %l:%M %P')
+    endTime = ""
+    if @event.end
+      if (@event.end - @event.start) >= 1
+        endTime = @event.end.strftime('%b %e, %Y at %l:%M %P')
+      else
+        endTime = @event.end.strftime('%l:%M %P')
+      end
+    end
+    @timePeriod = startTime
+    @timePeriod = startTime + ' to ' + endTime unless endTime == ""
+
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     display_synchronization_result(new_guests)
+
   end
 
   def display_synchronization_result(new_guests)
@@ -57,16 +71,20 @@ class EventsController < ApplicationController
   end
 
   def create
-    result = Event.check_if_fields_valid(event_params)
-    return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
+    #result = Event.check_if_fields_valid(event_params)
+    #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
-    redirect_to calendar_path
+    #@msg = "Successfully added #{@event.name}!"
+    respond_to do |format|
+      format.js #runs app/views/events/create.js.haml
+    end
   end
 
   def perform_create_transaction
     @event = Event.new(event_params)
     remote_event = Meetup.new.push_event(@event)
     if remote_event
+      @msg = "inside if"
       @event.update_meetup_fields(remote_event)
       @event.save!
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
@@ -83,11 +101,11 @@ class EventsController < ApplicationController
   def update
     @event = Event.find params[:id]
     result = Event.check_if_fields_valid(event_params)
-    return redirect_to edit_event_path(@event), notice: result[:message] if not result[:value]
+    #return redirect_to edit_event_path(@event), notice: result[:message] if not result[:value]
     perform_update_transaction
+    @msg = @event.name + " successfully updated!"
     respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
+      format.js  #runs app/views/events/update.js.haml
     end
   end
 
@@ -103,9 +121,13 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find params[:id]
+    name = @event.name
+    @id = @event.id
     perform_destroy_transaction
-    redirect_to calendar_path
-    #render :nothing => true
+    @msg = name + " event successfully deleted!"
+    respond_to do |format|
+      format.js #runs app/views/events/destroy.js.haml
+    end
   end
 
   def perform_destroy_transaction
