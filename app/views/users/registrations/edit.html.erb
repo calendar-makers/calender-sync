@@ -20,22 +20,33 @@
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
+      <br/>
+
       <div class="field">
         <%= f.password_field :password, autocomplete: "off", class: 'edit_text_field', placeholder: 'New Password', label: 'new_password', style: 'width:20em;' %>
       </div>
+
+      <br/>
 
       <div class="field">
         <%= f.password_field :password_confirmation, autocomplete: "off", class: 'edit_text_field', placeholder: 'Confirm New Password', label: 'new_password_confirmation', style: 'width:20em;' %>
       </div>
 
+      <br/>
+
       <div class="field">
         <%= f.password_field :current_password, autocomplete: "off", class: 'edit_text_field', placeholder: 'Current Password', label: 'current_password', style: 'width:20em;' %>
       </div>
+
+      <br/>
 
       <div class="actions">
         <%= f.submit "Update", class: 'button' %>
       </div>
     <% end %>
+
+    <br/>
+    <br/>
 
     <%= link_to "Back", :back, style: 'font-weight:200;' %>
 
