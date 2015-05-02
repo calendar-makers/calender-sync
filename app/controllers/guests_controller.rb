@@ -4,7 +4,8 @@ class GuestsController < ActionController::Base
     if !Guest.fields_valid?(guest_params)
       return redirect_to event_path(@event.id), notice: 'Please fill out all fields to RSVP.'
     end
-    #handle_guest_registration
+    handle_guest_registration
+    @msg = "RSVP for #{@event.name} confirmed!"
     respond_to do |format|
       format.js
     end
