@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :guests, through: :registrations
   has_many :registrations
 
-  has_attached_file :image, styles: {small: "150x100", medium: "300x200", large: "450,300" }, :url => "/assets/:id/:style/:basename.:extension", :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
+  has_attached_file :image, styles: {original: "300x200", medium: "300x200" }, :url => "/assets/:id/:style/:basename.:extension", :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
 
   #validates_attachment_presence :image
   #validates_attachment_size :image, :less_than => 5.megabytes
@@ -228,6 +228,10 @@ class Event < ActiveRecord::Base
     Event.cleanup_ids(Event.get_requested_ids(args))
   end
 
+  def updated_fields
+    attributes.compact
+  end
+
   def format_start_date
     Event.format_date(start)
   end
@@ -242,7 +246,7 @@ class Event < ActiveRecord::Base
 
   def location
     location = []
-    location << address_1
+    location << "#{st_number} #{st_name}"
     location << city.to_s + (state ? (', ' + state + ' ') : ' ') + zip.to_s
     location << country
     location.join("\n")

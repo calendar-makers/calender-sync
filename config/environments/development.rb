@@ -16,14 +16,12 @@ Rails.application.configure do
   # Mailer needed for devise
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  # config.action_mailer.delivery_method = :file
-  # config.action_mailer.file_settings = {:location => Rails.root.join('tmp/mail')}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 '587',
-      user_name:            ENV[GMAIL_USERNAME],
-      password:             ENV[GMAIL_PASSWORD],
+      user_name:            'csynchronization@gmail.com',
+      password:             'natureinthecity',
       authentication:       'plain',
       enable_starttls_auto: true}
   

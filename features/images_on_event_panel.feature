@@ -14,5 +14,5 @@ Background:
   
   Scenario: User should see all pictures related to the event
   Given I am on the "Calendar" page
-  When I click on "Nature Walk" in the calendar
+  When I click on the "Green Bean Mixer" link
   Then I should see the picture "nature1.jpg" for "Nature Walk" in the panel

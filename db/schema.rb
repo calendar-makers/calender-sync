@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425193349) do
+ActiveRecord::Schema.define(version: 20150501103653) do
 
   create_table "events", force: :cascade do |t|
     t.string   "organization"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 20150425193349) do
     t.string   "url"
     t.string   "how_to_find_us"
     t.string   "status"
-    t.string   "address_1"
     t.string   "city"
     t.string   "zip"
     t.string   "state"
@@ -34,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150425193349) do
     t.datetime "image_updated_at"
     t.string   "venue_name"
     t.datetime "end"
+    t.string   "st_number"
+    t.string   "st_name"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -64,11 +65,9 @@ ActiveRecord::Schema.define(version: 20150425193349) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
     t.integer  "level",                  default: 1
   end
 
