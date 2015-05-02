@@ -74,7 +74,7 @@ class EventsController < ApplicationController
     #result = Event.check_if_fields_valid(event_params)
     #return redirect_to new_event_path, notice: "Please fill in the following fields: " + result[:message].to_s if not result[:value]
     perform_create_transaction
-    @msg = "Successfully added #{@event.name}!"
+    #@msg = "Successfully added #{@event.name}!"
     respond_to do |format|
       format.js #runs app/views/events/create.js.haml
     end
@@ -84,6 +84,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     remote_event = Meetup.new.push_event(@event)
     if remote_event
+      @msg = "inside if"
       @event.update_meetup_fields(remote_event)
       @event.save!
       flash[:notice] = "'#{@event.name}' was successfully added and pushed to Meetup."
