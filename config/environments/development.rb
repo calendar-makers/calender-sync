@@ -16,8 +16,6 @@ Rails.application.configure do
   # Mailer needed for devise
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  # config.action_mailer.delivery_method = :file
-  # config.action_mailer.file_settings = {:location => Rails.root.join('tmp/mail')}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
