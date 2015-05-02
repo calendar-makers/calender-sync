@@ -226,7 +226,7 @@ RSpec.describe Event, type: :model do
     let(:location) {[]}
 
     it 'returns a complete location string' do
-      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+      location_data = {'st_number' => '145', 'st_name' => 'peep st', 'city' => 'New York',
                             'zip' => '90210', 'state' => 'NY', 'country' => 'US'}
       event = Event.new(location_data)
       location_data.each {|k, v| location << v}
@@ -234,7 +234,7 @@ RSpec.describe Event, type: :model do
     end
 
     it 'handles nil state fields' do
-      location_data = {'address_1' => '145 peep st', 'city' => 'New York',
+      location_data = {'st_number' => '145', 'st_name' => 'peep st', 'city' => 'New York',
                        'zip' => '90210', 'state' => nil, 'country' => 'US'}
       event = Event.new(location_data)
       expect(event.location).to eq("145 peep st\nNew York 90210\nUS")
