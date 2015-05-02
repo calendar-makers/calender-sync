@@ -51,7 +51,7 @@ h1.title {
 h2 {
     font-weight: normal;
 }
-#calendar, #panel_header, #pane_wrapper, #panel, .button {
+#calendar, #panel_header, #panel_wrapper, #panel, .button {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
@@ -66,7 +66,6 @@ h2 {
     float:right;
 }
 #panel_header h2 {
-    margin-top: 0;
     text-align:center;
 }
 #panel {
@@ -74,11 +73,6 @@ h2 {
     overflow-x:hidden;
     padding: 0.3em;
     border: 1px solid #ccc;
-}
-#name, #date_time, #location {
-    border-top: 1px solid #ccc;
-/*    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;*/
 }
 .crud {
     position: relative;
@@ -89,29 +83,33 @@ h2 {
 .right {
     position: relative;
     float: right;
-    width: calc(100% - 4.45em);
+    width: calc(100% - 3.55em);
     padding: 0.3em;
     border-left: 1px solid #ccc;
 }
 .left {
-    width: 3.2em;
+    width: 2.3em;
     padding: 0.2em;
     float: left;
     position: relative;
+    font-weight: 600;
 }
 .left p, .right p {
     margin:0;
 }
-#name, #date_time, #location, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image {
+#name, #date_time, #location, #description, #find_us, #rsvp, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image {
     border-top: 1px solid #ccc;
 }
 #e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image {
     padding: 0.5em 0 0.7em 0;
 }
-#date_time, #e_start_date, #e_end_date, #e_location, #e_image {
+#date_time, #description, #rsvp, #e_start_date, #e_end_date, #e_location, #e_image {
     background: #f9f9f9;
 }
-#location, #e_image {
+#description, #find_us, #rsvp {
+    padding: 0.2em;
+}
+#rsvp, #e_image {
     border-bottom: 1px solid #ccc;
 }
 .edit_text_field {
