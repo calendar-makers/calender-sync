@@ -22,7 +22,7 @@ Scenario: show the new event panel
 Scenario: Show the event editing panel
   Given the month is March 2015
   When I click on "Nature Walk" in the calendar
-  When I click on the edit event button
+  And I click on the edit event button
   Then I should see the edit form in the panel
   When I change the start time to "April 16 12:00 am"
   And save the event
@@ -31,5 +31,5 @@ Scenario: Show the event editing panel
 Scenario: Delete an event
   Given the month is April 2015
   When I click on "Green Bean Mixer" in the calendar
-  When I click on the delete event button
+  And I click on the delete event button
   Then "Green Bean Mixer" should not be in the calendar

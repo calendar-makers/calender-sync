@@ -5,34 +5,34 @@ Then(/^I should see the default panel$/) do
 end
 
 When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
-  @name = name
-  sleep(2)
-  page.all('.fc-title')[0].click
+  all('.fc-title', :text => name)[0].click
 end
 
-# When(/^I click on "(.*)" in the calendar$/) do |name|
+=begin
+When(/^I click on "(.*)" in the calendar$/) do |name|
 # problems.....
-#   # expect(page).to have_selector(".fc-event-container")
-#   # # page.execute_script(<<-JAVASCRIPT)
-#   # #   var handlers = $('.fc-event-container')[0].click;
-#   # #   console.log("hi");
-#   # # JAVASCRIPT
-#   # #page.execute_script("$('.fc-title')[0].click;")
-#   # #p page.body
-#   # #find(:xpath, '//span[contains(., "Volunteer")').click
-#   page.all(".fc-title").each do |el|
-#     el.click
-#   end
-#   # p page.execute_script("var thing = [{
-#   #                        'id':1,
-#   #                        'title':'Green Bean Mixer',
-#   #                        'start':'',
-#   #                        'end':'',
-#   #                        'location':'45 Seneca st\nPhoenix91210\n',
-#   #                        'description':'If you like beans youll like this event!',
-#   #                        'temp':'/events/1'
-#   #                      }]; thing;")
-# end
+   expect(page).to have_selector(".fc-event-container")
+   page.execute_script(<<-JAVASCRIPT)
+   var handlers = $('.fc-event-container')[0].click;
+   console.log("hi");
+   JAVASCRIPT
+   page.execute_script("$('.fc-title')[0].click;")
+   p page.body
+   find(:xpath, '//span[contains(., "Volunteer")').click
+   page.all(".fc-title").each do |el|
+     el.click
+   end
+   p page.execute_script("var thing = [{
+                        'id':1,
+                        'title':'Green Bean Mixer',
+                        'start':'',
+                        'end':'',
+                        'location':'45 Seneca st\nPhoenix91210\n',
+                        'description':'If you like beans youll like this event!',
+                        'temp':'/events/1'
+                      }]; thing;")
+ end
+=end
 
 Then(/^the panel should display "(.*)" in its "(.*)" field$/) do |value, field|
   expect(page).to have_content("Event Details")
@@ -77,11 +77,11 @@ When(/^I change the (.*) to "(.*)"$/) do |field, value|
     minute = datetime[3].split(":")[1]
     ampm   = datetime[4]
   end
-  page.find('#update_event')[:value]
+  page.find('#update')[:value]
 end
 
 And(/^(?:|I )save the event$/) do
-  page.find('#update_event').click
+  page.find('#update').click
 end
 
 # revise later
