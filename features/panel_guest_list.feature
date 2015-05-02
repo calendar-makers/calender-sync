@@ -7,9 +7,9 @@ Feature: See who RSVPed for event
 
 Background:
   Given the following events exist:
-    | name             | organization       | description                               | venue_name                 | address_1      | city     | zip   | start                | end                  | how_to_find_us     | meetup_id |
-    | Nature Walk      | Nature in the City | A walk through the city                   | The Old Town Hall          | 145 Jackson st | Glendale | 90210 | March 19 2015, 16:30 | March 19 2015, 20:30 | First door on left | 342343432 |
-    | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | San Francisco City Library | 45 Seneca st   | Phoenix  | 91210 | April 20 2015, 8:30  | April 21 2015, 8:30  | Second door on left| 343333333 |
+    | name             | organization       | description                               | venue_name                 | address_1      | city     | zip   | start                | end                  | how_to_find_us     |
+    | Nature Walk      | Nature in the City | A walk through the city                   | The Old Town Hall          | 145 Jackson st | Glendale | 90210 | March 19 2015, 16:30 | March 19 2015, 20:30 | First door on left |
+    | Green Bean Mixer | Green Carrots      | If you like beans you'll like this event! | San Francisco City Library | 45 Seneca st   | Phoenix  | 91210 | April 20 2015, 8:30  | April 21 2015, 8:30  | Second door on left|
 
   And the following guests exist:
   | first_name | last_name | phone          | email            | address            | is_anon |
@@ -29,15 +29,8 @@ Background:
   | 2        | 4        |
   | 2        | 5        |
 
-  And I am on the calendar page
-  And the month is March 2015
-
-Scenario: Any user can see the first names of non-anonymous event attendees
+Scenario: Guest sees all event attendees
+  Given the month is March 2015
   When I click on "Nature Walk" in the calendar
-  Then the panel should list the attendees of "Nature Walk" alphabetically by first name
-  But it should not list anonymous attendees of "Nature Walk"
-
-Scenario: Admin can see the first names of non-anonymous event attendees
-  When I click on "Nature Walk" in the calendar
-  Then the panel should list the attendees of "Nature Walk" alphabetically by first name
-  And I should see all the information about attendees of "Nature Walk"
+  Then I should see attendees of "Nature Walk" listed alphabetically by first name
+  But I should not see anonymous attendees of "Nature Walk"
