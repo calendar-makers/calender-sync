@@ -2,6 +2,9 @@
 %hr
 
 %main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
+  - flash.each do |name, msg|
+    = msg
+    </br>
   - if user_signed_in?
     = link_to "Change your password", edit_user_registration_path
     </br>

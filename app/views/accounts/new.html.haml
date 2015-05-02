@@ -1,4 +1,8 @@
 %h1 Create new Admin
+
+- flash.each do |name, msg|
+  = msg
+
 = form_tag accounts_path do
   = render :partial => 'account_form'
   = submit_tag "Create Admin"
