@@ -22,7 +22,20 @@ $(document).ready(function() {
           id: calEvent.id,
           //could pass all the other fields here to avoid a database lookup...
         },
-        dataType: 'script'
+        dataType: 'script',
+        complete: function(){
+          console.log("Yoyoyo")
+          console.log($('#loco').text());
+          var loc = $('#loco').text();
+          console.log(loc);
+          console.log("^^loc");
+          var address = new google.maps.places.Autocomplete((loc),
+                                                        { types: ['geocode'] });
+          console.log("lalalala");
+          //initialize();
+          get_my_interactive_map(address);
+          console.log("after");
+        }
       });
       return false;
     },
