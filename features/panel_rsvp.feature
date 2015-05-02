@@ -1,3 +1,4 @@
+@javascript
 Feature: User can RSVP for event through event details page
 
   As a vistor of the website
@@ -19,7 +20,7 @@ Background:
   | Max        | Leroy     | (723) 123-8900 | maxler@aol.com   | 69 Feeling St      | false   |
 
   And the following registrations exist:
-  | event_id | guest_id  |
+  | event_id | guest_id |
   | 1        | 1        |
   | 1        | 2        |
   | 1        | 3        |
@@ -28,21 +29,21 @@ Background:
   | 2        | 4        |
   | 2        | 5        |
 
-  And I am on the "details" page for "Nature Walk"
-  Then I should see the RSVP form
+  And I am on the calendar page
+  When the month is March 2015
+  And I click on "Nature Walk" in the calendar
 
 Scenario: RSVP form, completed and submitted non-anonymously
   When I fill out and submit the RSVP form non-anonymously
-  Then I should see a message confirming my submission
-  And I should see my first name on the page
+  Then I should see "Click an event!" on the page
+  And I should see my first name under "Nature Walk"
 
 Scenario: RSVP form, completed and submitted anonymously
   When I fill out and submit the RSVP form anonymously
-  Then I should see a message confirming my submission
-  And I should not see my first name on the page
+  Then I should see "Click an event!" on the page
+  And I should not see my first name under "Nature Walk"
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the entire RSVP form
   And I press "Submit"
-  Then I should see a failed submission message
-  And I should not see my first name on the page
+  Then I should see "RSVP Now!" on the page
