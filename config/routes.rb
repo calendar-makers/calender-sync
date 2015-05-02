@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :skip => [:registrations]
+  as :user do
+    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
+    put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'            
+  end
+
   resource :calendar, :only => [:show] do
     collection do
       get 'show_event'
@@ -8,6 +13,7 @@ Rails.application.routes.draw do
       post 'show_new'
     end
   end
+
   resources :events do
     collection do
       get 'third_party'

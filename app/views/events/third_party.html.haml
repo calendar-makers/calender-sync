@@ -1,61 +1,72 @@
-.titles
-  %h1 Third Party Events
-  - notice = flash[:notice]
-  - if notice
-    %h3= notice
-.subtitles
-  %h3 Filter by ID or by Group Name
+<br/>
+<br/>
+<br/>
+%main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
+  %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
+  .titles
+    %h1 Third Party Events
+    - notice = flash[:notice]
+    - if notice
+      %h3= notice
+  .subtitles
+    %h3 Filter by ID or by Group Name
 
-= form_tag third_party_events_path do
+  = form_tag third_party_events_path do
 
-  = label_tag 'id', 'ID'
-  = text_field_tag 'id'
+    = label_tag 'id', 'ID'
+    = text_field_tag 'id'
+    </br>
+    = label_tag 'group_urlname', 'Group Name'
+    = text_field_tag 'group_urlname'
+    </br>
+    </br>
+    = submit_tag 'Search'
+
   </br>
-  = label_tag 'group_urlname', 'Group Name'
-  = text_field_tag 'group_urlname'
   </br>
+  %h2 Matched Events
   </br>
-  = submit_tag 'Search'
-
-</br>
-</br>
-%h2 Matched Events
-</br>
-= form_tag pull_third_party_events_path do
-  %table#matched_events
-    %thead
-      %tr
-        %th Select
-        %th Name
-        %th Group
-        %th Start Time
-        %th End Time
-        %th Location
-        %th Meetup Link
-
-    %tbody
-      - @events.each do |event|
+  = form_tag pull_third_party_events_path do
+    %table#matched_events
+      %thead
         %tr
-          - meetup_id = event.meetup_id
-          %td= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
-          - name = event.name
-          - id = event.id
-          %td.names= id ? (link_to name, event_path(id)) : name
-          %td= (organization = event.organization) ? organization : 'N/A'
-          %td= (start = event.format_start_date) ? start : 'N/A'
-          %td= (end_date = event.format_end_date) ? end_date : 'N/A'
-          %td= (location = event.location) ? location : 'N/A'
-          - if (url = event.url) =~ /www.meetup.com/
-            %td= link_to 'go', url
+          %th Select
+          %th Name
+          %th Group
+          %th Start Time
+          %th End Time
+          %th Location
+          %th Meetup Link
+
+      %tbody
+        - @events.each do |event|
+          %tr
+            - meetup_id = event.meetup_id
+            %td= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
+            - name = event.name
+            - id = event.id
+            %td.names= id ? (link_to name, event_path(id)) : name
+            %td= (organization = event.organization) ? organization : 'N/A'
+            %td= (start = event.format_start_date) ? start : 'N/A'
+            %td= (end_date = event.format_end_date) ? end_date : 'N/A'
+            %td= (location = event.location) ? location : 'N/A'
+            - if (url = event.url) =~ /www.meetup.com/
+              %td= link_to 'go', url
+
+    </br>
+    = submit_tag 'Add Events'
 
   </br>
-  = submit_tag 'Add Events'
 
-</br>
+  </br>
+  </br>
+  = link_to 'Back to Calendar', calendar_path
+  </br>
+  </br>
+  = link_to 'Events Directory', events_path
 
-</br>
-</br>
-= link_to 'Back to Calendar', calendar_path
-</br>
-</br>
-= link_to 'Events Directory', events_path
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}
