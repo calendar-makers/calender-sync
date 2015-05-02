@@ -18,7 +18,7 @@
 
   %div
     %div{:style=>"float:left;"}
-      %h1 Events Calendar
+      %h1{style: 'color: #9f9f9f; font-weight:300'} Events Calendar
     %div{:style=>"float:right; width:9em; padding:0 0.3em 0 0;"}
       - if user_signed_in?
         = form_tag show_new_calendar_path, id: 'new_event', format: :js, remote: true, style: 'float:right;' do
@@ -33,7 +33,7 @@
     #calendar
     #panel_wrapper
       #panel_header
-        %h2{:style => "font-weight:200;"} Event Details
+        %h3{:style => "font-weight:200; text-align:center"} Event Details
       #panel
         %p Click an event!
       %div{:style => "clear:both;"}
