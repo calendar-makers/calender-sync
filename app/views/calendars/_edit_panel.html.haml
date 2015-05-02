@@ -1,3 +1,4 @@
+%h4{style: 'text-align:center; font-weight:200'} Edit Event
 = form_tag event_path(@event), id: 'update_event', format: :js,  remote: true do
   -# this path does an ajax get to the event controller action update
   = render partial: 'event_form', locals: {event: @event}
