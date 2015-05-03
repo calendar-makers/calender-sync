@@ -101,5 +101,5 @@ Then(/^the panel should display a google map in its location field$/) do
 end
 
 Then(/^I should be able to specify the location through google maps$/) do
-  expect(page).to have_selector('#locator')
+  expect(page).to have_selector('#location')
 end
