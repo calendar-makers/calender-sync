@@ -108,11 +108,6 @@ class CalendarsController < ApplicationController
     info.join(', ')
   end
 
-
-
-
-
-
   def respond_js
     respond_to do |format|
       format.js
@@ -154,7 +149,8 @@ class CalendarsController < ApplicationController
   def create_guest
     @event = Event.find(params[:event_id])
     if !Guest.fields_valid?(guest_params)
-      return redirect_to event_path(@event.id), notice: 'Please fill out all fields to RSVP.'
+      render :nothing => true
+      return
     end
     handle_guest_registration
     GuestMailer.rsvp_email(@guest, @event).deliver

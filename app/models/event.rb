@@ -30,17 +30,13 @@ class Event < ActiveRecord::Base
   #   options ? where(nil).apply_finder_options(options, true) : where(nil)
   # end
 
-  def self.check_if_fields_valid(arg)
-    result = {}
-    result[:message] = []
-    result[:value] = true
-    arg.each do |key, value|
+  def self.fields_valid?(parameters)
+    parameters.each do |key, value|
       if value.blank?
-        result[:value] = false
-        result[:message].append key.to_s
+        return false
       end
     end
-    result
+    return true
   end
 
   def is_new?
