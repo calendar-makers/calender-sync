@@ -33,10 +33,10 @@ click submit create new event:
 EDIT: 
 click edit button:
   views/calendars/_show_panel.html.haml
-    form_tag show_edit_calendar_path (post)
-  controllers/calendars_controller.rb
-    def show_edit
-  views/calendars/show_edit.js.haml
+    form_tag edit_event_path (get)
+  controllers/events/events_controller.rb
+    def edit
+  views/events/edit.js.haml
     render partial w/
       @event
   views/calendars/_edit_panel.html.haml
