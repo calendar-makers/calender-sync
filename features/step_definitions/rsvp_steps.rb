@@ -71,7 +71,8 @@ Then(/^I should see a message confirming my submission$/) do
   step %{the page should have the text "You successfully registered for this event!"}
 end
 
-Then(/^I should( not)? see my first name on the page$/) do |should_not|
+Then(/^I should( not)? see my first name under "(.*?)"$/) do |should_not, event_name|
+  step %{I click on "#{event_name}" in the calendar}
   if should_not
     step %{the page should not have the text "Alexander"}
   else

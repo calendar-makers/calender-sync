@@ -6,5 +6,5 @@
     = f.file_field :image, :id => "image"
   = render partial: 'event_form', locals: {event: @event}
   <br/><br/>
-  = submit_tag "Save Event", class:'button', style: 'float:right;'
+  = submit_tag "Save Event", id: 'update', class: 'button', style: 'float:right;'
 <br/>

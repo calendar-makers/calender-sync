@@ -5,6 +5,7 @@ Then(/^I should see the default panel$/) do
 end
 
 When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
+  sleep(2)
   all('.fc-title', :text => name)[0].click
 end
 
@@ -51,7 +52,7 @@ Then(/^I should see the (.*) in the panel$/) do |panel|
   when "edit form"
     expect(page).to have_content("Edit Event")
   when "new form"
-    expect(page).to have_content("Click")
+    expect(page).to have_content("New Event")
   end
 end
 
