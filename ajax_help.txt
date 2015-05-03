@@ -1,10 +1,10 @@
 SHOW: 
 in calendar, click to show event:
   assets/javascripts/calendar/mycalendar.js
-    eventClick......$.ajax.....'calendar/show_event'
-  controllers/calendars_controller.rb
-    def show_event
-  views/calendars/show_event.js.haml
+    eventClick......$.ajax.....'events/:id'
+  controllers/events_controller.rb
+    def show
+  views/events/show.js.haml
     render partial w/
       @event
       @timePeriod

@@ -114,6 +114,7 @@ class CalendarsController < ApplicationController
     end
   end
 
+=begin
   def show_event
     @event = Event.find params[:id]
     formatTime(@event)
@@ -136,6 +137,7 @@ class CalendarsController < ApplicationController
     @timePeriod = startTime + ' to ' + endTime unless endTime == ""
   end
 
+
   def show_edit
     @event = Event.find params[:event_id]
     respond_js
@@ -145,6 +147,7 @@ class CalendarsController < ApplicationController
     @event = Event.new
     respond_js
   end
+=end
 
   def create_guest
     @event = Event.find(params[:event_id])

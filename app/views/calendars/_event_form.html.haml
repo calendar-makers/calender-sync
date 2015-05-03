@@ -1,3 +1,7 @@
+#e_image
+  %p.field Image Upload
+  = file_field :event, :image, :id => "image"
+
 #e_name
   = label :event, :name, 'Name', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'

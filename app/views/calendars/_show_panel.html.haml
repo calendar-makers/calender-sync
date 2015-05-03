@@ -16,7 +16,7 @@
     %p Time
   .right
     %p
-      = @timePeriod
+      = @time_period
   %div{:style=>"clear:both;"}
 
 #location
@@ -87,9 +87,8 @@
   <br/>
   %div
     %div{:style=>"float:left;"}
-      = form_tag show_edit_calendar_path, id: 'edit_event', format: :js, remote: true do
-        -# this path does an ajax post to the calendar controller action show_edit
-        = hidden_field_tag :event_id, @event.id
+      = form_tag edit_event_path(@event), method: 'get', id: 'edit_event', format: :js, remote: true do
+        -# this path does an ajax get to the event controller action "edit"
         %p= submit_tag 'Edit', class: 'button'
     %div{:style=>"float:right;"}
       =form_tag event_path(@event), id: 'delete_event', format: :js, remote: true, method: 'delete' do

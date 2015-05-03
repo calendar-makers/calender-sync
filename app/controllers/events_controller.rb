@@ -11,6 +11,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    @event = Event.find params[:id]
+    @time_period = Event.format_time(@event)
+    new_guests = @event.merge_meetup_rsvps
+    @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+    respond_js
+  end
+
   def third_party
     if not params[:id].blank?
       @events = Event.get_remote_events({event_id: params[:id]})
@@ -31,12 +39,8 @@ class EventsController < ApplicationController
     redirect_to calendar_path, notice: Event.display_message(events)
   end
 
-  def respond_do
-    respond_to do |format|
-      format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
-      format.js
-    end
+  def new
+    respond_js
   end
 
   # handles panel add new event
@@ -59,6 +63,11 @@ class EventsController < ApplicationController
     else
       @msg = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
     end
+  end
+
+  def edit
+    @event = Event.find params[:id]
+    respond_js
   end
 
   # does panel update event
@@ -99,6 +108,21 @@ class EventsController < ApplicationController
       @msg = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
     end
   end
+
+  def respond_do
+    respond_to do |format|
+      format.html { redirect_to calendar_path }
+      format.json { render :nothing => true }
+      format.js
+    end
+  end
+
+  def respond_js
+    respond_to do |format|
+      format.js
+    end
+  end
+
 
   private
 
