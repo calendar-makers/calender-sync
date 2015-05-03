@@ -20,19 +20,11 @@ When(/^I fill out and submit the RSVP form with email "(.*)"$/) do |email|
   click_button('Submit')
 end
 
-Then(/^I should see attendees of "(.*)" listed alphabetically by first name$/) do |event_name|
+Then(/^I should see the first names of the attendees of "(.*)"$/) do |event_name|
   event = Event.find_by_name(event_name)
-  ordered_non_anon_guests = event.guests.where(is_anon: false).order(:first_name)
-
-  prev_guest = nil
-  ordered_non_anon_guests.each do |guest|
-    if (prev_guest != nil) && (prev_guest != '')
-      puts "prev_guest is: " + prev_guest.first_name
-      puts "guest is: " + guest.first_name
-      puts page.body.match(/<td>#{prev_guest.first_name}<\/td>(.*)<td>#{guest.first_name}<\/td>/m)
-      expect(page).to have_content(/#{prev_guest.first_name}(.*)#{guest.first_name}/)
-    end
-    prev_guest = guest
+  non_anon_guests = event.guests.where(is_anon: false)
+  non_anon_guests.each do |guest|
+    step %{the page should have the text "#{guest.first_name}"}
   end
 end
 
@@ -41,7 +33,7 @@ Then(/^I should not see anonymous attendees of "(.*)"$/) do |event_name|
   event = Event.find_by_name(event_name)
   anon_guests = event.guests.where(is_anon: true)
   anon_guests.each do |guest|
-    step %{the page should not have the text "#{guest.first_name} #{guest.last_name}"}
+    step %{the page should not have the text "#{guest.first_name}"}
   end
 end
 
