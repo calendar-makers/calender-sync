@@ -55,7 +55,7 @@
           %td= guest.first_name
   <br/>
   %p RSVP Now!
-  = form_tag create_guest_calendar_path, id: 'rsvp_guest', remote: true, format: :js do
+  = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
     -# this path does an ajax post to the calendar controller action create_guest
     = hidden_field_tag :event_id, @event.id
 

@@ -16,7 +16,7 @@ class EventsController < ApplicationController
     @time_period = Event.format_time(@event)
     new_guests = @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
-    respond_js
+    respond_do
   end
 
   def third_party
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    respond_js
+    respond_do
   end
 
   # handles panel add new event
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find params[:id]
-    respond_js
+    respond_do
   end
 
   # does panel update event
@@ -116,13 +116,6 @@ class EventsController < ApplicationController
       format.js
     end
   end
-
-  def respond_js
-    respond_to do |format|
-      format.js
-    end
-  end
-
 
   private
 
