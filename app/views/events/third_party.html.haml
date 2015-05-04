@@ -40,19 +40,20 @@
             %th Meetup Link
 
         %tbody
-          - @events.each do |event|
-            %tr
-              - meetup_id = event.meetup_id
-              %td= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
-              - name = event.name
-              - id = event.id
-              %td.names= id ? (link_to name, event_path(id)) : name
-              %td= (organization = event.organization) ? organization : 'N/A'
-              %td= (start = event.format_start_date) ? start : 'N/A'
-              %td= (end_date = event.format_end_date) ? end_date : 'N/A'
-              %td= (location = event.location) ? location : 'N/A'
-              - if (url = event.url) =~ /www.meetup.com/
-                %td= link_to 'go', url
+          - if @events
+            - @events.each do |event|
+              %tr
+                - meetup_id = event.meetup_id
+                %td= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
+                - name = event.name
+                - id = event.id
+                %td.names= id ? (link_to name, event_path(id)) : name
+                %td= (organization = event.organization) ? organization : 'N/A'
+                %td= (start = event.format_start_date) ? start : 'N/A'
+                %td= (end_date = event.format_end_date) ? end_date : 'N/A'
+                %td= (location = event.location) ? location : 'N/A'
+                - if (url = event.url) =~ /www.meetup.com/
+                  %td= link_to 'go', url
 
       </br>
       = submit_tag 'Add Events', class: 'button'

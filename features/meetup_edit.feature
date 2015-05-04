@@ -1,3 +1,4 @@
+@javascript
 @meetup_edit
 Feature: Enforce event lists consistency by updating events locally and remotely as required
 
@@ -12,22 +13,23 @@ Feature: Enforce event lists consistency by updating events locally and remotely
     And the following event exists on Meetup and on the Calendar
       |    name      |    organization    |   event_id   |
       | Nature Walk  | Nature in the city | 221850455    |
+    And the month is August 2015
 
   @calendar_successful_edit
   Scenario: update initiated on Calendar
-    Given I am on the "details" page for "Nature Walk"
+    Given I click on "Nature Walk" in the calendar
     And I click on the "Edit" button
-    And I fill in the "Title" field with "Festival"
-    And I click on the "Update Event Info" button
+    And I fill in the "Name" field with "Festival"
+    And I click on the "Save Event" button
     Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms
-    And I should see the message "'Festival' was successfully updated."
+    And I should see the message "Festival successfully updated!"
 
   @calendar_failed_edit
   Scenario: failed update initiated on Calendar
-    Given I am on the "details" page for "Nature Walk"
+    Given I click on "Nature Walk" in the calendar
     And I click on the "Edit" button
-    And I fill in the "Title" field with "Festival"
-    And I click on the "Update Event Info" button
+    And I fill in the "Name" field with "Festival"
+    And I click on the "Save Event" button
     Then the event "Nature Walk" should be renamed to "Festival" on "neither" platforms
     And I should see the message "Could not update 'Nature Walk'."
 
@@ -36,4 +38,3 @@ Feature: Enforce event lists consistency by updating events locally and remotely
     Given the event "Nature Walk" is renamed on Meetup to "Festival"
     And I am on the "Calendar" page
     Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms
-    And I should see the message "Successfully pulled events: Festival from Meetup"

@@ -13,20 +13,18 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
-    @time_period = Event.format_time(@event)
-    new_guests = @event.merge_meetup_rsvps
+    @time_period = @event.format_time
+    @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     respond_do
   end
 
   def third_party
-    if not params[:id].blank?
-      @events = Event.get_remote_events({event_id: params[:id]})
-    elsif  !params[:group_urlname].blank?
-      @events = Event.get_remote_events({group_urlname: params[:group_urlname]})
-    else
-      @events = []
-    end
+    id = params[:id]
+    return @events = Event.get_remote_events({event_id: id}) unless id.blank?
+    group_urlname = params[:group_urlname]
+    return @events = Event.get_remote_events({group_urlname: group_urlname}) unless group_urlname.blank?
+    @events = []
   end
 
   def pull_third_party
@@ -35,8 +33,8 @@ class EventsController < ApplicationController
       flash[:notice] = 'You must select at least one event. Please retry.'
       return redirect_to third_party_events_path
     end
-    events = Event.store_third_party_events(ids)
-    redirect_to calendar_path, notice: Event.display_message(events)
+    Event.store_third_party_events(ids)
+    redirect_to calendar_path
   end
 
   def new
@@ -45,10 +43,10 @@ class EventsController < ApplicationController
 
   # handles panel add new event
   def create
-    if not Event.fields_valid?(event_params)
-      @msg = "Could not create the event. Please make sure all fields are filled before submitting."
-    else
+    if Event.fields_valid?(event_params)
       perform_create_transaction
+    else
+      @msg = "Could not create the event. Please make sure all fields are filled before submitting."
     end
     respond_do
   end
@@ -73,10 +71,10 @@ class EventsController < ApplicationController
   # does panel update event
   def update
     @event = Event.find params[:id]
-    if not Event.fields_valid?(event_params)
-      @msg = "Could not update '#{@event.name}'. Please make sure all fields are filled before submitting."
-    else
+    if Event.fields_valid?(event_params)
       perform_update_transaction
+    else
+      @msg = "Could not update '#{@event.name}'. Please make sure all fields are filled before submitting."
     end
     respond_do
   end
@@ -94,7 +92,7 @@ class EventsController < ApplicationController
   # handles panel event delete
   def destroy
     @event = Event.find params[:id]
-    name = @event.name
+    @event.name
     @id = @event.id
     perform_destroy_transaction
     respond_do

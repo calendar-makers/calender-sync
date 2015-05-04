@@ -26,10 +26,7 @@ describe EventsController do
         allow(Event).to receive(:get_requested_ids).and_return(ids)
       end
 
-      it "should return a message with the added events" do
-        get :pull_third_party
-        expect(flash[:notice]).to eq(Event.display_message(events))
-      end
+
 
       it "should redirect to the calendar" do
         get :pull_third_party

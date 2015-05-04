@@ -29,8 +29,7 @@ gem 'httparty'
 # integrate with Moment.js
 gem 'momentjs-rails'
 
-# countries and states gems
-gem 'country_select', github: 'stefanpenner/country_select'
+
 
 # authentication
 gem 'devise'

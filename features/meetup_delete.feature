@@ -14,16 +14,17 @@ Feature: Enforce event lists consistency by deleting events locally and remotely
       |    name      |    organization    |   event_id   |
       | Nature Walk  | Nature in the city | 221850455    |
       | Nerds Safari | Nature in the city | 220706208    |
+    And the month is August 2015
 
   @calendar_successful_deletion
   Scenario: deletion initiated on Calendar
-    Given I am on the "details" page for "Nature Walk"
+    Given I click on "Nature Walk" in the calendar
     And I click on the "Delete" button
     And the "Nature Walk" event should exist on "neither" platforms
 
   @calendar_failed_deletion
   Scenario: failed deletion initiated on Calendar
-    Given I am on the "details" page for "Nature Walk"
+    Given I click on "Nature Walk" in the calendar
     And I click on the "Delete" button
     And the "Nature Walk" event should exist on "both" platforms
 

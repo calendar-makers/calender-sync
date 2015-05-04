@@ -97,7 +97,8 @@ Then(/^"(.*)" should (?:|not )be in the calendar$/) do |d_name|
 end
 
 Then(/^the panel should display a google map in its location field$/) do
-  expect(page).to have_selector('#map')
+  #expect(page).to have_selector('#map')
+  expect(page).to have_selector('#map iframe')
 end
 
 Then(/^I should be able to specify the location through google maps$/) do

@@ -128,15 +128,11 @@ And /^I searched events by group_urlname: "(.*)"$/ do |urlname|
 end
 
 Given /^I already pulled the RSVP list for the event: "(.*)"/ do |name|
-  step %Q{I go to the "details" page for event: "#{name}"}
+  step %Q{I click on "#{name}" in the calendar}
 end
 
 Given /^I already pulled from Meetup/ do
-  step %Q{I am on the "Calendar" page}
-  # NOTE I am forced to also go the Events Directory page
-  # because otherwise Capybara doesn't let me visit the
-  # same page (Calendar) twice consecutively. Possible bug
-  step %Q{I am on the "Events Directory" page}
+  Event.synchronize_upcoming_events
 end
 
 Given /I already pulled the event id: "(.*)"/ do |id|
@@ -156,6 +152,7 @@ Given /I already pulled by group_urlname: "(.*)"/ do |urlname|
 end
 
 And /"(.*)" should (not )?exist on "(.*)"/ do |event_name, negative, platform|
+  sleep(1)
   platform = platform.downcase
   if platform == 'calendar'
     event = Event.find_by_name(event_name)
@@ -180,7 +177,8 @@ And /the "(.*)" event should exist on "(both|neither)" platforms/ do |event_name
 end
 
 And /the following event(?:s)? exist(?:s)? on Meetup and on the Calendar/ do |data|
-  step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
+  #step %Q{I am on the "Calendar" page} # fakeweb will pull an event and make it local
+  Event.synchronize_upcoming_events
 end
 
 Given /the event "(.*)" is deleted on Meetup/ do |event_name|
@@ -200,6 +198,7 @@ Then /the event "(.*)" should be renamed to "(.*)" on "(.*)" platforms/ do |old_
 end
 
 Then /the "(.*)" event "(.*)" should (not )?be renamed to "(.*)"/ do |platform, old_event_name, negative, new_event_name|
+  sleep(1)
   id = '221850455'
   if platform == 'calendar'
     expect(Event.find_by_meetup_id(id).name).to eq(negative ? old_event_name : new_event_name)
@@ -209,5 +208,30 @@ Then /the "(.*)" event "(.*)" should (not )?be renamed to "(.*)"/ do |platform, 
 end
 
 Given /the event "(.*?)" is renamed on Meetup to "(.*?)"$/ do |arg1, arg2|
+  # no-op
+end
 
+Then /the RSVP list for "(.*)" should include: "(.*)"/ do |event_name, name_list|
+  sleep(1)
+  name_list = name_list.split(',').collect {|name| name.strip}
+  event = Event.find_by_name(event_name)
+  rsvp_name_list = event.guests.collect {|guest| guest.first_name}
+  expect(name_list).to match_array(rsvp_name_list)
+end
+
+And /the total number of participants for "(.*)", including invited guests, should be: "(.*)"/ do |event_name, total|
+  sleep(1)
+  event = Event.find_by_name(event_name)
+  expect(total.to_i).to eq(count_event_participants(event))
+end
+
+def count_event_participants(event)
+  event.registrations.inject(0) do |sum, regis|
+    guest_count = regis.invited_guests
+    sum + 1 + (guest_count ? guest_count : 0 )
+  end
+end
+
+And /I accept the google maps suggested address/ do
+  page.execute_script("$('#autocomplete').focus();")
 end

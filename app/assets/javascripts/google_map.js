@@ -16,7 +16,6 @@ var idMap = {
     country: 'event_country'};
 
 function initialize() {
-    console.log("I'm here in initialize");
     autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
                                                         { types: ['geocode'] });
     // When the user selects an address from the dropdown,

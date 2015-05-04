@@ -35,7 +35,7 @@ class Guest < ActiveRecord::Base
     Guest.find_by_meetup_id(rsvp[:meetup_id])
   end
 
-  def self.create_guest_by_meetup_rsvp(rsvp)
+  def self.create_by_meetup_rsvp(rsvp)
     first, last = Guest::parse_meetup_name(rsvp[:meetup_name])
     Guest.create!(first_name: first, last_name: last,
                   is_anon: false, meetup_id: rsvp[:meetup_id])

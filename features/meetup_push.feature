@@ -1,3 +1,4 @@
+@javascript
 @meetup_push
 Feature: push new calendar events to meetup
 
@@ -8,12 +9,11 @@ Feature: push new calendar events to meetup
   Background: create a new event
     Given I am logged in as the admin
     And I am an authorized organizer of the group
-    And I am on the "Create" page
-    And I fill in the "Event Name" field with "Nature Walk"
-    And I fill in the "Venue Name" field with "Steps"
-    And I fill in the "Address" field with "145 Jackson st"
-    And I fill in the "City" field with "Glendale"
-    And I fill in the "Zip" field with "90210"
+    And I am on the calendar page
+    And I click on the "+" button
+    And I fill in the "Name" field with "Nature Walk"
+    And I fill in the "autocomplete" field with "145 N Jackson st Glendale 91206"
+    And I accept the google maps suggested address
     And I select "8/18/2015, 4:30pm" as the "start" date and time
     And I select "8/22/2015, 4:30pm" as the "end" date and time
     And I fill in the "Description" field with "Join us for a nature walk through old town Los Angeles!"
@@ -22,14 +22,12 @@ Feature: push new calendar events to meetup
   @successful_push
   Scenario: successfully push the newly created event to Meetup
       Given I click on the "Create Event" button
-      Then I should be on the "Calendar" page
-      And I should see the message "'Nature Walk' was successfully added and pushed to Meetup."
+      Then I should see the message "Successfully added Nature Walk!"
       And the "Nature Walk" event should exist on "both" platforms
 
   @failed_push
   Scenario: failed push of newly created event to Meetup (Implemented as a transaction)
       Given I click on the "Create Event" button
-      Then I should be on the "Calendar" page
       And I should see the message "Failed to push event 'Nature Walk' to Meetup. Creation aborted."
       And the "Nature Walk" event should exist on "neither" platforms
 
