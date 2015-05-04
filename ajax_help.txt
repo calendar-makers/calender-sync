@@ -1,10 +1,10 @@
 SHOW: 
 in calendar, click to show event:
   assets/javascripts/calendar/mycalendar.js
-    eventClick......$.ajax.....'calendar/show_event'
-  controllers/calendars_controller.rb
-    def show_event
-  views/calendars/show_event.js.haml
+    eventClick......$.ajax.....'events/:id'
+  controllers/events_controller.rb
+    def show
+  views/events/show.js.haml
     render partial w/
       @event
       @timePeriod
@@ -14,10 +14,10 @@ in calendar, click to show event:
 CREATE:
 click show new form:
   views/show.html.haml
-    form_tag show_new_calendar_path (ajax post)
-  controllers/calendars_controller.rb
-    def show_new
-  views/calendars/show_new.js.haml
+    form_tag new_event_path (ajax get)
+  controllers/events_controller.rb
+    def new
+  views/events/new.js.haml
     render partial
   views/calendars/_new_panel.html.haml
 click submit create new event:
@@ -33,10 +33,10 @@ click submit create new event:
 EDIT: 
 click edit button:
   views/calendars/_show_panel.html.haml
-    form_tag show_edit_calendar_path (post)
-  controllers/calendars_controller.rb
-    def show_edit
-  views/calendars/show_edit.js.haml
+    form_tag edit_event_path (get)
+  controllers/events/events_controller.rb
+    def edit
+  views/events/edit.js.haml
     render partial w/
       @event
   views/calendars/_edit_panel.html.haml

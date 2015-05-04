@@ -17,7 +17,7 @@ When(/^I fill out and submit the RSVP form with email "(.*)"$/) do |email|
   fill_in('guest_email', :with => email)
   fill_in('guest_address', :with => '12 Place Blvd.')
   choose('guest_is_anon_false')
-  click_button('Submit')
+  click_button('RSVP')
 end
 
 Then(/^I should see attendees of "(.*)" listed alphabetically by first name$/) do |event_name|
@@ -27,21 +27,17 @@ Then(/^I should see attendees of "(.*)" listed alphabetically by first name$/) d
   prev_guest = nil
   ordered_non_anon_guests.each do |guest|
     if (prev_guest != nil) && (prev_guest != '')
-      puts "prev_guest is: " + prev_guest.first_name
-      puts "guest is: " + guest.first_name
-      puts page.body.match(/<td>#{prev_guest.first_name}<\/td>(.*)<td>#{guest.first_name}<\/td>/m)
       expect(page).to have_content(/#{prev_guest.first_name}(.*)#{guest.first_name}/)
     end
     prev_guest = guest
   end
 end
 
-
 Then(/^I should not see anonymous attendees of "(.*)"$/) do |event_name|
   event = Event.find_by_name(event_name)
   anon_guests = event.guests.where(is_anon: true)
   anon_guests.each do |guest|
-    step %{the page should not have the text "#{guest.first_name} #{guest.last_name}"}
+    step %{the page should not have the text "#{guest.first_name}"}
   end
 end
 
@@ -64,14 +60,15 @@ When(/^I fill out and submit the RSVP form (anonymously|non-anonymously)$/) do |
   else
     choose('guest_is_anon_false')
   end
-  click_button('Submit')
+  click_button('RSVP')
 end
 
 Then(/^I should see a message confirming my submission$/) do
   step %{the page should have the text "You successfully registered for this event!"}
 end
 
-Then(/^I should( not)? see my first name on the page$/) do |should_not|
+Then(/^I should( not)? see my first name under "(.*?)"$/) do |should_not, event_name|
+  step %{I click on "#{event_name}" in the calendar}
   if should_not
     step %{the page should not have the text "Alexander"}
   else

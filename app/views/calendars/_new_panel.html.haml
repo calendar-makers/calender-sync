@@ -1,10 +1,7 @@
 %h4{style: 'text-align:center; font-weight:200'} New Event
-= form_for @event, url: events_path, id: 'create_event', remote: true, format: :js, :multipart => true, authenticity_token: true do |f|
+= form_tag events_path, id: 'create_event', remote: true, format: :js, :multipart => true, authenticity_token: true do |f|
   -# this path does an ajax post to the event controller action create
-  #e_image
-    %p.field Image Upload
-    = f.file_field :image, :id => "image"
-  = render :partial => 'event_form'
+  = render :partial => 'calendars/event_form'
   <br/><br/>
   = submit_tag "Create Event", class:'button', style: 'float:right;'
 <br/>
