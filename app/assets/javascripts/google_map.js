@@ -7,14 +7,6 @@ var componentForm = {
     country: 'short_name',
     postal_code: 'short_name'
 };
-var fullAddress = {
-    street_number: '',
-    route: '',
-    locality: '',
-    administrative_area_level_1: '',
-    country: '',
-    postal_code: ''
-};
 var idMap = {
     street_number: 'event_st_number',
     route: 'event_st_name',
@@ -54,52 +46,51 @@ function fillInAddress() {
     get_interactive_map();
 }
 
-function read_full_address() {
+function read_full_address_from_form() {
+    var fullAddress = {
+        event_st_number: '',
+        event_st_name: '',
+        event_city: '',
+        event_zip: '',
+        event_state: '',
+        event_country: ''
+    };
     for (var component in componentForm) {
-        fullAddress[component] = document.getElementById(idMap[component]).value;
+        id = idMap[component];
+        fullAddress[id] = document.getElementById(id).value;
+    }
+    return fullAddress;
+}
+
+function fix_null_fields(address) {
+    for (var field in address) {
+        if (!address[field]) {
+            address[field] = '';
+        }
+    }
+    return address;
+}
+
+function read_full_address(address) {
+    if (address) {
+        return fix_null_fields(address);
+    } else {
+        return read_full_address_from_form();
     }
 }
 
-function format_address_string() {
-     return [(fullAddress['street_number'] + ' ' + fullAddress['route']).replace(' ', '+'),
-       fullAddress['locality'].replace(' ', '+'), fullAddress['administrative_area_level_1'].replace(' ', '+'),
-       fullAddress['country'].replace(' ', '+'), fullAddress['postal_code']].join(',').replace(' ', '+');
-}
-/*
-function format_my_address_string(address) {
-    console.log("I'm formating");
-     int i = 0;
-     while(i<address.length  && address[i]==' '){
-        i++;
-     }
-     address = address.slice(i);
-     console.log ("I'm returning");
-     return address.replace(' ', '+');
-}
-*/
-function get_interactive_map() {
-    console.log("drawing map");
-    console.log($('#map'));
-    var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
-    read_full_address();
-    var address = format_address_string();
-    console.log(address);
-    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
-    $('#map').append(map);
+function format_address_string(address) {
+     return [(address['event_st_number'] + ' ' + address['event_st_name']).replace(' ', '+'),
+              address['event_city'].replace(' ', '+'), address['event_state'].replace(' ', '+'),
+              address['event_country'].replace(' ', '+'), address['event_zip']].join(',').replace(' ', '+');  // CHECK THIS FINAL REPLACE
 }
 
-function get_my_interactive_map(address) {
-    console.log("drawing my map");
-    console.log($('#map'));
+function get_interactive_map(address_map) {
     var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
-    //read_full_address();
-    //var address = format_address_string();
-    
-    console.log(address);
-    //address = format_my_address_string(address);
-    console.log(address);
-    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address, '"></iframe>'].join(""));
-    $('#map').append(map);
+    var address = read_full_address(address_map);
+    var address_string = format_address_string(address);
+    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address_string, '"></iframe>'].join(""));
+    $('#map').html(map).show();
 }
 
 function geolocate() {

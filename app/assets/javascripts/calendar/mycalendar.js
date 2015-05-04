@@ -20,20 +20,9 @@ $(document).ready(function() {
         url: calEvent.url,
         dataType: 'script',
         complete: function(){
-          console.log("Yoyoyo")
-          console.log($('#loco').text());
-          var loc = $('#loco').text();
-          console.log(loc);
-          console.log("^^loc");
-          var address = new google.maps.places.Autocomplete((loc),
-                                                        { types: ['geocode'] });
-          console.log("lalalala");
-          //initialize();
-          get_my_interactive_map(address);
-          console.log("after");
+          get_interactive_map(calEvent.location)
         }
       });
-      return false;
     },
 
     header: {
@@ -41,7 +30,6 @@ $(document).ready(function() {
       center: 'title',
       right:  'prev,next'
     }
-
   });
 
   $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));

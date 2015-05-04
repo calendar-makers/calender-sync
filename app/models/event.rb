@@ -21,7 +21,8 @@ class Event < ActiveRecord::Base
       :title => self.name,
       :start => self.start.iso8601,
       :end => (self.end ? self.end.iso8601 : nil),
-      :location => self.location,
+      :location => {event_st_number: st_number, event_st_name: st_name, event_city: city,
+                    event_state: state, event_zip: zip, event_country: country},
       :description => self.description,
       :url => Rails.application.routes.url_helpers.event_path(id)
     }
