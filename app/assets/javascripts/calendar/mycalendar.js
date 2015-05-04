@@ -23,7 +23,6 @@ $(document).ready(function() {
           get_interactive_map(calEvent.location)
         }
       });
-      return false;
     },
 
     header: {
@@ -31,7 +30,6 @@ $(document).ready(function() {
       center: 'title',
       right:  'prev,next'
     }
-
   });
 
   $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));
