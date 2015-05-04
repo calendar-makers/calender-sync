@@ -1,3 +1,6 @@
+= tinymce_assets
+%script{type: "text/javascript", src: "/assets/tinymce.js"}
+
 #e_name
   = label :event, :name, 'Name', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
@@ -51,8 +54,10 @@
 
 #e_description
   = label :event, :description, 'Description', class: 'field'
-  = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field'
+  = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field tinymce'
 
 #e_how_to_find_us
   = label :event, :how_to_find_us, 'How to find us', class: 'field'
   = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '8', class: 'edit_text_field'
+
+= tinymce
