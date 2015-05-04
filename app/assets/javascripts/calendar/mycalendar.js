@@ -19,22 +19,12 @@ $(document).ready(function() {
         type: 'GET',
         url: 'calendar/show_event',
         data: {
-          id: calEvent.id,
+          id: calEvent.id
           //could pass all the other fields here to avoid a database lookup...
         },
         dataType: 'script',
         complete: function(){
-          console.log("Yoyoyo")
-          console.log($('#loco').text());
-          var loc = $('#loco').text();
-          console.log(loc);
-          console.log("^^loc");
-          var address = new google.maps.places.Autocomplete((loc),
-                                                        { types: ['geocode'] });
-          console.log("lalalala");
-          //initialize();
-          get_my_interactive_map(address);
-          console.log("after");
+          get_interactive_map(calEvent.location)
         }
       });
       return false;
