@@ -21,7 +21,7 @@
 
 #e_location
   .field= label_tag 'Location', 'Location'
-  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();', id: 'locator'}
+  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
 
   .field= label_tag 'Street Address', 'Street Address'
   %div
