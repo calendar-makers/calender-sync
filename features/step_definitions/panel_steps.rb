@@ -9,43 +9,16 @@ When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
   all('.fc-title', :text => name)[0].click
 end
 
-=begin
-When(/^I click on "(.*)" in the calendar$/) do |name|
-# problems.....
-   expect(page).to have_selector(".fc-event-container")
-   page.execute_script(<<-JAVASCRIPT)
-   var handlers = $('.fc-event-container')[0].click;
-   console.log("hi");
-   JAVASCRIPT
-   page.execute_script("$('.fc-title')[0].click;")
-   p page.body
-   find(:xpath, '//span[contains(., "Volunteer")').click
-   page.all(".fc-title").each do |el|
-     el.click
-   end
-   p page.execute_script("var thing = [{
-                        'id':1,
-                        'title':'Green Bean Mixer',
-                        'start':'',
-                        'end':'',
-                        'location':'45 Seneca st\nPhoenix91210\n',
-                        'description':'If you like beans youll like this event!',
-                        'temp':'/events/1'
-                      }]; thing;")
- end
-=end
-
 Then(/^the panel should display "(.*)" in its "(.*)" field$/) do |value, field|
-  expect(page).to have_content("Event Details")
-  expect(value).to be(value)
+  expect(page).to have_css("##{field}", text: value)
 end
 
-Then(/^the panel should display the (.*) and description for "(.*)"$/) do |image, name|
-  expect(image).to be(image)
-  step %Q(the panel should display "Description" in its "Description" field)
+Then(/^the panel should display the description for "(.*)"$/) do |name|
+  event = Event.find_by_name(name)
+  step %Q(the panel should display "#{event.description}" in its "description" field)
 end
 
-Then(/^I should see the (.*) in the panel$/) do |panel|
+Then(/^I should see the "(.*)" in the panel$/) do |panel|
   case panel
   when "details"
     expect(page).to have_content("Event Details")
@@ -57,7 +30,7 @@ Then(/^I should see the (.*) in the panel$/) do |panel|
 end
 
 Then(/^I click on the (.*) event button$/) do |action|
-  selector = '#' + action + '_event'
+  selector = "##{action}_event"
   page.find(selector).click
   if action == "delete"
     @d_name = "select only one"
@@ -85,7 +58,6 @@ And(/^(?:|I )save the event$/) do
   page.find('#update').click
 end
 
-# revise later
 Then(/^I(?:| should) see "(.*)" on "(.*)" in the calendar$/) do |name, date|
   step %Q(the month is #{@date})
   expect(page).to have_content(name)

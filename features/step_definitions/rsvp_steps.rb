@@ -10,16 +10,6 @@ Given(/^the following registrations exist:$/) do |registrations_table|
   end
 end
 
-When(/^I fill out and submit the RSVP form with email "(.*)"$/) do |email|
-  fill_in('guest_first_name', :with => 'Jonathan')
-  fill_in('guest_last_name', :with => 'Smith')
-  fill_in('guest_phone', :with => '956-865-1475')
-  fill_in('guest_email', :with => email)
-  fill_in('guest_address', :with => '12 Place Blvd.')
-  choose('guest_is_anon_false')
-  click_button('RSVP')
-end
-
 Then(/^I should see attendees of "(.*)" listed alphabetically by first name$/) do |event_name|
   event = Event.find_by_name(event_name)
   ordered_non_anon_guests = event.guests.where(is_anon: false).order(:first_name)
@@ -41,30 +31,17 @@ Then(/^I should not see anonymous attendees of "(.*)"$/) do |event_name|
   end
 end
 
-Then(/^I should see the RSVP form$/) do
-  tags = ['guest_first_name', 'guest_last_name', 'guest_phone', 'guest_email',
-          'guest_address', 'guest_is_anon_true', 'guest_is_anon_false']
-  tags.each do |tag|
-    expect(page).to have_css("##{tag}")
-  end
-end
-
 When(/^I fill out and submit the RSVP form (anonymously|non-anonymously)$/) do |anon|
+  # Fills out the required fields: First Name, Last Name, Email, and anonymity status.
   fill_in('guest_first_name', :with => 'Alexander')
   fill_in('guest_last_name', :with => 'Hamilton')
-  fill_in('guest_phone', :with => '956-975-1475')
   fill_in('guest_email', :with => 'aHamil@usa.com')
-  fill_in('guest_address', :with => '12 New England Blvd')
   if anon == 'anonymously'
     choose('guest_is_anon_true')
   else
     choose('guest_is_anon_false')
   end
   click_button('RSVP')
-end
-
-Then(/^I should see a message confirming my submission$/) do
-  step %{the page should have the text "You successfully registered for this event!"}
 end
 
 Then(/^I should( not)? see my first name under "(.*?)"$/) do |should_not, event_name|
@@ -76,17 +53,16 @@ Then(/^I should( not)? see my first name under "(.*?)"$/) do |should_not, event_
   end
 end
 
-When(/^I do not fill out the entire RSVP form$/) do
+When(/^I do not fill out the all of the required fields of the RSVP form$/) do
+  # Failed to fill in email and choose anonymity status.
   fill_in('guest_first_name', :with => 'Alexander')
   fill_in('guest_last_name', :with => 'Hamilton')
+  fill_in('guest_phone', :with => '956-865-1475')
+  fill_in('guest_address', :with => '12 Place Blvd.')
 end
 
 When(/^I press "(.*)"$/) do |button|
   click_button(button)
-end
-
-Then(/^I should see a failed submission message$/) do
-  step %{the page should have the text "Please fill out all fields to RSVP."}
 end
 
 Then(/^the page should( not)? have the text "(.*)"$/) do |should_not, text|
