@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   resource :guests, :only => [:create]
   resources :accounts
   get '/', to: redirect('/calendar')
+
+  mount Ckeditor::Engine => '/ckeditor'
 end

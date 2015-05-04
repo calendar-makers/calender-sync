@@ -69,6 +69,9 @@ GEM
     capybara-webkit (1.4.1)
       capybara (>= 2.3.0, < 2.5.0)
       json
+    ckeditor (4.1.1)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -347,6 +350,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara-webkit
+  ckeditor
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   country_select!

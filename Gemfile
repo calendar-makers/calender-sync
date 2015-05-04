@@ -35,6 +35,9 @@ gem 'country_select', github: 'stefanpenner/country_select'
 # authentication
 gem 'devise'
 
+# rich text editor
+gem 'ckeditor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
