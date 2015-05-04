@@ -23,5 +23,6 @@ module CalendarSync
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
     config.assets.precompile += Ckeditor.assets
+    config.assets.paths << Rails.root.join('app', 'assets', 'javascripts', 'ckeditor')
   end
 end
