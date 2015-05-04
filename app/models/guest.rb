@@ -12,8 +12,9 @@ class Guest < ActiveRecord::Base
   end
 
   def self.fields_valid?(fields)
+    required_fields = ['first_name', 'last_name', 'email', 'is_anon']
     fields.each do |k, v|
-      if v == nil || v == ''
+      if (required_fields.include?(k)) and (v == nil || v == '')
         return false
       end
     end

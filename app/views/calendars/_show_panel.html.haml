@@ -1,7 +1,7 @@
 #image
   - if @event.image.file?
     = image_tag @event.image.url(:original)
-    <br/>
+    %br
 
 #name
   .left
@@ -16,7 +16,7 @@
     %p Time
   .right
     %p
-      = @timePeriod
+      = @time_period
   %div{:style=>"clear:both;"}
 
 #location
@@ -24,6 +24,7 @@
   %p#loco
     = @event.location
   %div#map
+
 
 #description
   %p{style: 'font-weight:600;'} About
@@ -46,19 +47,27 @@
       - @non_anon_guests_by_first_name.each do |guest|
         %tr
           %td= guest.first_name
-  <br/>
-  %p RSVP Now!
-  = form_tag create_guest_calendar_path, id: 'rsvp_guest', remote: true, format: :js do
+  %br
+
+  %div{style: 'font-weight:600;'} RSVP Now!
+  %div Your information will not be shared.
+  %div You will be added to our mailing list.
+  %br
+  %i * denotes a required field
+  = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
     -# this path does an ajax post to the calendar controller action create_guest
     = hidden_field_tag :event_id, @event.id
 
-    = text_field :guest, :first_name, class: 'edit_text_field', placeholder: 'First Name', label: 'first_name'
-    = text_field :guest, :last_name, class: 'edit_text_field', placeholder: 'Last Name', label: 'last_name'
+    = text_field :guest, :first_name, class: 'edit_text_field', placeholder: '*First Name', label: 'first_name'
+    = text_field :guest, :last_name, class: 'edit_text_field', placeholder: '*Last Name', label: 'last_name'
+    = text_field :guest, :email, class: 'edit_text_field', placeholder: '*Email', label: 'email'
     = text_field :guest, :phone, class: 'edit_text_field', placeholder: 'Phone Number', label: 'phone'
-    = text_field :guest, :email, class: 'edit_text_field', placeholder: 'Email', label: 'email'
-    = text_area :guest, :address, :rows => '4', class: 'edit_text_field', placeholder: 'Address', label: 'address'
+    = text_field :guest, :address, class: 'edit_text_field', placeholder: 'Address', label: 'address'
+    = text_field :guest, :city, class: 'edit_text_field', placeholder: 'City', label: 'city'
+    = text_field :guest, :state, class: 'edit_text_field', placeholder: 'State', label: 'state'
+    = text_field :guest, :zip, class: 'edit_text_field', placeholder: 'Zip', label: 'zip'
 
-    %p Do you want to remain anonymous?
+    %p*Do you want to remain anonymous to other guests?
     %div{style: 'padding: 0 15% 0 15%;'}
       = hidden_field :guest, :is_anon, :value => nil
       %div{:style=>"float:left; position:relative;"}
@@ -72,17 +81,16 @@
       %div{:style=>"clear:both;"}
     %div{style: 'float:left; position:relative; left:50%;'}
       %div{style: 'float:left; position:relative; left:-50%;'}
-        %p= submit_tag "Submit", :class=>'button'
-    <br/>
+        %p= submit_tag "RSVP", :class=>'button'
+    %br
 
 - if user_signed_in?
-  <br/>
-  <br/>
+  %br
+  %br
   %div
     %div{:style=>"float:left;"}
-      = form_tag show_edit_calendar_path, id: 'edit_event', format: :js, remote: true do
-        -# this path does an ajax post to the calendar controller action show_edit
-        = hidden_field_tag :event_id, @event.id
+      = form_tag edit_event_path(@event), method: 'get', id: 'edit_event', format: :js, remote: true do
+        -# this path does an ajax get to the event controller action "edit"
         %p= submit_tag 'Edit', class: 'button'
     %div{:style=>"float:right;"}
       =form_tag event_path(@event), id: 'delete_event', format: :js, remote: true, method: 'delete' do

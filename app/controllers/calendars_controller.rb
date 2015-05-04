@@ -15,8 +15,6 @@ class CalendarsController < ApplicationController
     @head1 = (@page.at_css "head").inner_html
     @header = @page.at_css "header"
     @footer = @page.at_css "footer"
-    #@text = @head1.inner_html
-    #@head1 = @text
   end
 
   def css_base
@@ -66,7 +64,6 @@ class CalendarsController < ApplicationController
     end
   end
 
-
   def preprocess_for_bad_request
     file = File.join(Rails.root, 'features', 'support', 'backup.html')
     @page = Nokogiri::HTML(File.read(file))
@@ -75,7 +72,6 @@ class CalendarsController < ApplicationController
   def show
     begin
       @page = Nokogiri::HTML(open("http://www.natureinthecity.org/"))
-      #preprocess_for_bad_request
     rescue Exception
       preprocess_for_bad_request
     end
@@ -106,70 +102,5 @@ class CalendarsController < ApplicationController
       info << 'and more'
     end
     info.join(', ')
-  end
-
-
-
-
-
-
-  def respond_js
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def show_event
-    @event = Event.find params[:id]
-    formatTime(@event)
-    new_guests = @event.merge_meetup_rsvps
-    @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
-    respond_js
-  end
-
-  def formatTime(event)
-    startTime = event.start.strftime('%b %e, %Y at %l:%M %P')
-    endTime = ""
-    if event.end
-      if (event.end - event.start) >= 1
-        endTime = event.end.strftime('%b %e, %Y at %l:%M %P')
-      else
-        endTime = event.end.strftime('%l:%M %P')
-      end
-    end
-    @timePeriod = startTime
-    @timePeriod = startTime + ' to ' + endTime unless endTime == ""
-  end
-
-  def show_edit
-    @event = Event.find params[:event_id]
-    respond_js
-  end
-
-  def show_new
-    @event = Event.new
-    respond_js
-  end
-
-  def create_guest
-    @event = Event.find(params[:event_id])
-    if !Guest.fields_valid?(guest_params)
-      return redirect_to event_path(@event.id), notice: 'Please fill out all fields to RSVP.'
-    end
-    handle_guest_registration
-    GuestMailer.rsvp_email(@guest, @event).deliver
-    respond_js
-  end
-
-  def handle_guest_registration
-    @guest = Guest.find_by_email(guest_params[:email]) || Guest.create!(guest_params)
-    @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
-    @guest.save
-  end
-
-  private
-
-  def guest_params
-    params.require(:guest).permit(:first_name, :last_name, :phone, :email, :address, :is_anon)
   end
 end

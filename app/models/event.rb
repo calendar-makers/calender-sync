@@ -22,8 +22,9 @@ class Event < ActiveRecord::Base
       :start => self.start.iso8601,
       :end => (self.end ? self.end.iso8601 : nil),
       :location => {event_st_number: st_number, event_st_name: st_name, event_city: city,
-                    event_state: state, event_zip: zip, event_country: country},#self.location,
-      :description => self.description
+                    event_state: state, event_zip: zip, event_country: country},
+      :description => self.description,
+      :url => Rails.application.routes.url_helpers.event_path(id)
     }
   end
 
@@ -31,17 +32,13 @@ class Event < ActiveRecord::Base
   #   options ? where(nil).apply_finder_options(options, true) : where(nil)
   # end
 
-  def self.check_if_fields_valid(arg)
-    result = {}
-    result[:message] = []
-    result[:value] = true
-    arg.each do |key, value|
+  def self.fields_valid?(parameters)
+    parameters.each do |key, value|
       if value.blank?
-        result[:value] = false
-        result[:message].append key.to_s
+        return false
       end
     end
-    result
+    return true
   end
 
   def is_new?
@@ -270,4 +267,21 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def self.format_time(event)
+    start_time = event.start.strftime('%b %e, %Y at %l:%M %P')
+    end_time = ""
+    if event.end
+      if (event.end - event.start) >= 1
+        end_time = event.end.strftime('%b %e, %Y at %l:%M %P')
+      else
+        end_time = event.end.strftime('%l:%M %P')
+      end
+    end
+
+    if end_time == ""
+      return start_time
+    else
+      return start_time + ' to ' + end_time
+    end
+  end
 end

@@ -17,11 +17,7 @@ $(document).ready(function() {
       jsEvent.preventDefault();
       $.ajax({
         type: 'GET',
-        url: 'calendar/show_event',
-        data: {
-          id: calEvent.id
-          //could pass all the other fields here to avoid a database lookup...
-        },
+        url: calEvent.url,
         dataType: 'script',
         complete: function(){
           get_interactive_map(calEvent.location)
