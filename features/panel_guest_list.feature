@@ -33,5 +33,5 @@ Scenario: Guest sees all event attendees
   Given I am on the "Calendar" page
   And   the month is March 2015
   When I click on "Nature Walk" in the calendar
-  Then I should see the first names of the attendees of "Nature Walk"
+  Then I should see attendees of "Nature Walk" listed alphabetically by first name
   But I should not see anonymous attendees of "Nature Walk"

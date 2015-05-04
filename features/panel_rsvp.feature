@@ -45,5 +45,5 @@ Scenario: RSVP form, completed and submitted anonymously
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the entire RSVP form
-  And I press "Submit"
-  Then I should see "RSVP Now!" on the page
+  And I press "RSVP"
+  Then I should see "Failed to RSVP." on the page
