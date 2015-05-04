@@ -29,37 +29,29 @@ class CalendarsController < ApplicationController
     end
   end
 
+  def css_handler(group_elem, elem, condition )
+    @page.css(group_elem).each do |tag|
+      selector = tag[elem]
+      tag.set_attribute(elem, HOST_WEBSITE + selector) if condition.call(selector)
+    end
+  end
+
   def css_image
-    @page.css('img').each do |tag|
-      src = tag['src']
-      if !src.nil? and src[0]=='/'
-        tag.set_attribute('src', HOST_WEBSITE + src)
-      end
-    end
-  end
-
-  def css_script
-    @page.css('script').each do |tag|
-      src = tag['src']
-      if !src.nil? and src.match('/media')
-        tag.set_attribute('src', HOST_WEBSITE + src)
-      end
-    end
-  end
-
-  def css_li
-     @page.css('li').each do |tag|
-       css_class = tag['class']
-       tag['class'] = 'item-144 current' if !css_class.nil? and css_class == 'item-144'
-    end
+    css_handler('img', 'src', lambda {|elem| !elem.nil? && elem[0] == '/'})
   end
 
   def css_a_form_link
-    @page.css('a,form,link').each do |tag|
-      href = tag['href']
-      if !href.nil? and href[0] =='/'
-        tag.set_attribute('href', HOST_WEBSITE + href)
-      end
+    css_handler('a,form,link', 'href', lambda {|elem| !elem.nil? && elem[0] == '/'})
+  end
+
+  def css_script
+    css_handler('script', 'src', lambda {|elem| !elem.nil? && elem.match('/media')})
+  end
+
+  def css_li
+    @page.css('li').each do |tag|
+      css_class = tag['class']
+      tag['class'] = 'item-144 current' if !css_class.nil? and css_class == 'item-144'
     end
   end
 
