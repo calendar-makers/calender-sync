@@ -1,17 +1,12 @@
-#image
-  - if @event.image.file?
+#title
+  %h2= @event.name
+
+- if @event.image.file?
+  #image
     = image_tag @event.image.url(:original)
     %br
 
-#name
-  .left
-    %p Title
-  .right
-    %p
-      = @event.name
-  %div{:style=>"clear:both;"}
-
-#date_time
+#time
   .left
     %p Time
   .right
@@ -36,8 +31,7 @@
     != @event.how_to_find_us
 
 #rsvp
-  %p Check out who's going!
-  -# maybe we should put a link to an rsvp form page or popup...
+  %p.field Check out who's going!
   %table#attendees
     %thead
       %tr
@@ -49,8 +43,7 @@
   %br
 
   %div{style: 'font-weight:600;'} RSVP Now!
-  %div Your information will not be shared.
-  %div You will be added to our mailing list.
+  %div (You will be added to our mailing list. Your information will not be shared.)
   %br
   %i * denotes a required field
   = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
