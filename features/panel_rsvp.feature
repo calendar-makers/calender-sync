@@ -44,6 +44,6 @@ Scenario: RSVP form, completed and submitted anonymously
   And I should not see my first name under "Nature Walk"
 
 Scenario: Attempt submission of incomplete RSVP form
-  When I do not fill out the entire RSVP form
+  When I do not fill out the all of the required fields of the RSVP form
   And I press "RSVP"
   Then I should see "Failed to RSVP." on the page
