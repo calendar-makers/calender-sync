@@ -11,5 +11,4 @@
 // about supported directives.
 //
 //= require moment
-//= require tinymce-jquery
 //= require_tree .

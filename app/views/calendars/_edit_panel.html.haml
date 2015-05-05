@@ -1,3 +1,6 @@
+= tinymce_assets
+%script{type: "text/javascript", src: "/assets/tinymce.js"}
+
 %h4{style: 'text-align:center; font-weight:200'} Edit Event
 = form_for @event, :url => event_path(@event), id: 'update_event', format: :js,  remote: true, :multipart => true, authenticity_token: true do |f|
   -# this path does an ajax post to the event controller action update
@@ -5,3 +8,5 @@
   <br/><br/>
   = submit_tag "Save Event", id: 'update', class: 'button', style: 'float:right;'
 <br/>
+
+= tinymce
