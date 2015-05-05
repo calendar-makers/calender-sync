@@ -7,7 +7,7 @@
 
 #e_image
   %p.field Image Upload
-  = file_field :event, :image, :id => "image"
+  = file_field :event, :image, id: 'image', accept: 'image/*'
 
 #e_start_time
   = label :event, :start, 'Start Time', class: 'field'
