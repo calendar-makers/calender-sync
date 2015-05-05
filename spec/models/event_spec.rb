@@ -2,23 +2,6 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  describe "Invalid field checking" do
-    it "should return hash with :value => true if all keys are mapped to something" do
-      event_hash = { name: 'coyote appreciation',
-                     location: 'yosemite',
-                     organization: 'nature loving',
-                     start: '8-mar-2016',
-                     description: 'watch coyotes' }
-      expect(Event.fields_valid?(event_hash)).to be_truthy
-    end
-
-    it "should return false for invalid input" do
-      event_hash = { name: '' }
-      expect(Event.fields_valid?(event_hash)).to be_falsey
-    end
-  end
-
-
   describe "#is_new?" do
     context "with a new event" do
       it "returns positive" do

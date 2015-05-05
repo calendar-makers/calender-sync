@@ -20,7 +20,7 @@ Scenario: see the event title
 Scenario: see the event time
   When the month is March 2015
   And I click on "Nature Walk" in the calendar
-  Then the panel should display "Mar 19, 2015 at 4:30 pm to Mar 19, 2015 at 8:30 pm" in its "time" field
+  Then the panel should display "Mar 19, 2015 at 4:30 pm to 8:30 pm" in its "time" field
   When the month is April 2015
   And I click on "Green Bean Mixer" in the calendar
   Then the panel should display "Apr 20, 2015 at 8:30 am to Apr 21, 2015 at 8:30 am" in its "time" field

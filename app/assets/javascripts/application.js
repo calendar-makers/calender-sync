@@ -13,6 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require ckeditor/init
-//= require_directory .
+//= require moment
+//= require_tree .
 //= require jquery.remotipart
