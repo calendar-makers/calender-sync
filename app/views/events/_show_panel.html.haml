@@ -48,7 +48,7 @@
   %br
   %i * denotes a required field
   = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
-    -# this path does an ajax post to the calendar controller action create_guest
+    -# this path does an ajax post to the guests controller action "create"
     = hidden_field_tag :event_id, @event.id
 
     = text_field :guest, :first_name, class: 'edit_text_field', placeholder: '*First Name', label: 'first_name'
