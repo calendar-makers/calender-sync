@@ -36,5 +36,5 @@ Feature: Enforce event lists consistency by updating events locally and remotely
   @meetup_successful_edit
   Scenario: update initiated on Meetup
     Given the event "Nature Walk" is renamed on Meetup to "Festival"
-    And I am on the "Calendar" page
+    And I synchronize the calendar with meetup
     Then the event "Nature Walk" should be renamed to "Festival" on "both" platforms

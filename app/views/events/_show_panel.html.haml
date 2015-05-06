@@ -7,15 +7,17 @@
     %br
 
 #time
-  .left
-    %p Time
-  .right
-    %p
-      = @time_period
-  %div{:style=>"clear:both;"}
+  -#.left
+  %p{style: 'font-weight:600;'} Time
+  -#.right
+  %div
+    %p= @time_period
+  -#%div{:style=>"clear:both;"}
 
 #location
   %p{style: 'font-weight:600;'} Location
+
+  #venue= @event.venue_name
   %p#loco
     = @event.location
   %div#map
@@ -78,7 +80,6 @@
     %br
 
 - if user_signed_in?
-  %br
   %br
   %div
     %div{:style=>"float:left;"}

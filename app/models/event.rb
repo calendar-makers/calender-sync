@@ -3,15 +3,16 @@ class Event < ActiveRecord::Base
   has_many :guests, through: :registrations
   has_many :registrations
 
-  has_attached_file :image, styles: {original: "300x200"}, :url => "/assets/:id/:style/:basename.:extension", :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
+  has_attached_file :image, styles: {original: "300x200"}, :url => "/assets/:id/:style/:basename.:extension",
+                    :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
 
   do_not_validate_attachment_file_type :image
   #validates_attachment_presence :image
   #validates_attachment_size :image, :less_than => 5.megabytes
   #validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 
-  DEFAULT_DATE_FORMAT = '%b %e, %Y at %l:%M %P'
-  DEFAULT_TIME_FORMAT = '%l:%M %P'
+  DEFAULT_DATE_FORMAT = '%b %e, %Y at %l:%M%P'
+  DEFAULT_TIME_FORMAT = '%l:%M%P'
 
   def as_json(options={})
     {
@@ -210,19 +211,19 @@ class Event < ActiveRecord::Base
     date.strftime(DEFAULT_DATE_FORMAT) if date
   end
 
-  def lasts_less_than_1_day?
+  def at_least_1_day_long?
     (self.end - self.start) >= 1.day
   end
 
-  #def pick_end_time_type
-  #  return format_end_date if lasts_less_than_1_day?
-  #  self.end.strftime(DEFAULT_TIME_FORMAT)
-  #end
+  def pick_end_time_type
+    return format_end_date if at_least_1_day_long?
+    self.end.strftime(DEFAULT_TIME_FORMAT)
+  end
 
   def format_time
     start_time = format_start_date
-    end_time = format_end_date#pick_end_time_type
-    start_time + ' to ' + end_time
+    end_time = pick_end_time_type
+    "#{start_time} to #{end_time}"
   end
 
 end

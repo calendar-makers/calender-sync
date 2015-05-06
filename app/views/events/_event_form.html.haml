@@ -5,17 +5,15 @@
   = label :event, :name, 'Name (required)', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
-#e_image
-  %p.field Image Upload
-  = file_field :event, :image, id: 'image', accept: 'image/*'
-
+- now = DateTime.now
+- default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}
 #e_start_time
   = label :event, :start, 'Start Time', class: 'field'
-  = datetime_select :event, :start, class: 'edit_text_field'
+  = datetime_select :event, :start, class: 'edit_text_field', default: default_time, datetime_separator: '', time_separator: '', ampm: true, start_year: now.year
 
 #e_end_time
   = label :event, :end, 'End Time', class: 'field'
-  = datetime_select :event, :end, class: 'edit_text_field'
+  = datetime_select :event, :end, class: 'edit_text_field', default: default_time, datetime_separator: '', time_separator: '', ampm: true, start_year: now.year
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
 
@@ -27,33 +25,34 @@
 
 #e_location
   %div= label_tag 'Location', 'Location', class: 'field'
-  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();'}
+  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'}
 
   %div= label_tag 'Street Address', 'Street Address', class: 'field'
   %div
-    = text_field :event, 'st_number', disabled: true
-    = text_field :event, 'st_name', disabled: true
+    = text_field :event, 'st_number', disabled: true, class: 'short_edit_text_field'
+    = text_field :event, 'st_name', disabled: true, class: 'medium_edit_text_field'
 
   #e_city
     = label :event, :city, 'City', class: 'field'
-    = text_field :event, 'city', class: 'edit_text_field', disabled: true
+    = text_field :event, 'city', class: 'medium_edit_text_field', disabled: true
 
   #e_state
     = label :event, :state, 'State', class: 'field'
-    = text_field :event, 'state', disabled: true
+    = text_field :event, 'state', class: 'short_edit_text_field', disabled: true
 
   #e_zip
     = label :event, :zip, 'Zip', class: 'field'
-    = text_field :event, 'zip', size: '6', class: 'edit_text_field', disabled: true
+    = text_field :event, 'zip', size: '6', class: 'short_edit_text_field', disabled: true
 
   #e_country
     = label :event, :country, 'Country', class: 'field'
-    = text_field :event, 'country', class: 'edit_text_field', disabled: true
-
-  %br
+    = text_field :event, 'country', class: 'short_edit_text_field', disabled: true
 
   #map
-  %br
+
+#e_image
+  %p.field Image Upload
+  = file_field :event, :image, id: 'image', accept: 'image/*'
 
 #e_description
   = label :event, :description, 'Description', class: 'field'

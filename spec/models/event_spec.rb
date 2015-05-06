@@ -41,7 +41,7 @@ RSpec.describe Event, type: :model do
 
   describe "#format_start_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
-    let(:formatted_date) {'Oct 31, 2002 at 12:02 am'}
+    let(:formatted_date) {'Oct 31, 2002 at 12:02am'}
 
     it "returns the date in a simpler form" do
       event = Event.new(start: date)
@@ -52,7 +52,7 @@ RSpec.describe Event, type: :model do
 
   describe "#format_end_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
-    let(:formatted_date) {'Oct 31, 2002 at 12:02 am'}
+    let(:formatted_date) {'Oct 31, 2002 at 12:02am'}
 
     it "returns the date in a simpler form" do
       event = Event.new(end: date)

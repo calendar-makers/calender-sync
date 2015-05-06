@@ -21,6 +21,7 @@ Feature: automatically pull rsvp list from Meetup and merge to rsvp list in the 
       | Laura             |     0          |
 
     And I am on the calendar page
+    And I synchronize the calendar with meetup
     And the month is April 2015
 
   @successful_pull_rsvp

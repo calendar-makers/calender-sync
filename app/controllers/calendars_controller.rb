@@ -78,7 +78,6 @@ class CalendarsController < ApplicationController
 
   def show
     handle_joomla
-    Event.synchronize_upcoming_events
   end
 
 end
