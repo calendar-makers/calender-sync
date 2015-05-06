@@ -5,6 +5,10 @@
   = label :event, :name, 'Name (required)', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
+#e_image
+  %p.field Image Upload
+  = file_field :event, :image, id: 'image', accept: 'image/*'
+
 - now = DateTime.now
 - default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}
 #e_start_time
@@ -48,10 +52,6 @@
     = text_field :event, 'country', class: 'short_edit_text_field', disabled: true
 
   #map
-
-#e_image
-  %p.field Image Upload
-  = file_field :event, :image, id: 'image', accept: 'image/*'
 
 #e_description
   = label :event, :description, 'Description', class: 'field'
