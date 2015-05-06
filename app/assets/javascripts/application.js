@@ -13,6 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.remotipart
 //= require moment
 //= require_tree .
-//= require jquery.remotipart
