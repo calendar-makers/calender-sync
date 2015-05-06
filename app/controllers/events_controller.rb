@@ -55,7 +55,9 @@ class EventsController < ApplicationController
       @event.save!
       @msg = "Successfully added #{@event.name}!"
     else
-      @msg = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
+      @msg = %q(Failed to push event to Meetup. Event creation aborted. Please
+      provide a name for the event. If you entered a location, please ensure
+      that the address is real.)
     end
   end
 

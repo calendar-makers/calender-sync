@@ -28,7 +28,7 @@ Feature: push new calendar events to meetup
   @failed_push
   Scenario: failed push of newly created event to Meetup (Implemented as a transaction)
       Given I click on the "Create Event" button
-      And I should see the message "Failed to push event 'Nature Walk' to Meetup. Creation aborted."
+      And I should see the message "Failed to push event to Meetup."
       And the "Nature Walk" event should exist on "neither" platforms
 
 

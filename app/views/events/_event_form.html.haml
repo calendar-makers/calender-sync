@@ -2,7 +2,7 @@
 %script{type: 'text/javascript', src: 'assets/tinymce/tinymce.js'}
 
 #e_name
-  = label :event, :name, 'Name', class: 'field'
+  = label :event, :name, 'Name (required)', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
 #e_image
@@ -47,10 +47,10 @@
     = label :event, :country, 'Country', class: 'field'
     = text_field :event, 'country', class: 'edit_text_field', disabled: true
 
-  <br>
+  %br
 
   #map
-  <br>
+  %br
 
 #e_description
   = label :event, :description, 'Description', class: 'field'
