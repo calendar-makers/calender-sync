@@ -17,16 +17,14 @@
       = label_tag 'id', 'ID'
       = text_field_tag 'id'
       </br>
+      </br>
       = label_tag 'group_urlname', 'Group Name'
       = text_field_tag 'group_urlname'
       </br>
       </br>
       = submit_tag 'Search', class: 'button'
 
-    </br>
-    </br>
     %h2 Matched Events
-    </br>
     = form_tag pull_third_party_events_path do
       %table#matched_events
         %thead
@@ -63,12 +61,6 @@
     </br>
     </br>
     = link_to 'Back to Calendar', calendar_path
-    </br>
-    </br>
-    = link_to 'Events Directory', events_path
-
-    <br/>
-    <br/>
     <br/>
     <br/>
   %h1.title{:style => "border-top: 4px solid #ff9900; border-bottom: 0px;"}

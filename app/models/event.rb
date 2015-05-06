@@ -26,13 +26,6 @@ class Event < ActiveRecord::Base
     }
   end
 
-  def self.fields_valid?(parameters)
-    parameters.values.each do |value|
-      return false if value.blank?
-    end
-    true
-  end
-
   def is_new?
     self.class.find_by_meetup_id(meetup_id).nil?
   end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+# Ruby version
+ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use SCSS for stylesheets
@@ -29,13 +30,11 @@ gem 'httparty'
 # integrate with Moment.js
 gem 'momentjs-rails'
 
-
-
 # authentication
 gem 'devise'
 
 # rich text editor
-gem 'ckeditor'
+gem 'tinymce-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

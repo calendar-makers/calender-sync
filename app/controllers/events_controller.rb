@@ -43,11 +43,7 @@ class EventsController < ApplicationController
 
   # handles panel add new event
   def create
-    if Event.fields_valid?(event_params)
-      perform_create_transaction
-    else
-      @msg = "Could not create the event. Please make sure all fields are filled before submitting."
-    end
+    perform_create_transaction
     respond_do
   end
 
@@ -59,7 +55,9 @@ class EventsController < ApplicationController
       @event.save!
       @msg = "Successfully added #{@event.name}!"
     else
-      @msg = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
+      @msg = %q(Failed to push event to Meetup. Event creation aborted. Please
+      provide a name for the event. If you entered a location, please ensure
+      that the address is real.)
     end
   end
 
@@ -71,11 +69,7 @@ class EventsController < ApplicationController
   # does panel update event
   def update
     @event = Event.find params[:id]
-    if Event.fields_valid?(event_params)
-      perform_update_transaction
-    else
-      @msg = "Could not update '#{@event.name}'. Please make sure all fields are filled before submitting."
-    end
+    perform_update_transaction
     respond_do
   end
 
