@@ -12,23 +12,11 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
     when /^Calendar$/ then calendar_path
-    when /^Events Directory$/ then events_path
-    when /^Create$/ then new_event_path
     when /^third_party$/ then third_party_events_path
     when /^Sign In$/ then new_user_session_path
     when /^Account Creation$/ then new_account_path
     when /^Account Deletion$/ then '/accounts/root/edit'
-
-    when /^RSVP$/ then pending # Vincent and Mike need to replace 'pending'
-
-    when /^the (.*) page for (.*)$/
-      if $1 == 'details'
-        event_path(Event.find_by_name($2).id)
-      else
-        "/events/#{Event.find_by_name($2).id}/#{$1}"
-      end
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -221,14 +221,14 @@ class Event < ActiveRecord::Base
     (self.end - self.start) >= 1.day
   end
 
-  def pick_end_time_type
-    return format_end_date if lasts_less_than_1_day?
-    self.end.strftime(DEFAULT_TIME_FORMAT)
-  end
+  #def pick_end_time_type
+  #  return format_end_date if lasts_less_than_1_day?
+  #  self.end.strftime(DEFAULT_TIME_FORMAT)
+  #end
 
   def format_time
     start_time = format_start_date
-    end_time = pick_end_time_type
+    end_time = format_end_date#pick_end_time_type
     start_time + ' to ' + end_time
   end
 
