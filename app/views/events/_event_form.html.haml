@@ -25,12 +25,13 @@
 
 #e_location
   %div= label_tag 'Location', 'Location', class: 'field'
-  %div= text_field_tag :autocomplete, nil, {placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'}
+  %div= text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'
 
   %div= label_tag 'Street Address', 'Street Address', class: 'field'
-  %div
-    = text_field :event, 'st_number', disabled: true, class: 'short_edit_text_field'
-    = text_field :event, 'st_name', disabled: true, class: 'medium_edit_text_field'
+  %table
+    %tr
+      %td= text_field :event, 'st_number', disabled: true, style: 'width: 3em'
+      %td= text_field :event, 'st_name', disabled: true
 
   #e_city
     = label :event, :city, 'City', class: 'field'

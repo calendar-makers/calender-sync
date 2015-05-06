@@ -188,10 +188,12 @@ class Event < ActiveRecord::Base
 
   def location
     location = []
-    location << "#{st_number} #{st_name}"
+    if st_number || st_name
+      location << "#{st_number} #{st_name}"
+    end
     location << city.to_s + (state ? (', ' + state + ' ') : ' ') + zip.to_s
     location << country
-    location.join("\n")
+    location.join(', ')
   end
 
   def update_meetup_fields(event)
