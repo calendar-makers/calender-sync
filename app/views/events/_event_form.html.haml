@@ -18,7 +18,10 @@
   = datetime_select :event, :end, class: 'edit_text_field'
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
-= hidden_field :event, :venue_name, value: 'Nature in the City'
+
+#e_venue_name
+  = label :event, :venue_name, 'Venue Name', class: 'field'
+  = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
 #e_address_1
 
