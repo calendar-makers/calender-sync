@@ -1,3 +1,4 @@
+@javascript
 @meetup_pull
 Feature: automatically pull existing events from Meetup onto the calendar
 
@@ -16,28 +17,28 @@ Feature: automatically pull existing events from Meetup onto the calendar
 
   @successful_pull_meetup
   Scenario: perform a successful pull from Meetup
-    Given I am on the "Calendar" page
+    Given I synchronize the calendar with meetup
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should exist
-    And I should see the message "Successfully pulled events: Market Street Prototyping Festival, Nerds on Safari: Market Street, Volunteer at the Adah Bakalinsky Steps! from Meetup"
+    #And I should see the message "Successfully pulled events: Market Street Prototyping Festival, Nerds on Safari: Market Street, Volunteer at the Adah Bakalinsky Steps! from Meetup"
 
   @failed_pull_meetup
   Scenario: failed pull from Meetup
-    Given I am on the "Calendar" page
+    Given I synchronize the calendar with meetup
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should not exist
-    And I should see the message "Could not pull events from Meetup"
+    #And I should see the message "Could not pull events from Meetup"
 
   @repeated_changed_pull_meetup
   Scenario: perform a successful pull of updated events from Meetup
     Given I already pulled from Meetup
     And the meetup event "Market Street Prototyping Festival" is updated to the name "Prototyping Festival"
-    And I am on the "Calendar" page
+    And I synchronize the calendar with meetup
     Then the Meetup events "Prototyping Festival" should exist
     And the Meetup events "Market Street Prototyping Festival" should not exist
-    And I should see the message "Successfully pulled events: Prototyping Festival from Meetup"
+    #And I should see the message "Successfully pulled events: Prototyping Festival from Meetup"
 
   @repeated_unchanged_pull_meetup
   Scenario: perform a successful pull of unchanged events from Meetup
     Given I already pulled from Meetup
-    And I am on the "Calendar" page
+    And I synchronize the calendar with meetup
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should exist
-    And I should see the message "The Calendar and Meetup are synched"
+    #And I should see the message "The Calendar and Meetup are synched"

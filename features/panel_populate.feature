@@ -12,28 +12,28 @@ Background: events have already been added to the database
 
   And I am on the calendar page
 
-Scenario: see the event
+Scenario: see the event title
   When the month is April 2015
   And I click on "Green Bean Mixer" in the calendar
   Then the panel should display "Green Bean Mixer" in its "title" field
 
-Scenario: see the event "when"
+Scenario: see the event time
   When the month is March 2015
   And I click on "Nature Walk" in the calendar
-  Then the panel should display "Mar 19th 2015, 4:30 pm to 8:30 pm" in its "When" field
+  Then the panel should display "Mar 19, 2015 at 4:30pm to 8:30pm" in its "time" field
   When the month is April 2015
   And I click on "Green Bean Mixer" in the calendar
-  Then the panel should display "Apr 20th 2015, 8:30 am to Apr 21th 2015, 8:30 am" in its "When" field
+  Then the panel should display "Apr 20, 2015 at 8:30am to Apr 21, 2015 at 8:30am" in its "time" field
 
-Scenario: see the event "where"
+Scenario: see the event location
   When the month is April 2015
   And I click on "Green Bean Mixer" in the calendar
-  Then the panel should display "The old Town Hall" in its "Where" field
+  Then the panel should display "45 Seneca st" in its "location" field
 
-Scenario: see all event details in panel, including image and description
+Scenario: see event description
   When the month is April 2015
   And I click on "Green Bean Mixer" in the calendar
-  Then the panel should display the image and description for "Green Bean Mixer"
+  Then the panel should display the description for "Green Bean Mixer"
   When the month is March 2015
   And when I click on "Nature Walk" in the calendar
-  Then the panel should display the image and description for "Nature Walk"
+  Then the panel should display the description for "Nature Walk"

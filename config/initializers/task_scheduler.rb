@@ -10,8 +10,8 @@ scheduler.every '1m', first: Time.now + 20 do |job|
 end
 
 
-scheduler.every '5m', first: Time.now + 2 * 60  do |job|
-  if Time.now.min == 30
+scheduler.every '1m', first: Time.now + 2 * 60  do |job|
+  if Time.now.min % 30 == 0
     Event.synchronize_past_events
     puts 'Past Events Synchronized.'
   end

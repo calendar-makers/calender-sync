@@ -1,44 +1,42 @@
-#image
-  - if @event.image.file?
+#title
+  %h2= @event.name
+
+- if @event.image.file?
+  #image
     = image_tag @event.image.url(:original)
     %br
 
-#name
-  .left
-    %p Title
-  .right
-    %p
-      = @event.name
-  %div{:style=>"clear:both;"}
-
-#date_time
-  .left
-    %p Time
-  .right
-    %p
-      = @time_period
-  %div{:style=>"clear:both;"}
+#time
+  -#.left
+  %p{style: 'font-weight:600;'} Time
+  -#.right
+  %div
+    %p= @time_period
+  -#%div{:style=>"clear:both;"}
 
 #location
   %p{style: 'font-weight:600;'} Location
+
+  #venue= @event.venue_name
   %p#loco
     = @event.location
 
   %div#map
 
+
+
 #description
   %p{style: 'font-weight:600;'} About
-  %p
+  %div
     != @event.description
 
 #find_us
   %p{style: 'font-weight:600;'} How to find us
-  %p
+  %div
     != @event.how_to_find_us
 
 #rsvp
-  %p Check out who's going!
-  -# maybe we should put a link to an rsvp form page or popup...
+  %p.field Check out who's going!
   %table#attendees
     %thead
       %tr
@@ -50,12 +48,11 @@
   %br
 
   %div{style: 'font-weight:600;'} RSVP Now!
-  %div Your information will not be shared.
-  %div You will be added to our mailing list.
+  %div (You will be added to our mailing list. Your information will not be shared.)
   %br
   %i * denotes a required field
   = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
-    -# this path does an ajax post to the calendar controller action create_guest
+    -# this path does an ajax post to the guests controller action "create"
     = hidden_field_tag :event_id, @event.id
 
     = text_field :guest, :first_name, class: 'edit_text_field', placeholder: '*First Name', label: 'first_name'
@@ -85,7 +82,6 @@
     %br
 
 - if user_signed_in?
-  %br
   %br
   %div
     %div{:style=>"float:left;"}

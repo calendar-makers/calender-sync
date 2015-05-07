@@ -680,20 +680,23 @@ default.call
 Before('@meetup_push') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 Before('@successful_push') do
   FakeWeb.clean_registry
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {:body => pushed_event, :content_type => 'application/json', :status => ["201", "Created"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
 end
 
 Before('@failed_push') do
   FakeWeb.clean_registry
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
   FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
 end
 
 # Set defaults
@@ -709,6 +712,9 @@ Before('@meetup_edit') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
   FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
+
 end
 
 Before('@calendar_successful_edit') do
@@ -779,6 +785,7 @@ end
 Before('@meetup_pull') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 # Set defaults
@@ -916,6 +923,7 @@ end
 Before('@meetup_pull_rsvp') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
+  FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
 # Set defaults

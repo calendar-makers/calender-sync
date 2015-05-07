@@ -26,9 +26,12 @@
       - if user_signed_in?
         = form_tag new_event_path, method: :get, id: 'new_event', format: :js, remote: true, style: 'float:right;' do
           -# this path does an ajax GET to the event controller action "new"
-          %p= submit_tag '+', class: 'button'
-        %div{style: 'position:relative;width:2em;'} 
-        = button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: 'button', style: 'float:left;'
+          = submit_tag '+', class: 'button'
+        %div{style: 'position:relative;width:2em;'}
+        -#= button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: 'button', style: 'float:left;'
+        = form_tag third_party_events_path, method: :get, id: 'third_party', format: :js, remote: true, style: 'float:left;' do
+          -#this path does an ajax GET to the event controller action "new"
+          = submit_tag '+ 3rd Party', class: 'button'
     %div{:style=>"clear:both;"}
   </br>
 
@@ -43,6 +46,6 @@
 
     %div{:style => "clear:both;"}
 
-</br></br></br></br></br>
+</br></br>
 %div{style: 'width:90%; margin-left:5%; margin-right:5%; min-width:50em;'}= raw @section
 %div{style: 'min-width:50em;'}= raw @footer

@@ -14,7 +14,7 @@ describe CalendarsController do
     end
   end
 
-
+=begin
   describe 'synchronizing in #show' do
     context 'multiple events' do
       let(:events) {[Event.new, Event.new, Event.new]}
@@ -27,7 +27,7 @@ describe CalendarsController do
 
     end
 
-=begin
+
       it 'should indirectly get remote meetup events' do
         allow(Event).to receive(:get_remote_events).and_return(events)
         expect(Event).to receive(:get_remote_events)
@@ -99,6 +99,6 @@ describe CalendarsController do
   end
 =end
 
-  end
+
 end
 

@@ -13,30 +13,34 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
-    @time_period = Event.format_time(@event)
-    new_guests = @event.merge_meetup_rsvps
+    @time_period = @event.format_time
+    @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
     respond_do
   end
 
   def third_party
-    if not params[:id].blank?
-      @events = Event.get_remote_events({event_id: params[:id]})
-    elsif  !params[:group_urlname].blank?
-      @events = Event.get_remote_events({group_urlname: params[:group_urlname]})
-    else
-      @events = []
+    id = params[:id]
+    if !id.blank?
+      @events = Event.get_remote_events({event_id: id})
+      #return respond_do
     end
+    return respond_do
+    #return (@events = Event.get_remote_events({event_id: id}) && respond_do) unless id.blank?
+    group_urlname = params[:group_urlname]
+    return @events = Event.get_remote_events({group_urlname: group_urlname}) unless group_urlname.blank?
+    @events = []
   end
 
   def pull_third_party
     ids = Event.get_event_ids(params)
     if ids.blank?
-      flash[:notice] = 'You must select at least one event. Please retry.'
-      return redirect_to third_party_events_path
+      @msg = 'You must select at least one event. Please retry.'
+      #return redirect_to third_party_events_path
     end
-    events = Event.store_third_party_events(ids)
-    redirect_to calendar_path, notice: Event.display_message(events)
+    Event.store_third_party_events(ids)
+    #redirect_to calendar_path
+    render partial: 'pull_third_party'
   end
 
   def new
@@ -45,11 +49,7 @@ class EventsController < ApplicationController
 
   # handles panel add new event
   def create
-    if not Event.fields_valid?(event_params)
-      @msg = "Could not create the event. Please make sure all fields are filled before submitting."
-    else
-      perform_create_transaction
-    end
+    perform_create_transaction
     respond_do
   end
 
@@ -61,7 +61,9 @@ class EventsController < ApplicationController
       @event.save!
       @msg = "Successfully added #{@event.name}!"
     else
-      @msg = "Failed to push event '#{@event.name}' to Meetup. Creation aborted."
+      @msg = %q(Failed to push event to Meetup. Event creation aborted. Please
+      provide a name for the event. If you entered a location, please ensure
+      that the address is real.)
     end
   end
 
@@ -73,11 +75,7 @@ class EventsController < ApplicationController
   # does panel update event
   def update
     @event = Event.find params[:id]
-    if not Event.fields_valid?(event_params)
-      @msg = "Could not update '#{@event.name}'. Please make sure all fields are filled before submitting."
-    else
-      perform_update_transaction
-    end
+    perform_update_transaction
     respond_do
   end
 
@@ -94,7 +92,7 @@ class EventsController < ApplicationController
   # handles panel event delete
   def destroy
     @event = Event.find params[:id]
-    name = @event.name
+    @event.name
     @id = @event.id
     perform_destroy_transaction
     respond_do

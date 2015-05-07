@@ -19,12 +19,22 @@ Then /I should see(?:| the) "(.*)" on the page$/ do |content|
 end
 
 And /^I fill in the "(.*)" field with "(.*)"$/ do |field, value|
-  field = find_field(field)
-  field.set value
+  if (field != 'Description') && (field != 'How to find us')
+    field = find_field(field)
+    field.set value
+  else
+    if field == 'Description'
+      id = 'event_description'
+    else
+      id = 'event_how_to_find_us'
+    end
+    js = "tinyMCE.get('#{id}').setContent('#{value}')"
+    page.execute_script(js)
+  end
 end
 
 And /^I select "([^"]*)" as the date and time$/ do |value|
-  dt  = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
+  dt = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
   select dt.year, :from => 'event_start_1i'
   select dt.strftime("%B"), :from => 'event_start_2i'
   select dt.day, :from => 'event_start_3i'

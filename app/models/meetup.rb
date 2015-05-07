@@ -6,7 +6,7 @@ class Meetup
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
-  UTC_OFFSET = 14400000
+  UTC_OFFSET = 25200000#14400000#
 
   # NATURE IN THE CITY DATA
   GROUP_ID = '1556336'#'8870202'
@@ -59,11 +59,13 @@ class Meetup
     #options[:body].merge!(announce:'true')
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", options)
+    byebug
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 201)
   end
 
   def pull_event(id)
     data = HTTParty.get("#{BASE_URL}/2/event/#{id}?#{Meetup.options_string(default_auth)}")
+    byebug
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
   end
 
@@ -102,16 +104,13 @@ class Meetup
   end
 
   def self.parse_event(data)
-    event = {}
-    event[:meetup_id] = data['id']
-    event[:name] = data['name']
-    event[:description] = data['description']
-    event[:organization] = data['group']['name']
-    event[:url] = data['event_url']
-    event[:how_to_find_us] = data['how_to_find_us']
-    event[:status] = data['status']
-    event.merge!(parse_dates(data))
-    event.merge!(parse_venue(data))
+    {meetup_id: data['id'],
+     name: data['name'],
+     description: data['description'],
+     organization: data['group']['name'],
+     url: data['event_url'],
+     how_to_find_us: data['how_to_find_us'],
+     status: data['status']}.merge(parse_dates(data)).merge(parse_venue(data))
   end
 
   def self.parse_dates(data)
@@ -125,14 +124,14 @@ class Meetup
 
   def self.parse_venue(data)
     if data && data = data['venue']
-      venue = {}
-      venue[:venue_name] = data['name']
-      venue[:st_number], venue[:st_name] = Meetup.parse_address(data['address_1'])
-      venue[:city] = data['city']
-      venue[:zip] = data['zip']
-      venue[:state] = data['state']
-      venue[:country] = data['country']
-      venue
+      st_num, st_name = Meetup.parse_address(data['address_1'])
+      {venue_name: data['name'],
+       st_number: st_num,
+       st_name: st_name,
+       city: data['city'],
+       zip: data['zip'],
+       state: data['state'],
+       country: data['country']}
     else
       {}
     end
@@ -146,20 +145,18 @@ class Meetup
   end
 
   def get_event_data(event)
-    data = {}
-    data[:name] = event['name']
-    data[:description] = event['description']
-    data[:venue_id] = get_meetup_venue_id(event)
     start = event['start']
     stop = event['end']
-    data[:time] = set_time(start)
     duration = (stop && start) ? stop - start : 0
-    data[:duration] = Meetup.get_milliseconds(duration)
-    data[:how_to_find_us] = event['how_to_find_us']
-    data.compact
+    {name: event['name'],
+     description: event['description'],
+     venue_id: get_meetup_venue_id(event),
+     time: Meetup.set_time(start),
+     duration: Meetup.get_milliseconds(duration),
+     how_to_find_us: event['how_to_find_us']}.compact
   end
 
-  def set_time(date)
+  def self.set_time(date)
     Meetup.get_milliseconds(date) + UTC_OFFSET
     #local_offset = DateTime.now.offset
     #date.to_datetime.new_offset(local_offset).to_i * 1000
@@ -199,22 +196,19 @@ class Meetup
   end
 
   def self.build_date(time, utc_offset)
-    if time
-      (time = time + utc_offset) if utc_offset
-      millis_per_second = 1000
-      Time.at(time / millis_per_second).to_datetime
-    end
+    return if time.nil?
+    (time = time + utc_offset) if utc_offset
+    millis_per_second = 1000
+    Time.at(time / millis_per_second).to_datetime
   end
 
   def self.parse_rsvp(data)
-    rsvp = {}
-    rsvp[:event_id] = data['event']['id']
     member = data['member']
-    rsvp[:meetup_id] = member['member_id']
-    rsvp[:meetup_name] = member['name']
-    rsvp[:invited_guests] = data['guests']
-    rsvp[:updated] = build_date(data['mtime'], data['utc_offset'])
-    rsvp
+    {event_id: data['event']['id'],
+     meetup_id: member['member_id'],
+     meetup_name: member['name'],
+     invited_guests: data['guests'],
+     updated: build_date(data['mtime'], data['utc_offset'])}
   end
 
   def self.options_string(options)

@@ -18,13 +18,13 @@ Background: Events have already been added to the database
 
 Scenario: show the new event panel
   When I click on the new event button
-  Then I should see the new form in the panel
+  Then I should see the "new form" in the panel
 
 Scenario: Show the event editing panel
   Given the month is March 2015
   When I click on "Nature Walk" in the calendar
   And I click on the edit event button
-  Then I should see the edit form in the panel
+  Then I should see the "edit form" in the panel
   When I change the start time to "April 16 12:00 am"
   And save the event
   Then I should see "Nature Walk" on "April 16" in the calendar

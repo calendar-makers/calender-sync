@@ -2,52 +2,6 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  describe "Invalid field checking" do
-    it "should return hash with :value => true if all keys are mapped to something" do
-      event_hash = { name: 'coyote appreciation',
-                     location: 'yosemite',
-                     organization: 'nature loving',
-                     start: '8-mar-2016',
-                     description: 'watch coyotes' }
-      expect(Event.fields_valid?(event_hash)).to be_truthy
-    end
-
-    it "should return hash with :value => false if nil or empty string" do
-      event_hash = { name: '' }
-      expect(Event.fields_valid?(event_hash)).to be_falsey
-    end
-  end
-
-  describe "#generate_participants_message" do
-    it "returns the string reporting the total participants" do
-      total_participants = 100000
-      allow_any_instance_of(Event).to receive(:count_event_participants).and_return(total_participants)
-      string = Event.new.generate_participants_message
-      expect(string).to eq("The total number of participants, including invited guests, so far is: #{total_participants}")
-    end
-  end
-
-  describe "#count_events_participants" do
-    let(:event) {Event.new}
-
-    context "with at least a positive rsvp" do
-      it "gives the total number of attendees" do
-        event.registrations << Registration.new(invited_guests: 1000)
-        event.registrations << Registration.new(invited_guests: 0)
-        event.save!
-        total = event.count_event_participants
-        expect(total).to eq(1002)
-      end
-    end
-
-    context "with no positive rsvps" do
-      it "gives zero attendees" do
-        total = event.count_event_participants
-        expect(total).to eq(0)
-      end
-    end
-  end
-
   describe "#is_new?" do
     context "with a new event" do
       it "returns positive" do
@@ -87,7 +41,7 @@ RSpec.describe Event, type: :model do
 
   describe "#format_start_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
-    let(:formatted_date) {'10/31/2002 at 12:02AM'}
+    let(:formatted_date) {'Oct 31, 2002 at 12:02am'}
 
     it "returns the date in a simpler form" do
       event = Event.new(start: date)
@@ -98,7 +52,7 @@ RSpec.describe Event, type: :model do
 
   describe "#format_end_date" do
     let(:date) {Time.utc(2002, 10, 31, 0, 2)}
-    let(:formatted_date) {'10/31/2002 at 12:02AM'}
+    let(:formatted_date) {'Oct 31, 2002 at 12:02am'}
 
     it "returns the date in a simpler form" do
       event = Event.new(end: date)
@@ -107,12 +61,12 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "::process_remote_events" do
+  describe ".process_remote_events" do
     let(:event) {[Event.new]}
 
     context "with new events" do
       it "saves the event in the db" do
-        expect_any_instance_of(Event).to receive(:save!)
+        expect_any_instance_of(Event).to receive(:save)
         Event.process_remote_events(event)
       end
     end
@@ -204,18 +158,6 @@ RSpec.describe Event, type: :model do
     end
 
   end
-=begin
-  describe '#location' do
-    let(:location_data) {{'address_1' => '145 peep st', 'city' => 'New York',
-                          'zip' => '90210', 'state' => 'NY', 'country' => 'US'}}
-    let(:event) {Event.new(location_data)}
-    let(:location) {[]}
-    it 'returns a complete location string' do
-      location_data.each {|k, v| location << v}
-      expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
-    end
-  end
-=end
 
   describe '#location' do
     let(:location) {[]}
@@ -225,19 +167,19 @@ RSpec.describe Event, type: :model do
                             'zip' => '90210', 'state' => 'NY', 'country' => 'US'}
       event = Event.new(location_data)
       location_data.each {|k, v| location << v}
-      expect(event.location).to eq("145 peep st\nNew York, NY 90210\nUS")
+      expect(event.location).to eq("145 peep st, New York, NY 90210, US")
     end
 
     it 'handles nil state fields' do
       location_data = {'st_number' => '145', 'st_name' => 'peep st', 'city' => 'New York',
                        'zip' => '90210', 'state' => nil, 'country' => 'US'}
       event = Event.new(location_data)
-      expect(event.location).to eq("145 peep st\nNew York 90210\nUS")
+      expect(event.location).to eq("145 peep st, New York 90210, US")
     end
 
   end
 
-  describe '::remove_remotely_deleted_events' do
+  describe '.remove_remotely_deleted_events' do
     before(:each) do
       @event_1 = Event.create!(meetup_id: '12345', start: DateTime.now)
       @event_2 = Event.create!(meetup_id: '678910', start: DateTime.now)
@@ -283,7 +225,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '::get_remotely_deleted_ids' do
+  describe '.get_remotely_deleted_ids' do
     before(:each) do
       @event_1 = Event.create!(meetup_id: '12345', start: DateTime.now)
       @event_2 = Event.create!(meetup_id: '678910', start: DateTime.now)
@@ -343,7 +285,7 @@ RSpec.describe Event, type: :model do
 
 
 
-  describe "::get_requested_ids" do
+  describe ".get_requested_ids" do
     let(:data) {{event123: "1", e123vent: "2", evenABC: "3", event: "4", event12abc: "5"}}
     it "Selects only ids which match /^event.*/" do
       result = Event.get_requested_ids(data)
@@ -351,42 +293,13 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe "::cleanup_ids" do
+  describe ".cleanup_ids" do
     let(:dirty_ids) {['event123', 'event1456', 'eventABC']}
     let(:clean_ids) {['123', '1456', 'ABC']}
 
     it 'should return only pure ids' do
       result = Event.cleanup_ids(dirty_ids)
       expect(result).to eq(clean_ids)
-    end
-  end
-
-  describe "::display_message" do
-
-    context "with at least one event" do
-      let(:events) {[Event.new(name: 'gardening'), Event.new(name: 'swimming')]}
-
-      it "returns a message with the added event names" do
-        result = Event.display_message(events)
-        expect(result).to eq("Successfully added: gardening, swimming.")
-      end
-    end
-
-    context "with zero events" do
-      let(:events) {[]}
-
-      it "returns a message stating that the RSVP for the event is up to date with Meetup" do
-        result = Event.display_message(events)
-        expect(result).to eq("These events are already in the Calendar, and are up to date.")
-      end
-    end
-
-    context "with nil" do
-      let(:events) {}
-      it "returns a failure message" do
-        result = Event.display_message(events)
-        expect(result).to eq("Could not add event. Please retry.")
-      end
     end
   end
 
