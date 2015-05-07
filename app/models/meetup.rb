@@ -6,7 +6,7 @@ class Meetup
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
-  UTC_OFFSET = 14400000
+  UTC_OFFSET = 25200000
 
   # NATURE IN THE CITY DATA
   GROUP_ID = '1556336'#'8870202'
