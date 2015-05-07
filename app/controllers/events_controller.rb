@@ -21,7 +21,12 @@ class EventsController < ApplicationController
 
   def third_party
     id = params[:id]
-    return @events = Event.get_remote_events({event_id: id}) unless id.blank?
+    if !id.blank?
+      @events = Event.get_remote_events({event_id: id})
+      #return respond_do
+    end
+    return respond_do
+    #return (@events = Event.get_remote_events({event_id: id}) && respond_do) unless id.blank?
     group_urlname = params[:group_urlname]
     return @events = Event.get_remote_events({group_urlname: group_urlname}) unless group_urlname.blank?
     @events = []
@@ -30,11 +35,12 @@ class EventsController < ApplicationController
   def pull_third_party
     ids = Event.get_event_ids(params)
     if ids.blank?
-      flash[:notice] = 'You must select at least one event. Please retry.'
-      return redirect_to third_party_events_path
+      @msg = 'You must select at least one event. Please retry.'
+      #return redirect_to third_party_events_path
     end
     Event.store_third_party_events(ids)
-    redirect_to calendar_path
+    #redirect_to calendar_path
+    render partial: 'pull_third_party'
   end
 
   def new

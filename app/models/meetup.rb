@@ -6,7 +6,7 @@ class Meetup
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
-  UTC_OFFSET = 25200000
+  UTC_OFFSET = 25200000#14400000#
 
   # NATURE IN THE CITY DATA
   GROUP_ID = '1556336'#'8870202'
@@ -59,11 +59,13 @@ class Meetup
     #options[:body].merge!(announce:'true')
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", options)
+    byebug
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 201)
   end
 
   def pull_event(id)
     data = HTTParty.get("#{BASE_URL}/2/event/#{id}?#{Meetup.options_string(default_auth)}")
+    byebug
     Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
   end
 

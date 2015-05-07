@@ -1,3 +1,4 @@
+=begin
 scheduler = Rufus::Scheduler.new
 
 scheduler.every '1m', first: Time.now + 20 do |job|
@@ -17,3 +18,4 @@ scheduler.every '1m', first: Time.now + 2 * 60  do |job|
   Event.synchronize_upcoming_events
   puts 'Upcoming Events Synchronized.'
 end
+=end

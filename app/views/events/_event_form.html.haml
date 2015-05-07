@@ -13,6 +13,7 @@
 - default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}
 #e_start_time
   = label :event, :start, 'Start Time', class: 'field'
+
   = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true, start_year: now.year
 
 #e_end_time
