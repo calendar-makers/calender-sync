@@ -9,9 +9,9 @@ class Meetup
   UTC_OFFSET = 25200000
 
   # NATURE IN THE CITY DATA
-  GROUP_ID = '1556336'#'8870202'
-  GROUP_URLNAME = 'Meetup-API-Testing'#'Nature-in-the-City'
-  GROUP_NAME = 'Meetup API Testing Sandbox'#'Nature in the City'
+  GROUP_ID = '8870202' # '1556336'#
+  GROUP_URLNAME = 'Nature-in-the-City' #'Meetup-API-Testing'#
+  GROUP_NAME = 'Nature in the City' #'Meetup API Testing Sandbox'#
 
   def default_group_name=(name='')
     @default_group_name = name.blank? ? GROUP_NAME : name
@@ -149,17 +149,15 @@ class Meetup
     {name: event['name'],
      description: event['description'],
      venue_id: get_meetup_venue_id(event),
-     time: Meetup.set_time(start),
+     time: Meetup.get_milliseconds(Meetup.set_time(start)),
      duration: Meetup.get_milliseconds(duration),
      how_to_find_us: event['how_to_find_us']}.compact
   end
 
   def self.set_time(date)
-    Meetup.get_milliseconds(date) + UTC_OFFSET
-    #local_offset = DateTime.now.offset
-    #date.to_datetime.new_offset(local_offset).to_i * 1000
-    #date.to_datetime.change(offset: local_offset).to_i * 1000
-    #1430434800000
+    #Meetup.get_milliseconds(date) + UTC_OFFSET
+    local_offset = DateTime.now.offset
+    date.to_datetime.change(offset: local_offset)
   end
 
   def get_meetup_venue_id(event)
