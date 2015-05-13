@@ -135,7 +135,7 @@ h2 {
 .field {
     font-weight: 600;
 }
-#title, #time, #location, #description, #find_us, #rsvp, #e_name, #e_start_date, #e_start_time,
+#title, #time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
 #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name, #e_how_to_find_us {
     border-top: 1px solid #ccc;
 }
@@ -143,13 +143,13 @@ h2 {
 #e_how_to_find_us, #e_organization, #e_venue_name {
     padding: 0.5em 0 0.7em 0;
 }
-#date_time, #time, #description, #rsvp, #e_end_time, #e_description, #e_name, #e_location, #e_organization {
+#date_time, #time, #description, #guests, #e_end_time, #e_description, #e_name, #e_location, #e_organization {
     background: #f9f9f9;
 }
-#time, #description, #find_us, #rsvp {
+#time, #description, #find_us, #guests {
     padding: 0.2em;
 }
-#rsvp, #e_how_to_find_us {
+#guests, #e_how_to_find_us {
     border-bottom: 1px solid #ccc;
 }
 .edit_text_field {

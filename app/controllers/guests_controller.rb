@@ -1,4 +1,9 @@
 class GuestsController < ActionController::Base
+  def new
+    @event = Event.find(params[:event_id])
+    respond_js
+  end
+
   def create
     @event = Event.find(params[:event_id])
     if !Guest.fields_valid?(guest_params)
