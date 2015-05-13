@@ -1,5 +1,4 @@
 class Meetup
-
   include HTTParty
 
   attr_reader :default_group_id, :default_group_urlname, :default_auth, :default_group_name
@@ -9,9 +8,14 @@ class Meetup
   UTC_OFFSET = 25200000
 
   # NATURE IN THE CITY DATA
-  GROUP_ID = '8870202' # '1556336'#
-  GROUP_URLNAME = 'Nature-in-the-City' #'Meetup-API-Testing'#
-  GROUP_NAME = 'Nature in the City' #'Meetup API Testing Sandbox'#
+=begin
+  GROUP_ID = '8870202'
+  GROUP_URLNAME = 'Nature-in-the-City'
+  GROUP_NAME = 'Nature in the City'
+=end
+  GROUP_ID = '1556336'
+  GROUP_URLNAME = 'Meetup-API-Testing'
+  GROUP_NAME = 'Meetup API Testing Sandbox'
 
   def default_group_name=(name='')
     @default_group_name = name.blank? ? GROUP_NAME : name
@@ -215,4 +219,3 @@ class Meetup
     date.to_i * 1000
   end
 end
-
