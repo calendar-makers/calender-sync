@@ -1,6 +1,9 @@
 %div{style: 'width:90%; margin-left:5%; margin-right:5%; min-width:50em;'}= raw @header
 %hr{style: 'width:90%; margin-left:5%; margin-right:5%; min-width:50em;'}
 
+%div{id: 'overlay'}
+%div{id: 'content_box'}
+
 %main{:style => "width:75%; margin-left:12.5%; margin-right:12.5%; min-width:50em;"}
   - flash.each do |name, msg|
     = msg

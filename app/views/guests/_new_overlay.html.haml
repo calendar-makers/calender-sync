@@ -1,7 +1,5 @@
 #rsvp_form
-  #rsvp_title= "RSVP for #{@event.name}!"
-
-  %div{style: 'font-weight:600;'} RSVP Now!
+  %div#rsvp_title{style: 'font-weight:600;'}= "RSVP for #{@event.name}!"
   %div (You will be added to our mailing list. Your information will not be shared.)
   %br
   %i * denotes a required field
@@ -30,6 +28,8 @@
           = radio_button :guest, :is_anon, false, style: 'margin: 0;'
           &nbsp;No
       %div{style: "clear:both;"}
-    %div{style: 'float:left; position:relative; left:50%;'}
-      %div{style: 'float:left; position:relative; left:-50%;'}
-        %p= submit_tag "RSVP", class: 'button'
+    %br
+    %div{style: 'float:right;'}
+      %div= submit_tag "RSVP", class: 'button'
+
+    %button.button{style: 'float:left;', onClick: 'toggleOverlay()'} Cancel
