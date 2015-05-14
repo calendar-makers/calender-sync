@@ -19,16 +19,11 @@ Then /I should see(?:| the) "(.*)" on the page$/ do |content|
 end
 
 And /^I fill in the "(.*)" field with "(.*)"$/ do |field, value|
-  if (field != 'Description') && (field != 'How to find us')
+  if (field != 'Description')
     field = find_field(field)
     field.set value
   else
-    if field == 'Description'
-      id = 'event_description'
-    else
-      id = 'event_how_to_find_us'
-    end
-    js = "tinyMCE.get('#{id}').setContent('#{value}')"
+    js = "tinyMCE.get('event_description').setContent('#{value}')"
     page.execute_script(js)
   end
 end

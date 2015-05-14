@@ -12,7 +12,7 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    when /^Calendar$/ then calendar_path
+    when /^Calendar$/ then '/'
     when /^third_party$/ then third_party_events_path
     when /^Sign In$/ then new_user_session_path
     when /^Account Creation$/ then new_account_path

@@ -1,2 +1,5 @@
 $('#calendar').fullCalendar('refetchEvents');
 $('#content_box').html('#{j render partial: 'confirmation_overlay', locals: {msg: @msg}}');
+
+- if (@guest != nil) and (not @guest.is_anon)
+  == $('#attendees tr:last').after('<tr><td>#{@guest.first_name}</td></tr>');

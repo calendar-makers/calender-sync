@@ -32,18 +32,21 @@ Background:
   And I am on the calendar page
   When the month is March 2015
   And I click on "Nature Walk" in the calendar
+  Then I press "RSVP Now!"
 
 Scenario: RSVP form, completed and submitted non-anonymously
   When I fill out and submit the RSVP form non-anonymously
-  Then I should see "Click an event!" on the page
-  And I should see my first name under "Nature Walk"
+  Then I should see "Thank you for RSVPing" on the page
+  When I press "Close"
+  Then I should see my first name under "Nature Walk"
 
 Scenario: RSVP form, completed and submitted anonymously
   When I fill out and submit the RSVP form anonymously
-  Then I should see "Click an event!" on the page
-  And I should not see my first name under "Nature Walk"
+  Then I should see "Thank you for RSVPing" on the page
+  When I press "Close"
+  Then I should not see my first name under "Nature Walk"
 
 Scenario: Attempt submission of incomplete RSVP form
   When I do not fill out the all of the required fields of the RSVP form
   And I press "RSVP"
-  Then I should see "Failed to RSVP." on the page
+  Then I should see "Failed to RSVP" on the page
