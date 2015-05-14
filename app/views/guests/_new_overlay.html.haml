@@ -1,12 +1,13 @@
-#rsvp_title= "RSVP for #{@event.name}!"
 #rsvp_form
+  #rsvp_title= "RSVP for #{@event.name}!"
+
   %div{style: 'font-weight:600;'} RSVP Now!
   %div (You will be added to our mailing list. Your information will not be shared.)
   %br
   %i * denotes a required field
   = form_tag guests_path, id: 'rsvp_guest', remote: true, format: :js do
     -# this path does an ajax post to the guests controller action "create"
-    = hidden_field_tag :event_id, params[:event_id]
+    = hidden_field_tag :event_id, @event.id
 
     = text_field :guest, :first_name, class: 'edit_text_field', placeholder: '*First Name', label: 'first_name'
     = text_field :guest, :last_name, class: 'edit_text_field', placeholder: '*Last Name', label: 'last_name'
@@ -19,16 +20,16 @@
 
     %p*Do you want to remain anonymous to other guests?
     %div{style: 'padding: 0 15% 0 15%;'}
-      = hidden_field :guest, :is_anon, :value => nil
-      %div{:style=>"float:left; position:relative;"}
+      = hidden_field :guest, :is_anon, value: nil
+      %div{style: "float:left; position:relative;"}
         %label{for: 'guest_is_anon'}
           = radio_button :guest, :is_anon, true, style: 'margin: 0;'
           &nbsp;Yes
-      %div{:style=>"float:right; position:relative;"}
+      %div{style: "float:right; position:relative;"}
         %label{for: 'guest_is_anon'}
           = radio_button :guest, :is_anon, false, style: 'margin: 0;'
           &nbsp;No
-      %div{:style=>"clear:both;"}
+      %div{style: "clear:both;"}
     %div{style: 'float:left; position:relative; left:50%;'}
       %div{style: 'float:left; position:relative; left:-50%;'}
-        %p= submit_tag "RSVP", :class=>'button'
+        %p= submit_tag "RSVP", class: 'button'

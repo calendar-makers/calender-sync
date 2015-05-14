@@ -1,23 +1,22 @@
 #title
   %h2= @event.name
 
-- if @event.image.file?
-  #image
-    = image_tag @event.image.url(:original)
-    %br
-
 #rsvp
   = form_tag new_guest_path(event_id: @event.id), method: 'get', id: 'new_rsvp', format: :js, remote: true do
     -# this path does an ajax get to the guest controller action "new"
     = submit_tag 'RSVP Now!', class: 'button'
 
+- if @event.image.file?
+  #image
+    = image_tag @event.image.url(:original)
+    %br
+
 #time
-  -#.left
-  %p{style: 'font-weight:600;'} Time
-  -#.right
-  %div
+  .left
+    %p{style: 'font-weight:600;'} Time
+  .right
     %p= @time_period
-  -#%div{:style=>"clear:both;"}
+  %div{:style=>"clear:both;"}
 
 #location
   %p{style: 'font-weight:600;'} Location
