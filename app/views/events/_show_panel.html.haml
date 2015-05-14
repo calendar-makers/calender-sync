@@ -27,16 +27,15 @@
     = @event.location
   %div#map
 
+#find_us
+  %p{style: 'font-weight:600;'} How to Find Us
+  %div
+    = @event.how_to_find_us
 
 #description
   %p{style: 'font-weight:600;'} About
   %div
     != @event.description
-
-#find_us
-  %p{style: 'font-weight:600;'} How to find us
-  %div
-    != @event.how_to_find_us
 
 #guests
   %p.field Check out who's going!
@@ -53,13 +52,13 @@
 - if user_signed_in?
   %br
   %div
-    %div{:style=>"float:left;"}
+    %div{style: "float:left;"}
       = form_tag edit_event_path(@event), method: 'get', id: 'edit_event', format: :js, remote: true do
         -# this path does an ajax get to the event controller action "edit"
         %p= submit_tag 'Edit', class: 'button'
-    %div{:style=>"float:right;"}
+    %div{style: "float:right;"}
       = form_tag event_path(@event), method: 'delete', id: 'delete_event', format: :js, remote: true do
         -# this path does an ajax delete to the events controller action destroy
         = hidden_field_tag :event_id, @event.id
         %p= submit_tag 'Delete', class: 'button', confirm: 'Are you sure?'
-    %div{:style=>"clear:both;"}
+    %div{style: "clear:both;"}
