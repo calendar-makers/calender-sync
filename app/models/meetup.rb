@@ -5,17 +5,17 @@ class Meetup
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
-  UTC_OFFSET = 25200000
+  UTC_OFFSET = 0
 
   # NATURE IN THE CITY DATA
-=begin
   GROUP_ID = '8870202'
   GROUP_URLNAME = 'Nature-in-the-City'
   GROUP_NAME = 'Nature in the City'
-=end
+=begin
   GROUP_ID = '1556336'
   GROUP_URLNAME = 'Meetup-API-Testing'
   GROUP_NAME = 'Meetup API Testing Sandbox'
+=end
 
   def default_group_name=(name='')
     @default_group_name = name.blank? ? GROUP_NAME : name
