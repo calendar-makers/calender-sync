@@ -14,6 +14,7 @@ class GuestsController < ActionController::Base
     handle_guest_registration
     @msg = "Thank you for RSVPing for #{@event.name}! You will receive an email confirming your registration shortly."
     GuestMailer.rsvp_email(@guest, @event).deliver
+    AdminMailer.admin_email(@guest, @event).deliver
     respond_js
   end
 
