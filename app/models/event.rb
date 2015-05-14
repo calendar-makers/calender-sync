@@ -188,12 +188,20 @@ class Event < ActiveRecord::Base
 
   def location
     location = []
-    if st_number || st_name
-      location << "#{st_number} #{st_name}"
-    end
-    location << city.to_s + (state ? (', ' + state + ' ') : ' ') + zip.to_s
-    location << country
+    street = "#{st_number} #{st_name}"
+    append_to_list(location, street)
+    append_to_list(location, city)
+    append_to_list(location, state)
+    append_to_list(location, zip)
+    append_to_list(location, country)
     location.join(', ')
+  end
+
+  # Appends field to lst if field is neither nil nor whitespace
+  def append_to_list(lst, field)
+    if (field != nil) and (field.strip != '')
+      lst << field
+    end
   end
 
   def update_meetup_fields(event)
