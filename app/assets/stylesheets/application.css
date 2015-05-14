@@ -13,35 +13,43 @@
  *= require_tree .
  *= require_self
  */
-#event_end_1i{
-    width: 27%;
-}
-#event_end_2i{
-    width: 27%;
-}
-#event_end_3i{
-    width: 27%;
-}
-#event_end_4i{
-    width: 27%;
-}
-#event_end_5i{
+#event_end_1i {
     width: 27%;
 }
 
-#event_start_1i{
+#event_end_2i {
     width: 27%;
 }
-#event_start_2i{
+
+#event_end_3i {
     width: 27%;
 }
-#event_start_3i{
+
+#event_end_4i {
     width: 27%;
 }
-#event_start_4i{
+
+#event_end_5i {
     width: 27%;
 }
-#event_start_5i{
+
+#event_start_1i {
+    width: 27%;
+}
+
+#event_start_2i {
+    width: 27%;
+}
+
+#event_start_3i {
+    width: 27%;
+}
+
+#event_start_4i {
+    width: 27%;
+}
+
+#event_start_5i {
     width: 27%;
 }
 
@@ -52,15 +60,18 @@ html, body {
     color: #7f7f7f;
     font-size: 0.97em;
 }
-div#new{
+
+div#new {
     margin: 0;
     padding: 0 20px 20px;
 }
+
 a {
     background: transparent;
     color: #6f6f6f;
     text-decoration: underline;
 }
+
 h1 {
     color: #9f9f9f;
     font-size: 150%;
@@ -69,6 +80,7 @@ h1 {
     font-style: normal;
     font-weight: 500;
 }
+
 h1.title {
     margin: 0 0 1em;
     padding: 10px;
@@ -78,43 +90,52 @@ h1.title {
     font-style: normal;
     font-weight: 500;
 }
+
 h2 {
     font-weight: normal;
 }
+
 #calendar, #panel_header, #panel_wrapper, #panel, .button {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 /*    border: 1px solid #ccc;*/
 }
+
 #calendar {
     width:64%;
     float:left;
 }
+
 #panel_wrapper {
     width:34%;
     float:right;
 }
+
 #panel_header {
     padding: 0 0 1.6em 0;
 }
+
 #panel_header h2 {
     text-align: center;
     margin: 0;
     font-weight: 200;
 }
+
 #panel {
     overflow-y: scroll;
     overflow-x:hidden;
     padding: 0.3em;
     border: 1px solid #ccc;
 }
+
 .crud {
     position: relative;
     float: left;
     min-height: 0.2em;
     min-width: 0.2em;
 }
+
 .right {
     position: relative;
     float: right;
@@ -122,6 +143,7 @@ h2 {
     padding: 0.3em;
     border-left: 1px solid #ccc;
 }
+
 .left {
     width: 2.3em;
     padding: 0.2em;
@@ -129,29 +151,37 @@ h2 {
     position: relative;
     font-weight: 600;
 }
+
 .left p, .right p {
     margin:0;
 }
+
 .field {
     font-weight: 600;
 }
+
 #title, #time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
 #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name, #e_how_to_find_us {
     border-top: 1px solid #ccc;
 }
+
 #e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image,
 #e_how_to_find_us, #e_organization, #e_venue_name {
     padding: 0.5em 0 0.7em 0;
 }
-#date_time, #time, #description, #guests, #e_end_time, #e_description, #e_name, #e_location, #e_organization {
+
+#date_time, #time, #description, #e_name, #e_start_time, #e_venue_name, #e_description {
     background: #f9f9f9;
 }
+
 #time, #description, #find_us, #guests {
     padding: 0.2em;
 }
-#guests, #e_how_to_find_us {
+
+#guests, #e_description {
     border-bottom: 1px solid #ccc;
 }
+
 .edit_text_field {
     border-radius: 2px;
     border: 1px solid #ccc;
@@ -177,26 +207,32 @@ h2 {
     max-height: 9em;
     overflow-y: scroll;
 }
+
 .edit_text_field:focus, .drop_down:focus {
     background: #FFEDD2;
     outline-color: none;
 }
+
 #invalid_form_warnings {
     border-bottom: 1px solid #ccc;
     background: #f9f9f9;
     color: #EE5050;
 }
+
 #invalid_form_warnings p {
     margin:0;
 }
+
 .edit_text_field_invalid {
     outline-color: #EE5050;
 }
+
 .drop_down {
     border-radius: 2px;
 /*    -webkit-appearance: none;*/
     border: 1px solid #ccc;
 }
+
 .button {
     /* dimensions */
     margin: 0;
@@ -220,6 +256,7 @@ h2 {
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     color: #333;
 }
+
 .button:hover {
     color: #333333;
     text-decoration: none;
@@ -229,6 +266,7 @@ h2 {
          -o-transition: background-position 0.1s linear;
             transition: background-position 0.1s linear;
 }
+
 #notice #warning {
     background: rosybrown;
     margin: 1em 0;
