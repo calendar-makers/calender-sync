@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 $(document).ready(function() {
   $('#calendar').fullCalendar({
 
