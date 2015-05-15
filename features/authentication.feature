@@ -21,7 +21,7 @@ Scenario: Admins should not be able to login with improper credentials
 Scenario: Admins should be able to logout
   Given I am logged in as the admin
   When  I click on the "Sign Out" link
-  Then   I should see the "Login" link
+  Then  I should see "Signed out successfully" on the page
 
 Scenario: Admins should see admin actions
   Given I am logged in as the admin
