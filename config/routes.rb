@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   post '/events/:id', to: 'events#update'
   resources :guests, :only => [:new, :create]
   resources :accounts
-  get '/', to: redirect('/calendar')
-  #root 'calendars#show'
+  #get '/', to: redirect('/calendar')
+  root 'calendars#show'
 end
