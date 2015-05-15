@@ -191,8 +191,13 @@ class Event < ActiveRecord::Base
     street = "#{st_number} #{st_name}"
     append_to_list(location, street)
     append_to_list(location, city)
-    append_to_list(location, state)
-    append_to_list(location, zip)
+
+    state_zip_list = []
+    append_to_list(state_zip_list, state)
+    append_to_list(state_zip_list, zip)
+    state_zip = state_zip_list.join(' ').strip
+
+    append_to_list(location, state_zip)
     append_to_list(location, country)
     location.join(', ')
   end

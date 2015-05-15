@@ -174,7 +174,7 @@ RSpec.describe Event, type: :model do
       location_data = {'st_number' => '145', 'st_name' => 'peep st', 'city' => 'New York',
                        'zip' => '90210', 'state' => nil, 'country' => 'US'}
       event = Event.new(location_data)
-      expect(event.location).to eq("145 peep st, New York 90210, US")
+      expect(event.location).to eq("145 peep st, New York, 90210, US")
     end
 
   end
