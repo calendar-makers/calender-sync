@@ -74,9 +74,8 @@ class EventsController < ApplicationController
   end
 
   def perform_update_transaction
-    updated_fields = Event.new(event_params).updated_fields
-    if Meetup.new.edit_event(updated_fields: updated_fields, id: @event.meetup_id)
-      @event.update_attributes(updated_fields)
+    if Meetup.new.edit_event(updated_fields: event_params, id: @event.meetup_id)
+      @event.update_attributes(event_params)
       @msg = "#{@event.name} successfully updated!"
     else
       @msg = "Could not update '#{@event.name}'."
