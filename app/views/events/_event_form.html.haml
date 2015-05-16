@@ -9,15 +9,13 @@
   %p.field Image Upload
   = file_field :event, :image, id: 'image', accept: 'image/*'
 
-- now = DateTime.now
-- default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}
 #e_start_time
   = label :event, :start, 'Start Time', class: 'field'
-  = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true, start_year: now.year
+  = datetime_select :event, :start, datetime_separator: '', time_separator: '', ampm: true
 
 #e_end_time
   = label :event, :end, 'End Time', class: 'field'
-  = datetime_select :event, :end, default: default_time, datetime_separator: '', time_separator: '', ampm: true, start_year: now.year
+  = datetime_select :event, :end, datetime_separator: '', time_separator: '', ampm: true
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
 
