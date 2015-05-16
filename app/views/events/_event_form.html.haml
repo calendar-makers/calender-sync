@@ -11,11 +11,13 @@
 
 #e_start_time
   = label :event, :start, 'Start Time', class: 'field'
-  = datetime_select :event, :start, datetime_separator: '', time_separator: '', ampm: true
+  - Time.use_zone("Pacific Time (US & Canada)") do
+    = datetime_select :event, :start, datetime_separator: '', time_separator: '', ampm: true
 
 #e_end_time
   = label :event, :end, 'End Time', class: 'field'
-  = datetime_select :event, :end, datetime_separator: '', time_separator: '', ampm: true
+  - Time.use_zone("Pacific Time (US & Canada)") do
+    = datetime_select :event, :end, datetime_separator: '', time_separator: '', ampm: true
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
 

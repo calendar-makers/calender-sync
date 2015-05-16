@@ -159,7 +159,7 @@ class Meetup
   end
 
   def self.set_time(date)
-    Meetup.get_milliseconds(date) + UTC_OFFSET
+    #Meetup.get_milliseconds(date) + UTC_OFFSET
     local_offset = DateTime.now.offset
     date.to_datetime.change(offset: local_offset)
   end
