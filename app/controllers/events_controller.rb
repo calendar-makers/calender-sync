@@ -13,7 +13,6 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
-    byebug
     @time_period = @event.format_time
     @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
@@ -50,7 +49,6 @@ class EventsController < ApplicationController
 
   def perform_create_transaction
     @event = Event.new(event_params)
-    byebug
     remote_event = Meetup.new.push_event(@event)
     if remote_event
       @event.update_meetup_fields(remote_event)
