@@ -153,14 +153,9 @@ class Meetup
     {name: event['name'],
      description: event['description'],
      venue_id: get_meetup_venue_id(event),
-     time: Meetup.get_milliseconds(Meetup.set_time(start)),
+     time: Meetup.get_milliseconds(start),
      duration: Meetup.get_milliseconds(duration),
      how_to_find_us: event['how_to_find_us']}.compact
-  end
-
-  def self.set_time(date)
-    #Meetup.get_milliseconds(date) + UTC_OFFSET
-    date
   end
 
   def get_meetup_venue_id(event)
