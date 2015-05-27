@@ -117,7 +117,8 @@ class Meetup
 
   def self.parse_dates(data)
     time = data['time']
-    offset = data['utc_offset']
+    #offset = data['utc_offset']
+    offset = 0
     duration = data['duration']
     {start: build_date(time, offset),
     end: build_date(time + (duration ? duration : 0), offset),
