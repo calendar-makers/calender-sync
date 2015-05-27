@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def root?
-    return self.level == 0
+    level == 0
   end
 
   # The following methods are NOT USED and are deprecated.
