@@ -40,7 +40,8 @@ class EventsController < ApplicationController
     end
     Event.store_third_party_events(ids)
     #redirect_to calendar_path
-    render partial: 'pull_third_party'
+    #render partial: 'pull_third_party'
+    format.json { render :json => @events }
   end
 
   def new
