@@ -102,31 +102,97 @@ h2 {
 /*    border: 1px solid #ccc;*/
 }
 
+
+#new_event {
+    float:right;
+}
+
+#third_party {
+    float:left;
+}
+
+#event_creation_box {
+    float: right;
+    width: 9em;
+    padding: 0;
+    margin-top: 1em;
+}
+
+
+
+#calendar_title {
+    float:left;
+    margin-bottom: 1em;
+}
+
+#calendar_title h1 {
+    color: #9f9f9f;
+    font-weight:300;
+}
+
 #calendar {
     width:64%;
     float:left;
 }
 
+#joomla_header, .joomla_horiz_line, #joomla_footer, #joomla_section {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    min-width: 50em;
+}
+
+.joomla_horiz_line {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+#main {
+    width:75%;
+    margin-left:12.5%;
+    margin-right:12.5%;
+    min-width:50em;
+}
+
+#panel p {
+    font-weight:600;
+}
+
 #panel_wrapper {
-    width:34%;
+    width:35%;
+    height: 60%;
     float:right;
 }
 
 #panel_header {
-    padding: 0 0 1.6em 0;
+    padding: 0;
 }
 
 #panel_header h2 {
     text-align: center;
     margin: 0;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 #panel {
     overflow-y: scroll;
     overflow-x:hidden;
-    padding: 0.3em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
     border: 1px solid #ccc;
+    width:100%;
+    height:100%;
+    display: table;
+}
+
+#default_event_message {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .crud {
@@ -160,7 +226,7 @@ h2 {
     font-weight: 600;
 }
 
-#title, #time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
+#time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
 #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name, #e_how_to_find_us {
     border-top: 1px solid #ccc;
 }

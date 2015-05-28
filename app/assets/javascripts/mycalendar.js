@@ -31,14 +31,17 @@ $(document).ready(function() {
     }
   });
 
-  $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));
+  setOuterHeight = function() {
+      $('#panel').outerHeight($('#calendar .fc-view-container').outerHeight(true));
+  };
 
-  var timer,
-    $win = $(window);
-  $win.on('resize', function() {
+  setOuterHeight();
+
+  var timer;
+  $(window).resize(function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-      $('#panel').outerHeight($('#calendar').outerHeight(true) - $('#panel_header').outerHeight(true));
+        setOuterHeight();
     }, 250);
   });
 
