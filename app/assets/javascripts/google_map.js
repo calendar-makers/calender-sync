@@ -88,7 +88,7 @@ function get_interactive_map(address_map) {
     var key = 'AIzaSyBktYa3JqWkksJQOd6pajaI8SDms7iKO3M';
     var address = read_full_address(address_map);
     var address_string = format_address_string(address);
-    var map = $(['<iframe width="98%" height="50%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address_string, '"></iframe>'].join(""));
+    var map = $(['<iframe id="map_frame" width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address_string, '"></iframe>'].join(""));
     $('#map').html(map).show();
 }
 

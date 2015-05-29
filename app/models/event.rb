@@ -17,6 +17,8 @@ class Event < ActiveRecord::Base
   def as_json(options={})
     {
       :id => self.id,
+      :organization => self.organization,
+      :default_organization => Meetup.new.default_group_name,
       :title => self.name,
       :start => self.start.iso8601,
       :end => (stop = self.end) ? stop.iso8601 : nil,
@@ -237,8 +239,12 @@ class Event < ActiveRecord::Base
 
   def format_time
     start_time = format_start_date
-    end_time = pick_end_time_type
-    "#{start_time} to #{end_time}"
+    if start != self.end
+      end_time = pick_end_time_type
+      "#{start_time} to #{end_time}"
+    else
+      "#{start_time}"
+    end
   end
 
 end

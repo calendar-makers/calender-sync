@@ -60,17 +60,117 @@ html, body {
     color: #7f7f7f;
     font-size: 0.97em;
 }
+/*/////////////////////////////////////////////////     */
+#panel {
+    line-height: 1.2em;
+}
 
+#panel label {
+    line-height: 1.2em;
+}
+
+#panel input {
+    line-height: 1.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#panel select {
+    line-height: 1.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#mceu_6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#panel #image {
+    padding: 0;
+}
+
+#panel textarea {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#panel .button {
+    margin-top: 0.4em;
+    margin-bottom: 0.5em;
+}
+
+
+#e_start_time select, #e_end_time select {
+    width: 23%;
+    display: inline-block;
+}
+
+#e_start_time #event_start_2i, #e_end_time #event_end_2i {
+    width: 30%;
+
+}
+
+#event_st_number {
+    width: 15%;
+    display:block;
+    float:left;
+}
+
+#event_st_name {
+    width: calc(65% - 0.6em - 0.5em);
+    display:block;
+}
+
+#event_city {
+    width: 80%;
+}
+
+.main_organization {
+    background-color: #A6C55F;
+    border-color: #A6C55F;
+}
+
+.third_party_organization {
+    background-color: #ff8832;
+    border-color: #ff8832;
+
+}
+
+.event_creation_button {
+    /* dimensions */
+    margin: 0;
+    height: 2.3em;
+    padding: 0 .6em;
+    position: relative;
+
+    /* text & cursor */
+    font-size: 1.1em;
+    white-space: nowrap;
+    cursor: pointer;
+
+    border: 1px solid;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+/*./////////////////////////////////////////////////////////*/
 div#new {
     margin: 0;
     padding: 0 20px 20px;
 }
 
-a {
-    background: transparent;
-    color: #6f6f6f;
-    text-decoration: underline;
-}
+
 
 h1 {
     color: #9f9f9f;
@@ -95,6 +195,7 @@ h2 {
     font-weight: normal;
 }
 
+
 #calendar, #panel_header, #panel_wrapper, #panel, .button {
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
@@ -102,27 +203,9 @@ h2 {
 /*    border: 1px solid #ccc;*/
 }
 
-
-#new_event {
-    float:right;
-}
-
-#third_party {
-    float:left;
-}
-
-#event_creation_box {
-    float: right;
-    width: 9em;
-    padding: 0;
-    margin-top: 1em;
-}
-
-
-
 #calendar_title {
     float:left;
-    margin-bottom: 1em;
+    width: 21em;
 }
 
 #calendar_title h1 {
@@ -135,11 +218,38 @@ h2 {
     float:left;
 }
 
+#calendar a:hover {
+    color: #fff;
+}
+
+#calendar a:active {
+    color: #fff;
+}
+
+#calendar a:focus {
+    color: #fff;
+}
+
+.fc-title:hover, .fc-title:active, .fc-title:focus {
+    color: #777;
+}
+
 #joomla_header, .joomla_horiz_line, #joomla_footer, #joomla_section {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
     min-width: 50em;
+}
+
+#joomla_section section {
+    border-top: none;
+    margin-top: 0;
+}
+
+
+#joomla_section {
+    margin-left: 13.5%;  /* Attempt at centering joomla footer*/
+    margin-right: auto;
 }
 
 .joomla_horiz_line {
@@ -155,11 +265,24 @@ h2 {
     width:75%;
     margin-left:12.5%;
     margin-right:12.5%;
+    margin-bottom: 3%;
     min-width:50em;
 }
 
+
 #panel p {
-    font-weight:600;
+    margin: 0;  /* override bootstrap */
+}
+
+#panel form {
+    margin: 0; /* override bootstrap */
+}
+
+#title h3 {
+    margin-top: 0.1em;
+    margin-bottom: 0.2em;
+    font-size: 1.8em;
+    line-height: 1.2em;
 }
 
 #panel_wrapper {
@@ -185,13 +308,17 @@ h2 {
     padding-right: 0.3em;
     border: 1px solid #ccc;
     width:100%;
-    height:100%;
-    display: table;
 }
 
-#default_event_message {
+
+#rsvp {
+    margin-top: 0.1em;
+    margin-bottom: 0.4em;
+}
+
+.default_event_message {
     text-align: center;
-    display: table-cell;
+    font-weight:200;
     vertical-align: middle;
 }
 
@@ -222,8 +349,18 @@ h2 {
     margin:0;
 }
 
+#buttons_box {
+    margin: 0;
+}
+
 .field {
     font-weight: 600;
+    margin: 0;
+}
+
+#map_frame {
+    height: 18em;
+    margin-top: 0.5em;
 }
 
 #time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
@@ -233,14 +370,14 @@ h2 {
 
 #e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image,
 #e_how_to_find_us, #e_organization, #e_venue_name {
-    padding: 0.5em 0 0.7em 0;
+    padding: 0.3em 0 0.3em 0;
 }
 
-#date_time, #time, #description, #e_name, #e_start_time, #e_venue_name, #e_description {
+#date_time, #time, #description, #e_name, #e_start_time, #e_venue_name, #e_how_to_find_us {
     background: #f9f9f9;
 }
 
-#time, #description, #find_us, #guests {
+#time, #description, #find_us, #guests, #location {
     padding: 0.2em;
 }
 
@@ -276,7 +413,7 @@ h2 {
 
 .edit_text_field:focus, .drop_down:focus {
     background: #FFEDD2;
-    outline-color: none;
+    outline-color: initial;
 }
 
 #invalid_form_warnings {
@@ -363,3 +500,115 @@ h2 {
   color: #000;
   padding: 1% 1% 1% 1%;
 }
+
+#new_event {
+    float:right;
+}
+
+#third_party {
+    float:left;
+}
+
+#event_creation_box {
+    display: inline-block;
+    float: right;
+    width: 9.6em;
+    padding: 0;
+    margin-top: 1.2em;
+}
+/***************************************************************/
+
+#admin_panel {
+    display: inline-block;
+    margin-top: 1em;
+    margin-right: 0;
+    width: calc(100% - 21em - 9.6em);
+}
+
+/*
+#admin_panel {
+    font-size: 1.1em;
+    white-space: nowrap;
+    cursor: pointer;
+}*/
+
+
+#primary_nav_wrap
+{
+    padding-left: 63%;
+    text-align: left;
+    margin-top:0.8em
+}
+
+#primary_nav_wrap ul
+{
+    list-style:none;
+    position:relative;
+    float:left;
+    margin:0;
+    padding:0
+}
+
+#primary_nav_wrap ul a
+{
+    display:block;
+    color:#333;
+    text-decoration:none;
+    font-weight:700;
+    font-size:12px;
+    line-height:32px;
+    padding:0 15px;
+    font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#primary_nav_wrap ul li
+{
+    position:relative;
+    float:left;
+    margin:0;
+    padding:0
+}
+
+#primary_nav_wrap ul li.current-menu-item
+{
+    background:#ddd
+}
+
+#primary_nav_wrap ul li:hover
+{
+    background:#f6f6f6
+}
+
+#primary_nav_wrap ul ul
+{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:#fff;
+    padding:0
+}
+
+#primary_nav_wrap ul ul li
+{
+    float:none;
+    width:200px
+}
+
+#primary_nav_wrap ul ul a
+{
+    line-height:120%;
+    padding:10px 15px
+}
+
+#primary_nav_wrap ul ul ul
+{
+    top:0;
+    left:100%
+}
+
+#primary_nav_wrap ul li:hover > ul
+{
+    display:block
+}
+/****************************************************************/

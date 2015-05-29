@@ -9395,6 +9395,9 @@ function EventManager(options) { // assumed to be a calendar
 			assignDatesToEvent(start, end, allDay, out);
 		}
 
+        out.className = (input.organization == input.default_organization) ? 'main_organization'
+                                                                              : 'third_party_organization';
+
 		return out;
 	}
 

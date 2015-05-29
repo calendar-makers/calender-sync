@@ -7,29 +7,32 @@
 #main
   - flash.each do |name, msg|
     = msg
-
-  - if user_signed_in?
-    #admin_panel
-      = link_to "Change your password", edit_user_registration_path
-      </br>
-      = link_to "Sign Out", destroy_user_session_path, :method => :get
-
-      - if user_signed_in? and current_user.root?
-        </br>
-        = link_to "Create new account", new_account_path, :method => :get
-        </br>
-        = link_to "Delete existing accounts", edit_account_path("root"), :method => :get
+    %br
 
   #title_box
     #calendar_title
       %h1 Events Calendar
 
+    - if user_signed_in?
+      #admin_panel
+        %nav#primary_nav_wrap
+          %ul
+            %li
+              Admin Panel
+              %ul
+                %li= link_to "Change your password", edit_user_registration_path
+                %li= link_to "Sign Out", destroy_user_session_path, :method => :get
+
+                - if user_signed_in? and current_user.root?
+                  %li= link_to "Create new account", new_account_path, :method => :get
+                  %li= link_to "Delete existing accounts", edit_account_path("root"), :method => :get
+
     #event_creation_box
       - if user_signed_in?
         = form_tag new_event_path, method: :get, id: 'new_event', format: :js, remote: true do
           -# this path does an ajax GET to the event controller action "new"
-          = submit_tag '+', class: 'button'
-        = button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: 'button'
+          = submit_tag '+', class: ['main_organization', 'event_creation_button']
+        = button_to "+ 3rd Party", third_party_events_path, id: "third_party", class: ['event_creation_button','third_party_organization']
 
     .clear
 
@@ -41,10 +44,10 @@
       #panel_header
         %h2 Event Details
       #panel
-        %h4#default_event_message Click an event!
+        %h4.default_event_message Click an event!
 
     .clear
-
+%hr.joomla_horiz_line
 #joomla_section= raw @section
 %hr.joomla_horiz_line
 #joomla_footer= raw @footer

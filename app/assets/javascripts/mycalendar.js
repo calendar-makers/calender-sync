@@ -7,8 +7,6 @@ $(document).ready(function() {
       });
     },
 
-    eventColor: '#A6C55F',
-
     eventLimit: 'true',
 
     eventClick: function(calEvent, jsEvent, view) {
@@ -31,17 +29,17 @@ $(document).ready(function() {
     }
   });
 
-  setOuterHeight = function() {
-      $('#panel').outerHeight($('#calendar .fc-view-container').outerHeight(true));
+  setPanelHeight = function() {
+      $('#panel').outerHeight($('#calendar').find('.fc-view-container').outerHeight(true));
   };
 
-  setOuterHeight();
+  setPanelHeight();
 
   var timer;
   $(window).resize(function() {
     clearTimeout(timer);
     timer = setTimeout(function() {
-        setOuterHeight();
+        setPanelHeight();
     }, 250);
   });
 
