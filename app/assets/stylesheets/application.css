@@ -41,10 +41,8 @@ html, body {
 
 #panel select {
     line-height: 1.2em;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
+    margin: 0;
+    padding: 0;
 }
 
 #mceu_6 {
@@ -74,6 +72,7 @@ html, body {
 #e_start_time select, #e_end_time select {
     width: 23%;
     display: inline-block;
+    height: 25px;
 }
 
 #e_start_time #event_start_2i, #e_end_time #event_end_2i {
@@ -196,10 +195,15 @@ h2 {
     color: #777;
 }
 
-#joomla_header, .joomla_horiz_line, #joomla_footer, #joomla_section {
+#joomla_header,  #joomla_footer, #joomla_section {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    min-width: 50em;
+}
+
+.joomla_horiz_line {
+    width: 90%;
     min-width: 50em;
 }
 
@@ -236,7 +240,7 @@ h2 {
     margin: 0;  /* override bootstrap */
 }
 
-#panel form {
+#event_creation_box form, #panel form {
     margin: 0; /* override bootstrap */
 }
 
@@ -321,7 +325,7 @@ h2 {
 }
 
 #map_frame {
-    height: 18em;
+    height: 16.5em;
     margin-top: 0.5em;
 }
 
@@ -502,9 +506,11 @@ h2 {
 
 #primary_nav_wrap
 {
-    padding-left: 63%;
+    font-size: 1.1em;
+    padding-left: calc(65% - 15px);
     text-align: left;
-    margin-top:0.8em
+    margin-top:0.8em;
+    color: #B00100;
 }
 
 #primary_nav_wrap ul
@@ -519,31 +525,32 @@ h2 {
 #primary_nav_wrap ul a
 {
     display:block;
-    color:#333;
     text-decoration:none;
-    font-weight:700;
-    font-size:12px;
-    line-height:32px;
-    padding:0 15px;
-    font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+    width:10.8em;
+    color: #777;
 }
+
+
+#primary_nav_wrap ul a:hover
+{
+    color: #5990de;
+}
+
+
 
 #primary_nav_wrap ul li
 {
     position:relative;
     float:left;
     margin:0;
-    padding:0
+    padding:0;
 }
 
-#primary_nav_wrap ul li.current-menu-item
-{
-    background:#ddd
-}
+
 
 #primary_nav_wrap ul li:hover
 {
-    background:#f6f6f6
+    /*background:#a6c55f*/
 }
 
 #primary_nav_wrap ul ul
@@ -553,19 +560,21 @@ h2 {
     top:100%;
     left:0;
     background:#fff;
-    padding:0
+    padding:0;
+    z-index: 1;
 }
 
 #primary_nav_wrap ul ul li
 {
     float:none;
-    width:200px
+    width:auto;
+    border: 1px solid #a6c55f;
 }
 
 #primary_nav_wrap ul ul a
 {
     line-height:120%;
-    padding:10px 15px
+    padding:0.3em;
 }
 
 #primary_nav_wrap ul ul ul

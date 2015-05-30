@@ -20,8 +20,8 @@
             %li
               Admin Panel
               %ul
-                %li= link_to "Change your password", edit_user_registration_path
                 %li= link_to "Sign Out", destroy_user_session_path, :method => :get
+                %li= link_to "Change your password", edit_user_registration_path
 
                 - if user_signed_in? and current_user.root?
                   %li= link_to "Create new account", new_account_path, :method => :get
