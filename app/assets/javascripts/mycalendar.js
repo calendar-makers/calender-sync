@@ -15,10 +15,10 @@ $(document).ready(function() {
       $.ajax({
         type: 'GET',
         url: calEvent.url,
-        dataType: 'script',
-        complete: function(){
-          get_interactive_map(calEvent.location)
-        }
+        dataType: 'script'//,
+        //complete: function(){
+          //get_interactive_map(calEvent.location)
+        //}
       });
     },
 
