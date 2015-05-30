@@ -54,10 +54,10 @@ function initialize() {
         get_interactive_map();
     });
 
-    locationBox.addEventListener('click', function() {
+    $(locationBox).on('click select', function() {
         displayLocationDivs();
         registerMapGenerationEvent();
-    }, true);
+    });
 }
 
 function clearElementsText() {
