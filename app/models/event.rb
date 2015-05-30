@@ -16,16 +16,11 @@ class Event < ActiveRecord::Base
 
   def as_json(options={})
     {
-     :id => self.id,
-      #:organization => self.organization,
-      #:default_organization => Meetup.new.default_group_name,
+      :id => self.id,
       :third_party => Meetup.new.default_group_name != self.organization,
       :title => self.name,
       :start => self.start.iso8601,
       :end => (stop = self.end) ? stop.iso8601 : nil,
-      #:location => {event_st_number: st_number, event_st_name: st_name, event_city: city,
-      #              event_state: state, event_zip: zip, event_country: country},
-     # :description => self.description,
       :url => Rails.application.routes.url_helpers.event_path(id)
     }
   end

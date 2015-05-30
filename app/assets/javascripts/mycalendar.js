@@ -2,7 +2,7 @@ $(document).ready(function() {
   $('#calendar').fullCalendar({
 
     events: function(start, end, timezone, callback){
-      $.getJSON('events.json', function(data){
+      $.getJSON('events.json', {start: start.toDate(), end: end.toDate()}, function(data){
         callback(data);
       });
     },

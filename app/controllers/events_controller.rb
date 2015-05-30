@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   def index
     start_date = params[:start]
     end_date = params[:end]
-    @events = (start_date && end_date) ? Event.between(start_date, end_date) : Event.all
+    @events = (start_date && end_date) ? Event.where(start: start_date.to_datetime..end_date.to_datetime) : Event.all
     respond_to do |format|
       format.html
       format.json { render :json => @events }
