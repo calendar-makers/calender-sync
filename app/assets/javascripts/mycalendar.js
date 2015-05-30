@@ -43,4 +43,11 @@ $(document).ready(function() {
     }, 250);
   });
 
+  // Prevent any form submission caused by a simple press of the ENTER key
+  $(window).on('keydown', function(e) {
+      var enter_key_code = 13;
+      if (e.keyCode == enter_key_code) {
+          return false;
+      }
+  });
 });

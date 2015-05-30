@@ -1,4 +1,6 @@
 var autocomplete;
+
+// Used to choose type of address components received by Google
 var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
@@ -7,32 +9,69 @@ var componentForm = {
     country: 'short_name',
     postal_code: 'short_name'
 };
+
+// Used to map app's css ids to google ids
 var idMap = {
     street_number: 'event_st_number',
     route: 'event_st_name',
     locality: 'event_city',
     postal_code: 'event_zip',
     administrative_area_level_1: 'event_state',
-    country: 'event_country'};
+    country: 'event_country'
+};
+
+// Used to hide or display the divs containing ALL the location fields
+var divIDs = [
+    'e_address',
+    'e_city',
+    'e_state',
+    'e_zip',
+    'e_country'
+];
+
+var registerMapGenerationEvent = function () {
+    for (var i = 0; i < divIDs.length; i++) {
+        document.getElementById(divIDs[i]).addEventListener('blur', function () {
+            get_interactive_map();
+        }, true);
+    }
+};
+
+
+function displayLocationDivs() {
+    for (var i = 0; i < divIDs.length; i++) {
+        document.getElementById(divIDs[i]).style.display = 'block';
+    }
+}
 
 function initialize() {
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
-                                                        { types: ['geocode'] });
+    var locationBox = document.getElementById('autocomplete');
+    autocomplete = new google.maps.places.Autocomplete(locationBox, {types: ['geocode']});
     // When the user selects an address from the dropdown,
     // populate the address fields in the form.
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         fillInAddress();
+        get_interactive_map();
     });
+
+    locationBox.addEventListener('click', function() {
+        displayLocationDivs();
+        registerMapGenerationEvent();
+    }, true);
 }
 
+function clearElementsText() {
+    for (var component in componentForm) {
+        if (componentForm.hasOwnProperty(component)) {
+            document.getElementById(idMap[component]).value = '';
+        }
+    }
+}
 
 function fillInAddress() {
     var place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
-        document.getElementById(idMap[component]).value = '';
-        document.getElementById(idMap[component]).disabled = false;
-    }
+    clearElementsText();
 
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
@@ -41,8 +80,6 @@ function fillInAddress() {
             document.getElementById(idMap[addressType]).value = val;
         }
     }
-
-    get_interactive_map();
 }
 
 function read_full_address_from_form() {
@@ -55,15 +92,17 @@ function read_full_address_from_form() {
         event_country: ''
     };
     for (var component in componentForm) {
-        id = idMap[component];
-        fullAddress[id] = document.getElementById(id).value;
+        if (componentForm.hasOwnProperty(component)) {
+            id = idMap[component];
+            fullAddress[id] = document.getElementById(id).value;
+        }
     }
     return fullAddress;
 }
 
 function fix_null_fields(address) {
     for (var field in address) {
-        if (!address[field]) {
+        if (address.hasOwnProperty(field) && !address[field]) {
             address[field] = '';
         }
     }
@@ -106,6 +145,3 @@ function geolocate() {
         });
     }
 }
-
-
-// JUST CALL get_interactive_map() TO OPEN THE MAP.  BUT MAKE SURE THAT THE LOCATION FIELDS ARE POPULATED FIRST

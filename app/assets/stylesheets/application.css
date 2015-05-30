@@ -13,45 +13,7 @@
  *= require_tree .
  *= require_self
  */
-#event_end_1i {
-    width: 27%;
-}
 
-#event_end_2i {
-    width: 27%;
-}
-
-#event_end_3i {
-    width: 27%;
-}
-
-#event_end_4i {
-    width: 27%;
-}
-
-#event_end_5i {
-    width: 27%;
-}
-
-#event_start_1i {
-    width: 27%;
-}
-
-#event_start_2i {
-    width: 27%;
-}
-
-#event_start_3i {
-    width: 27%;
-}
-
-#event_start_4i {
-    width: 27%;
-}
-
-#event_start_5i {
-    width: 27%;
-}
 
 html, body {
     margin: 0;
@@ -507,6 +469,11 @@ h2 {
 
 #third_party {
     float:left;
+}
+
+/* Set location fields to invisibile, and then use javascript to show them*/
+#e_address, #e_city, #e_state, #e_zip, #e_country {
+    display: none
 }
 
 #event_creation_box {

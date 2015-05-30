@@ -27,28 +27,29 @@
   = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
 #e_location
-  %div= label_tag 'Location', 'Location', class: 'field'
-  %div= text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'
+  = label_tag 'Location', 'Location', class: 'field'
+  = text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'
 
-  %div= label_tag 'Street Address', 'Street Address', class: 'field'
-  %div= text_field :event, 'st_number', disabled: true
-  %div= text_field :event, 'st_name', disabled: true
+  #e_address
+    = label_tag 'Street Address', 'Street Address', class: 'field'
+    = text_field :event, 'st_number'
+    = text_field :event, 'st_name'
 
   #e_city
     = label :event, :city, 'City', class: 'field'
-    = text_field :event, 'city', class: 'medium_edit_text_field', disabled: true
+    = text_field :event, 'city', class: 'medium_edit_text_field'
 
   #e_state
     = label :event, :state, 'State', class: 'field'
-    = text_field :event, 'state', class: 'short_edit_text_field', disabled: true
+    = text_field :event, 'state', class: 'short_edit_text_field'
 
   #e_zip
     = label :event, :zip, 'Zip', class: 'field'
-    = text_field :event, 'zip', size: '6', class: 'short_edit_text_field', disabled: true
+    = text_field :event, 'zip', size: '6', class: 'short_edit_text_field'
 
   #e_country
     = label :event, :country, 'Country', class: 'field'
-    = text_field :event, 'country', class: 'short_edit_text_field', disabled: true
+    = text_field :event, 'country', class: 'short_edit_text_field'
 
   #map
 
