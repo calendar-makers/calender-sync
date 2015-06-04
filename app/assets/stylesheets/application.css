@@ -214,6 +214,7 @@ h2 {
     margin: 0 5%;
 }
 
+
 #joomla_section section {
     border-top: none;
     margin-top: 0;
@@ -221,13 +222,8 @@ h2 {
 
 
 #joomla_section {
-    margin: 0;
-    padding: 0;
-}
-
-#gk-bottom {
-    padding-left: 14.5% !important;  /* Attempt at centering joomla footer*/
-    padding-right: auto;
+    margin: 0 auto;
+    max-width: 90em
 }
 
 .clear {
@@ -607,12 +603,8 @@ h2 {
 
 
 /*  STYLE TO FIX ISSUE WITH HEADER SEARCH BOX  */
-/*
+
 #mod-search-searchword {
     float: right;
 }
-
-.gk-main-menu form .btn-primary {
-    float: left;
-}*/
 
