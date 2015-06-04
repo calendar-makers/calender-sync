@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require jquery.remotipart
 //= require moment
+//= require tinymce
 //= require_tree .

@@ -1,5 +1,4 @@
 class CalendarsController < ApplicationController
-  include JoomlaScraper
 
   before_filter do
     if request.ssl? && Rails.env.production?
@@ -8,6 +7,6 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    fetch_joomla_data
+    @head, @header, @footer, @section = JoomlaScraper.instance.joomla_data
   end
 end
