@@ -53,8 +53,10 @@ class EventsController < ApplicationController
     if remote_event
       @event.update_meetup_fields(remote_event)
       @event.save!
+      @success = true
       @msg = "Successfully added #{@event.name}!"
     else
+      @success = false
       @msg = %q(Failed to push event to Meetup. Event creation aborted. Please
       provide a name for the event. If you entered a location, please ensure
       that the address is real.)
@@ -70,15 +72,19 @@ class EventsController < ApplicationController
   def update
     @event = Event.find params[:id]
     perform_update_transaction
-    respond_do
+    @success ? respond_do : (render nothing: true)
+    # TO RENDER ONLY ERRORS YOU COULD SET A CONDITION IN THE JS VIEW THAT
+    # ONLY SENDS OVER THE JAVASCRIPT TO DISPLAY THE ERRORS
+    # i.e. without refresh
   end
 
   def perform_update_transaction
-    updated_fields = Event.new(event_params).updated_fields
-    if Meetup.new.edit_event(updated_fields: updated_fields, id: @event.meetup_id)
+    if Meetup.new.edit_event({event: Event.new(event_params), id: @event.meetup_id})
       @event.update_attributes(event_params)
+      @success = true
       @msg = "#{@event.name} successfully updated!"
     else
+      @success = false
       @msg = "Could not update '#{@event.name}'."
     end
   end
@@ -86,7 +92,6 @@ class EventsController < ApplicationController
   # handles panel event delete
   def destroy
     @event = Event.find params[:id]
-    @event.name
     @id = @event.id
     perform_destroy_transaction
     respond_do
@@ -95,8 +100,10 @@ class EventsController < ApplicationController
   def perform_destroy_transaction
     if @event.is_third_party? || Meetup.new.delete_event(@event.meetup_id)
       @event.destroy
+      @success = true
       @msg = "#{@event.name} event successfully deleted!"
     else
+      @success = false
       @msg = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
     end
   end
@@ -112,8 +119,8 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :organization, :venue_name, :st_number, :st_name,
-                                  :city, :zip, :state, :country, :start, :end,
-                                  :description, :how_to_find_us, :image, :street_number, :route, :locality)
+    params.require(:event).permit(:name, :organization, :venue_name, :st_number, :st_name, :city, :zip,
+                                  :state, :country, :start, :end, :description, :how_to_find_us, :image,
+                                  :street_number, :route, :locality)
   end
 end

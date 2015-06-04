@@ -20,7 +20,6 @@ class Event < ActiveRecord::Base
       :third_party => Meetup.new.default_group_name != self.organization,
       :title => self.name,
       :start => self.start.iso8601,
-      :end => (stop = self.end) ? stop.iso8601 : nil,
       :url => Rails.application.routes.url_helpers.event_path(id)
     }
   end
@@ -133,9 +132,8 @@ class Event < ActiveRecord::Base
   end
 
   def is_third_party?
-    default_group_name = Event.get_default_group_name
     group_name = organization
-    group_name && group_name != default_group_name
+    group_name && group_name != Event.get_default_group_name
   end
 
   def apply_update(new_event)
@@ -178,10 +176,6 @@ class Event < ActiveRecord::Base
 
   def self.get_event_ids(args)
     Event.cleanup_ids(Event.get_requested_ids(args))
-  end
-
-  def updated_fields
-    attributes.compact
   end
 
   def location

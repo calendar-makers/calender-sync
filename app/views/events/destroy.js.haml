@@ -1,2 +1,2 @@
-#{@event.destroyed? ? "$('#calendar').fullCalendar('removeEvents', '#{@id}');" : ""}
+#{@success ? "$('#calendar').fullCalendar('removeEvents', '#{@id}');" : ""}
 $('#panel').html('#{j render partial: 'default_panel', locals: {msg: @msg}}');

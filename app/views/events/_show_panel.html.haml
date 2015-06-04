@@ -8,8 +8,7 @@
 
 - if @event.image.file?
   #image
-    = image_tag @event.image.url(:original)
-    %br
+    = image_tag @event.image
 
 #time
   .field Time

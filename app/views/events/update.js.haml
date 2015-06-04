@@ -1,7 +1,8 @@
-var event = $('#calendar').fullCalendar('clientEvents', #{@event.id})[0];
-event.title = "#{@event.name}";
-event.start = "#{@event.start.iso8601}";
-event.end = "#{(stop = @event.end) ? stop.iso8601 : nil}";
-$('#calendar').fullCalendar('updateEvent', event);
-
 $('#panel').html('#{j render partial: 'default_panel', locals: {msg: @msg}}');
+
+- if @success
+  var event = $('#calendar').fullCalendar('clientEvents', #{@event.id})[0];
+  event.title = "#{@event.name}";
+  event.start = "#{@event.start.iso8601}";
+  event.end = "#{(stop = @event.end) ? stop.iso8601 : nil}";
+  $('#calendar').fullCalendar('updateEvent', event);

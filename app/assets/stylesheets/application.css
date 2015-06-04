@@ -53,7 +53,8 @@ html, body {
 }
 
 #panel #image {
-    padding: 0;
+    padding: 0.2em;
+    margin-bottom: 0.2em;
 }
 
 #panel textarea {
@@ -195,16 +196,22 @@ h2 {
     color: #777;
 }
 
-#joomla_header,  #joomla_footer, #joomla_section {
+#joomla_footer, #joomla_section {
     width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
     min-width: 50em;
+    margin: 0 5%;
+}
+
+#joomla_header {
+    width: 90%;
+    min-width: 50em;
+    margin: 0 5%;
 }
 
 .joomla_horiz_line {
     width: 90%;
     min-width: 50em;
+    margin: 0 5%;
 }
 
 #joomla_section section {
@@ -214,13 +221,13 @@ h2 {
 
 
 #joomla_section {
-    margin-left: 13.5%;  /* Attempt at centering joomla footer*/
-    margin-right: auto;
+    margin: 0;
+    padding: 0;
 }
 
-.joomla_horiz_line {
-    margin-top: 0;
-    margin-bottom: 0;
+#gk-bottom {
+    padding-left: 14.5% !important;  /* Attempt at centering joomla footer*/
+    padding-right: auto;
 }
 
 .clear {
@@ -588,3 +595,24 @@ h2 {
     display:block
 }
 /****************************************************************/
+
+.some {
+    color: #cbeeff
+}
+
+/* Color for square representing today in calendar*/
+.fc-bg .fc-today {
+    background:  /*#cbeeff;*/ #bfdfff;
+}
+
+
+/*  STYLE TO FIX ISSUE WITH HEADER SEARCH BOX  */
+/*
+#mod-search-searchword {
+    float: right;
+}
+
+.gk-main-menu form .btn-primary {
+    float: left;
+}*/
+

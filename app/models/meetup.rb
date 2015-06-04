@@ -5,7 +5,6 @@ class Meetup
 
   BASE_URL = 'https://api.meetup.com'
   API_KEY = ENV['MEETUP_API']
-  UTC_OFFSET = 0
 
   # NATURE IN THE CITY DATA
 =begin
@@ -44,7 +43,7 @@ class Meetup
 
   def edit_event(args)
     options = {}
-    options[:body] = get_event_data(args[:updated_fields]).merge(default_auth)
+    options[:body] = get_event_data(args[:event]).merge(default_auth)
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event/#{args[:id]}", options)
     Meetup.process_result(data, nil, 200)
@@ -117,12 +116,10 @@ class Meetup
 
   def self.parse_dates(data)
     time = data['time']
-    #offset = data['utc_offset']
-    offset = 0
     duration = data['duration']
-    {start: build_date(time, offset),
-    end: build_date(time + (duration ? duration : 0), offset),
-    updated: build_date(data['updated'], offset)}
+    {start: build_date(time, 0),
+    end: build_date(time + (duration ? duration : 0), 0),
+    updated: build_date(data['updated'], 0)}
   end
 
   def self.parse_venue(data)
@@ -162,6 +159,7 @@ class Meetup
   def get_meetup_venue_id(event)
     data = create_venue(event)
     code = data.code
+    byebug
     if code == 201
       data.parsed_response['id']
     elsif code == 409 # Match was found. Meetup refused to create a new venue
@@ -170,6 +168,7 @@ class Meetup
   end
 
   def self.get_matched_venue_id(data)
+    byebug
     data.parsed_response['errors'][0]['potential_matches'][0]['id']
   end
 

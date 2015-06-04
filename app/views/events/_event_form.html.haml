@@ -8,6 +8,7 @@
 #e_image
   .field Image Upload
   = file_field :event, :image, id: 'image', accept: 'image/*'
+  - #= file_field_tag 'event_image', {id: 'image', accept: 'image/*', value: (@event ? image_path(@event.image) : '')}
 
 - now = DateTime.now
 - default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}

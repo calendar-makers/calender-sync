@@ -10,8 +10,8 @@ $(document).ready(function() {
     eventLimit: 'true',
 
     eventClick: function(calEvent, jsEvent, view) {
-      jsEvent.stopPropagation();
-      jsEvent.preventDefault();
+      //jsEvent.stopPropagation();
+      //jsEvent.preventDefault();
       $.ajax({
         type: 'GET',
         url: calEvent.url,
@@ -20,6 +20,7 @@ $(document).ready(function() {
           //get_interactive_map(calEvent.location)
         //}
       });
+      return false;
     },
 
     header: {
