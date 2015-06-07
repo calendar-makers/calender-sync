@@ -1,3 +1,8 @@
+- @elem_class = nil
+
+- def determine_class(prev)
+  - (prev == 'colored') ? (@elem_class = "") : (@elem_class = 'colored')
+
 #title
   %h3= @event.name
 
@@ -10,35 +15,40 @@
   #image
     = image_tag @event.image
 
-#time
-  .field Time
-  = @time_period
+- if @time_period.present?
+  #time{class: "#{determine_class(@elem_class)}"}
+    .field Time
+    = @time_period
 
-#location
-  .field  Location
+- if @event.venue_name.present? && @event.location.present?
+  #location{class: "#{determine_class(@elem_class)}"}
+    .field  Location
 
-  #venue= @event.venue_name
-  #loco
-    = @event.location
-  #map
+    #venue= @event.venue_name
+    #loco
+      = @event.location
+    #map
 
-#find_us
-  .field How to Find Us
-  %div
-    = @event.how_to_find_us
+- if @event.how_to_find_us.present?
+  #find_us{class: "#{determine_class(@elem_class)}"}
+    .field How to Find Us
+    %div
+      = @event.how_to_find_us
 
-#description
-  .field About
-  %div
-    != @event.description
+- if @event.description.present?
+  #description{class: "#{determine_class(@elem_class)}"}
+    .field About
+    %div
+      != @event.description
 
-#guests
-  .field Check out who's going!
-  %table#attendees
-    %tbody
-      - @non_anon_guests_by_first_name.each do |guest|
-        %tr
-          %td= guest.first_name
+- if @non_anon_guests_by_first_name && !@non_anon_guests_by_first_name.empty?
+  #guests{class: "#{determine_class(@elem_class)}"}
+    .field Check out who's going!
+    %table#attendees
+      %tbody
+        - @non_anon_guests_by_first_name.each do |guest|
+          %tr
+            %td= guest.first_name
 
 #buttons_box
   - if user_signed_in?
@@ -50,5 +60,5 @@
       = form_tag event_path(@event), method: 'delete', id: 'delete_event', format: :js, remote: true do
         -# this path does an ajax delete to the events controller action destroy
         = hidden_field_tag :event_id, @event.id
-        = submit_tag 'Delete', class: 'button', confirm: 'Are you sure?'
+        = submit_tag 'Delete', class: 'button', id: 'delete_1'
 

@@ -43,15 +43,15 @@ class Meetup
 
   def edit_event(args)
     options = {}
-    options[:body] = get_event_data(args[:event]).merge(default_auth)
+    options[:body] = get_event_data(args[:event], args[:id]).merge(default_auth)
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event/#{args[:id]}", options)
-    Meetup.process_result(data, nil, 200)
+    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, ['200'])
   end
 
   def delete_event(id)
     data = HTTParty.delete("#{BASE_URL}/2/event/#{id}?#{Meetup.options_string(default_auth)}")
-    Meetup.process_result(data, nil, 200)
+    Meetup.process_result(data, nil, ['200'])
   end
 
   # ASK ABOUT ANNOUNCING EVENTS... If necessary it can be done here automatically...or with edit_event
@@ -62,12 +62,12 @@ class Meetup
     #options[:body].merge!(announce:'true')
     options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
     data = HTTParty.post("#{BASE_URL}/2/event", options)
-    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 201)
+    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, ['201'])
   end
 
   def pull_event(id)
     data = HTTParty.get("#{BASE_URL}/2/event/#{id}?#{Meetup.options_string(default_auth)}")
-    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
+    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, ['200'])
   end
 
   def pull_events(options={})
@@ -76,22 +76,57 @@ class Meetup
     end
     options.merge!(default_auth)
     data = HTTParty.get("#{BASE_URL}/2/events?#{Meetup.options_string(options)}")
-    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, 200)
+    Meetup.process_result(data, lambda {|arg| Meetup.parse_event(arg)}, ['200'])
   end
 
   def pull_rsvps(options={})
     options.merge!(default_auth)
     options.merge!({rsvp: 'yes'})
     data = HTTParty.get("#{BASE_URL}/2/rsvps?#{Meetup.options_string(options)}")
-    Meetup.process_result(data, lambda {|arg| Meetup.parse_rsvp(arg)}, 200)
+    Meetup.process_result(data, lambda {|arg| Meetup.parse_rsvp(arg)}, ['200'])
   end
 
-  def self.process_result(result, handler, success_code)
-    success = result.code == success_code
+  # Used to get venue ids when we need to push an event to Meetup.
+  # Can search by any of: event_id, group_id, group_urlname, venue_id
+  # We'll choose to use the event_id
+
+  def get_venues(options={})
+    options = options.merge(default_auth)
+    data = HTTParty.get("#{BASE_URL}/2/venues?#{Meetup.options_string(options)}")
+    Meetup.process_result(data, lambda {|arg| arg}, ['200'])
+  end
+
+  # Posts a venue to Meetup
+  def create_venue(event)
+    options = {}
+    options[:body] = Venue.get_event_venue_data(event).merge(default_auth)
+    options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
+    data = HTTParty.post("#{BASE_URL}/#{default_group_urlname}/venues", options)
+    Meetup.process_result(data, lambda {|arg| data}, ['201', '409'])
+  end
+
+
+
+
+  def self.process_result(result, handler, success_codes)
+    success = (success_codes.include?(result.code.to_s))
     return success if handler.nil?
     if success
       parse_data(result, handler)
+    else
+      message = parse_error(result)
+      raise message
     end
+  end
+
+  def self.parse_error(result)
+    data = result.parsed_response
+    errors = data['errors'] || [data]
+    message = ""
+    errors.each do |error|
+      message += "#{error['code']} #{error['message']} #{error['problem']} #{error['details']}"
+    end
+    message
   end
 
   def self.parse_data(result, handler)
@@ -117,9 +152,9 @@ class Meetup
   def self.parse_dates(data)
     time = data['time']
     duration = data['duration']
-    {start: build_date(time, 0),
-    end: build_date(time + (duration ? duration : 0), 0),
-    updated: build_date(data['updated'], 0)}
+    {start: build_date(time),
+    end: build_date(time ? time + (duration ? duration : 0) : nil),
+    updated: build_date(data['updated'])}
   end
 
   def self.parse_venue(data)
@@ -144,54 +179,20 @@ class Meetup
     [num, name]
   end
 
-  def get_event_data(event)
+  def get_event_data(event, id=nil)
     start = event['start']
     stop = event['end']
-    duration = (stop && start) ? stop - start : 0
+    duration = (stop && start) ? stop - start : nil
     {name: event['name'],
      description: event['description'],
-     venue_id: get_meetup_venue_id(event),
+     venue_id: Venue.get_meetup_venue_id(event, id),
      time: Meetup.get_milliseconds(start),
      duration: Meetup.get_milliseconds(duration),
      how_to_find_us: event['how_to_find_us']}.compact
   end
 
-  def get_meetup_venue_id(event)
-    data = create_venue(event)
-    code = data.code
-    byebug
-    if code == 201
-      data.parsed_response['id']
-    elsif code == 409 # Match was found. Meetup refused to create a new venue
-      Meetup.get_matched_venue_id(data)
-    end
-  end
-
-  def self.get_matched_venue_id(data)
-    byebug
-    data.parsed_response['errors'][0]['potential_matches'][0]['id']
-  end
-
-  def create_venue(event)
-    options = {}
-    options[:body] = Meetup.get_event_venue_data(event).merge(default_auth)
-    options[:headers] = {'Content-Type' => 'application/x-www-form-urlencoded'}
-    HTTParty.post("#{BASE_URL}/#{default_group_urlname}/venues", options)
-  end
-
-  def self.get_event_venue_data(event)
-    return {} if event.nil?
-    keys = [:city, :state, :zip, :country]
-    venue = {}
-    keys.each_index {|index| venue[keys[index]] = event[keys[index].to_s]}
-    venue[:address_1] = "#{event['st_number']} #{event['st_name']}"
-    venue[:name] = event['venue_name']
-    venue.compact
-  end
-
-  def self.build_date(time, utc_offset)
+  def self.build_date(time)
     return if time.nil?
-    (time = time + utc_offset) if utc_offset
     millis_per_second = 1000
     Time.at(time / millis_per_second).to_datetime
   end
@@ -202,7 +203,7 @@ class Meetup
      meetup_id: member['member_id'],
      meetup_name: member['name'],
      invited_guests: data['guests'],
-     updated: build_date(data['mtime'], data['utc_offset'])}
+     updated: build_date(data['mtime'])}
   end
 
   def self.options_string(options)
@@ -210,6 +211,7 @@ class Meetup
   end
 
   def self.get_milliseconds(date)
+    return if date.nil?
     date.to_i * 1000
   end
 end

@@ -25,11 +25,15 @@ class Event < ActiveRecord::Base
   end
 
   def is_new?
-    self.class.find_by_meetup_id(meetup_id).nil?
+    Event.find_by_meetup_id(meetup_id).nil?
   end
 
   def needs_updating?(latest_update)
     updated < latest_update
+  end
+
+  def is_past?
+    DateTime.now >= self.end
   end
 
   def self.get_remote_events(options={})
@@ -154,7 +158,6 @@ class Event < ActiveRecord::Base
       process_rsvp(rsvp, guest.id)
     end
   end
-
 
   def process_rsvp(rsvp, guest_id)
     registration = Registration.find_by({event_id: id, guest_id: guest_id})

@@ -3,4 +3,5 @@
 = form_tag events_path, id: 'create_event', remote: true, format: :js, :multipart => true, authenticity_token: true do
   -# this path does an ajax post to the event controller action create
   = render :partial => 'event_form'
-  = submit_tag "Create Event", class:'button', style: 'float:right;'
+  = submit_tag "Create Event", class:'button', style: 'float:right;', id: 'create'
+  = submit_tag "Cancel",  name: 'cancel', id: 'cancel', class: 'button', style: 'float:left;'

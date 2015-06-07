@@ -335,7 +335,8 @@ h2 {
 }
 
 #time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
-#e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name, #e_how_to_find_us {
+#e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name,
+#e_how_to_find_us, #buttons_box {
     border-top: 1px solid #ccc;
 }
 
@@ -344,17 +345,17 @@ h2 {
     padding: 0.3em 0 0.3em 0;
 }
 
-#date_time, #time, #description, #e_name, #e_start_time, #e_venue_name, #e_how_to_find_us {
+.colored {
     background: #f9f9f9;
 }
 
 #time, #description, #find_us, #guests, #location {
     padding: 0.2em;
 }
-
+/*
 #guests, #e_description {
     border-bottom: 1px solid #ccc;
-}
+}*/
 
 .edit_text_field {
     border-radius: 2px;

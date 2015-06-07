@@ -31,7 +31,7 @@ var divIDs = [
 
 var registerMapGenerationEvent = function () {
     for (var i = 0; i < divIDs.length; i++) {
-        document.getElementById(divIDs[i]).addEventListener('blur', function () {
+        document.getElementById(divIDs[i]).addEventListener('change', function () {
             get_interactive_map();
         }, true);
     }
@@ -54,10 +54,9 @@ function initialize() {
         get_interactive_map();
     });
 
-    $(locationBox).on('click select', function() {
-        displayLocationDivs();
-        registerMapGenerationEvent();
-    });
+    displayLocationDivs();
+    registerMapGenerationEvent();
+    geolocate();
 }
 
 function clearElementsText() {
@@ -132,7 +131,6 @@ function get_interactive_map(address_map) {
 }
 
 function geolocate() {
-    initialize();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var geolocation = new google.maps.LatLng(

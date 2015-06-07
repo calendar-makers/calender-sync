@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :is_root
 
   def create
@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
       flash[:notice] = "Account successfully created"
       redirect_to calendar_path
     else
-      flash[:notice] = @user.errors.full_messages.join(", ").html_safe 
+      flash[:notice] = @user.errors.full_messages.join(", ").html_safe
       redirect_to new_account_path
     end
   end

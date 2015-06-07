@@ -1,4 +1,4 @@
-#e_name
+#e_name.colored
   = label :event, :name, 'Name (required)', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
@@ -7,10 +7,10 @@
   = file_field :event, :image, id: 'image', accept: 'image/*'
   - #= file_field_tag 'event_image', {id: 'image', accept: 'image/*', value: (@event ? image_path(@event.image) : '')}
 
-- now = DateTime.now
-- default_time = {hour: now.hour + 1, minute: 0, day: now.day, month: now.month, year: now.year}
+- next_hour = DateTime.now + 1.hour
+- default_time = {hour: next_hour.hour, minute: 0, day: next_hour.day, month: next_hour.month, year: next_hour.year}
 
-#e_start_time
+#e_start_time.colored
   = label :event, :start, 'Start Time', class: 'field'
   = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true
 
@@ -20,13 +20,13 @@
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
 
-#e_venue_name
+#e_venue_name.colored
   = label :event, :venue_name, 'Venue Name', class: 'field'
   = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
 #e_location
   = label_tag 'Location', 'Location', class: 'field'
-  = text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'geolocate();', class: 'edit_text_field'
+  = text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'initialize();', class: 'edit_text_field'
 
   #e_address
     = label_tag 'Street Address', 'Street Address', class: 'field'
@@ -51,7 +51,7 @@
 
   #map
 
-#e_how_to_find_us
+#e_how_to_find_us.colored
   = label :event, :how_to_find_us, 'How to find us', class: 'field'
   = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '2', class: 'edit_text_field'
 
@@ -59,4 +59,4 @@
   = label :event, :description, 'Description', class: 'field'
   = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field tinymce'
 
-= tinymce
+.colored= tinymce

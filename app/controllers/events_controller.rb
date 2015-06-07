@@ -1,5 +1,13 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
+  #before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
+
+  before_filter :check_for_cancel, :only => [:create, :update]
+
+  def check_for_cancel
+    if params[:cancel]
+      render 'default', format: :js
+    end
+  end
 
   def index
     start_date = params[:start]
@@ -14,8 +22,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find params[:id]
     @time_period = @event.format_time
-    @event.merge_meetup_rsvps
     @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+    @event.merge_meetup_rsvps
     respond_do
   end
 
@@ -33,8 +41,15 @@ class EventsController < ApplicationController
       flash[:notice] = 'You must select at least one event. Please retry.'
       return redirect_to third_party_events_path
     end
-    Event.store_third_party_events(ids)
+    events = Event.store_third_party_events(ids)
+    events.each {|event| run_rsvp_update(event)}  # Not sure if OK... With many events you would get many threads...
     redirect_to calendar_path
+  end
+
+  def run_rsvp_update(event)
+    Thread.new do
+      event.merge_meetup_rsvps
+    end
   end
 
   def new
@@ -44,22 +59,19 @@ class EventsController < ApplicationController
   # handles panel add new event
   def create
     perform_create_transaction
-    respond_do
+    @success ? respond_do : (render 'errors', format: :js)
   end
 
   def perform_create_transaction
-    @event = Event.new(event_params)
-    remote_event = Meetup.new.push_event(@event)
-    if remote_event
+    begin
+      @event = Event.new(event_params)
+      remote_event = Meetup.new.push_event(@event)
       @event.update_meetup_fields(remote_event)
       @event.save!
       @success = true
-      @msg = "Successfully added #{@event.name}!"
-    else
-      @success = false
-      @msg = %q(Failed to push event to Meetup. Event creation aborted. Please
-      provide a name for the event. If you entered a location, please ensure
-      that the address is real.)
+      @msg = "Successfully added '#{@event.name}'!"
+    rescue Exception => e
+      @msg = "Could not create '#{@event.name}':" + '\n' + e.to_s
     end
   end
 
@@ -71,21 +83,25 @@ class EventsController < ApplicationController
   # does panel update event
   def update
     @event = Event.find params[:id]
-    perform_update_transaction
-    @success ? respond_do : (render nothing: true)
-    # TO RENDER ONLY ERRORS YOU COULD SET A CONDITION IN THE JS VIEW THAT
-    # ONLY SENDS OVER THE JAVASCRIPT TO DISPLAY THE ERRORS
-    # i.e. without refresh
+    if @event.is_third_party? || @event.is_past?
+      @msg = "Sorry but third-party and past events cannot be edited. Only deleted."
+    else
+      perform_update_transaction
+    end
+    @success ? respond_do : (render 'errors', format: :js)
   end
 
   def perform_update_transaction
-    if Meetup.new.edit_event({event: Event.new(event_params), id: @event.meetup_id})
+    event = Event.new(event_params)
+    begin
+      remote_event = Meetup.new.edit_event({event: event, id: @event.meetup_id})
       @event.update_attributes(event_params)
+      @event.update_attributes(venue_name: remote_event[:venue_name])  # Necessary if meetup refused to create the venue
+      run_rsvp_update(@event)
       @success = true
       @msg = "#{@event.name} successfully updated!"
-    else
-      @success = false
-      @msg = "Could not update '#{@event.name}'."
+    rescue Exception => e
+      @msg = "Could not update '#{@event.name}':" + '\n' + e.to_s
     end
   end
 
@@ -94,17 +110,18 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     @id = @event.id
     perform_destroy_transaction
-    respond_do
+    @success ? respond_do : (render 'errors', format: :js)
   end
 
   def perform_destroy_transaction
+    begin
     if @event.is_third_party? || Meetup.new.delete_event(@event.meetup_id)
       @event.destroy
       @success = true
       @msg = "#{@event.name} event successfully deleted!"
-    else
-      @success = false
-      @msg = "Failed to delete event '#{@event.name}' from Meetup. Deletion aborted."
+    end
+    rescue Exception => e
+      @msg = "Failed to delete event '#{@event.name}':" + '\n' + e.to_s
     end
   end
 
@@ -115,6 +132,7 @@ class EventsController < ApplicationController
       format.js
     end
   end
+
 
   private
 
