@@ -52,7 +52,6 @@ class EventsController < ApplicationController
       return redirect_to third_party_events_path
     end
     events = Event.store_third_party_events(ids)
-    events.each {|event| run_rsvp_update(event)}  # Not sure if OK... With many events you would get many threads...
     redirect_to calendar_path
   end
   ###########################################################
@@ -109,7 +108,6 @@ class EventsController < ApplicationController
       remote_event = Meetup.new.edit_event({event: event, id: @event.meetup_id})
       @event.update_attributes(event_params)
       @event.update_attributes(venue_name: remote_event[:venue_name])  # Necessary if meetup refused to create the venue
-      run_rsvp_update(@event)
       @success = true
       @msg = "#{@event.name} successfully updated!"
     rescue Exception => e
