@@ -23,7 +23,7 @@ Feature: automatically pull existing events from Meetup onto the calendar
 
   @failed_pull_meetup
   Scenario: failed pull from Meetup
-    Given I synchronize the calendar with meetup
+    Given I attempt to synchronize the calendar with meetup
     Then the Meetup events "Nerds on Safari: Market Street, Market Street Prototyping Festival, Volunteer at the Adah Bakalinsky Steps!" should not exist
     #And I should see the message "Could not pull events from Meetup"
 

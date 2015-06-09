@@ -39,15 +39,15 @@ Feature: pull 3rd-party events created on Meetup by organization name and displa
   Scenario: fail to pull events
     Given I searched events by group_urlname: "LiveMusicSF"
     And I check "Select" for "event220680184, event220804867"
-    And I click on the "Add Events" button
-    Then I should be on the "Calendar" page
+    And I attempt to click on the "Add Events" button
+    #Then I should be on the "Calendar" page
     And the Meetup events "'Wisps & Willows, The Kilbanes, and Dara Ackerman at Viracocha! ' 'Walk the Moon'" should not exist
     #And I should see the message "Could not add event. Please retry."
 
   @search_events_by_group
   Scenario: attempt to pull no selected events
     Given I searched events by group_urlname: "LiveMusicSF"
-    And I attempt to click on the "Add Events" button
+    And I try to click on the "Add Events" button
     Then I should be on the "third_party" page
     And I should see the message "You must select at least one event. Please retry."
 

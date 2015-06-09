@@ -50,8 +50,13 @@ Then /^I should see "(.*)" as the "(.*)"$/ do |value, field|
   expect(field).to have_content(value)
 end
 
-Then /^I should see (?:the flash message |the message )?"([^"]*)"$/ do |message|
-  expect(page).to have_content(message)
+Then /^I should see the (javascript )?(?:flash message |message )?"([^"]*)"$/ do |type, message|
+  if type == 'javascript '
+    sleep 1
+    expect(page.driver.browser.alert_messages[0]).to include(message)
+  else
+    expect(page).to have_content(message)
+  end
 end
 
 Then /the "(.*)" field should be populated with "(.*)"$/ do |field, value|
@@ -80,11 +85,12 @@ Given /^I am on the "(.*)" page(?: for "(.*)")?$/ do |page_name, event_name|
   end
 end
 
-When /^I click on the "(.*)" (link|button)$/ do |element_name, element_type|
+When /^I (attempt to )?click on the "(.*)" (link|button)$/ do |must_fail, element_name, element_type|
   if element_type == 'link'
-    click_link(element_name)
+    must_fail ? (expect{click_link(element_name)}.to raise_exception) : click_link(element_name)
   elsif element_type == 'button'
-    click_button(element_name)
+    must_fail ? (expect{click_button(element_name)}.to raise_exception) : click_button(element_name)
+
   end
 end
 

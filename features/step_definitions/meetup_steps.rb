@@ -47,7 +47,7 @@ Given /^I attempt to go to the "(.*)" page?$/ do |page_name|
 end
 
 # Check break internet note
-Given /^I attempt to click on the "(.*)" button$/ do |button_name|
+Given /^I try to click on the "(.*)" button$/ do |button_name|
   step %Q{break internet}
   step %Q{I click on the "Add Events" button}
 end
@@ -160,7 +160,7 @@ And /"(.*)" should (not )?exist on "(.*)"/ do |event_name, negative, platform|
   elsif platform == 'meetup'
     meetup = Meetup.new
     event_id = 221850455
-    negative ? (expect(meetup.pull_event(event_id)).to be_nil) : (expect(meetup.pull_event(event_id)).not_to be_nil)
+    negative ? (expect{meetup.pull_event(event_id)}.to raise_error(/not_found/)) : (expect(meetup.pull_event(event_id)).not_to be_nil)
   else
     raise Error.new
   end
@@ -236,6 +236,10 @@ And /I accept the google maps suggested address/ do
   page.execute_script("$('#autocomplete').focus();")
 end
 
-And /I synchronize the calendar with meetup/ do
-  Event.synchronize_upcoming_events
+And /I (attempt to )?synchronize the calendar with meetup/ do |must_fail|
+  if must_fail
+    expect{Event.synchronize_upcoming_events}.to raise_exception
+  else
+    Event.synchronize_upcoming_events
+  end
 end

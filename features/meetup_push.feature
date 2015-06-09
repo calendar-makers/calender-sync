@@ -22,13 +22,13 @@ Feature: push new calendar events to meetup
   @successful_push
   Scenario: successfully push the newly created event to Meetup
       Given I click on the "Create Event" button
-      Then I should see the message "Successfully added Nature Walk!"
+      Then I should see the message "Successfully added 'Nature Walk'!"
       And the "Nature Walk" event should exist on "both" platforms
 
   @failed_push
   Scenario: failed push of newly created event to Meetup (Implemented as a transaction)
       Given I click on the "Create Event" button
-      And I should see the message "Failed to push event to Meetup."
+      And I should see the javascript message "Could not create 'Nature Walk'"
       And the "Nature Walk" event should exist on "neither" platforms
 
 

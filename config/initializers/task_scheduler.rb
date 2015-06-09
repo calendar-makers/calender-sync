@@ -2,7 +2,6 @@ DEBUG = true
 
 JoomlaScraper.instance.fetch_joomla_data
 
-=begin
 scheduler = Rufus::Scheduler.new
 
 scheduler.every '1m', first: Time.now + 5 do |job|
@@ -30,4 +29,3 @@ scheduler.every '1m', first: Time.now + 2 * 60  do |job|
   Event.synchronize_upcoming_events
   puts 'Upcoming Events Synchronized.' if DEBUG
 end
-=end

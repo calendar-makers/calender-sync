@@ -20,12 +20,22 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find params[:id]
-    @time_period = @event.format_time
-    @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
-    @event.merge_meetup_rsvps
-    respond_do
+    begin
+      @event = Event.find params[:id]
+      @time_period = @event.format_time
+      @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
+      @event.merge_meetup_rsvps
+      respond_do
+    rescue Exception => e
+      @msg = "Could not pull rsvps '#{@event.name}':" + '\n' + e.to_s
+      render 'errors', format: :js
+    end
+
   end
+
+  #########################################################
+  ############  UNPROTECTED BY RESCUE CLAUSE ##############
+  ############  This code must first be changed to implement javascript 3rd party implementation
 
   def third_party
     id = params[:id]
@@ -45,6 +55,8 @@ class EventsController < ApplicationController
     events.each {|event| run_rsvp_update(event)}  # Not sure if OK... With many events you would get many threads...
     redirect_to calendar_path
   end
+  ###########################################################
+  ###########################################################
 
   def run_rsvp_update(event)
     Thread.new do

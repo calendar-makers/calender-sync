@@ -31,7 +31,7 @@ Feature: Enforce event lists consistency by updating events locally and remotely
     And I fill in the "Name" field with "Festival"
     And I click on the "Save Event" button
     Then the event "Nature Walk" should be renamed to "Festival" on "neither" platforms
-    And I should see the message "Could not update 'Nature Walk'."
+    And I should see the javascript message "Could not update 'Nature Walk'"
 
   @meetup_successful_edit
   Scenario: update initiated on Meetup

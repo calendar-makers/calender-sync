@@ -1,7 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :registrations
   has_many :guests, through: :registrations
-  has_many :registrations
 
   has_attached_file :image, styles: {original: "300x200"}, :url => "/assets/:id/:style/:basename.:extension",
                     :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
