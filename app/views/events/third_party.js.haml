@@ -1,0 +1,4 @@
+- if @events.blank?
+  == $('#panel').html('#{j render partial: 'third_party'}');
+- else
+  == $('#calendar').html('#{j render partial: 'matched_third_party', locals: {events: @events}}');

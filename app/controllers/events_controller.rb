@@ -21,6 +21,7 @@ class EventsController < ApplicationController
 
   def show
     begin
+      byebug
       @event = Event.find params[:id]
       @time_period = @event.format_time
       @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
@@ -39,13 +40,34 @@ class EventsController < ApplicationController
 
   def third_party
     id = params[:id]
+    if id.present?
+      @events = Event.get_remote_events({event_id: id})
+      #return respond_do
+    end
+    return respond_do
+
+    #######################################
+=begin
+    id = params[:id]
     return @events = Event.get_remote_events({event_id: id}) unless id.blank?
     group_urlname = params[:group_urlname]
     return @events = Event.get_remote_events({group_urlname: group_urlname}) unless group_urlname.blank?
     @events = []
+=end
   end
 
   def pull_third_party
+    ids = Event.get_event_ids(params)
+    if ids.blank?
+      @msg = 'You must select at least one event. Please retry.'
+      #return redirect_to third_party_events_path
+    end
+    Event.store_third_party_events(ids)
+
+    render partial: 'pull_third_party', format: :js
+
+    #########################################
+=begin
     ids = Event.get_event_ids(params)
     if ids.blank?
       flash[:notice] = 'You must select at least one event. Please retry.'
@@ -53,6 +75,7 @@ class EventsController < ApplicationController
     end
     events = Event.store_third_party_events(ids)
     redirect_to calendar_path
+=end
   end
   ###########################################################
   ###########################################################

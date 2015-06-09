@@ -1,0 +1,23 @@
+%div
+
+  %div
+    .titles
+      %h2 Add Third Party Events
+      - notice = flash[:notice]
+      - if notice
+        %h3= notice
+    %div
+      %h3 Filter by ID or by Group Name
+
+    = form_tag third_party_events_path, method: :get, format: :js, remote: true do
+
+      = label_tag 'id', 'ID'
+      = text_field_tag 'id', nil, class: 'edit_text_field'
+
+      = label_tag 'group_urlname', 'Group Name'
+      = text_field_tag 'group_urlname', nil, class: 'edit_text_field'
+      %br
+      %br
+      %div{:style=>"float:right"}= submit_tag 'Search', class: 'button'
+
+

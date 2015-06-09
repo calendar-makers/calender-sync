@@ -10,15 +10,10 @@ $(document).ready(function() {
     eventLimit: 'true',
 
     eventClick: function(calEvent, jsEvent, view) {
-      //jsEvent.stopPropagation();
-      //jsEvent.preventDefault();
       $.ajax({
         type: 'GET',
         url: calEvent.url,
-        dataType: 'script'//,
-        //complete: function(){
-          //get_interactive_map(calEvent.location)
-        //}
+        dataType: 'script'
       });
       return false;
     },
