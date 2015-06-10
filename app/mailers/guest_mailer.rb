@@ -1,5 +1,5 @@
 class GuestMailer < ActionMailer::Base
-  default from: "mailbot@cal-sync.herokuapp.com"
+  default from: "info@natureinthecity.org"
   def rsvp_email(guest, event)
     @guest = guest
     @event = event
