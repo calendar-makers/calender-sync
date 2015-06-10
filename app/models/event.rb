@@ -6,9 +6,6 @@ class Event < ActiveRecord::Base
                     :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
 
   do_not_validate_attachment_file_type :image
-  #validates_attachment_presence :image
-  #validates_attachment_size :image, :less_than => 5.megabytes
-  #validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png', 'image/jpg']
 
   DEFAULT_DATE_FORMAT = '%b %e, %Y at %l:%M%P'
   DEFAULT_TIME_FORMAT = '%l:%M%P'
