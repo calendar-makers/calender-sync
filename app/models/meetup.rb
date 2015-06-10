@@ -150,11 +150,11 @@ class Meetup
   def self.parse_event(data)
     {meetup_id: data['id'],
      name: data['name'],
-     description: data['description'],
-     organization: data['group']['name'],
-     url: data['event_url'],
-     how_to_find_us: data['how_to_find_us'],
-     status: data['status']}.merge(parse_dates(data)).merge(parse_venue(data))
+     description: data['description'] || '',
+     organization: data['group']['name'] || '',
+     url: data['event_url'] || '',
+     how_to_find_us: data['how_to_find_us'] || '',
+     status: data['status'] || ''}.merge(parse_dates(data)).merge(parse_venue(data))
   end
 
   def self.parse_dates(data)
@@ -168,13 +168,13 @@ class Meetup
   def self.parse_venue(data)
     if data && data = data['venue']
       st_num, st_name = Meetup.parse_address(data['address_1'])
-      {venue_name: data['name'],
-       st_number: st_num,
-       st_name: st_name,
-       city: data['city'],
-       zip: data['zip'],
-       state: data['state'],
-       country: data['country']}
+      {venue_name: data['name'] || '',
+       st_number: st_num || '',
+       st_name: st_name || '',
+       city: data['city'] || '',
+       zip: data['zip'] || '',
+       state: data['state'] || '',
+       country: data['country'] || ''}
     else
       {}
     end
@@ -182,8 +182,8 @@ class Meetup
 
   def self.parse_address(data)
     data =~ /^(\d+)\b/
-    num = $1
-    (name = data[num.size..data.size].strip) if num
+    num = $1 || ''
+    num.present? ? (name = data[num.size..data.size].strip) : (name = data)
     [num, name]
   end
 

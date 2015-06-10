@@ -1,36 +1,33 @@
-
 #panel_header
-  %h2 Matched Events
+  %h2 Available Events
 -#%h1.title{:style => "border_top: 4px solid #ff9900; border-top: 0px;"}
-= form_tag pull_third_party_events_path, method: :post, format: :js, remote: true do
-  %table#matched_events
+= form_tag pull_third_party_events_path, method: :post, format: :js, remote: true, id: 'third_events_list_form' do
+  %table#available_third_events_table
     %thead
       %tr
-        %th Select
-        %th Name
-        %th Group
-        %th Start Time
-        %th End Time
-        %th Location
-        %th Meetup Link
+        %th
+        %th.field Name
+        %th.field Group
+        %th.field Start Time
+        %th.field End Time
+        %th.field Location
+        %th.field Link
 
     %tbody
       - if @events
         - @events.each do |event|
           %tr
             - meetup_id = event.meetup_id
-            %td= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
+            %td#third_events_checks= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
             - name = event.name
             - id = event.id
-            %td.names= id ? (link_to name, event_path(id)) : name
+            %td#names_column= id ? (link_to name, event_path(id)) : name
             %td= (organization = event.organization) ? organization : 'N/A'
             %td= (start = event.format_start_date) ? start : 'N/A'
             %td= (end_date = event.format_end_date) ? end_date : 'N/A'
             %td= (location = event.location) ? location : 'N/A'
             - if (url = event.url) =~ /www.meetup.com/
-              %td= link_to 'go', url
+              %td#third_events_links= link_to 'go', url, target: '_blank'
 
-  </br>
-  %div{style: 'float:right'}= submit_tag 'Add Events', class: 'button'
-
-<br/>
+  = submit_tag "Save Events", class: 'button', style: 'float:right;'
+  = submit_tag "Cancel",  name: 'cancel_third_party', class: 'button', style: 'float:left;'

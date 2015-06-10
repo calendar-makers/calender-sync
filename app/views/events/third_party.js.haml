@@ -1,4 +1,11 @@
 - if @events.blank?
-  == $('#panel').html('#{j render partial: 'third_party'}');
+  $('#panel').html('#{j render partial: 'third_party'}');
 - else
-  == $('#calendar').html('#{j render partial: 'matched_third_party', locals: {events: @events}}');
+  $('#calendar').html('#{j render partial: 'matched_third_party', locals: {events: @events}}');
+  - # Necessary because usually the panel's height depends on the calendar's height.
+  - # Since we momentarily deactivate the calendar, then we reverse the relationship
+  - # and we set the calendar div to the height of the panel.
+  - # Once the calendar comes back, then it's all back to normal flow
+$('#third_events_list_form').outerHeight($('#panel').outerHeight(true));
+$('#search_by_id').on('click', function() { $('#id').prop('disabled', false);  $('#group_urlname').prop('disabled', true);});
+$('#search_by_group').on('click', function() { $('#group_urlname').prop('disabled', false);  $('#id').prop('disabled', true);});

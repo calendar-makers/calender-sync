@@ -24,11 +24,15 @@ html, body {
 }
 /*/////////////////////////////////////////////////     */
 #panel {
-    line-height: 1.2em;
+    line-height: 1.6em;
+}
+
+#panel .field {
+    line-height: 1.8em;
 }
 
 #panel label {
-    line-height: 1.2em;
+    line-height: 1.9em;
 }
 
 #panel input {
@@ -325,7 +329,7 @@ h2 {
 }
 
 .field {
-    font-weight: 600;
+    font-weight: 600 !important;
     margin: 0;
 }
 
@@ -532,7 +536,7 @@ h2 {
 {
     display:block;
     text-decoration:none;
-    width:10.8em;
+    width:11em;
     color: #777;
 }
 
@@ -604,6 +608,53 @@ h2 {
     background:  /*#cbeeff;*/ #bfdfff;
 }
 
+
+#third_events_list_form {
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+}
+
+#available_third_events_table {
+    margin: 0;
+    table-layout: auto;
+}
+
+#third_events_checks input {
+    margin: 0;
+}
+
+
+
+#available_third_events_table a:visited {
+    color: #B00100;
+}
+
+#available_third_events_table a:hover {
+    color: #777;
+}
+
+
+#available_third_events_table td, #available_third_events_table th {
+    border-top-width: inherit;
+    border-left-width: inherit;
+    vertical-align: middle;
+    horiz-align: center;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    line-height: 1.6em
+}
+
+#third_events_checks, #third_events_links {
+    text-align: center;
+}
+
+#third_events_list_form .button {
+    margin: 0.5em;
+}
+
+#names_column {
+    width: 15em;
+}
 
 /*  STYLE TO FIX ISSUE WITH HEADER SEARCH BOX  */
 
