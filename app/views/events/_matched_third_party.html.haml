@@ -2,19 +2,19 @@
   %h2 Available Events
 -#%h1.title{:style => "border_top: 4px solid #ff9900; border-top: 0px;"}
 = form_tag pull_third_party_events_path, method: :post, format: :js, remote: true, id: 'third_events_list_form' do
-  %table#available_third_events_table
-    %thead
-      %tr
-        %th
-        %th.field Name
-        %th.field Group
-        %th.field Start Time
-        %th.field End Time
-        %th.field Location
-        %th.field Link
+  - if @events.present?
+    %table#available_third_events_table
+      %thead
+        %tr
+          %th
+          %th.field Name
+          %th.field Group
+          %th.field Start Time
+          %th.field End Time
+          %th.field Location
+          %th.field Link
 
-    %tbody
-      - if @events
+      %tbody
         - @events.each do |event|
           %tr
             - meetup_id = event.meetup_id
@@ -28,6 +28,10 @@
             %td= (location = event.location) ? location : 'N/A'
             - if (url = event.url) =~ /www.meetup.com/
               %td#third_events_links= link_to 'go', url, target: '_blank'
+  - else
+    .field
+      There are currently no upcoming events for this group.
 
-  = submit_tag "Save Events", class: 'button', style: 'float:right;'
+  - if @events.present?
+    = submit_tag "Save Events", class: 'button', style: 'float:right;'
   = submit_tag "Cancel",  name: 'cancel_third_party', class: 'button', style: 'float:left;'
