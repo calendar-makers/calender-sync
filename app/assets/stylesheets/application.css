@@ -101,13 +101,13 @@ html, body {
 }
 
 .main_organization {
-    background-color: #A6C55F;
-    border-color: #A6C55F;
+    background-color: #A6C55F !important;
+    border-color: #A6C55F !important;
 }
 
 .third_party_organization {
-    background-color: #ff8832;
-    border-color: #ff8832;
+    background-color: #ff8832 !important;
+    border-color: #ff8832 !important;
 
 }
 
@@ -605,7 +605,7 @@ h2 {
 
 /* Color for square representing today in calendar*/
 .fc-bg .fc-today {
-    background:  /*#cbeeff;*/ #bfdfff;
+    background:  /*#cbeeff;*/ #bfdfff !important;
 }
 
 
