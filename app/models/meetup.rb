@@ -7,16 +7,17 @@ class Meetup
   API_KEY = ENV['MEETUP_API']
 
   # NATURE IN THE CITY DATA
+=begin
   GROUP_ID = '8870202'
   GROUP_URLNAME = 'Nature-in-the-City'
   GROUP_NAME = 'Nature in the City'
-
+=end
   # TESTING DATA
-=begin
+
   GROUP_ID = '1556336'
   GROUP_URLNAME = 'Meetup-API-Testing'
   GROUP_NAME = 'Meetup API Testing Sandbox'
-=end
+
 
   def default_group_name=(name='')
     @default_group_name = name.blank? ? GROUP_NAME : name
@@ -131,10 +132,10 @@ class Meetup
 
   def self.parse_error(result)
     data = result.parsed_response
+    message = "#{data['code']} #{data['message']} #{data['problem']} #{data['details']}"
     errors = data['errors'] || [data]
-    message = ""
-    errors.each do |error|
-      message += "#{error['code']} #{error['message']} #{error['problem']} #{error['details']}"
+    errors[0].each do |k, v|
+      message += " #{k} : #{v} "
     end
     message
   end

@@ -1,4 +1,5 @@
 default:
+  browser_spellcheck: true
   menubar: false
   toolbar: bold italic | bullist | link image media
   plugins:
