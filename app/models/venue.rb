@@ -1,9 +1,9 @@
 module Venue
 
   def self.get_meetup_venue_id(event, event_id)
-    if event_id.blank? && Venue.is_empty_venue?(event)  # new and empty -> nil
+    if event_id.blank? && Venue.is_blank_venue?(event)  # new and empty -> nil
       return
-    elsif event_id.present? && Venue.is_empty_venue?(event)   # edit and empty -> reset
+    elsif event_id.present? && Venue.is_blank_venue?(event)   # edit and empty -> reset
       0
     else
       Venue.get_new_meetup_venue_id(event)
@@ -18,8 +18,8 @@ module Venue
     Meetup.new.get_venues(event_id: event_id)[0]['id']
   end
 
-  def self.is_empty_venue?(event)
-    [:venue_name, :city, :zip, :state, :country, :st_number, :st_name].each {|key| return false if event[key].nil? || !event[key].empty?}
+  def self.is_blank_venue?(event)
+    [:venue_name, :city, :zip, :state, :country, :st_number, :st_name].each {|key| return false if event[key].present?}
     true
   end
 

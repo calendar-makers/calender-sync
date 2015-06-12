@@ -91,17 +91,17 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find params[:id]
+    if @event.is_third_party? || @event.is_past?
+      @msg = "Sorry but third-party and past events cannot be edited. Only deleted."
+      return render 'errors', format: :js
+    end
     respond_do
   end
 
   # does panel update event
   def update
     @event = Event.find params[:id]
-    if @event.is_third_party? || @event.is_past?
-      @msg = "Sorry but third-party and past events cannot be edited. Only deleted."
-    else
-      perform_update_transaction
-    end
+    perform_update_transaction
     @success ? respond_do : (render 'errors', format: :js)
   end
 

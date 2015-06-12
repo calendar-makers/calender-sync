@@ -1,5 +1,5 @@
 #e_name.colored
-  = label :event, :name, 'Name (required)', class: 'field'
+  = label :event, :name, 'Name', class: 'field'
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
 #e_image
@@ -20,6 +20,8 @@
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
 
 #e_venue_name.colored
+  = check_box_tag 'venue_check'
+  = label_tag 'venue_check', 'Enable Venue', style: 'display:inline-block'
   = label :event, :venue_name, 'Venue Name', class: 'field'
   = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
