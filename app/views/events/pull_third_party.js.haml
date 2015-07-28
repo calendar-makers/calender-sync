@@ -2,5 +2,5 @@
 -         # So I'm forced to reset the div, and rebuild the calendar from scratch
 $('#calendar').replaceWith("<div id='calendar'></div>");
 $('#calendar').fullCalendar(init_object);
-$('#panel').html('#{j render partial: 'default_panel', locals: {msg: @msg}}');
+$('#panel').html('#{j render 'default_panel', locals: {msg: @msg}}');
 

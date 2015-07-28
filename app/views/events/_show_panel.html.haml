@@ -1,8 +1,3 @@
-- @elem_class = nil
-
-- def determine_class(prev)
-  - (prev == 'colored') ? (@elem_class = "") : (@elem_class = 'colored')
-
 #title
   %h3= @event.name
 
@@ -16,12 +11,12 @@
     = image_tag @event.image
 
 - if @time_period.present?
-  #time{class: "#{determine_class(@elem_class)}"}
+  #time{class: "#{determine_class(elem)}"}
     .field Time
     = @time_period
 
 - if @event.venue_name.present? && @event.location.present?
-  #location{class: "#{determine_class(@elem_class)}"}
+  #location{class: "#{determine_class(elem)}"}
     .field  Location
 
     #venue= @event.venue_name
@@ -30,19 +25,19 @@
     #map
 
 - if @event.how_to_find_us.present?
-  #find_us{class: "#{determine_class(@elem_class)}"}
+  #find_us{class: "#{determine_class(elem)}"}
     .field How to Find Us
     %div
       = @event.how_to_find_us
 
 - if @event.description.present?
-  #description{class: "#{determine_class(@elem_class)}"}
+  #description{class: "#{determine_class(elem)}"}
     .field About
     %div
       != @event.description
 
-- if @non_anon_guests_by_first_name && !@non_anon_guests_by_first_name.empty?
-  #guests{class: "#{determine_class(@elem_class)}"}
+- if @non_anon_guests_by_first_name.present?
+  #guests{class: "#{determine_class(elem)}"}
     .field Check out who's going!
     %table#attendees
       %tbody

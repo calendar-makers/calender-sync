@@ -16,4 +16,5 @@
 //= require jquery.remotipart
 //= require moment
 //= require tinymce
+//= require fullcalendar
 //= require_tree .

@@ -10,11 +10,11 @@
 - default_time = {hour: next_hour.hour, minute: 0, day: next_hour.day, month: next_hour.month, year: next_hour.year}
 
 #e_start_time.colored
-  = label :event, :start, 'Start Time', class: 'field'
+  .field Start Time
   = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true
 
 #e_end_time
-  = label :event, :end, 'End Time', class: 'field'
+  .field End Time
   = datetime_select :event, :end,  default: default_time, datetime_separator: '', time_separator: '', ampm: true
 
 = hidden_field :event, :organization, value: Meetup::GROUP_NAME
@@ -22,42 +22,42 @@
 #e_venue_name.colored
   = check_box_tag 'venue_check'
   = label_tag 'venue_check', 'Enable Venue', style: 'display:inline-block'
-  = label :event, :venue_name, 'Venue Name', class: 'field'
+  #venue_label.field Venue Name
   = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
 #e_location
-  = label_tag 'Location', 'Location', class: 'field'
+  #location_label.field Location
   = text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'initialize();', class: 'edit_text_field'
 
   #e_address
-    = label_tag 'Street Address', 'Street Address', class: 'field'
+    .field Street Address
     = text_field :event, 'st_number'
     = text_field :event, 'st_name'
 
   #e_city
-    = label :event, :city, 'City', class: 'field'
+    .field City
     = text_field :event, 'city', class: 'medium_edit_text_field'
 
   #e_state
-    = label :event, :state, 'State', class: 'field'
+    .field State
     = text_field :event, 'state', class: 'short_edit_text_field'
 
   #e_zip
-    = label :event, :zip, 'Zip', class: 'field'
+    .field Zip
     = text_field :event, 'zip', size: '6', class: 'short_edit_text_field'
 
   #e_country
-    = label :event, :country, 'Country', class: 'field'
+    .field Country
     = text_field :event, 'country', class: 'short_edit_text_field'
 
   #map
 
 #e_how_to_find_us.colored
-  = label :event, :how_to_find_us, 'How to find us', class: 'field'
+  .field How to find us
   = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '2', class: 'edit_text_field'
 
 #e_description
-  = label :event, :description, 'Description', class: 'field'
+  .field Description
   = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field tinymce'
 
 .colored= tinymce

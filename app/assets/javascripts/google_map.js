@@ -117,7 +117,7 @@ function read_full_address(address) {
 }
 
 function format_address_string(address) {
-     return [(address['event_st_number'] + ' ' + address['event_st_name']).replace(' ', '+'),
+     return [(address['event_st_number'] + ' ' + address['event_st_name']).replace(' ', '+').replace('&', 'and'),
               address['event_city'].replace(' ', '+'), address['event_state'].replace(' ', '+'),
               address['event_country'].replace(' ', '+'), address['event_zip']].join(',').replace(' ', '+');  // CHECK THIS FINAL REPLACE
 }

@@ -7,6 +7,6 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    @head, @header, @footer, @section = JoomlaScraper.instance.joomla_data
+    #@head, @header, @footer, @section = JoomlaScraper.instance.joomla_data
   end
 end
