@@ -20,6 +20,4 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
-.idea
-*/.DS_Store
-coverage
+.idea/*
