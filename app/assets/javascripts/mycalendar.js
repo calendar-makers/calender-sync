@@ -26,14 +26,12 @@ var init_object = {
     }
 };
 
+var setPanelHeight = function() {
+    $('#panel').outerHeight($('#calendar').find('.fc-view-container').outerHeight(true));
+};
 
 $(document).ready(function() {
-
   $('#calendar').fullCalendar(init_object);
-
-  var setPanelHeight = function() {
-      $('#panel').outerHeight($('#calendar').find('.fc-view-container').outerHeight(true));
-  };
 
   setPanelHeight();
 
@@ -53,3 +51,11 @@ $(document).ready(function() {
       }
   });
 });
+
+var refreshCalendar = function() {
+    // NOTE: The calendar API seems to be buggy. It refuses to refetch the calendar
+    // So I'm forced to reset the div, and rebuild the calendar from scratch
+    $('#calendar').replaceWith("<div id='calendar'></div>");
+    $('#calendar').fullCalendar(init_object);
+    setPanelHeight();
+};

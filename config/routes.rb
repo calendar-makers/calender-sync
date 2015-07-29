@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  resource :calendar, :only => [:show]
+  root 'calendars#show'
+
   devise_for :users, :skip => [:registrations]
+
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
     put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
   end
-
-  resource :calendar, :only => [:show]
 
   resources :events do
     collection do
@@ -14,9 +16,8 @@ Rails.application.routes.draw do
       post 'pull_third_party'
     end
   end
-  post '/events/:id', to: 'events#update'
-  resources :guests, :only => [:new, :create]
-  resources :accounts
 
-  root 'calendars#show'
+  resources :guests, :only => [:new, :create]
+
+  resources :accounts
 end

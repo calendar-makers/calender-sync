@@ -8,13 +8,13 @@
     %h4 Search by Event-ID or by URL-Group-Name
 
   = form_tag third_party_events_path, method: :get, format: :js, remote: true do
-    = radio_button_tag 'search_by', 'id', true
-    = label_tag 'id', 'ID', class: 'field', style: 'display:inline-block;'
+    = radio_button_tag 'search_by', 'id'
+    = label_tag 'id', 'ID', id: 'id_label'
     = text_field_tag 'id', nil, class: 'edit_text_field'
 
-    = radio_button_tag 'search_by', 'group', false
-    = label_tag 'group_urlname', 'Group Name', class: 'field', style: 'display:inline-block;'
-    = text_field_tag 'group_urlname', nil, class: 'edit_text_field', disabled: true
+    = radio_button_tag 'search_by', 'group'
+    = label_tag 'group_urlname', 'Group Name', id: 'group_label'
+    = text_field_tag 'group_urlname', nil, class: 'edit_text_field'
 
-    = submit_tag "Get Events", class: 'button', style: 'float:right;'
-    = submit_tag "Cancel",  name: 'cancel', class: 'button', style: 'float:left;'
+    = submit_tag "Get Events", class: 'button_right'
+    = submit_tag "Cancel",  name: 'cancel', class: 'button_left'

@@ -6,9 +6,6 @@
   .field Image Upload
   = file_field :event, :image, id: 'image', accept: 'image/*'
 
-- next_hour = DateTime.now + 1.hour
-- default_time = {hour: next_hour.hour, minute: 0, day: next_hour.day, month: next_hour.month, year: next_hour.year}
-
 #e_start_time.colored
   .field Start Time
   = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true
@@ -21,7 +18,7 @@
 
 #e_venue_name.colored
   = check_box_tag 'venue_check'
-  = label_tag 'venue_check', 'Enable Venue', style: 'display:inline-block'
+  = label_tag 'venue_check', 'Enable Venue'
   #venue_label.field Venue Name
   = text_field :event, :venue_name, placeholder: 'Venue Name', class: 'edit_text_field'
 
@@ -31,7 +28,7 @@
 
   #e_address
     .field Street Address
-    = text_field :event, 'st_number'
+    = text_field :event, 'st_number', placeholder: 'not required'
     = text_field :event, 'st_name'
 
   #e_city
@@ -44,7 +41,7 @@
 
   #e_zip
     .field Zip
-    = text_field :event, 'zip', size: '6', class: 'short_edit_text_field'
+    = text_field :event, 'zip', size: '6', class: 'short_edit_text_field', placeholder: 'not required'
 
   #e_country
     .field Country

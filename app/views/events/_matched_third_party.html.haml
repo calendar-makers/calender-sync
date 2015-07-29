@@ -1,6 +1,6 @@
 #panel_header
   %h2 Available Events
--#%h1.title{:style => "border_top: 4px solid #ff9900; border-top: 0px;"}
+
 = form_tag pull_third_party_events_path, method: :post, format: :js, remote: true, id: 'third_events_list_form' do
   - if @events.present?
     %table#available_third_events_table
@@ -17,21 +17,18 @@
       %tbody
         - @events.each do |event|
           %tr
-            - meetup_id = event.meetup_id
-            %td#third_events_checks= check_box_tag "event" + (meetup_id.nil? ? "" : meetup_id)
-            - name = event.name
-            - id = event.id
-            %td#names_column= id ? (link_to name, event_path(id)) : name
+            %td#third_events_checks= check_box_tag "event#{(id = event.meetup_id) ? id : ''}"
+            %td#names_column= event.name
             %td= (organization = event.organization) ? organization : 'N/A'
             %td= (start = event.format_start_date) ? start : 'N/A'
             %td= (end_date = event.format_end_date) ? end_date : 'N/A'
             %td= (location = event.location) ? location : 'N/A'
-            - if (url = event.url) =~ /www.meetup.com/
-              %td#third_events_links= link_to 'go', url, target: '_blank'
+            %td#third_events_links= link_to 'go', event.url, target: '_blank'
+
+    = submit_tag "Save Events", class: 'button_right'
+
   - else
     .field
       There are currently no upcoming events for this group.
 
-  - if @events.present?
-    = submit_tag "Save Events", class: 'button', style: 'float:right;'
-  = submit_tag "Cancel",  name: 'cancel_third_party', class: 'button', style: 'float:left;'
+  = submit_tag "Cancel",  name: 'cancel_third_party', class: 'button_left'

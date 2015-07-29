@@ -1,2 +1,4 @@
-#{@success ? "$('#calendar').fullCalendar('removeEvents', '#{@id}');" : ""}
+- if @success
+  $('#calendar').fullCalendar('removeEvents', '#{@id}');
+
 $('#panel').html('#{j render 'default_panel', locals: {msg: @msg}}');

@@ -2,10 +2,5 @@
   $('#panel').html('#{j render 'third_party'}');
 - else
   $('#calendar').html('#{j render 'matched_third_party', locals: {events: @events}}');
-  - # Necessary because usually the panel's height depends on the calendar's height.
-  - # Since we momentarily deactivate the calendar, then we reverse the relationship
-  - # and we set the calendar div to the height of the panel.
-  - # Once the calendar comes back, then it's all back to normal flow
-$('#third_events_list_form').outerHeight($('#panel').outerHeight(true));
-$('#search_by_id').on('click', function() { $('#id').prop('disabled', false); var group = $('#group_urlname'); group.prop('disabled', true); group.val('');});
-$('#search_by_group').on('click', function() { $('#group_urlname').prop('disabled', false); var id = $('#id'); id.prop('disabled', true); id.val('');});
+
+setup_third_party();

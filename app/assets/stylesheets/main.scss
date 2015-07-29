@@ -20,15 +20,13 @@ html, body {
 
 #panel input {
   line-height: 1.2em;
-  margin-top: 0;
-  margin-bottom: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
 }
 
 #panel select {
   line-height: 1.2em;
-  margin: 0;
+  margin-top: 0.3em;
   padding: 0;
 }
 
@@ -69,18 +67,25 @@ html, body {
 }
 
 #event_st_number {
-  width: 15%;
-  display:block;
+  display:inline-block;
   float:left;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  padding: 0.5em 0.3em 0.5em 0.3em;
+  width: 23%;
+  margin-right: 0.5em;
 }
 
 #event_st_name {
-  width: calc(65% - 0.6em - 0.5em);
-  display:block;
+  display: inline-block;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  padding: 0.5em 0.3em 0.5em 0.3em;
+  width: calc(100% - 23% - 0.5em);
 }
 
 #event_city {
-  width: 80%;
+  width: 100%;
 }
 
 .main_organization {
@@ -349,21 +354,21 @@ h2 {
   border-radius: 2px;
   border: 1px solid #ccc;
   padding: 0.5em 0.3em 0.5em 0.3em;
-  width: calc(100% - 0.6em - 0.5em);
+  width: 100%;
 }
 
 .medium_edit_text_field {
   border-radius: 2px;
   border: 1px solid #ccc;
   padding: 0.5em 0.3em 0.5em 0.3em;
-  width: calc(80% - 0.6em - 0.5em);
+  width: 80%;
 }
 
 .short_edit_text_field {
   border-radius: 2px;
   border: 1px solid #ccc;
   padding: 0.5em 0.3em 0.5em 0.3em;
-  width: calc(25% - 0.6em - 0.5em);
+  width: 23%;
 }
 
 #edit_description {
@@ -396,9 +401,10 @@ h2 {
   border: 1px solid #ccc;
 }
 
-.button {
+@mixin button {
   /* dimensions */
-  margin: 0;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
   height: 2.1em;
   padding: 0 .6em;
   position: relative;
@@ -418,6 +424,20 @@ h2 {
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   color: #333;
+}
+
+.button {
+  @include button;
+}
+
+.button_right {
+  @include button;
+  float: right;
+}
+
+.button_left {
+  @include button;
+  float: left;
 }
 
 .button:hover {
@@ -646,4 +666,9 @@ h2 {
 
 #title_box {
   margin-bottom: 1em;
+}
+
+#panel label {
+  margin-bottom: 0;
+  margin-top: 0.5em;
 }
