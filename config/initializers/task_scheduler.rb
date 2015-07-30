@@ -1,7 +1,7 @@
 unless Rails.env.test?
   DEBUG = true
 
-  JoomlaScraper.instance.fetch_joomla_data
+  WebScraper.instance.fetch_page_data
 
   scheduler = Rufus::Scheduler.new
 
@@ -19,7 +19,7 @@ unless Rails.env.test?
   scheduler.every '1m', first: Time.now + 2 * 60  do |job|
     minutes = Time.now.min
     if minutes % 5 == 0
-      JoomlaScraper.instance.fetch_joomla_data
+      WebScraper.instance.fetch_page_data
       puts 'Joomla Data Fetched.' if DEBUG
       if minutes % 30 == 0
         Event.synchronize_past_events

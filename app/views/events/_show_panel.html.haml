@@ -47,13 +47,13 @@
 
 #buttons_box
   - if user_signed_in?
-    %div{style: "float:left;"}
+    %div
       = form_tag edit_event_path(@event), method: 'get', id: 'edit_event', format: :js, remote: true do
         -# this path does an ajax get to the event controller action "edit"
-        = submit_tag 'Edit', class: 'button'
-    %div{style: "float:right;"}
+        = submit_tag 'Edit', class: 'button_left'
+    %div
       = form_tag event_path(@event), method: 'delete', id: 'delete_event', format: :js, remote: true do
         -# this path does an ajax delete to the events controller action destroy
         = hidden_field_tag :event_id, @event.id
-        = submit_tag 'Delete', class: 'button', id: 'delete_1'
+        = submit_tag 'Delete', class: 'button_right', id: 'delete_1'
 

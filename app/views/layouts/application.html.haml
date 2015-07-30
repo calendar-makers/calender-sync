@@ -1,13 +1,12 @@
 !!! 5
 %html
   %head
-    %title Calendar
     = stylesheet_link_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places',
       'data-turbolinks-track' => true, 'data-turbolinks-eval' => false
     = javascript_include_tag 'application',
       'data-turbolinks-track' => true, 'data-turbolinks-eval' => false
     = csrf_meta_tags
-    = raw @head
-  %body
-    = yield
+    -#= raw @head
+  -#%body
+  = yield

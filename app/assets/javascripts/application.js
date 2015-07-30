@@ -17,4 +17,5 @@
 //= require moment
 //= require tinymce
 //= require fullcalendar
+//= require bootstrap
 //= require_tree .

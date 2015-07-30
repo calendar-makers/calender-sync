@@ -1,0 +1,46 @@
+#main
+  - flash.each do |name, msg|
+    %div
+      msg
+
+  #title_box
+    - if user_signed_in?
+      #admin_panel
+        .dropdown
+          %p{class: 'dropdown-toggle', 'data-toggle' => 'dropdown'}
+            Admin Panel
+          %ul.dropdown-menu
+            %li
+              = link_to "Sign Out", destroy_user_session_path, :method => :get
+            %li
+              = link_to "Change your password", edit_user_registration_path
+
+            - if user_signed_in? and current_user.root?
+              %li
+                = link_to "Create new account", new_account_path, :method => :get
+              %li
+                = link_to "Delete existing accounts", edit_account_path("root"), :method => :get
+
+    #event_creation_box
+      - if user_signed_in?
+        = form_tag new_event_path, method: :get, id: 'new_event', format: :js, remote: true do
+          -# this path does an ajax GET to the event controller action "new"
+          = submit_tag '+', class: ['main_organization', 'event_creation_button']
+
+        = form_tag third_party_events_path, method: :get, id: 'third_party', format: :js, remote: true  do
+          -#this path does an ajax GET to the event controller action "third_party"
+          = submit_tag '+ 3rd Party', class: ['event_creation_button','third_party_organization']
+
+    .clear
+
+  - # Div for calendar and sidepanel
+  #wrap
+    #calendar
+    - # Div for event side panel
+    #panel_wrapper
+      #panel_header
+        %h2 Event Details
+      #panel
+        %h4.default_event_message Click an event!
+
+    .clear
