@@ -26,12 +26,6 @@ module CalendarsHelper
 
   def process_head(head)
     head.at_css('title').content = 'Calendar — Nature in the City'
-   # link_to_favicon(head)
     raw head
-  end
-
-  def link_to_favicon(head)
-    elem = head.at_css('title').next_element
-    elem.attribute('href').content = '/favicon.ico'
   end
 end
