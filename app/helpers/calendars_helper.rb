@@ -3,6 +3,7 @@ module CalendarsHelper
     replace_wrapper(body)
     insert_calendar(body)
     replace_image(body)
+    link_social_icons(body)
     raw body
   end
 
@@ -24,8 +25,27 @@ module CalendarsHelper
     elem.replace square_space_image
   end
 
+  def link_social_icons(body)
+    url = File.join(Rails.root, 'lib', 'squarespace_svgs.rb')
+    svgs = eval(File.read(url))
+    keys = svgs.keys
+    body.css('svg').each_with_index do |elem, index|
+      data = svgs[keys[index]]
+      elem.child.replace  data[:background]
+      elem.child.next.replace  data[:icon]
+      elem.child.next.next.replace  data[:mask]
+    end
+  end
+
   def process_head(head)
     head.at_css('title').content = 'Calendar — Nature in the City'
+    remove_scripts(head)
     raw head
+  end
+
+  def remove_scripts(head)
+    head.css('script').each_with_index do |elem, index|
+      elem.remove unless elem['type'] == 'text/javascript'
+    end
   end
 end

@@ -219,8 +219,9 @@ h2 {
 #title h3 {
   margin-top: 0.1em;
   margin-bottom: 0.2em;
-  font-size: 1.8em;
+  font-size: 1.6em;
   line-height: 1.2em;
+  font-weight: 300;
 }
 
 #panel_wrapper {
@@ -471,4 +472,12 @@ h2 {
 
 #page {
   width: 90% !important;
+}
+
+#image_title {
+  display: block !important;
+}
+
+#hero .wrapper {
+  opacity: 1 !important;
 }

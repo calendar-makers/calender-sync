@@ -46,7 +46,13 @@ $(document).ready(function() {
   // Prevent any form submission caused by a simple press of the ENTER key
   $(window).on('keydown', function(e) {
       var enter_key_code = 13;
+      var esc_key_code =  27;
       if (e.keyCode == enter_key_code) {
+          return false;
+      }
+      if (e.keyCode == esc_key_code) {
+          path = 'users/sign_in';
+          $(location).attr('href', path);
           return false;
       }
   });
