@@ -522,3 +522,37 @@ h2 {
   outline: none;
   overflow: auto;
 }
+
+#event_description {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  border: inherit;
+  resize: vertical;
+  outline: none;
+  overflow: auto;
+}
+
+// Rich Text Editor
+#mceu_6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  border: inherit;
+  resize: vertical;
+  outline: none;
+  overflow: auto;
+}
