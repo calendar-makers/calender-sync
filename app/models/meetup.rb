@@ -8,15 +8,15 @@ class Meetup
 
   # NATURE IN THE CITY DATA
 
-  GROUP_ID = '8870202'
-  GROUP_URLNAME = 'Nature-in-the-City'
-  GROUP_NAME = 'Nature in the City'
+  #GROUP_ID = '8870202'
+  #GROUP_URLNAME = 'Nature-in-the-City'
+  #GROUP_NAME = 'Nature in the City'
 
   # TESTING DATA
 
-  #GROUP_ID = '1556336'
-  #GROUP_URLNAME = 'Meetup-API-Testing'
-  #GROUP_NAME = 'Meetup API Testing Sandbox'
+  GROUP_ID = '1556336'
+  GROUP_URLNAME = 'Meetup-API-Testing'
+  GROUP_NAME = 'Meetup API Testing Sandbox'
 
 
   def default_group_name=(name='')
