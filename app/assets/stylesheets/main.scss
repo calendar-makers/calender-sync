@@ -5,7 +5,7 @@ $dark_red: #B00100;
 @mixin button {
   /* dimensions */
   margin-top: 0.5em;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.8em !important;
   height: 2.1em;
   padding: 0 .6em;
   position: relative;

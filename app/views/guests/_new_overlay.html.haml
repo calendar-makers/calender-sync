@@ -17,7 +17,7 @@
     = text_field :guest, :zip, class: 'edit_text_field', placeholder: 'Zip', label: 'zip'
 
     %p*Do you want to remain anonymous to other guests?
-    %div{style: 'padding: 0 15% 0 15%;'}
+    %div{style: 'padding: 0 15%'}
       = hidden_field :guest, :is_anon, value: nil
       %div{style: "float:left; position:relative;"}
         %label{for: 'guest_is_anon'}
@@ -27,9 +27,9 @@
         %label{for: 'guest_is_anon'}
           = radio_button :guest, :is_anon, false, style: 'margin: 0;'
           &nbsp;No
-      %div{style: "clear:both;"}
+      .clear
     %br
     %div{style: 'float:right;'}
       %div= submit_tag "RSVP", class: 'button'
 
-    %button.button{style: 'float:left;', onClick: 'toggleOverlay()'} Cancel
+    %button.button.button_left{onClick: 'toggleOverlay()'} Cancel

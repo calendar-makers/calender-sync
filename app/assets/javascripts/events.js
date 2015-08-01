@@ -30,6 +30,7 @@ var setup_event_form = function(button_id) {
         venue_check.prop('checked', true);
         event_venue_name.prop('disabled', false);
         autocomplete.prop('disabled', false);
+        displayLocationDivs();
     } else {
         venue_check.prop('checked', false);
         venue_label.addClass('disabled');
@@ -46,14 +47,11 @@ var setup_event_form = function(button_id) {
         if (!enabled) {
             venue_label.addClass('disabled');
             location_label.addClass('disabled');
-            $('#e_address').hide();
-            $('#e_city').hide();
-            $('#e_state').hide();
-            $('#e_zip').hide();
-            $('#e_country').hide();
+            hideLocationDivs();
             $('#map').hide();
+            clearElementsText();
             autocomplete.val('');
-            venue_name.val('');
+            event_venue_name.val('');
         } else {
             venue_label.removeClass('disabled');
             location_label.removeClass('disabled');
@@ -76,5 +74,15 @@ var setup_event_form = function(button_id) {
         }
     });
 
+};
+
+var renderEvent = function(event) {
+    calendar = $('#calendar');
+    eventDate = calendar.fullCalendar('getCalendar').moment(event['start']);
+    displayedDate = calendar.fullCalendar('getDate');
+    if (eventDate.month() == displayedDate.month()) {
+        calendar.fullCalendar('renderEvent', event, true);
+    }
+    calendar.fullCalendar('gotoDate', eventDate);
 };
 

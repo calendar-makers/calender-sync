@@ -4,6 +4,7 @@ module CalendarsHelper
     insert_calendar(body)
     replace_image(body)
     link_social_icons(body)
+    absolutize_links(body)
     raw body
   end
 
@@ -34,6 +35,19 @@ module CalendarsHelper
       elem.child.replace  data[:background]
       elem.child.next.replace  data[:icon]
       elem.child.next.next.replace  data[:mask]
+    end
+  end
+
+  def absolutize_links(body)
+    absolutize_collection(body.css('#upper-logo a'))
+    absolutize_collection(body.css('#topNav .folder-collection .subnav a'))
+  end
+
+  def absolutize_collection(array)
+    base = 'http://natureinthecity.org'
+    array.each do |elem|
+      path = elem['href']
+      elem['href'] = (base + path) unless path.include?(base)
     end
   end
 

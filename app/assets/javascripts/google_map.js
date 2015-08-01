@@ -44,6 +44,12 @@ function displayLocationDivs() {
     }
 }
 
+function hideLocationDivs() {
+    for (var i = 0; i < divIDs.length; i++) {
+        document.getElementById(divIDs[i]).style.display = 'none';
+    }
+}
+
 function initialize() {
     var locationBox = document.getElementById('autocomplete');
     autocomplete = new google.maps.places.Autocomplete(locationBox, {types: ['geocode']});
