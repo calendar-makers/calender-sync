@@ -64,8 +64,9 @@ var setLayout = function() {
 $(document).ready(function() {
   $('#calendar').fullCalendar(init_object);
 
-  setPanelHeight();
   setLayout();
+  setPanelHeight();
+
 
   var timer;
   $(window).resize(function() {
@@ -99,5 +100,6 @@ var refreshCalendar = function() {
     // So I'm forced to reset the div, and rebuild the calendar from scratch
     $('#calendar').replaceWith("<div id='calendar'></div>");
     $('#calendar').fullCalendar(init_object);
+    setLayout();
     setPanelHeight();
 };

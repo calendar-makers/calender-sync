@@ -11,6 +11,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( application.css.scss )
 Rails.application.config.assets.precompile += %w( application.js )
-Rails.application.config.assets.precompile += %w( fullcalendar.css.scss )
+Rails.application.config.assets.precompile += %w( fullcalendar.scss )
 Rails.application.config.assets.precompile += %w( fullcalendar.js )
 Rails.application.config.assets.precompile += %w( mycalendar.js )
