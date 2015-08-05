@@ -57,7 +57,6 @@ html, body {
   #margin-left:12.5%;
   #margin-right:12.5%;
   margin-bottom: 3%;
-  min-width:50em;
 }
 
 h1 {
@@ -220,8 +219,6 @@ h2 {
 }
 
 #calendar {
-  width:64%;
-  float:left;
   a {
     text-decoration: none;
     &:link {
@@ -252,9 +249,7 @@ h2 {
 }
 
 #panel_wrapper {
-  width:35%;
   height: 60%;
-  float:right;
 }
 
 #panel_header h2 {
@@ -497,16 +492,13 @@ h2 {
   max-width: 1305px !important;
 }
 
-#page {
-  width: 90% !important;
-}
-
 #image_title {
   display: block !important;
 }
 
 #hero .wrapper {
   opacity: 1 !important;
+  top: 38%;
 }
 
 #event_how_to_find_us {

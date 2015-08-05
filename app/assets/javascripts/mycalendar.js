@@ -23,17 +23,49 @@ var init_object = {
         left:   'today',
         center: 'title',
         right:  'prev,next'
-    }
+    },
+
+    aspectRatio: 1
 };
 
 var setPanelHeight = function() {
     $('#panel').outerHeight($('#calendar').find('.fc-view-container').outerHeight(true));
 };
 
+var setLayout = function() {
+    var panel = $('#panel_wrapper');
+    var calendar = $('#calendar');
+    calendar.css('float', 'left');
+    var width = $(window).width();
+
+    if (width < 500) {
+        panel.css('float', 'left');
+        panel.css('width', '100%');
+        calendar.css('width', '100%');
+    } else {
+        panel.css('float', 'right');
+        panel.css('width', '35%');
+        calendar.css('width', '64%');
+    }
+
+    if (width < 980) {
+        $('#page').css('width', '100%');
+
+        if (width < 800) {
+            calendar.fullCalendar('option', 'aspectRatio', 0.8);
+        }
+    } else {
+        $('#page').css('width', '96%');
+        calendar.fullCalendar('option', 'aspectRatio', 1);
+    }
+
+};
+
 $(document).ready(function() {
   $('#calendar').fullCalendar(init_object);
 
   setPanelHeight();
+  setLayout();
 
   var timer;
   $(window).resize(function() {
@@ -41,6 +73,8 @@ $(document).ready(function() {
     timer = setTimeout(function() {
         setPanelHeight();
     }, 250);
+
+    setLayout();
   });
 
   // Prevent any form submission caused by a simple press of the ENTER key
@@ -56,6 +90,8 @@ $(document).ready(function() {
           return false;
       }
   });
+
+  setup_squarespace();
 });
 
 var refreshCalendar = function() {
