@@ -63,10 +63,4 @@ module CalendarsHelper
       elem.remove unless elem['type'] == 'text/javascript'
     end
   end
-
-  def remove_typekit(head)
-    head.css('script').each do |elem|
-      elem.remove if elem['src'].include? 'typekit'
-    end
-  end
 end
