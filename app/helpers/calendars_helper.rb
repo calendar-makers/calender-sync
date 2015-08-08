@@ -59,8 +59,14 @@ module CalendarsHelper
   end
 
   def remove_scripts(head)
-    head.css('script').each_with_index do |elem, index|
+    head.css('script').each do |elem|
       elem.remove unless elem['type'] == 'text/javascript'
+    end
+  end
+
+  def remove_typekit(head)
+    head.css('script').each do |elem|
+      elem.remove if elem['src'].include? 'typekit'
     end
   end
 end
