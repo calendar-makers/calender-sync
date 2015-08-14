@@ -134,6 +134,19 @@ function get_interactive_map(address_map) {
     var address_string = format_address_string(address);
     var map = $(['<iframe id="map_frame" width="100%" height="100%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=', key, '&q=', address_string, '"></iframe>'].join(""));
     $('#map').html(map).show();
+    prevent_auto_scroll_on_map();
+}
+
+function prevent_auto_scroll_on_map() {
+    // make iframe active on click, disable on mouseleave
+    $('#map_frame').each( function(i, iframe) {
+        $(iframe).parent().hover( // make inactive on hover
+            function() {
+                $(iframe).css('pointer-events', 'none');
+            }).click( // activate on click
+            function() { $(iframe).css('pointer-events', 'auto');
+            }).trigger('mouseover'); // make it inactive by default as well
+    });
 }
 
 function geolocate() {
