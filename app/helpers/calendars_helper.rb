@@ -40,8 +40,8 @@ module CalendarsHelper
 
   def absolutize_links(body)
     absolutize_collection(body.css('#upper-logo a'))
-    absolutize_collection(body.css('#topNav .folder-collection .subnav a'))
-    absolutize_collection(body.css('#mobileNav .folder-collection .subnav a'))
+    absolutize_collection(body.css('#topNav .page-collection a'))
+    absolutize_collection(body.css('#mobileNav .page-collection a'))
   end
 
   def absolutize_collection(array)

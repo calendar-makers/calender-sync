@@ -5,6 +5,9 @@ unless Rails.env.test?
 
   scheduler = Rufus::Scheduler.new
 
+  ##
+  # This loop will continue until the database initialization is successful
+  #
   scheduler.every '1m', first: Time.now + 5 do |job|
     result = Event.initialize_calendar_db
     if result
