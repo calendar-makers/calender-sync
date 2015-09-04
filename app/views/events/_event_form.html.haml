@@ -1,28 +1,30 @@
-#e_name.colored
+#e_type.colored
+  = check_box_tag 'event_type_check', 'third_party', (@event.is_third_party? ? true : false)
+  = label_tag 'event_type_check', 'Third Party', class: 'field'
+
+#e_name
   .field Name
   = text_field :event, 'name', placeholder: 'Name', class: 'edit_text_field'
 
-#e_image
+#e_image.colored
   .field Image Upload
   = file_field :event, :image, id: 'image', accept: 'image/*'
 
-#e_start_time.colored
+#e_start_time
   .field Start Time
   = datetime_select :event, :start, default: default_time, datetime_separator: '', time_separator: '', ampm: true
 
-#e_end_time
+#e_end_time.colored
   .field End Time
   = datetime_select :event, :end,  default: default_time, datetime_separator: '', time_separator: '', ampm: true
 
-= hidden_field :event, :organization, value: Meetup::GROUP_NAME
-
-#e_venue_name.colored
+#e_venue_name
   = check_box_tag 'venue_check'
   = label_tag 'venue_check', 'Enable Venue', class: 'field'
   #venue_label.field Venue Name
   = text_field :event, :venue_name, class: 'edit_text_field'
 
-#e_location
+#e_location.colored
   #location_label.field Location
   = text_field_tag :autocomplete, nil, placeholder: 'Enter your address', onFocus: 'initialize();', class: 'edit_text_field'
 
@@ -49,13 +51,13 @@
 
   #map
 
-#e_how_to_find_us.colored
+#e_how_to_find_us
   .field How to find us
   = text_area :event, 'how_to_find_us', :cols =>'40', :rows => '2', class: 'edit_text_field'
 
-#e_description
+#e_description.colored
   .field Description
   = text_area :event, 'description', :cols =>'40', :rows => '10', class: 'edit_text_field tinymce'
 
 = tinymce_assets
-.colored= tinymce
+= tinymce

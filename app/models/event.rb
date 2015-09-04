@@ -12,10 +12,10 @@ class Event < ActiveRecord::Base
 
   def as_json(options={})
     {
-      :id => self.id,
-      :third_party => Meetup.new.default_group_name != self.organization,
-      :title => self.name,
-      :start => self.start.iso8601,
+      :id => id,
+      :third_party => is_third_party?,
+      :title => name,
+      :start => start.iso8601,
       :url => Rails.application.routes.url_helpers.event_path(id)
     }
   end
@@ -134,7 +134,11 @@ class Event < ActiveRecord::Base
 
   def is_third_party?
     group_name = organization
-    group_name && group_name != Event.get_default_group_name
+    group_name.nil? || group_name != Event.get_default_group_name
+  end
+
+  def is_external_third_party?
+    organization.nil?
   end
 
   def apply_update(new_event)

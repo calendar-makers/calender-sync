@@ -312,13 +312,13 @@ h2 {
   margin-top: 0.5em;
 }
 
-#time, #location, #description, #find_us, #guests, #e_name, #e_start_date, #e_start_time,
+#time, #location, #description, #find_us, #guests, #e_type, #e_name, #e_start_date, #e_start_time,
 #e_end_date, #e_end_time, #e_location, #e_description, #e_image, #e_organization, #e_venue_name,
 #e_how_to_find_us, #buttons_box {
   border-top: 1px solid #ccc;
 }
 
-#e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image,
+#e_type, #e_name, #e_start_date, #e_start_time, #e_end_date, #e_end_time, #e_location, #e_description, #e_image,
 #e_how_to_find_us, #e_organization, #e_venue_name {
   padding: 0.3em 0;
 }

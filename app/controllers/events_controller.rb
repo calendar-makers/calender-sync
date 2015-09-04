@@ -67,7 +67,14 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new
     respond_do
+  end
+
+  def assign_organization
+    org = params[:event_type_check] == 'third_party' ? 'affiliate' :
+                                                       Event.get_default_group_name
+    @event.update_attributes(organization: org)
   end
 
   # handles panel add new event
@@ -79,6 +86,7 @@ class EventsController < ApplicationController
   def perform_create_transaction
     begin
       @event = Event.new(event_params)
+      assign_organization
       remote_event = Meetup.new.push_event(@event)
       @event.update_meetup_fields(remote_event)
       @event.save!
@@ -91,8 +99,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find params[:id]
-    if @event.is_third_party? || @event.is_past?
-      @msg = "Sorry but third-party and past events cannot be edited. Only deleted."
+    if @event.is_external_third_party? || @event.is_past?
+      @msg = "Sorry but not-owned third-party events or past events cannot be edited. You may only delete them."
       return render 'errors', format: :js
     end
     respond_do
@@ -107,6 +115,7 @@ class EventsController < ApplicationController
 
   def perform_update_transaction
     event = Event.new(event_params)
+    assign_organization
     begin
       remote_event = Meetup.new.edit_event({event: event, id: @event.meetup_id})
       @event.update_attributes(event_params)

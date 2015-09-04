@@ -154,7 +154,7 @@ class Meetup
     {meetup_id: data['id'],
      name: data['name'],
      description: data['description'] || '',
-     organization: data['group']['name'] || '',
+     #organization: data['group']['name'] || '',
      url: data['event_url'] || '',
      how_to_find_us: data['how_to_find_us'] || '',
      status: data['status'] || ''}.merge(parse_dates(data)).merge(parse_venue(data))

@@ -7,6 +7,21 @@
     %div
       = msg
 
+  #color_keys
+    %table
+      %tr
+        %td{width: '20px'}
+          %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
+            %rect{:width => 15, :height => 15, :fill => "#A6C55F"}
+
+        %td Nature in the City
+      %tr
+        %td{width: '20px'}
+          %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
+            %rect{:width => 15, :height => 15, :fill => "#ff8832"}
+
+        %td Third Party Organization
+
   #title_box
     - if user_signed_in?
       #admin_panel
