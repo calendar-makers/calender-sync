@@ -1,4 +1,4 @@
-unless Rails.env.test? || Rails.env.production?
+unless Rails.env.test?
   DEBUG = true
 
   WebScraper.instance.fetch_page_data
