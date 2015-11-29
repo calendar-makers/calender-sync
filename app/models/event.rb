@@ -141,7 +141,7 @@ class Event < ActiveRecord::Base
   # Only get third party events which ended the day before
   #
   def self.get_stored_past_third_party_ids
-    ids = Event.where("end >= '#{DateTime.now - 1}' AND end < '#{DateTime.now}'").each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
+    ids = Event.where(end: (DateTime.now - 1...DateTime.now)).each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
     ids[0...200]    # Meetup limits the number of ids you can send to them to 200
   end
 
