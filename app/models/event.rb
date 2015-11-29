@@ -56,8 +56,9 @@ class Event < ActiveRecord::Base
     remotely_deleted_ids.each {|id| Event.find_by_meetup_id(id).destroy}
   end
 
+  # This only applies to present and upcoming events. Past events cannot be deleted
   def self.get_remotely_deleted_ids(remote_events)
-    target_events = Event.where("start >= '#{DateTime.now - 1}'")
+    target_events = Event.where("start >= '#{DateTime.now}'")
     local_event_ids = target_events.inject([]) {|array, event| array << event.meetup_id}
     remote_event_ids = remote_events.inject([]) {|array, event| array << event.meetup_id}
     local_event_ids - remote_event_ids
@@ -72,7 +73,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_upcoming_third_party_events
-    ids = Event.get_stored_third_party_ids
+    ids = Event.get_stored_upcoming_third_party_ids
     if ids.size > 0
       options = {event_id: ids.join(',')}
       events = Event.get_remote_events({status: 'upcoming'}.merge options)
@@ -82,7 +83,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.get_past_third_party_events(from=nil, to=nil)
-    ids = Event.get_stored_third_party_ids
+    ids = Event.get_stored_past_third_party_ids
     if ids.size > 0
       options = {event_id: ids.join(',')}
       range = Event.date_range(from, to)
@@ -127,22 +128,39 @@ class Event < ActiveRecord::Base
     Meetup::GROUP_NAME
   end
 
-  def self.get_stored_third_party_ids
-    ids = Event.all.each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
+  def self.internal_third_party_group_name
+    'affiliate'
+  end
+
+  def self.get_stored_upcoming_third_party_ids
+    ids = Event.where("start >= '#{DateTime.now}'").each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
+    ids[0...200]    # Meetup limits the number of ids you can send to them to 200
+  end
+
+  ##
+  # Only get third party events which ended the day before
+  #
+  def self.get_stored_past_third_party_ids
+    ids = Event.where("end >= '#{DateTime.now - 1}' AND end < '#{DateTime.now}'").each_with_object([]) {|event, ids| ids << event.meetup_id if event.is_third_party?}
     ids[0...200]    # Meetup limits the number of ids you can send to them to 200
   end
 
   def is_third_party?
-    group_name = organization
-    group_name.nil? || group_name != Event.get_default_group_name
+    is_external_third_party? || (organization != Event.get_default_group_name)
   end
 
+  ##
+  # NOTE: Because of the many events in the db where the organization was erroneously set to nil, here I am going to
+  # consider any event with nil organization as external third party.
+  # FROM 11-28-2015 THIS WILL NOT BE AN ISSUE ANYMORE since there will not be a nil organization name anymore
+  #
   def is_external_third_party?
-    organization.nil?
+    organization != Event.get_default_group_name && organization != Event.internal_third_party_group_name || organization.nil?
   end
 
   def apply_update(new_event)
     new_pairs = new_event.attributes
+    new_pairs.delete 'organization'      # We don't want to update the db with organization names coming from meetup
     modified_pairs = new_pairs.select {|key, value| value && value != self[key]}
     update_attributes(modified_pairs)
   end
@@ -205,6 +223,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  ##
+  # Used only during event creation. It basically gets a few selected fields from the newly created
+  # event we got back from meetup and it sticks them into the event for database storage purposes
+  #
   def update_meetup_fields(event)
     keys = [:meetup_id, :updated, :url, :status]
     keys.each {|key| self[key] = event[key]}

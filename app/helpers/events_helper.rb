@@ -1,5 +1,5 @@
 module EventsHelper
-  # Represents the an html element
+  # Represents an html element
   def elem
     @elem ||= nil
   end

@@ -24,7 +24,7 @@ class EventsController < ApplicationController
       @time_period = @event.format_time
       @non_anon_guests_by_first_name = @event.guests.order(:first_name).where(is_anon: false)
       @event.merge_meetup_rsvps
-      respond_do
+      handle_response
     rescue Exception => e
       @msg = "Could not pull rsvps '#{@event.name}':" + '\n' + e.to_s
       render 'errors', format: :js
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
       elsif group_urlname.present?
         @events = Event.get_remote_events({group_urlname: group_urlname})
       end
-      respond_do
+      handle_response
     rescue Exception => e
       @msg = 'Could not perform the requested operation:' + '\n' + e.to_s
       render 'errors', format: :js
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
       raise 'You must select at least one event. \nPlease retry.' if ids.blank?
       events = Event.store_third_party_events(ids)
       @msg = 'Successfully added:' + '<br/>' + events.map {|event| event.name}.join('<br/>')
-      respond_do
+      handle_response
     rescue Exception => e
       @msg = 'Could not pull events:' + '\n' + e.to_s
       render 'errors', format: :js
@@ -68,19 +68,18 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    respond_do
+    handle_response
   end
 
   def assign_organization
-    org = params[:event_type_check] == 'third_party' ? 'affiliate' :
-                                                       Event.get_default_group_name
+    org = params[:event_type_check] == 'third_party' ? Event.internal_third_party_group_name : Event.get_default_group_name
     @event.update_attributes(organization: org)
   end
 
   # handles panel add new event
   def create
     perform_create_transaction
-    @success ? respond_do : (render 'errors', format: :js)
+    @success ? handle_response : (render 'errors', format: :js)
   end
 
   def perform_create_transaction
@@ -103,14 +102,14 @@ class EventsController < ApplicationController
       @msg = "Sorry but not-owned third-party events or past events cannot be edited. You may only delete them."
       return render 'errors', format: :js
     end
-    respond_do
+    handle_response
   end
 
   # does panel update event
   def update
     @event = Event.find params[:id]
     perform_update_transaction
-    @success ? respond_do : (render 'errors', format: :js)
+    @success ? handle_response : (render 'errors', format: :js)
   end
 
   def perform_update_transaction
@@ -132,7 +131,7 @@ class EventsController < ApplicationController
     @event = Event.find params[:id]
     @id = @event.id
     perform_destroy_transaction
-    @success ? respond_do : (render 'errors', format: :js)
+    @success ? handle_response : (render 'errors', format: :js)
   end
 
   def perform_destroy_transaction
@@ -147,7 +146,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def respond_do
+  def handle_response
     respond_to do |format|
       format.html { redirect_to calendar_path }
       format.json { render :nothing => true }

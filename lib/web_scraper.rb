@@ -28,6 +28,7 @@ class WebScraper
   # This method provides the squarespace data to the calendars controller
   #
   def page_data
+    fetch_page_data
     [@head, @body]
   end
 end
