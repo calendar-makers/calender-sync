@@ -71,32 +71,32 @@
       %div{:class => 'container'}
         %br
         %h2 Events
-        
-      %div{:class => 'container', :id => '#upcoming'}
+        %br
+      #upcoming.container
         %ul{:class => 'nav nav-tabs'}
           %li{:class => 'active'}
-            %a{'href'=>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
+            %a{:href =>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
           %li
-            %a{'href'=>'#pending_events', 'data-toggle' => 'tab'} Pending
+            %a{:href =>'#pending_events', 'data-toggle' => 'tab'} Pending (#{@pending})
           %li
-            %a{'href'=>'#rejected_events', 'data-toggle' => 'tab'} Rejected
+            %a{:href =>'#rejected_events', 'data-toggle' => 'tab'} Rejected
           %li
-            %a{'href'=>'#past_events', 'data-toggle' => 'tab'} Past
+            %a{:href =>'#past_events', 'data-toggle' => 'tab'} Past
       
       %div{:class=>'tab-content clearfix'}
         %div{:class => 'tab-pane active', :id =>'upcoming_events'}
           %br
           %ul
-            %li Upcoming event
+            %li upcoming event
         %div{:class => 'tab-pane', :id =>'pending_events'}
           %br
           %ul
-            %li Pending event
+            %li pending event
         %div{:class => 'tab-pane', :id =>'rejected_events'}
           %br
           %ul
-            %li Rejected event
+            %li rejected event
         %div{:class => 'tab-pane', :id =>'past_events'}
           %br
           %ul
-            %li Past event
+            %li past event
