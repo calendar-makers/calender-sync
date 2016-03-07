@@ -5,11 +5,11 @@
 * GitHub: https://github.com/Nature-in-the-City/Nature_Calendar/
 * Heroku: https://nature-calendar.herokuapp.com/
 * Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1540479/
-* Code Climate: https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/
+* Code Climate: https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/
 * [![Code Climate](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/gpa.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar)
 * [![Test Coverage](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/coverage.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/coverage)
 * [![Issue Count](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/issue_count.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar)
-* Travis CI: https://travis-ci.org/Nature-in-the-City/Nature_Calendar_Spring2016/
+* Travis CI: https://travis-ci.org/Nature-in-the-City/Nature_Calendar/
 * [![Build Status](https://travis-ci.org/Nature-in-the-City/Nature_Calendar.svg?branch=master)](https://travis-ci.org/Nature-in-the-City/Nature_Calendar)
 * YouTube: https://youtu.be/Sb__EmK319k
 
