@@ -6,44 +6,38 @@ Feature: View events by status on the admin page.
 
 Background: Events have already been added to the database
   Given the following events exist:
-    | name  | start       | end         | st_number | st_name   | city  | description     | status    |
-    | Hike  | Dec-21-2016 | Dec-21-2016 | 1210      | street rd | SF    | A past hike     | past      |
-    | Hike1 | Dec-22-2016 | Dec-22-2016 | 1210      | street rd | SF    | A past hike     | past      |
-    | Hike2 | Dec-25-2016 | Dec-25-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
-    | Hike3 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
-    | Hike4 | Dec-27-2016 | Dec-27-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
-    | Hike5 | Dec-28-2016 | Dec-28-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
-    | Hike6 | Dec-30-2016 | Dec-30-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
-    | Hike7 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
+    | name  | start               | end               | st_number | st_name   | city  | description | status    |
+    | Hike  | 12/21/2016 9:00 am  | 12/21/16 12:00 pm | 1210      | street rd | SF    | A hike      | approved  |
+    | Hike4 | 12/30/2016 9:00 am  | 12/30/16 12:00 pm | 1210      | street rd | SF    | A hike      | approved  |
+    | Hike2 | 12/25/2016 9:00 am  | 12/25/16 12:00 pm | 1210      | street rd | SF    | A hike      | pending   |
+    | Hike3 | 12/27/2016 9:00 am  | 12/27/16 12:00 pm | 1210      | street rd | SF    | A hike      | rejected  |
+    And I am on the admin page
+    And I see the "Admin" panel
+    And I see the following status tabs: Upcoming, Pending, Rejected, Past
+    And the date is "12/25/2016"
 
-    And   I am on the "Admin" page
-    When  I am logged in as the admin
-    Then  I see the "Admin" panel
-    And   I see the following status tabs: "Upcoming", "Pending", "Rejected", "Past"
-    And   the date is "12/25/2016 06:00:00 AM"
-    
+Scenario: show upcoming events
+  Given I see the "Upcoming" status tab 
+  And   I press the "Upcoming" tab
+  Then  I should see approved events with dates after "12:00am" today
+  And   I should see the events sorted by date in ascending order
+  And   I should not see approved events with date before "12:00am" today
 
-Scenario: Show upcoming events in ascending order
-  Given I press the "Upcoming" tab
-  Then  I should only see approved, upcoming events
-  And   I should see events with dates after now
-  And   I should see "Hike6" before "Hike7"
-  And   I should not see events with dates before now
+Scenario: show past events
+  Given I see the "Past" status tab
+  When  I press the "Past" tab
+  Then  I should see approved events with dates before "12:00am" today
+  And   I should see the events sorted by date in descending order
+  And   I should not see approved events with date after "12:00am" today
 
-Scenario: Show past events in descending order
-  Given I press the "Past" tab
-  Then  I should only see past events
-  And   I should see "Hike1" before "Hike"
-  And   I should see events with dates before now
-  And   I should not see events with dates after now
-
-Scenario: Show pending events in ascending order
-  Given I press the "Pending" tab
-  Then  I should only see pending events
-  And   I should see "Hike2" before "Hike3"
-  And   I should not see events with dates before now
+Scenario: show pending events
+  When  I press the "Pending" status tab
+  Then  I should see pending events
+  And   I should see the events sorted by date in ascending order
+  And I should not see "Approved" or "Rejected" or "Past" events
   
-Scenario: Show rejected events in ascending order
-  Given I press the "Rejected" tab
-  Then  I should only see rejected events
-  And   I should see "Hike4" before "Hike5"
+Scenario: show rejected events
+  When  I press the "Rejected" status tab
+  Then  I should see rejected events
+  And   I should see the events sorted by date in ascending order
+  And   I should not see "Approved" or "Upcoming" or "Past" events 
