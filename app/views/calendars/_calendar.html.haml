@@ -65,13 +65,13 @@
     .clear
     
     #events_box
-      %div{'class' => 'container'}
+      %div{:class => 'container'}
         %br
         %h2 Events
         
-      %div{'class' => 'container', 'id' => '#upcoming'}
-        %ul{'class' => 'nav nav-tabs'}
-          %li{'class' => 'active'}
+      %div{:class => 'container', :id => '#upcoming'}
+        %ul{:class => 'nav nav-tabs'}
+          %li{:class => 'active'}
             %a{'href'=>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
           %li
             %a{'href'=>'#pending_events', 'data-toggle' => 'tab'} Pending
@@ -81,19 +81,19 @@
             %a{'href'=>'#past_events', 'data-toggle' => 'tab'} Past
       
       %div{:class=>'tab-content clearfix'}
-        %div{:class => 'tab-pane active', 'id'=>'upcoming_events'}
+        %div{:class => 'tab-pane active', :id =>'upcoming_events'}
           %br
           %ul
             %li Upcoming event
-        %div{:class => 'tab-pane', 'id'=>'pending_events'}
+        %div{:class => 'tab-pane', :id =>'pending_events'}
           %br
           %ul
             %li Pending event
-        %div{:class => 'tab-pane', 'id'=>'rejected_events'}
+        %div{:class => 'tab-pane', :id =>'rejected_events'}
           %br
           %ul
             %li Rejected event
-        %div{:class => 'tab-pane', 'id'=>'past_events'}
+        %div{:class => 'tab-pane', :id =>'past_events'}
           %br
           %ul
             %li Past event
