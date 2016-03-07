@@ -2,15 +2,15 @@
 * Gmail: naturecalendar2016@gmail.com
 * Google Drive: https://drive.google.com/drive/u/1/folders/0B9mZP8ngprxbVDM2ZWhGZEdyMjQ
 * Cloud9: https://ide.c9.io/naturecalendar/nature-calendar
-* GitHub: https://github.com/Nature-in-the-City/Nature_Calendar_Spring2016/
+* GitHub: https://github.com/Nature-in-the-City/Nature_Calendar/
 * Heroku: https://nature-calendar.herokuapp.com/
 * Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1540479/
 * Code Climate: https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/
-* [![Code Climate](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/badges/gpa.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016)
-* [![Test Coverage](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/badges/coverage.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/coverage)
-* [![Issue Count](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016/badges/issue_count.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar_Spring2016)
+* [![Code Climate](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/gpa.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar)
+* [![Test Coverage](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/coverage.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/coverage)
+* [![Issue Count](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar/badges/issue_count.svg)](https://codeclimate.com/github/Nature-in-the-City/Nature_Calendar)
 * Travis CI: https://travis-ci.org/Nature-in-the-City/Nature_Calendar_Spring2016/
-* [![Build Status](https://travis-ci.org/Nature-in-the-City/Nature_Calendar_Spring2016.svg?branch=master)](https://travis-ci.org/Nature-in-the-City/Nature_Calendar_Spring2016)
+* [![Build Status](https://travis-ci.org/Nature-in-the-City/Nature_Calendar.svg?branch=master)](https://travis-ci.org/Nature-in-the-City/Nature_Calendar)
 * YouTube: https://youtu.be/Sb__EmK319k
 
 # Purpose
