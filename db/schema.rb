@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160306153528) do
-=======
-ActiveRecord::Schema.define(version: 20160228234126) do
->>>>>>> 65821703872cead1971b7f07d6fc833a2df18774
+ActiveRecord::Schema.define(version: 20160306160329) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
@@ -35,7 +31,6 @@ ActiveRecord::Schema.define(version: 20160228234126) do
     t.datetime "updated_at"
   end
 
-<<<<<<< HEAD
   create_table "guests", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -54,6 +49,15 @@ ActiveRecord::Schema.define(version: 20160228234126) do
     t.datetime "updated_at"
   end
 
-=======
->>>>>>> 65821703872cead1971b7f07d6fc833a2df18774
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                              null: false
+    t.string   "encrypted_passcode",                 null: false
+    t.string   "reset_password_token",               null: false
+    t.datetime "reset_password_sent_at"
+    t.integer  "failed_attempts",        default: 0, null: false
+    t.datetime "locked_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end
