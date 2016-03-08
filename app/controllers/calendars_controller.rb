@@ -7,7 +7,6 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    @pending = 1
     @head, @body = WebScraper.instance.page_data
   end
 end
