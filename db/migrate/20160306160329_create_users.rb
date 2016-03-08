@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :reset_password_token, null: false
       t.datetime :reset_password_sent_at
       t.integer :failed_attempts, default: 0, null: false
-      t.integer :level, default: 1, null: false
+      t.integer :level, default: 0, null: false
       t.datetime :locked_at
       t.timestamps
     end
