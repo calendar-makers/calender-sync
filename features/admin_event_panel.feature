@@ -6,11 +6,15 @@ Feature: View events by status on the admin page.
 
 Background: Events have already been added to the database
   Given the following events exist:
-    | name  | start       | end         | st_number | st_name   | city  | description | status    |
-    | Hike  | Dec-21-2016 | Dec-21-2016 | 1210      | street rd | SF    | A hike      | approved  |
-    | Hike4 | Dec-30-2016 | Dec-30-2016 | 1210      | street rd | SF    | A hike      | approved  |
-    | Hike2 | Dec-25-2016 | Dec-25-2016 | 1210      | street rd | SF    | A hike      | pending   |
-    | Hike3 | Dec-27-2016 | Dec-27-2016 | 1210      | street rd | SF    | A hike      | rejected  |
+    | name  | start       | end         | st_number | st_name   | city  | description     | status    |
+    | Hike  | Dec-21-2016 | Dec-21-2016 | 1210      | street rd | SF    | A past hike     | past      |
+    | Hike1 | Dec-22-2016 | Dec-22-2016 | 1210      | street rd | SF    | A past hike     | past      |
+    | Hike2 | Dec-25-2016 | Dec-25-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
+    | Hike3 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
+    | Hike4 | Dec-27-2016 | Dec-27-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
+    | Hike5 | Dec-28-2016 | Dec-28-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
+    | Hike6 | Dec-30-2016 | Dec-30-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
+    | Hike7 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
 
     And   I am on the "Admin" page
     When  I am logged in as the admin
@@ -19,29 +23,27 @@ Background: Events have already been added to the database
     And   the date is "12/25/2016 06:00:00 AM"
     
 
-Scenario: show upcoming events
+Scenario: Show upcoming events in ascending order
   Given I press the "Upcoming" tab
   Then  I should only see approved, upcoming events
-  And   I should see events with dates after "6:00 AM" today
-  And   I should see the events sorted by date in ascending order
-  And   I should not see events with dates before "6:00 AM" today
+  And   I should see events with dates after now
+  And   I should see "Hike6" before "Hike7"
+  And   I should not see events with dates before now
 
-Scenario: show past events
+Scenario: Show past events in descending order
   Given I press the "Past" tab
-  Then  I should see past events
-  And   I should see the events sorted by date in "descending" order
-  And   I should see events with dates before "6:00 AM" today
-  And   I should not see events with dates after "6:00 AM" today
+  Then  I should only see past events
+  And   I should see "Hike1" before "Hike"
+  And   I should see events with dates before now
+  And   I should not see events with dates after now
 
-Scenario: show pending events
-  Given I press the "Pending" status tab
-  Then  I should see pending events
-  And   I should see the events sorted by date in "ascending" order
-  And   I should not see events with dates before "6:00 AM" today
-  And   I should not see the following event statuses: approved, rejected, past 
+Scenario: Show pending events in ascending order
+  Given I press the "Pending" tab
+  Then  I should only see pending events
+  And   I should see "Hike2" before "Hike3"
+  And   I should not see events with dates before now
   
-Scenario: show rejected events
-  Given I press the "Rejected" status tab
-  Then  I should see rejected events
-  And   I should see the events sorted by date in "ascending" order
-  And   I should not see the following event statuses: approved, upcoming, past 
+Scenario: Show rejected events in ascending order
+  Given I press the "Rejected" tab
+  Then  I should only see rejected events
+  And   I should see "Hike4" before "Hike5"
