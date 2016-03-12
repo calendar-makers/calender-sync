@@ -91,14 +91,12 @@
         %div{:class => 'tab-pane', :id =>'pending_events'}
           %br
           %ul
-            - @pending.each do |events|
-              %li= events.name
+            %li pending event
         
         %div{:class => 'tab-pane', :id =>'rejected_events'}
           %br
           %ul
-          - @rejected.each do |events|
-            %li= events.name
+            %li rejected event
         
         %div{:class => 'tab-pane', :id =>'past_events'}
           %br
