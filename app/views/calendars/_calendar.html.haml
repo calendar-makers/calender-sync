@@ -53,6 +53,7 @@
       - else
         = form_tag new_event_path, method: :get, id: 'suggest_event', format: :js, remote: true do
           -# this path does an ajax GET to the event controller action "new"
+          = hidden_field_tag 'suggested_event', 'True'
           = submit_tag 'Suggest Event', class: ['main_organization', 'event_creation_button']
 
     .clear

@@ -5,17 +5,16 @@ Feature: Guests can submit Events for approval by an admin
   I want to submit my Event to the calendar for approval by an admin 
   
   Background:
-    Given I am logged in as the non-root admin
+    Given I am not logged in as the admin
     And I am on the calendar page
     And I press "Suggest Event"
     Then I should see "Suggest your Event"
   
   Scenario: Submit an Event
-    When I fill in required Event details
-    And I click "Submit"
+    When I fill in "name" with "Test Name"
+    And I press "Suggest Event"
     Then I should see "Your Event was successfully submitted for approval!"
   
   Scenario: Submit Event failure
-    When I fill in "Event Name" with "Test Name"
-    And I click "Submit"
+    When I press "Suggest Event"
     Then I should see "You must fill out all required fields (marked with a *)"
