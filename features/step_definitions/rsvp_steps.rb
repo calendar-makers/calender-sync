@@ -61,10 +61,6 @@ When(/^I do not fill out the all of the required fields of the RSVP form$/) do
   fill_in('guest_address', :with => '12 Place Blvd.')
 end
 
-When(/^I press "(.*)"$/) do |button|
-  click_button(button)
-end
-
 Then(/^the page should( not)? have the text "(.*)"$/) do |should_not, text|
   if should_not
     expect(page).to have_no_content(text)
