@@ -17,6 +17,10 @@ Background: Events have already been added to the database
     | Hike7 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
 
     And   I am on the "Admin" page
+<<<<<<< HEAD
+=======
+    When  I am logged in as the admin
+>>>>>>> fdbd89ca5fe448b4cc11730e7a9c734c34318f36
     Then  I see the "Admin" panel
     And   I see the following status tabs: "Upcoming", "Pending", "Rejected", "Past"
     And   the date is "12/25/2016 06:00:00 AM"

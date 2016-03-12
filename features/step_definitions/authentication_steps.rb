@@ -8,7 +8,12 @@ end
 
 def create_user
   delete_user
+<<<<<<< HEAD
   @user = User.create!(:email => "example@example.com", :encrypted_passcode => "changeme")
+=======
+  @user = User.create!(email: "example@example.com", 
+                      password: "changeme")
+>>>>>>> fdbd89ca5fe448b4cc11730e7a9c734c34318f36
 end
 
 def create_root
