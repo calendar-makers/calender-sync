@@ -49,9 +49,9 @@ Then /^(?:|I )should( not)? see events with dates (.*) now$/ do |negation, order
 end
 
 Then /I should( not)? see "(.*)" before "(.*)"/ do |negated, first_item, second_item|
-  rx = /#{e1}.*#{e2}/m
+  rx = /#{first_item}.*#{second_item}/m
   if negated.eql? "not"
-      rx = /#{e2}.*#{e1}/m
+      rx = /#{second_item}.*#{first_item}/m
   end
-  expect(page.body).to =~ rx
+  expect(page.body).to have_content(rx)
 end
