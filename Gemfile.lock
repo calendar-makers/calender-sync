@@ -308,6 +308,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  capybara (= 2.4.4)
   capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
@@ -345,4 +346,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.4
+   1.11.2
