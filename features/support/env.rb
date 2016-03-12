@@ -8,6 +8,7 @@ SimpleCov.start 'rails'
 
 require 'cucumber/rails'
 require 'fakeweb'
+require 'byebug'
 
 Capybara::Webkit.configure do |config|
   config.allow_url("csi.gstatic.com")

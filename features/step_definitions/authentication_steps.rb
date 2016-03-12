@@ -8,7 +8,7 @@ end
 
 def create_user
   delete_user
-  @user = User.create(email: "example@example.com", 
+  @user = User.create!(email: "example@example.com", 
                       password: "changeme")
 end
 

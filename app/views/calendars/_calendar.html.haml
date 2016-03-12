@@ -21,6 +21,9 @@
             %rect{:width => 15, :height => 15, :fill => "#ff8832"}
 
         %td Partner Organizations
+        %td
+          %button.button_right{'href' => '#', 'data-toggle' => 'modal'} Suggest Event
+          
 
   #title_box
     - if user_signed_in?
@@ -69,3 +72,39 @@
         %h4.default_event_message Click an event!
 
     .clear
+    
+    #events_box
+      %div{:class => 'container'}
+        %br
+        %h2 Events
+        %br
+      #upcoming.container
+        %ul{:class => 'nav nav-tabs'}
+          %li{:class => 'active'}
+            %a{:href =>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
+          %li
+            %a{:href =>'#pending_events', 'data-toggle' => 'tab'} Pending (#{@pending_count})
+          %li
+            %a{:href =>'#rejected_events', 'data-toggle' => 'tab'} Rejected
+          %li
+            %a{:href =>'#past_events', 'data-toggle' => 'tab'} Past
+      
+      %div{:class=>'tab-content clearfix'}
+        %div{:class => 'tab-pane active', :id =>'upcoming_events'}
+          %br
+          %ul
+            %li upcoming approved event
+        %div{:class => 'tab-pane', :id =>'pending_events'}
+          %br
+          %ul
+            %li pending event
+        
+        %div{:class => 'tab-pane', :id =>'rejected_events'}
+          %br
+          %ul
+            %li rejected event
+        
+        %div{:class => 'tab-pane', :id =>'past_events'}
+          %br
+          %ul
+            %li past event
