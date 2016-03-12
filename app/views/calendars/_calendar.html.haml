@@ -77,7 +77,7 @@
           %li{:class => 'active'}
             %a{:href =>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
           %li
-            %a{:href =>'#pending_events', 'data-toggle' => 'tab'} Pending (#{@pending})
+            %a{:href =>'#pending_events', 'data-toggle' => 'tab'} Pending (#{@pending_count})
           %li
             %a{:href =>'#rejected_events', 'data-toggle' => 'tab'} Rejected
           %li
@@ -91,11 +91,15 @@
         %div{:class => 'tab-pane', :id =>'pending_events'}
           %br
           %ul
-            %li upcoming pending event
+            - @pending.each do |events|
+              %li= events.name
+        
         %div{:class => 'tab-pane', :id =>'rejected_events'}
           %br
           %ul
-            %li upcoming rejected event
+          - @rejected.each do |events|
+            %li= events.name
+        
         %div{:class => 'tab-pane', :id =>'past_events'}
           %br
           %ul
