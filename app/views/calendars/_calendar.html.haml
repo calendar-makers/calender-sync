@@ -72,17 +72,21 @@
 
     .clear
     
-    #events_box
-      %div{:class => 'container'}
-        %br
-        %h2 Events
-        %br
-      #upcoming.container
-        %ul{:class => 'nav nav-tabs'}
-          - @tabs.each do |tab|
-            - if tab.eql? "Upcoming"
-              %li{:class => 'active'}
-                %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
+#events_box
+  %div{:class => 'container'}
+    %br
+    %h2 Events
+    %br
+  #upcoming.container
+    %ul{:class => 'nav nav-tabs'}
+      - @tabs.each do |tab|
+        - if tab.eql? "Upcoming"
+          %li{:class => 'active'}
+            %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
+        - else
+          %li
+            - if tab.eql? "Pending"
+              %a{:href =>"#pending_events", 'data-toggle' => 'tab'} Pending (#{@pending_count})
             - else
               %li
                 - if tab.eql? "Pending"

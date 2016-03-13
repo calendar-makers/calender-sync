@@ -17,7 +17,7 @@ events = [{:name => 'Market Street Prototyping Festival', :organization => 'Natu
             :city => 'Phoenix', :zip => 91210, :start => 'April 11 2016 00:00',:end => 'April 21 2016, 8:30', 
             :how_to_find_us => 'Second door on the left', :meetup_id => 656555555, :status => 'approved'},
           {:name => 'Muir Woods Hike', :organization => 'Outdoorsy', 
-            :description => 'Come in the iconic Muir woods of Mill Valley!', 
+            :description => 'Come hike the iconic Muir woods of Mill Valley!', 
             :venue_name => 'Muir Woods', :st_number => 1, :st_name => 'Muir Woods Rd', 
             :city => 'Mill Valley', :zip => 94941, :start => 'March 27 2016 09:00 AM',:end => 'March 27 2016, 03:30 PM', 
             :how_to_find_us => 'Meet in parking lot at 9 AM', :meetup_id => 656555555, :status => 'pending'},
