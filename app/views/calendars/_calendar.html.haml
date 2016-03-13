@@ -73,77 +73,22 @@
         %br
       #upcoming.container
         %ul{:class => 'nav nav-tabs'}
-          %li{:class => 'active'}
-            %a{:href =>'#upcoming_events', 'data-toggle' => 'tab'} Upcoming
-          %li
-            %a{:href =>'#pending_events', 'data-toggle' => 'tab'} Pending (#{@pending_count})
-          %li
-            %a{:href =>'#rejected_events', 'data-toggle' => 'tab'} Rejected
-          %li
-            %a{:href =>'#past_events', 'data-toggle' => 'tab'} Past
+          - @tabs.each do |tab|
+            - if tab.eql? "Upcoming"
+              %li{:class => 'active'}
+                %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
+            - else
+              %li
+                - if tab.eql? "Pending"
+                  %a{:href =>"#pending_events", 'data-toggle' => 'tab'} Pending (#{@pending_count})
+                - else
+                  %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
       
       %div{:class=>'tab-content clearfix'}
-        %div{:class => 'tab-pane active', :id =>'upcoming_events'}
-          %br
-          - @upcoming.each do |event|
-            %table#past
-              %tbody
-                %tr
-                  %td
-                    %h3= event.name
-                  %td= "Organization: #{event.organization}"
-                  %td= "Venue: #{event.venue_name}"
-                %tr
-                  %td= event.description
-                %tr
-                  %td= "Start: #{event.start}"
-                  %td= "End: #{event.end}"
-            %br
-
-        %div{:class => 'tab-pane', :id =>'pending_events'}
-          %br
-          - @pending.each do |event|
-            %table#past
-              %tbody
-                %tr
-                  %td
-                    %h3= event.name
-                  %td= "Organization: #{event.organization}"
-                  %td= "Venue: #{event.venue_name}"
-                %tr
-                  %td= event.description
-                %tr
-                  %td= "Start: #{event.start}"
-                  %td= "End: #{event.end}"
-
-        %div{:class => 'tab-pane', :id =>'rejected_events'}
-          %br
-          - @rejected.each do |event|
-            %table#past
-              %tbody
-                %tr
-                  %td
-                    %h3= event.name
-                  %td= "Organization: #{event.organization}"
-                  %td= "Venue: #{event.venue_name}"
-                %tr
-                  %td= event.description
-                %tr
-                  %td= "Start: #{event.start}"
-                  %td= "End: #{event.end}"
-
-        %div{:class => 'tab-pane', :id =>'past_events'}
-          %br
-          - @past.each do |event|
-            %table#past
-              %tbody
-                %tr
-                  %td
-                    %h3= event.name
-                  %td= "Organization: #{event.organization}"
-                  %td= "Venue: #{event.venue_name}"
-                %tr
-                  %td= event.description
-                %tr
-                  %td= "Start: #{event.start}"
-                  %td= "End: #{event.end}"
+        - @tabs.each do |tab|
+          - if tab.eql? "Upcoming"
+            %div{:class => 'tab-pane active', :id =>"#{tab.downcase}_events"}
+              = render :partial => 'admin_panel', :locals => {:tab => tab}
+          - else
+            %div{:class => 'tab-pane', :id =>"#{tab.downcase}_events"}
+              = render :partial => 'admin_panel', :locals => {:tab => tab}
