@@ -13,6 +13,8 @@ class CalendarsController < ApplicationController
     @upcoming = Event.where(:status => 'approved')
     @past = Event.where(:status => 'past')
     @rejected = Event.get_rejected_events
+    @event_relations = {"Upcoming" => @upcoming, "Pending" => @pending,
+    "Rejected" => @rejected, "Past" => @past}
     @head, @body = WebScraper.instance.page_data
   end
 end

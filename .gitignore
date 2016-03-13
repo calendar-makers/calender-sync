@@ -21,4 +21,8 @@
 /log/*
 !/log/.keep
 .idea/*
+<<<<<<< HEAD
+=======
+
+>>>>>>> dried out admin_panel event rendering
 open-uri*
