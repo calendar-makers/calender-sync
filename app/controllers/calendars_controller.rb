@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
     @tabs = %w(Upcoming Pending Rejected Past)
     @pending_count = Event.get_pending_events.count
     @pending = Event.get_pending_events
-    @upcoming = Event.where(:status => 'upcoming')
+    @upcoming = Event.where(:status => 'approved')
     @past = Event.where(:status => 'past')
     @rejected = Event.get_rejected_events
     @head, @body = WebScraper.instance.page_data

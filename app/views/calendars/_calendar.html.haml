@@ -91,19 +91,65 @@
       %div{:class=>'tab-content clearfix'}
         %div{:class => 'tab-pane active', :id =>'upcoming_events'}
           %br
-          %ul
-            %li upcoming approved event
+          - @upcoming.each do |event|
+            %table#past
+              %tbody
+                %tr
+                  %td
+                    %h3= event.name
+                  %td= "Organization: #{event.organization}"
+                  %td= "Venue: #{event.venue_name}"
+                %tr
+                  %td= event.description
+                %tr
+                  %td= "Start: #{event.start}"
+                  %td= "End: #{event.end}"
+            %br
+
         %div{:class => 'tab-pane', :id =>'pending_events'}
           %br
-          %ul
-            %li pending event
-        
+          - @pending.each do |event|
+            %table#past
+              %tbody
+                %tr
+                  %td
+                    %h3= event.name
+                  %td= "Organization: #{event.organization}"
+                  %td= "Venue: #{event.venue_name}"
+                %tr
+                  %td= event.description
+                %tr
+                  %td= "Start: #{event.start}"
+                  %td= "End: #{event.end}"
+
         %div{:class => 'tab-pane', :id =>'rejected_events'}
           %br
-          %ul
-            %li rejected event
-        
+          - @rejected.each do |event|
+            %table#past
+              %tbody
+                %tr
+                  %td
+                    %h3= event.name
+                  %td= "Organization: #{event.organization}"
+                  %td= "Venue: #{event.venue_name}"
+                %tr
+                  %td= event.description
+                %tr
+                  %td= "Start: #{event.start}"
+                  %td= "End: #{event.end}"
+
         %div{:class => 'tab-pane', :id =>'past_events'}
           %br
-          %ul
-            %li past event
+          - @past.each do |event|
+            %table#past
+              %tbody
+                %tr
+                  %td
+                    %h3= event.name
+                  %td= "Organization: #{event.organization}"
+                  %td= "Venue: #{event.venue_name}"
+                %tr
+                  %td= event.description
+                %tr
+                  %td= "Start: #{event.start}"
+                  %td= "End: #{event.end}"
