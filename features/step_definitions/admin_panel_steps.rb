@@ -27,15 +27,15 @@ Then /^I should (?:|only )see (.*) events$/ do |stat|
     expected_status = stat.split(", ")
     if expected_status.length > 1
         expected_status.each do |status|
-            expect(page).to have_content(status, :visible => true)
+            expect(page).to have_content(status)
         end
     else
-        expect(page).to have_content(expected_status[0], :visible => true)
+        expect(page).to have_content(expected_status[0])
     end
     options = %w(approved rejected past upcoming)
     options.each do |opt|
         if !(expected_status.include? opt)
-            expect(page).to have_content(opt, :visible => false)
+            expect(page).to have_content(opt)
         end
     end
 end
@@ -53,5 +53,5 @@ Then /I should( not)? see "(.*)" before "(.*)"/ do |negated, first_item, second_
     if negated.eql? "not"
         rx = /#{second_item}.*#{first_item}/m
     end
-    expect(page.body).to have_content(rx)
+    expect(page.body =~ rx).to be_truthy
 end
