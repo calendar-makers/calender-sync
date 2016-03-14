@@ -48,6 +48,7 @@ Then /^(?:|I )should( not)? see events with dates (.*) now$/ do |negation, order
     end
 end
 
+
 Then /I should( not)? see "(.*)" before "(.*)"/ do |negated, first_item, second_item|
     rx = /#{first_item}.*#{second_item}/m
     if negated.eql? "not"
