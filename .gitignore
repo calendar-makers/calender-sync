@@ -21,3 +21,6 @@
 /log/*
 !/log/.keep
 .idea/*
+
+# Ignore open-uri
+open-uri*
