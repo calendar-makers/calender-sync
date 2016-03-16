@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 20160306160329) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                               null: false
     t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token",                null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.integer  "failed_attempts",        default: 0,  null: false
-    t.integer  "level",                  default: 1,  null: false
+    t.integer  "level",                  default: 0,  null: false
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
