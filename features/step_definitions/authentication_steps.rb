@@ -8,7 +8,7 @@ end
 
 def create_user
   delete_user
-  @user = User.create!(:email => "example@example.com", 
+  @user = User.create(:email => "example@example.com",
                       :password => "changeme",
                       :reset_password_token => "token")
 end
@@ -17,8 +17,8 @@ def create_root
   delete_user
   @user = User.create(:email => "example@example.com",
                       :password => "changeme",
-                      :level => 0,
-                      :reset_password_token => "token")
+                      :reset_password_token => "token",
+                      :level => 0)
 end
 
 def delete_user
