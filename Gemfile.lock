@@ -302,8 +302,8 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
-  capybara (= 2.4.4)
-  capybara-webkit (= 1.8.0)
+  capybara
+  capybara-webkit
   codeclimate-test-reporter
   coffee-rails
   cucumber-rails
