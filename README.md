@@ -13,6 +13,60 @@
 * [![Build Status](https://travis-ci.org/Nature-in-the-City/Nature_Calendar.svg?branch=master)](https://travis-ci.org/Nature-in-the-City/Nature_Calendar)
 * YouTube: https://youtu.be/Sb__EmK319k
 
+# Setup
+Assuming you are using Cloud 9 and have run the CS 169 setup script:
+```
+curl -fsSL c9setup.saasbook.info | bash --login && rvm use 2.2.2 --default
+```
+Make sure you are using Ruby 2.2.3 and have webkit-capybara installed. Then clone this repository and set up Rails and Heroku. (See instructions below.)
+
+### ruby 2.2.3 installation
+```
+rvm install ruby-2.2.3
+gem update --system
+update_rubygems
+gem install bundler
+```
+
+### webkit-capybara installation
+```
+sudo add-apt-repository ppa:canonical-qt5-edgers/qt5-proper -y (ignore the errors)
+sudo add-apt-repository ppa:ubuntu-sdk-team/ppa -y (ignore the errors)
+sudo apt-get update
+sudo apt-get install qtcreator libqtwebkit-dev qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x -y
+```
+
+### Rails
+```
+git clone https://github.com/Nature-in-the-City/Nature_Calendar.git
+cd Nature_Calendar
+echo "export MEETUP_API=5a33782e51306c72532c33283d7d148" >> ~/.profile
+bundle install --without production
+bundle exec rake db:migrate db:seed db:test:prepare
+xvfb-run -a bundle exec rake cucumber
+xvfb-run -a bundle exec rake spec
+rails s -p $PORT -b $IP
+```
+
+### Heroku
+```
+(heroku create nature-calendar)
+(heroku config:set MEETUP_API=5a33782e51306c72532c33283d7d148)
+git remote add heroku https://git.heroku.com/nature-calendar.git
+git push heroku master
+heroku run rake db:migrate db:seed
+heroku open
+```
+
+### Grading
+```
+git checkout iterationi-j-sp16
+bundle install --without production
+bundle exec rake db:migrate db:test:prepare db:seed
+xvfb-run -a bundle exec rake cucumber
+xvfb-run -a bundle exec rake spec
+```
+
 # Purpose
 Nature in the City's mission is to inspire San Francisco to discover local nature.
 

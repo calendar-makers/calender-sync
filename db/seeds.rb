@@ -29,7 +29,7 @@ guests = [{:first_name => 'Bob', :last_name => 'Richard', :phone => '(851) 345-0
 registrations = [{:event_id => 1, :guest_id => 1},
   ]
 
-users = [
+users = [{:email => "admin@admin.com", :password => "password", :level => 0},
   ]
 
 events.each do |event|
