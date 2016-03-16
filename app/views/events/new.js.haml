@@ -1,2 +1,5 @@
-$('#panel').html('#{j render 'new_panel'}');
+- if @suggested_event
+    $('#panel').html("#{j render 'suggest_panel'}");
+- else
+    $('#panel').html("#{j render 'new_panel'}");
 setup_event_form('#create');
