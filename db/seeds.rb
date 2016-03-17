@@ -57,7 +57,7 @@ guests = [{:first_name => 'Bob',
 registrations = [{:event_id => 1, :guest_id => 1},
   ]
 
-users = [{:email => "admin1@admin.com",
+users = [{:email => "admin12@admin.com",
           :password => "password",
           :level => 0,
           :reset_password_token => "token"},
