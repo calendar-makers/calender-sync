@@ -37,7 +37,8 @@
           .container-fluid
             %p= event.description
         #contact_2.col-sm-3{:id => "val_Email"}
-          .container="Email: #{event.contact_email}"
+          .container-fluid
+            %p="Email: #{event.contact_email}"
           .container="Org: #{event.organization}"
     %br
     -# OLD TABLE 
