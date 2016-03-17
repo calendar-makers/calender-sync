@@ -4,16 +4,17 @@ Feature: View event details on the admin page.
 	I want to see each event's details displayed below it in the event list on the admin panel
 
 Background: Events have already been added to the database
-
   Given the following events exist:
-    | name  | datetime_start      | datetime_end      | location          | description | status    |
-    | Hike1 | 12/21/2016 9:00 am  | 12/21/16 12:00 pm | 1210 street rd SF | A hike      | approved  |
-    | Hike2 | 12/25/2016 9:00 am  | 12/25/16 12:00 pm | 1210 street rd SF | A hike      | pending   |
-    | Hike3 | 12/27/2016 9:00 am  | 12/27/16 12:00 pm | 1210 street rd SF | A hike      | rejected  |
-    | Hike4 | 12/30/2016 9:00 am  | 12/30/16 12:00 pm | 1210 street rd SF | A hike      | approved  |
+    | name  | start         | end           | st_number | st_name   | city  | description   | status    |
+    | Hike1 | 12/21/2016    | 12/21/2016    | 1210      | street rd | SF    | A hike        | approved  |
+    | Hike2 | 12/25/2016    | 12/25/2016    | 1210      | street rd | SF    | A hike        | pending   |
+    | Hike3 | 12/27/2016    | 12/27/2016    | 1210      | street rd | SF    | A hike        | rejected  |
+    | Hike4 | 12/30/2016    | 12/30/2016    | 1210      | street rd | SF    | A hike        | approved  |
+    | Hike5 | 12/31/2016    | 12/31/2016    | 1210      | street rd | SF    | A hike        | approved  |
     
-    And I am on the admin page
-    And the date is "12/22/2016"
+    And I am logged in as the admin
+    And I see the "Admin" panel
+    And the date is "12/25/2016 06:00:00 AM"
 
 Scenario: Display upcoming event details
   Given I am displaying the "Upcoming" events

@@ -111,6 +111,7 @@
                   %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
       
       %div{:class=>'tab-content clearfix'}
+        %br
         - @tabs.each do |tab|
           - if tab.eql? "Upcoming"
             %div{:class => 'tab-pane active', :id =>"#{tab.downcase}_events"}

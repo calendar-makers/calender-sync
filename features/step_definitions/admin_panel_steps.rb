@@ -32,7 +32,7 @@ Then /^I should (?:|only )see (.*) events$/ do |stat|
     else
         expect(page).to have_content(expected_status[0])
     end
-    options = %w(approved rejected past upcoming)
+    options = %w(pending rejected past upcoming)
     options.each do |opt|
         if !(expected_status.include? opt)
             expect(page).to have_content(opt)
