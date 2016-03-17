@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   #before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :third_party]
 
-  before_filter :check_for_cancel, :only => [:create, :update, :third_party, :pull_third_party]
+  before_filter :check_for_cancel, only: [:create, :update, :third_party, :pull_third_party]
 
   def check_for_cancel
     render 'default', format: :js  if params[:cancel]
@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @events = (start_date && end_date) ? Event.where(start: start_date.to_datetime..end_date.to_datetime) : Event.all
     respond_to do |format|
       format.html
-      format.json { render :json => @events }
+      format.json { render json: @events }
     end
   end
 
@@ -153,7 +153,7 @@ class EventsController < ApplicationController
   def handle_response
     respond_to do |format|
       format.html { redirect_to calendar_path }
-      format.json { render :nothing => true }
+      format.json { render nothing: true }
       format.js
     end
   end

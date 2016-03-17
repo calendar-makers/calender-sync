@@ -659,15 +659,15 @@ JSON
 default = lambda do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=,.+$|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{:body => clean_venue, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{:body => pushed_event, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=,.+$|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {body: third_party_event, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues|, [{body: clean_venue, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, [{body: pushed_event, content_type: 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {body: deleted_event, content_type: 'application/json', status: ["200", "OK"]})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
 end
 
@@ -685,18 +685,18 @@ end
 
 Before('@successful_push') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {:body => pushed_event, :content_type => 'application/json', :status => ["201", "Created"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {body: clean_venue, content_type: 'application/json', status: ["201", "Created"]})
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {body: pushed_event, content_type: 'application/json', status: ["201", "Created"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: pushed_event, content_type: 'application/json', status: ["200", "OK"]})
 end
 
 Before('@failed_push') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {body: clean_venue, content_type: 'application/json', status: ["201", "Created"]})
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: not_found, content_type: 'application/json', status: ["404", "Not Found"]})
 end
 
 # Set defaults
@@ -711,31 +711,31 @@ end
 Before('@meetup_edit') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {body: pushed_event_for_pull, content_type: 'application/json'})
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {:body => clean_venue, :content_type => 'application/json', :status => ["201", "Created"]})
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/.+/venues.*|, {body: clean_venue, content_type: 'application/json', status: ["201", "Created"]})
 
 end
 
 Before('@calendar_successful_edit') do
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {body: edited_event, content_type: 'application/json', status: ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: edited_event, content_type: 'application/json', status: ["200", "OK"]})
 end
 
 Before('@calendar_failed_edit') do
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:post, %r|https://api\.meetup\.com/2/event/.*|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: pushed_event, content_type: 'application/json', status: ["200", "OK"]})
 end
 
 Before('@meetup_successful_edit') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{:body => pushed_event_for_pull, :content_type => 'application/json'},
-                                                                         {:body => pushed_event_for_pull, :content_type => 'application/json'},
-                                                                         {:body => edited_pushed_event_for_pull, :content_type => 'application/json'},
-                                                                           {:body => edited_pushed_event_for_pull, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => edited_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{body: pushed_event_for_pull, content_type: 'application/json'},
+                                                                         {body: pushed_event_for_pull, content_type: 'application/json'},
+                                                                         {body: edited_pushed_event_for_pull, content_type: 'application/json'},
+                                                                           {body: edited_pushed_event_for_pull, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: edited_event, content_type: 'application/json', status: ["200", "OK"]})
 end
 
 # Set defaults
@@ -751,26 +751,26 @@ Before('@meetup_delete') do
   FakeWeb.clean_registry
   FakeWeb.allow_net_connect = false
   FakeWeb.allow_net_connect = %r|^https?://127.0.0.1.*|
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {:body => pushed_event_for_pull, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events.*|, {body: pushed_event_for_pull, content_type: 'application/json'})
 end
 
 Before('@calendar_successful_deletion') do
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => deleted_event, :content_type => 'application/json', :status => ["200", "OK"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {body: deleted_event, content_type: 'application/json', status: ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: not_found, content_type: 'application/json', status: ["404", "Not Found"]})
 end
 
 Before('@calendar_failed_deletion') do
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => pushed_event, :content_type => 'application/json', :status => ["200", "OK"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:delete, %r|https://api\.meetup\.com/2/event/.*|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: pushed_event, content_type: 'application/json', status: ["200", "OK"]})
 end
 
 Before('@meetup_successful_deletion') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, {:body => pushed_event_for_pull_after_one_deletion, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {:body => not_found, :content_type => 'application/json', :status => ["404", "Not Found"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, {body: pushed_event_for_pull_after_one_deletion, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/event/|, {body: not_found, content_type: 'application/json', status: ["404", "Not Found"]})
 end
 
 # Set defaults
@@ -795,31 +795,31 @@ end
 
 Before('@successful_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 
 end
 
 Before('@failed_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 
 end
 
 Before('@repeated_unchanged_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'},
-                                                                                           {:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'},
+                                                                                           {body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 
 end
 
 Before('@repeated_changed_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{:body => events, :content_type => 'application/json'},
-                                                                        {:body => modified_events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*|, [{body: events, content_type: 'application/json'},
+                                                                        {body: modified_events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 
 end
 ########################################
@@ -839,38 +839,38 @@ end
 
 Before('@search_events_by_group') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {body: third_party_events, content_type: 'application/json'})
 end
 
 Before('@successful_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 end
 
 Before('@failed_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {:body => third_party_events, :content_type => 'application/json'})
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {:body => third_party_events, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, {body: third_party_events, content_type: 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, {body: third_party_events, content_type: 'application/json'})
 end
 
 Before('@repeated_changed_pull_third_events') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, [{:body => third_party_events, :content_type => 'application/json'},
-                                                                                         {:body => modified_third_party_events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, [{:body => third_party_events, :content_type => 'application/json'},
-                                                                                         {:body => modified_third_party_events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_urlname=.*|, [{body: third_party_events, content_type: 'application/json'},
+                                                                                         {body: modified_third_party_events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=\w+,.+$|, [{body: third_party_events, content_type: 'application/json'},
+                                                                                         {body: modified_third_party_events, content_type: 'application/json'}])
 end
 #######################################
 
@@ -888,39 +888,39 @@ end
 
 Before('@search_event_by_id') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {body: third_party_event, content_type: 'application/json'})
 end
 
 Before('@successful_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
-  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {body: third_party_event, content_type: 'application/json'})
+  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {body: third_party_event, content_type: 'application/json'})
 end
 
 Before('@failed_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, [{:body => third_party_event, :content_type => 'application/json'},
-                                                                                        {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]}])
-  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, [{body: third_party_event, content_type: 'application/json'},
+                                                                                        {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]}])
+  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {:body => third_party_event, :content_type => 'application/json'})
-  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {:body => third_party_event, :content_type => 'application/json'})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?event_id=|, {body: third_party_event, content_type: 'application/json'})
+  #FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=[^,]+$|, {body: third_party_event, content_type: 'application/json'})
 end
 
 Before('@repeated_changed_pull_third_event') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=|, [{:body => third_party_event, :content_type => 'application/json'},
-                                                                                        {:body => third_party_event, :content_type => 'application/json'},
-                                                                                        {:body => modified_third_party_event, :content_type => 'application/json'},
-                                                                                        {:body => modified_third_party_event, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*event_id=|, [{body: third_party_event, content_type: 'application/json'},
+                                                                                        {body: third_party_event, content_type: 'application/json'},
+                                                                                        {body: modified_third_party_event, content_type: 'application/json'},
+                                                                                        {body: modified_third_party_event, content_type: 'application/json'}])
 end
 #######################################
 
@@ -940,32 +940,32 @@ end
 
 Before('@successful_pull_meetup') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
 end
 
 Before('@successful_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'}])
 end
 
 Before('@failed_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, {:body => error, :content_type => 'application/json', :status => ["500", "Internal Server Error"]})
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, {body: error, content_type: 'application/json', status: ["500", "Internal Server Error"]})
 end
 
 Before('@repeated_unchanged_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'},
-                                                                      {:body => rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'},
+                                                                      {body: rsvp, content_type: 'application/json'}])
 end
 
 Before('@repeated_changed_pull_rsvp') do
   FakeWeb.clean_registry
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{:body => events, :content_type => 'application/json'}])
-  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{:body => rsvp, :content_type => 'application/json'},
-                                                                      {:body => modified_rsvp, :content_type => 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/events\?.*group_id=.*|, [{body: events, content_type: 'application/json'}])
+  FakeWeb.register_uri(:get, %r|https://api\.meetup\.com/2/rsvps\?|, [{body: rsvp, content_type: 'application/json'},
+                                                                      {body: modified_rsvp, content_type: 'application/json'}])
 end
 ######################################

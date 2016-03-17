@@ -2,8 +2,8 @@ class Event < ActiveRecord::Base
   has_many :registrations
   has_many :guests, through: :registrations
 
-  has_attached_file :image, styles: {original: "300x200"}, :url => "/assets/:id/:style/:basename.:extension",
-                    :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
+  has_attached_file :image, styles: {original: "300x200"}, url: "/assets/:id/:style/:basename.:extension",
+                    path: "public/assets/:id/:style/:basename.:extension", default_url: "/assets/missing.png"
 
   do_not_validate_attachment_file_type :image
 
@@ -12,11 +12,11 @@ class Event < ActiveRecord::Base
 
   def as_json(options={})
     {
-      :id => id,
-      :third_party => is_third_party?,
-      :title => name,
-      :start => start.iso8601,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      id: id,
+      third_party: is_third_party?,
+      title: name,
+      start: start.iso8601,
+      url: Rails.application.routes.url_helpers.event_path(id)
     }
   end
 
@@ -124,11 +124,11 @@ class Event < ActiveRecord::Base
   
   # get all of the pending events
   def self.get_pending_events
-    return Event.where(:status => 'pending')
+    return Event.where(status: 'pending')
   end
   
   def self.get_rejected_events
-    return Event.where(:status => 'rejected')
+    return Event.where(status: 'rejected')
   end
   
   def self.get_past_third_party_events(from=nil, to=nil)

@@ -9,11 +9,11 @@ end
 
 And /^I select "(.*)" as the "(start|end)" date and time$/ do |value, selector|
   dt  = DateTime.strptime(value, "%m/%d/%Y, %I:%M%p")
-  select dt.year, :from => "event_#{selector}_1i"
-  select dt.strftime("%B"), :from => "event_#{selector}_2i"
-  select dt.day, :from => "event_#{selector}_3i"
-  select dt.strftime("%I %p"), :from => "event_#{selector}_4i"
-  select dt.min, :from => "event_#{selector}_5i"
+  select dt.year, from: "event_#{selector}_1i"
+  select dt.strftime("%B"), from: "event_#{selector}_2i"
+  select dt.day, from: "event_#{selector}_3i"
+  select dt.strftime("%I %p"), from: "event_#{selector}_4i"
+  select dt.min, from: "event_#{selector}_5i"
 end
 
 # NOTE if names contain commas the I separated them with single quotation marks
