@@ -17,6 +17,8 @@ module NavigationHelpers
     when /^Sign In$/ then new_user_session_path
     when /^Account Creation$/ then new_account_path
     when /^Account Deletion$/ then '/accounts/root/edit'
+    # CHANGE AS SOON AS ADMIN PAGE AVAILABLE
+    when /^Admin$/ then '/calendar'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

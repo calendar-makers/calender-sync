@@ -1,0 +1,20 @@
+-# in app/views/calendars/_admin_panel.html.haml, rendered from _calendar.html.haml
+%br
+- if @event_relations[tab].count > 0
+  - @event_relations[tab].each do |event|
+    %table{:id => "#{tab.downcase}_#{event.id}"}
+      %tbody
+        %tr
+          %td
+            %h3= event.name
+          %td= "Organization: #{event.organization}"
+          %td= "Venue: #{event.venue_name}"
+        %tr
+          %td= event.description
+        %tr
+          %td= "Start: #{event.start}"
+          %td= "End: #{event.end}"
+    %br
+- else
+  %ul
+    %li= "There are no #{tab} events"

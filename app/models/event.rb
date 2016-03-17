@@ -81,7 +81,16 @@ class Event < ActiveRecord::Base
     end
     []
   end
-
+  
+  # get all of the pending events
+  def self.get_pending_events
+    return Event.where(:status => 'pending')
+  end
+  
+  def self.get_rejected_events
+    return Event.where(:status => 'rejected')
+  end
+  
   def self.get_past_third_party_events(from=nil, to=nil)
     ids = Event.get_stored_past_third_party_ids
     if ids.size > 0

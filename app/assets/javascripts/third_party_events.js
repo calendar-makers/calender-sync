@@ -14,7 +14,7 @@ var setup_third_party = function() {
     var groupTextField = $('#group_urlname');
     var idLabel = $('#id_label');
     var groupLabel = $('#group_label');
-
+    
     idRadio.prop('checked', true);
     idTextField.prop('disabled', false);
     groupTextField.prop('disabled', true);

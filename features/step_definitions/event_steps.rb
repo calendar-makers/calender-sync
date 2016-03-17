@@ -10,6 +10,12 @@ Given /I should see the following fields: "(.*)"$/ do |fields|
   end
 end
 
+When /^I add new events:$/ do |events_table|
+  events_table.hashes.each do |event|
+    Event.create!(event)
+  end
+end
+
 Then /I should see the "(.*)" button$/ do |button_name|
   expect(page).to have_button(button_name)
 end
