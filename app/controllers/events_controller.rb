@@ -164,6 +164,8 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :organization, :venue_name, :st_number, :st_name, :city, :zip,
                                   :state, :country, :start, :end, :description, :how_to_find_us, :image,
-                                  :street_number, :route, :locality)
+                                  :street_number,  :cost, :route, :locality, :family_friendly, :free, :hike,
+                                  :volunteer, :play, :learn, :plant, :contact_email, :contact_name_first,
+                                  :contact_name_last, :contact_phone)
   end
 end

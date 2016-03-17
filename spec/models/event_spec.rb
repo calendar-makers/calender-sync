@@ -428,6 +428,18 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+  
+  describe ".tags" do
+    context "when no tags are true" do
+      it "should return and empty string"
+      it "should not error"
+    end
+    
+    context "when tags are true" do
+      it "should return the names of true tag values"
+      it "should not error"
+    end
+  end
 
 end
 

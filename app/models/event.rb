@@ -31,6 +31,46 @@ class Event < ActiveRecord::Base
   def is_past?
     DateTime.now >= self.end
   end
+  
+  def tags
+    event_tags = "N/A"
+    tags = %w(family_friendly free play plant hike learn volunteer)
+    count = 0
+    tags.each do |tag|
+      if self[tag]
+        val = format_tagname tag
+        if count == 0
+          event_tags = "#{val}"
+        else
+          event_tags += ", #{val}"
+        end
+        count += 1
+      end
+    end
+    return event_tags
+  end
+  
+  def format_tagname tag
+    case tag
+      when "family_friendly"
+        return "Family-Friendly"
+      when "free"
+        return "Free"
+      when "play"
+        return "Play"
+      when "plant"
+        return "Plant"
+      when "hike"
+        return "Hike"
+      when "learn"
+        return "Learn"
+      when "volunteer"
+        return "volunteer"
+      else
+        return ""
+    end
+  end
+      
 
   def self.get_remote_events(options={})
     meetup_events = Meetup.new.pull_events(options)

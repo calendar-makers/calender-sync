@@ -14,14 +14,14 @@
           .container=event.start.strftime("%b %-d, %Y")
         #cost.col-sm-3
           Cost:
-          .container --
+          .container= "$#{event.cost}"
         #tags.col-sm-3
           Tags:
-          .container --
+          .container="#{event.tags}"
         #contact_1.col-sm-3
           Contact Info:
-          .container Name: --
-          .container Phone: --
+          .container= "Name: #{event.contact_name_last}, #{event.contact_name_first}"
+          .container= "Phone: #{event.contact_phone}"
           
       #bottom{:class => "row"}
         #time.col-sm-3{:id => "_Time"}
@@ -37,7 +37,7 @@
           .container-fluid
             %p= event.description
         #contact_2.col-sm-3{:id => "val_Email"}
-          .container Email: --
+          .container="Email: #{event.contact_email}"
           .container="Org: #{event.organization}"
     %br
     -# OLD TABLE 
