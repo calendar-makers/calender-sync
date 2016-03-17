@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe EventsController do
   before :each do
-    @user = User.create(:email => "example@example.com",
-                        :password => "changeme")
+    @user = User.create(email: "example@example.com",
+                        password: "changeme")
     sign_in @user
   end
 

@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resource :calendar, :only => [:show]
+  resource :calendar, only: [:show]
   root 'calendars#show'
 
-  devise_for :users, :skip => [:registrations]
+  devise_for :users, skip: [:registrations]
 
   as :user do
-    get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'
-    put 'users/:id' => 'devise/registrations#update', :as => 'user_registration'
+    get 'users/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
+    put 'users/:id' => 'devise/registrations#update', as: 'user_registration'
   end
 
   resources :events do
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :guests, :only => [:new, :create]
+  resources :guests, only: [:new, :create]
 
   resources :accounts
 end

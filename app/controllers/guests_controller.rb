@@ -20,7 +20,7 @@ class GuestsController < ActionController::Base
 
   def handle_guest_registration
     @guest = Guest.create!(guest_params)
-    @guest.registrations.build({:event_id => params[:event_id], :guest_id => @guest.id})
+    @guest.registrations.build({event_id: params[:event_id], guest_id: @guest.id})
     @guest.save
   end
 

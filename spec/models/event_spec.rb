@@ -98,9 +98,9 @@ RSpec.describe Event, type: :model do
 
   describe "#merge_meetup_rsvps" do
     let(:event) {Event.new(id: 1)}
-    let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912,
-                  :meetup_name=>"Amber Hasselbring", :invited_guests=>0,
-                  :updated=> Time.now}]}
+    let(:rsvp) {[{event_id:"qdwhxgytgbxb", meetup_id:82190912,
+                  meetup_name:"Amber Hasselbring", invited_guests:0,
+                  updated: Time.now}]}
     let(:guest) {Guest.new(id: 1, first_name: 'chester', last_name: 'copperpot')}
 
       before(:each) do

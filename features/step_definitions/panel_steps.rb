@@ -6,7 +6,7 @@ end
 
 When(/^(?:|when )I click on "(.*)" in the calendar$/) do |name|
   sleep(2)
-  all('.fc-title', :text => name)[0].click
+  all('.fc-title', text: name)[0].click
 end
 
 Then(/^the panel should display "(.*)" in its "(.*)" field$/) do |value, field|

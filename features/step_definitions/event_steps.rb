@@ -36,11 +36,11 @@ end
 
 And /^I select "([^"]*)" as the date and time$/ do |value|
   dt = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
-  select dt.year, :from => 'event_start_1i'
-  select dt.strftime("%B"), :from => 'event_start_2i'
-  select dt.day, :from => 'event_start_3i'
-  select dt.hour, :from => 'event_start_4i'
-  select dt.min, :from => 'event_start_5i'
+  select dt.year, from: 'event_start_1i'
+  select dt.strftime("%B"), from: 'event_start_2i'
+  select dt.day, from: 'event_start_3i'
+  select dt.hour, from: 'event_start_4i'
+  select dt.min, from: 'event_start_5i'
 end
 
 Then /I should (not )?see the "(.*)" link$/ do |negative, link|

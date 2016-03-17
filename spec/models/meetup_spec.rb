@@ -71,7 +71,7 @@ describe Meetup do
   end
 
   describe '#options_string' do
-    let(:options)  {{:id => '22', :weight => '1000', :sweet => 'true'}}
+    let(:options)  {{id: '22', weight: '1000', sweet: 'true'}}
     let(:string) {'id=22&weight=1000&sweet=true'}
 
     it 'gets a hash of options and returns a string for urls' do
@@ -140,7 +140,7 @@ describe Meetup do
         end
 
         it 'returns the requested events' do
-          data = good_user.pull_events(:group_urlname => valid_group_urlname)
+          data = good_user.pull_events(group_urlname: valid_group_urlname)
           expect(data[0][:group_urlname]).to eq(valid_group_urlname)
         end
       end
@@ -153,7 +153,7 @@ describe Meetup do
         end
 
         it 'returns nil' do
-          data = good_user.pull_events(:group_urlname => invalid_group_urlname)
+          data = good_user.pull_events(group_urlname: invalid_group_urlname)
           expect(data).to be_nil
         end
       end
@@ -167,7 +167,7 @@ describe Meetup do
         end
 
         it 'returns the requested events' do
-          data = good_user.pull_events(:event_id => valid_event_id)
+          data = good_user.pull_events(event_id: valid_event_id)
           expect(data[0][:meetup_id]).to eq(valid_event_id)
         end
       end
@@ -180,7 +180,7 @@ describe Meetup do
         end
 
         it 'returns nil' do
-          data = good_user.pull_events(:event_id => invalid_event_id)
+          data = good_user.pull_events(event_id: invalid_event_id)
           expect(data).to be_nil
         end
       end
@@ -194,7 +194,7 @@ describe Meetup do
         end
 
         it 'returns a possible collection of events' do
-          data = good_user.pull_events(:group_id => valid_group_id)
+          data = good_user.pull_events(group_id: valid_group_id)
           expect(data[0][:group_id]).to eq(valid_group_id)
         end
       end
