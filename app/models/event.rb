@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
   end
   
   def tags
-    event_tags = "N/A"
+    event_tags = "None"
     tags = %w(family_friendly free play plant hike learn volunteer)
     count = 0
     tags.each do |tag|
