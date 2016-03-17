@@ -21,15 +21,5 @@
 /log/*
 !/log/.keep
 .idea/*
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> dried out admin_panel event rendering
-=======
-<<<<<<< HEAD
-=======
-# Ignore open-uri
->>>>>>> added backup.html and updated authentication steps with required fields
->>>>>>> added backup.html and updated authentication steps with required fields
 open-uri*
