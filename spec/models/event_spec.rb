@@ -98,9 +98,9 @@ RSpec.describe Event, type: :model do
 
   describe "#merge_meetup_rsvps" do
     let(:event) {Event.new(id: 1)}
-    let(:rsvp) {[{:event_id=>"qdwhxgytgbxb", :meetup_id=>82190912,
-                  :meetup_name=>"Amber Hasselbring", :invited_guests=>0,
-                  :updated=> Time.now}]}
+    let(:rsvp) {[{event_id:"qdwhxgytgbxb", meetup_id:82190912,
+                  meetup_name:"Amber Hasselbring", invited_guests:0,
+                  updated: Time.now}]}
     let(:guest) {Guest.new(id: 1, first_name: 'chester', last_name: 'copperpot')}
 
       before(:each) do
@@ -426,6 +426,18 @@ RSpec.describe Event, type: :model do
         result = Event.synchronize_past_events
         expect(result).to be_nil
       end
+    end
+  end
+  
+  describe ".tags" do
+    context "when no tags are true" do
+      it "should return and empty string"
+      it "should not error"
+    end
+    
+    context "when tags are true" do
+      it "should return the names of true tag values"
+      it "should not error"
     end
   end
 

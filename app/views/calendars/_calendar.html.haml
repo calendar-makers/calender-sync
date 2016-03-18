@@ -12,15 +12,33 @@
       %tr
         %td{width: '20px'}
           %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
-            %rect{:width => 15, :height => 15, :fill => "#A6C55F"}
+            %rect{:width => 15, :height => 15, :fill => "#2E9AFE"}
 
-        %td Nature in the City
+        %td Hike
       %tr
         %td{width: '20px'}
           %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
-            %rect{:width => 15, :height => 15, :fill => "#ff8832"}
+            %rect{:width => 15, :height => 15, :fill => "#86B404"}
 
-        %td Partner Organizations
+        %td Plant
+      %tr
+        %td{width: '20px'}
+          %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
+            %rect{:width => 15, :height => 15, :fill => "#FAAC58"}
+
+        %td Volunteer
+      %tr
+        %td{width: '20px'}
+          %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
+            %rect{:width => 15, :height => 15, :fill => "#F7FE2E"}
+
+        %td Learn
+      %tr
+        %td{width: '20px'}
+          %svg{:xmlns => "http://www.w3.org/2000/svg", :version => "1.1", :width => 15, :height => 15}
+            %rect{:width => 15, :height => 15, :fill => "#F781BE"}
+
+        %td Performance
 
   #title_box
     - if user_signed_in?
@@ -49,6 +67,12 @@
         = form_tag third_party_events_path, method: :get, id: 'third_party', format: :js, remote: true  do
           -#this path does an ajax GET to the event controller action "third_party"
           = submit_tag '+ 3rd Party', class: ['event_creation_button','third_party_organization']
+          
+      - else
+        = form_tag new_event_path, method: :get, id: 'suggest_event', format: :js, remote: true do
+          -# this path does an ajax GET to the event controller action "new"
+          = hidden_field_tag 'suggested_event', 'True'
+          = submit_tag 'Suggest Event', class: ['main_organization', 'event_creation_button', 'button_right']
 
     .clear
 
@@ -63,3 +87,35 @@
         %h4.default_event_message Click an event!
 
     .clear
+    
+#events_box
+  %div{:class => 'container'}
+    %br
+    %h2 Events
+    %br
+  #upcoming.container
+    %ul{:class => 'nav nav-tabs'}
+      - @tabs.each do |tab|
+        - if tab.eql? "Upcoming"
+          %li{:class => 'active'}
+            %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
+        - else
+          %li
+            - if tab.eql? "Pending"
+              %a{:href =>"#pending_events", 'data-toggle' => 'tab'} Pending (#{@pending_count})
+            - else
+              %li
+                - if tab.eql? "Pending"
+                  %a{:href =>"#pending_events", 'data-toggle' => 'tab'} Pending (#{@pending_count})
+                - else
+                  %a{:href =>"##{tab.downcase}_events", 'data-toggle' => 'tab'} #{tab}
+      
+      %div{:class=>'tab-content clearfix'}
+        %br
+        - @tabs.each do |tab|
+          - if tab.eql? "Upcoming"
+            %div{:class => 'tab-pane active', :id =>"#{tab.downcase}_events"}
+              = render :partial => 'admin_panel', :locals => {:tab => tab}
+          - else
+            %div{:class => 'tab-pane', :id =>"#{tab.downcase}_events"}
+              = render :partial => 'admin_panel', :locals => {:tab => tab}

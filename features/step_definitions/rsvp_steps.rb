@@ -33,9 +33,9 @@ end
 
 When(/^I fill out and submit the RSVP form (anonymously|non-anonymously)$/) do |anon|
   # Fills out the required fields: First Name, Last Name, Email, and anonymity status.
-  fill_in('guest_first_name', :with => 'Alexander')
-  fill_in('guest_last_name', :with => 'Hamilton')
-  fill_in('guest_email', :with => 'aHamil@usa.com')
+  fill_in('guest_first_name', with: 'Alexander')
+  fill_in('guest_last_name', with: 'Hamilton')
+  fill_in('guest_email', with: 'aHamil@usa.com')
   if anon == 'anonymously'
     choose('guest_is_anon_true')
   else
@@ -55,14 +55,10 @@ end
 
 When(/^I do not fill out the all of the required fields of the RSVP form$/) do
   # Failed to fill in email and choose anonymity status.
-  fill_in('guest_first_name', :with => 'Alexander')
-  fill_in('guest_last_name', :with => 'Hamilton')
-  fill_in('guest_phone', :with => '956-865-1475')
-  fill_in('guest_address', :with => '12 Place Blvd.')
-end
-
-When(/^I press "(.*)"$/) do |button|
-  click_button(button)
+  fill_in('guest_first_name', with: 'Alexander')
+  fill_in('guest_last_name', with: 'Hamilton')
+  fill_in('guest_phone', with: '956-865-1475')
+  fill_in('guest_address', with: '12 Place Blvd.')
 end
 
 Then(/^the page should( not)? have the text "(.*)"$/) do |should_not, text|

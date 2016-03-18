@@ -10,6 +10,12 @@ Given /I should see the following fields: "(.*)"$/ do |fields|
   end
 end
 
+When /^I add new events:$/ do |events_table|
+  events_table.hashes.each do |event|
+    Event.create!(event)
+  end
+end
+
 Then /I should see the "(.*)" button$/ do |button_name|
   expect(page).to have_button(button_name)
 end
@@ -30,11 +36,11 @@ end
 
 And /^I select "([^"]*)" as the date and time$/ do |value|
   dt = DateTime.strptime(value, "%m/%d/%Y, %H:%M%p")
-  select dt.year, :from => 'event_start_1i'
-  select dt.strftime("%B"), :from => 'event_start_2i'
-  select dt.day, :from => 'event_start_3i'
-  select dt.hour, :from => 'event_start_4i'
-  select dt.min, :from => 'event_start_5i'
+  select dt.year, from: 'event_start_1i'
+  select dt.strftime("%B"), from: 'event_start_2i'
+  select dt.day, from: 'event_start_3i'
+  select dt.hour, from: 'event_start_4i'
+  select dt.min, from: 'event_start_5i'
 end
 
 Then /I should (not )?see the "(.*)" link$/ do |negative, link|

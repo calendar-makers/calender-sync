@@ -8,14 +8,16 @@ end
 
 def create_user
   delete_user
-  @user = User.create(email: "example@example.com", 
-                      password: "changeme")
+  @user = User.create(email: "example@example.com",
+                      password: "changeme",
+                      reset_password_token: "token")
 end
 
 def create_root
   delete_user
   @user = User.create(email: "example@example.com",
                       password: "changeme",
+                      reset_password_token: "token",
                       level: 0)
 end
 

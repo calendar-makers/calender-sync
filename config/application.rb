@@ -24,5 +24,9 @@ module CalendarSync
 
     # To autoload the files in the lib folder
     config.autoload_paths += %W(#{config.root}/lib)
+    
+    # Allow the web-console gem in test envirorment
+    # Web-console github says config should only be in development
+    # config.web_console.development_only = false !!!
   end
 end

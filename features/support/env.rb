@@ -8,11 +8,21 @@ SimpleCov.start 'rails'
 
 require 'cucumber/rails'
 require 'fakeweb'
+require 'byebug'
+
+Capybara::Webkit.configure do |config|
+  config.allow_url("csi.gstatic.com")
+  config.allow_url("static1.squarespace.com")
+  config.allow_url("www.google.com")
+  config.allow_url("fonts.googleapis.com")
+  config.allow_url("use.typekit.net")
+  config.allow_url("maps.googleapis.com")
+end
 
 Before do
   file = File.join(Rails.root, 'features', 'support', 'backup.html')
   fake_response = File.read(file)
-  FakeWeb.register_uri(:get, "http://www.natureinthecity.org/", :body => fake_response, :status => ["200", "Okay"])
+  FakeWeb.register_uri(:get, "http://www.natureinthecity.org/", body: fake_response, status: ["200", "Okay"])
 end
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -49,7 +59,7 @@ end
 # See the DatabaseCleaner documentation for details. Example:
 #
 #   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
+#     # { except: [:widgets] } may not do what you expect here
 #     # as Cucumber::Rails::Database.javascript_strategy overrides
 #     # this setting.
 #     DatabaseCleaner.strategy = :truncation

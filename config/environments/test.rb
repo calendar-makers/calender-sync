@@ -42,4 +42,7 @@ Rails.application.configure do
 
   # Stop database queries from showing on terminal.
   config.log_level = :error
+  
+  # Allow the web-console gem in test envirorment
+  config.web_console.development_only = false
 end

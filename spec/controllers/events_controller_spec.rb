@@ -2,19 +2,22 @@ require 'rails_helper'
 
 describe EventsController do
   before :each do
-    @user = User.create(:email => "example@example.com",
-                        :password => "changeme")
+    @user = User.create(email: "example@example.com",
+                        password: "changeme")
     sign_in @user
   end
 
   let(:event) {Event.create(name: 'coyote appreciation',
                                     organization: 'nature loving',
                                     start: '8-mar-2016',
-                                    description: 'watch coyotes')}
+                                    description: 'watch coyotes',
+                                    contact_email: 'cayotyluvr123@gmail.com')}
 
   describe "pulls 3rd party events" do
     let(:ids) {['event123', 'event1456', 'eventABC']}
-    let(:events) {[Event.new(name: 'nature'), Event.new(name: 'gardening'), Event.new(name: 'butterflies')]}
+    let(:events) {[Event.new(name: 'nature', email: '123@abc.com'),
+                  Event.new(name: 'gardening', email: '123@abc.com'),
+                  Event.new(name: 'butterflies', email: '123@abc.com')]}
 
     before(:each) do
       allow(Event).to receive(:get_remote_events).and_return(nil)
@@ -25,8 +28,6 @@ describe EventsController do
       before(:each) do
         allow(Event).to receive(:get_requested_ids).and_return(ids)
       end
-
-
 
       it "should redirect to the calendar" do
         get :pull_third_party

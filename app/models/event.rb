@@ -2,8 +2,8 @@ class Event < ActiveRecord::Base
   has_many :registrations
   has_many :guests, through: :registrations
 
-  has_attached_file :image, styles: {original: "300x200"}, :url => "/assets/:id/:style/:basename.:extension",
-                    :path => "public/assets/:id/:style/:basename.:extension", :default_url => "/assets/missing.png"
+  has_attached_file :image, styles: {original: "300x200"}, url: "/assets/:id/:style/:basename.:extension",
+                    path: "public/assets/:id/:style/:basename.:extension", default_url: "/assets/missing.png"
 
   do_not_validate_attachment_file_type :image
 
@@ -12,11 +12,11 @@ class Event < ActiveRecord::Base
 
   def as_json(options={})
     {
-      :id => id,
-      :third_party => is_third_party?,
-      :title => name,
-      :start => start.iso8601,
-      :url => Rails.application.routes.url_helpers.event_path(id)
+      id: id,
+      third_party: is_third_party?,
+      title: name,
+      start: start.iso8601,
+      url: Rails.application.routes.url_helpers.event_path(id)
     }
   end
 
@@ -31,6 +31,46 @@ class Event < ActiveRecord::Base
   def is_past?
     DateTime.now >= self.end
   end
+  
+  def tags
+    event_tags = "None"
+    tags = %w(family_friendly free play plant hike learn volunteer)
+    count = 0
+    tags.each do |tag|
+      if self[tag]
+        val = format_tagname tag
+        if count == 0
+          event_tags = "#{val}"
+        else
+          event_tags += ", #{val}"
+        end
+        count += 1
+      end
+    end
+    return event_tags
+  end
+  
+  def format_tagname tag
+    case tag
+      when "family_friendly"
+        return "Family-Friendly"
+      when "free"
+        return "Free"
+      when "play"
+        return "Play"
+      when "plant"
+        return "Plant"
+      when "hike"
+        return "Hike"
+      when "learn"
+        return "Learn"
+      when "volunteer"
+        return "volunteer"
+      else
+        return ""
+    end
+  end
+      
 
   def self.get_remote_events(options={})
     meetup_events = Meetup.new.pull_events(options)
@@ -81,7 +121,16 @@ class Event < ActiveRecord::Base
     end
     []
   end
-
+  
+  # get all of the pending events
+  def self.get_pending_events
+    return Event.where(status: 'pending')
+  end
+  
+  def self.get_rejected_events
+    return Event.where(status: 'rejected')
+  end
+  
   def self.get_past_third_party_events(from=nil, to=nil)
     ids = Event.get_stored_past_third_party_ids
     if ids.size > 0

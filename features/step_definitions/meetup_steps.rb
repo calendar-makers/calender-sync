@@ -3,17 +3,17 @@ require 'cucumber/rspec/doubles'
 
 Given /I am an authorized organizer of the group/ do
   # Here I'm using credentials to access the sandbox at Meetup
-  tester = Meetup.new(group_id: '1556336', group_urlname: 'Meetup-API-Testing')
+  tester = Meetup.new(group_id: '19713962', group_urlname: 'NatureWalk')
   allow(Meetup).to receive(:new).and_return(tester)
 end
 
 And /^I select "(.*)" as the "(start|end)" date and time$/ do |value, selector|
   dt  = DateTime.strptime(value, "%m/%d/%Y, %I:%M%p")
-  select dt.year, :from => "event_#{selector}_1i"
-  select dt.strftime("%B"), :from => "event_#{selector}_2i"
-  select dt.day, :from => "event_#{selector}_3i"
-  select dt.strftime("%I %p"), :from => "event_#{selector}_4i"
-  select dt.min, :from => "event_#{selector}_5i"
+  select dt.year, from: "event_#{selector}_1i"
+  select dt.strftime("%B"), from: "event_#{selector}_2i"
+  select dt.day, from: "event_#{selector}_3i"
+  select dt.strftime("%I %p"), from: "event_#{selector}_4i"
+  select dt.min, from: "event_#{selector}_5i"
 end
 
 # NOTE if names contain commas the I separated them with single quotation marks
