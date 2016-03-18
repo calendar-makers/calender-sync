@@ -26,6 +26,7 @@ module CalendarSync
     config.autoload_paths += %W(#{config.root}/lib)
     
     # Allow the web-console gem in test envirorment
-    config.web_console.development_only = false
+    # Web-console github says config should only be in development
+    # config.web_console.development_only = false !!!
   end
 end
