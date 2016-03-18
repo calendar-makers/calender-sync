@@ -6,21 +6,20 @@ Feature: View events by status on the admin page.
 
 Background: Events have already been added to the database
   Given the following events exist:
-    | name  | start       | end         | st_number | st_name   | city  | description     | status    |
-    | Hike  | Dec-21-2016 | Dec-21-2016 | 1210      | street rd | SF    | A past hike     | past      |
-    | Hike1 | Dec-22-2016 | Dec-22-2016 | 1210      | street rd | SF    | A past hike     | past      |
-    | Hike2 | Dec-25-2016 | Dec-25-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
-    | Hike3 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | A pending hike  | pending   |
-    | Hike4 | Dec-27-2016 | Dec-27-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
-    | Hike5 | Dec-28-2016 | Dec-28-2016 | 1210      | street rd | SF    | A rejected hike | rejected  |
-    | Hike6 | Dec-30-2016 | Dec-30-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
-    | Hike7 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | Approved hike   | approved  |
+  | name  | start       | end         | st_number | st_name   | city  | description     | status    | contact_email |
+  | Hike  | Dec-21-2016 | Dec-21-2016 | 1210      | street rd | SF    | A past hike     | past      | joe@cnn.com   |
+  | Hike1 | Dec-22-2016 | Dec-22-2016 | 1210      | street rd | SF    | A past hike     | past      | joe@cnn.com   |
+  | Hike2 | Dec-25-2016 | Dec-25-2016 | 1210      | street rd | SF    | A pending hike  | pending   | joe@cnn.com   |
+  | Hike3 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | A pending hike  | pending   | joe@cnn.com   |
+  | Hike4 | Dec-27-2016 | Dec-27-2016 | 1210      | street rd | SF    | A rejected hike | rejected  | joe@cnn.com   |
+  | Hike5 | Dec-28-2016 | Dec-28-2016 | 1210      | street rd | SF    | A rejected hike | rejected  | joe@cnn.com   |
+  | Hike6 | Dec-30-2016 | Dec-30-2016 | 1210      | street rd | SF    | Approved hike   | approved  | joe@cnn.com   |
+  | Hike7 | Dec-26-2016 | Dec-26-2016 | 1210      | street rd | SF    | Approved hike   | approved  | joe@cnn.com   |
 
-    And   I am logged in as the admin
-    And  I see the "Admin" panel
-    And   I see the following status tabs: "Upcoming", "Pending", "Rejected", "Past"
-    And   the date is "12/25/2016 06:00:00 AM"
-    
+  And   I am logged in as the admin
+  And   I see the "Admin" panel
+  And   I see the following status tabs: "Upcoming", "Pending", "Rejected", "Past"
+  And   the date is "12/25/2016 06:00:00 AM"
 
 Scenario: Show upcoming events in ascending order
   Given I press the "Upcoming" tab

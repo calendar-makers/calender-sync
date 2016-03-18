@@ -5,16 +5,16 @@ Feature: View event details on the admin page.
 
 Background: Events have already been added to the database
   Given the following events exist:
-    | name  | start         | end           | st_number | st_name   | city  | description   | status    |
-    | Hike1 | 12/21/2016    | 12/21/2016    | 1210      | street rd | SF    | A hike        | approved  |
-    | Hike2 | 12/25/2016    | 12/25/2016    | 1210      | street rd | SF    | A hike        | pending   |
-    | Hike3 | 12/27/2016    | 12/27/2016    | 1210      | street rd | SF    | A hike        | rejected  |
-    | Hike4 | 12/30/2016    | 12/30/2016    | 1210      | street rd | SF    | A hike        | approved  |
-    | Hike5 | 12/31/2016    | 12/31/2016    | 1210      | street rd | SF    | A hike        | approved  |
-    
-    And I am logged in as the admin
-    And I see the "Admin" panel
-    And the date is "12/25/2016 06:00:00 AM"
+  | name  | start         | end           | st_number | st_name   | city  | description   | status    | contact_email |
+  | Hike1 | Dec-21-2016   | Dec-21-2016   | 1210      | street rd | SF    | A hike        | approved  | joe@cnn.com   |
+  | Hike2 | Dec-25-2016   | Dec-25-2016   | 1210      | street rd | SF    | A hike        | pending   | joe@cnn.com   |
+  | Hike3 | Dec-27-2016   | Dec-27-2016   | 1210      | street rd | SF    | A hike        | rejected  | joe@cnn.com   |
+  | Hike4 | Dec-30-2016   | Dec-30-2016   | 1210      | street rd | SF    | A hike        | approved  | joe@cnn.com   |
+  | Hike5 | Dec-31-2016   | Dec-31-2016   | 1210      | street rd | SF    | A hike        | approved  | joe@cnn.com   |
+  
+  And   I am logged in as the admin
+  And   I see the "Admin" panel
+  And   the date is "12/25/2016 06:00:00 AM"
 
 Scenario: Display upcoming event details
   Given I am displaying the "Upcoming" events
